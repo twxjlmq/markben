@@ -1,6 +1,6 @@
-package com.markben.core.entity.query;
+package com.markben.core.bean;
 
-import com.markben.core.helper.PageHelper;
+import com.markben.common.helper.PageHelper;
 
 import java.util.List;
 

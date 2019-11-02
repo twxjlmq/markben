@@ -184,17 +184,6 @@ public class StringUtils {
 	}
 	
 	/**
-     * 数字null转换为“0”
-     * <p>注：该方法已过时，请用{@link #handleNumNull(Object)} 代替</p>
-     * @param obj
-     * @return 返回转化结果
-     */
-	@Deprecated
-	public static String handNumNull(Object obj) {
-	    return handleNumNull(obj);
-	}
-	
-	/**
 	 * 数字null转换为“0”
 	 * @param obj
 	 * @return 返回转化结果
@@ -297,8 +286,7 @@ public class StringUtils {
 	/**
 	 * 生成序列号；
 	 * TODO 改为采用UUID生成序列号
-	 * 生成的序列号；如：U+时间＋５位随机序列号
-	 * 如:U141264925197606685
+	 * 生成的序列号；
 	 * @return 返回系统自动生成的序列号
 	 */
 	public static String createSerialNum() {
@@ -475,18 +463,6 @@ public class StringUtils {
 		boolean is = m.matches();
 		return is;
 	}
-	
-	/**
-	 * 验证QQ号码
-	 * @param value
-	 * @return 验证成功返回：true；否则返回：false
-	 */
-	public static boolean isQQ(String value) {
-		Pattern p = Pattern.compile("^[1-9]\\d{6,11}$");
-		Matcher m = p.matcher(value);
-		return m.matches();
-	}
-	
 	
 	/**
 	 * 验证email

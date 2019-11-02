@@ -3,7 +3,6 @@ package com.markben.common.utils;
 import com.markben.common.exception.NullArgumentException;
 import com.markben.common.logger.DefaultLogger;
 import com.markben.common.logger.ILogger;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -26,7 +25,7 @@ public class LoggerUtils {
 	}
 
 	/**
-	 * 记录INFO日志；如果 <code>msg</code> 参数需要拼接字符串，请使用{@link #info(Logger, String, Object...)} 方法
+	 * 记录INFO日志；如果 <code>msg</code> 参数需要拼接字符串，请使用{@link #info(ILogger, String, Object...)} 方法
 	 * @param logger 日志实现类
 	 * @param msg 日志内容
 	 */
@@ -49,7 +48,7 @@ public class LoggerUtils {
 	}
 	
 	/**
-	 * 记录DEBUG日志；如果 <code>msg</code> 参数需要拼接字符串，请使用{@link #debug(Logger, String, Object...)} 方法
+	 * 记录DEBUG日志；如果 <code>msg</code> 参数需要拼接字符串，请使用{@link #debug(ILogger, String, Object...)} 方法
 	 * @param logger 日志实现类
 	 * @param msg 日志内容
 	 */

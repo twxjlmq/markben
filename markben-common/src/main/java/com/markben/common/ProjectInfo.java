@@ -6,10 +6,8 @@ import com.markben.common.utils.StringUtils;
 
 /**
  * 项目信息
- * @author lmq
- * @version 1.0
- * @since JDK版本大于等于1.6
- * 2016年1月21日
+ * @author 乌草坡
+ * @since 1.0
  */
 public class ProjectInfo {
 
@@ -56,7 +54,7 @@ public class ProjectInfo {
 
 	/**
 	 * 开发模式
-	 * @return 返回值为1或0 <br />
+	 * @return 返回值为1或0;
 	 * 1--表示开发模式；0--表示产品模式
 	 */
 	public String getDevModel() {

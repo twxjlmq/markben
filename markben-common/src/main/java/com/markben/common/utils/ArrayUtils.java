@@ -144,7 +144,7 @@ public class ArrayUtils {
 	
 	/**
 	 * 按<code>separate</code>分离成数组,
-	 * 判断该数组里面是否包含<code>subStr</code>(不区分大小写) <br />
+	 * 判断该数组里面是否包含<code>subStr</code>(不区分大小写) ；
 	 * 如果<code>separate</code>为空，则采用默认值；默认值为：{@link MarkbenConstant#MULTI_VALUE_SPLIT}
 	 * @param str 字符串
 	 * @param subStr 用于判断是非包含的字符串；可能是子字符串或非子字符串

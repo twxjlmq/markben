@@ -10,10 +10,8 @@ import java.util.regex.Pattern;
 
 /**
  * 配置抽象类
- * @author lmq
- * @version 1.0
- * @since JDK版本大于等于1.6
- * 2016年1月21日
+ * @author 乌草坡
+ * @since 1.0
  */
 public abstract class AbstractConfig {
 

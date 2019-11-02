@@ -3,6 +3,7 @@ package com.markben.common.logger;
 import org.slf4j.Logger;
 
 /**
+ * 默认日志实现类
  * @author 乌草坡
  * @since 1.0
  */

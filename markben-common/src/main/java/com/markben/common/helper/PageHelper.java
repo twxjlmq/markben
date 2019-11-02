@@ -1,11 +1,10 @@
-package com.markben.core.helper;
+package com.markben.common.helper;
 
 import com.markben.common.config.SystemConfig;
 import com.markben.common.constant.MarkbenConstant;
 import com.markben.common.logger.ILogger;
 import com.markben.common.utils.LoggerUtils;
 import com.markben.common.utils.StringUtils;
-import org.slf4j.Logger;
 
 /**
  * 分页助手类

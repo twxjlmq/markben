@@ -1,12 +1,11 @@
-package com.markben.core.entity;
-
-import java.io.Serializable;
+package com.markben.core.bean.entity;
 
 /**
+ * 有主键的实体接口
  * @author 乌草坡
  * @since 1.0
  */
-public interface IEntityBean<T> extends Serializable {
+public interface IPKEntityBean<T> extends IEntityBean {
 
     /**
      * 获取主键ID
@@ -19,5 +18,4 @@ public interface IEntityBean<T> extends Serializable {
      * @param id 主键值
      */
     void setId(T id);
-
 }

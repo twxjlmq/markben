@@ -1,4 +1,4 @@
-package com.markben.core.entity;
+package com.markben.core.bean.entity;
 
 /**
  * 树型结构接口

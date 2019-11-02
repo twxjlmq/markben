@@ -1,6 +1,7 @@
 package com.markben.common.logger;
 
 /**
+ * 日志接口
  * @author 乌草坡
  * @since 1.0
  */

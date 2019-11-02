@@ -1,4 +1,4 @@
-package com.markben.core.entity;
+package com.markben.core.bean.entity;
 
 import java.util.Date;
 
