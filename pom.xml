@@ -22,35 +22,27 @@
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <hibernate-validator.version>6.1.2.Final</hibernate-validator.version>
+        <mysql.connector.version>8.0.19</mysql.connector.version>
 
-        <hibernate.version>5.1.17.Final</hibernate.version>
-        <hibernate-validator.version>5.4.2.Final</hibernate-validator.version>
-
-        <spring.version>4.3.24.RELEASE</spring.version>
-        <mysql.connector.version>5.1.46</mysql.connector.version>
-
-        <commons-text.version>1.6</commons-text.version>
+        <commons-text.version>1.8</commons-text.version>
         <commons-io.version>2.6</commons-io.version>
-        <commons-fileupload.version>1.3.3</commons-fileupload.version>
+        <commons-fileupload.version>1.4</commons-fileupload.version>
 
-        <commons-codec.version>1.10</commons-codec.version>
-        <commons-beanutils.version>1.9.2</commons-beanutils.version>
-        <commons-logging.version>1.2</commons-logging.version>
+        <commons-codec.version>1.14</commons-codec.version>
+        <commons-beanutils.version>1.9.4</commons-beanutils.version>
 
-        <log4j2.version>2.11.1</log4j2.version>
-        <slf4j.version>1.7.25</slf4j.version>
+        <slf4j.version>1.7.30</slf4j.version>
+        <junit.version>4.13</junit.version>
+        <ehcache.version>3.8.1</ehcache.version>
+        <fastjson.version>1.2.62</fastjson.version>
+        <javax.servlet.api.version>4.0.1</javax.servlet.api.version>
+        <UserAgentUtils.version>1.21</UserAgentUtils.version>
 
-        <junit.version>4.12</junit.version>
-
-        <ehcache.version>3.3.1</ehcache.version>
-
-        <jackson.version>2.9.6</jackson.version>
-        <jackson-mapper-asl.version>1.9.4</jackson-mapper-asl.version>
-        <fastjson.version>1.2.47</fastjson.version>
-        <javax.servlet.version>3.0.1</javax.servlet.version>
-
-        <aspectjrt.version>1.9.1</aspectjrt.version>
-        <cglib.version>3.2.7</cglib.version>
+        <aspectjrt.version>1.9.5</aspectjrt.version>
+        <cglib.version>3.3.0</cglib.version>
+        <mybatis-plus-boot-starter.version>3.3.1.tmp</mybatis-plus-boot-starter.version>
+        <lombok.version>1.18.12</lombok.version>
 
         <markben.version>${project.version}</markben.version>
 
@@ -64,8 +56,14 @@
         <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
         <maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
 
-        <swagger.version>2.7.0</swagger.version>
+        <swagger.version>2.9.2</swagger.version>
     </properties>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.5.RELEASE</version>
+    </parent>
 
     <build>
         <pluginManagement>
@@ -86,63 +84,10 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- Hibernate -->
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-c3p0</artifactId>
-                <version>${hibernate.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-ehcache</artifactId>
-                <version>${hibernate.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-core</artifactId>
-                <version>${hibernate.version}</version>
-            </dependency>
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-validator</artifactId>
                 <version>${hibernate-validator.version}</version>
-            </dependency>
-
-            <!-- Spring -->
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-tx</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-orm</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-jdbc</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-test</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-web</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-webmvc</artifactId>
-                <version>${spring.version}</version>
             </dependency>
 
             <dependency>
@@ -156,37 +101,9 @@
                 <version>${commons-beanutils.version}</version>
             </dependency>
             <dependency>
-                <groupId>commons-logging</groupId>
-                <artifactId>commons-logging</artifactId>
-                <version>${commons-logging.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
                 <version>${javax.servlet.version}</version>
-            </dependency>
-
-            <!-- jackson -->
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-core</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-annotations</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.codehaus.jackson</groupId>
-                <artifactId>jackson-mapper-asl</artifactId>
-                <version>${jackson-mapper-asl.version}</version>
             </dependency>
 
             <dependency>
@@ -222,28 +139,6 @@
                 <version>1.1.8</version>
             </dependency>
 
-            <!-- log4j2 -->
-            <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-api</artifactId>
-                <version>${log4j2.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-core</artifactId>
-                <version>${log4j2.version}</version>
-            </dependency>
-            <dependency> <!-- 桥接：告诉slf4j使用log4j2 -->
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-slf4j-impl</artifactId>
-                <version>${log4j2.version}</version>
-            </dependency>
-            <dependency> <!-- 桥接：告诉commons logging使用Log4j2 -->
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-jcl</artifactId>
-                <version>${log4j2.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
@@ -255,7 +150,6 @@
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
             </dependency>
-
 
             <dependency>
                 <groupId>org.ehcache</groupId>
@@ -274,6 +168,11 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.connector.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus-boot-starter.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>eu.bitwalker</groupId>
@@ -291,7 +190,6 @@
                 <artifactId>springfox-swagger-ui</artifactId>
                 <version>${swagger.version}</version>
             </dependency>
-
 
             <!-- markben依赖定义 -->
             <dependency>

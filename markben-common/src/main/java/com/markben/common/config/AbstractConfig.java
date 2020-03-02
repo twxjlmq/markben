@@ -52,8 +52,6 @@ public abstract class AbstractConfig {
 			if(matcher.find()) {
 				handleVar(value);
 			}
-			pattern = null;
-			matcher = null;
 			return value;
 		}
 		return value;
@@ -86,8 +84,6 @@ public abstract class AbstractConfig {
 		if(matcher.find()) {
 			handleSysVar(value);
 		}
-		pattern = null;
-		matcher = null;
 		return value;
 	}
 	

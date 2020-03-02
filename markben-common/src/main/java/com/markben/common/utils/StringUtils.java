@@ -895,4 +895,64 @@ public class StringUtils {
 		stringBuilder.append(value);
 		return stringBuilder.toString();
 	}
+
+	/**
+	 * 转换为Long
+	 * @param value
+	 * @return
+	 */
+	public static Long convertLong(Object value) {
+		String valueStr = null;
+		if(null == value) {
+			valueStr = "0";
+		} else {
+			valueStr = value.toString();
+		}
+		long num = 0;
+		try {
+			num = Long.parseLong(valueStr);
+		} catch (Exception ex) {
+			num = 0;
+		}
+		return num;
+	}
+
+	/**
+	 * 转换为Integer
+	 * @param value
+	 * @return
+	 */
+	public static Integer convertInteger(Object value) {
+		String valueStr = null;
+		if(null == value) {
+			valueStr = "0";
+		} else {
+			valueStr = value.toString();
+		}
+		int num = 0;
+		try {
+			num = Integer.parseInt(valueStr);
+		} catch (Exception ex) {
+			num = 0;
+		}
+		return num;
+	}
+
+	/**
+	 * 转换为Boolean
+	 * @param value
+	 * @return
+	 */
+	public static Boolean convertBoolean(Object value) {
+		if(null == value) {
+			return false;
+		}
+		boolean is = Boolean.FALSE;
+		try {
+			is = Boolean.parseBoolean(value.toString());
+		} catch (Exception ex) {
+			is = Boolean.FALSE;
+		}
+		return is;
+	}
 }
