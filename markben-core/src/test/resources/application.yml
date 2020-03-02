@@ -1,6 +1,12 @@
 #配置日志
-#logging:
+logging:
 #  config: classpath:log4j2.xml
+  file:
+    path: ./logs
+  level:
+    root: INFO
+    com.markben: DEBUG
+
 #配置tomcat
 server:
   port: 9090

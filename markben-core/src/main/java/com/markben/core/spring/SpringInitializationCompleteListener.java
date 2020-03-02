@@ -7,12 +7,14 @@ import com.markben.core.initialization.MarkbenInitializationImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
 
 /**
  * Spring初始化结束后执行该类
  * @autor 乌草坡
  * @since 1.0
  */
+@Component
 public class SpringInitializationCompleteListener implements ApplicationListener<ContextRefreshedEvent> {
 
     private static final ILogger logger = LoggerUtils.getLogger(SpringInitializationCompleteListener.class);

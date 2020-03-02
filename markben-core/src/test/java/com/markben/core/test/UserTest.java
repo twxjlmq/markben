@@ -33,11 +33,20 @@ public class UserTest {
         userServ.save(user);
     }
 
-    @Test
+    //@Test
     public void getTest() {
         TUser user = userServ.getById("11111");
         System.out.println(user.getName());
         Assert.assertNotNull(user);
+    }
+
+    @Test
+    public void updateUser() {
+        TUser user = userServ.getById("11111");
+        System.out.println(user.getName());
+        user.setAge(100);
+        boolean is = userServ.updateById(user);
+        Assert.assertTrue(is);
     }
 
 }

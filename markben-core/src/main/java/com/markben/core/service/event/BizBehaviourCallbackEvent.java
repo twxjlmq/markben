@@ -3,7 +3,6 @@ package com.markben.core.service.event;
 import com.markben.common.logger.ILogger;
 import com.markben.common.utils.CollectionUtils;
 import com.markben.common.utils.LoggerUtils;
-import com.markben.common.utils.ReflectionUtils;
 import com.markben.core.callback.ICallbackAware;
 import com.markben.core.callback.IDeleteCallbackAware;
 import com.markben.core.callback.ISaveCallbackAware;
@@ -40,10 +39,11 @@ public class BizBehaviourCallbackEvent implements IBizBehaviourEvent, IMarkbenIn
     public void event(final Object target, final BizBehaviourType behaviourType, Object value) {
         Map<String, List<ICallbackAware>> callbackAwareMap = callbackMap.get(behaviourType);
         if(null != callbackAwareMap) {
-            String targetDaoName = target.getClass().getTypeName();
-            List<ICallbackAware> callbackAwareList = callbackAwareMap.get(targetDaoName);
+            Type[] types = target.getClass().getGenericInterfaces();
+            String targetMapperName = types[0].getTypeName();
+            List<ICallbackAware> callbackAwareList = callbackAwareMap.get(targetMapperName);
             if(CollectionUtils.isNotEmpty(callbackAwareList)) {
-                String targetEntityName = ReflectionUtils.getSuperClassGenricType(target.getClass(), 0).getTypeName();
+                String targetEntityName = value.getClass().getTypeName();
                 callbackAwareList.parallelStream().forEach(callbackAware -> {
                     String valueTypeName = callbackTypePropCache.get(callbackAware.getClass().getName()).getValueTypeName();
                     if((null == valueTypeName && callbackAware instanceof IDeleteCallbackAware) || (null != valueTypeName && valueTypeName.equals(targetEntityName))) {
@@ -109,16 +109,16 @@ public class BizBehaviourCallbackEvent implements IBizBehaviourEvent, IMarkbenIn
             callbackMap.put(type, classifyCallbackMap);
         }
         Type[] types = ((ParameterizedType)callbackAware.getClass().getGenericInterfaces()[0]).getActualTypeArguments();
-        String daoName = types[0].getTypeName();
+        String mapperName = types[0].getTypeName();
         String valueTypeName = null;
         if(types.length > 1) {
             valueTypeName = types[1].getTypeName();
         }
-        callbackTypePropCache.put(callbackAware.getClass().getName(), new CallbackTypeProperty(daoName, valueTypeName));
-        List<ICallbackAware> callbackList = classifyCallbackMap.get(daoName);
+        callbackTypePropCache.put(callbackAware.getClass().getName(), new CallbackTypeProperty(mapperName, valueTypeName));
+        List<ICallbackAware> callbackList = classifyCallbackMap.get(mapperName);
         if(CollectionUtils.isEmpty(callbackList)) {
-            callbackList = new ArrayList<ICallbackAware>();
-            classifyCallbackMap.put(daoName, callbackList);
+            callbackList = new ArrayList<>();
+            classifyCallbackMap.put(mapperName, callbackList);
         }
         callbackList.add(callbackAware);
         removeList.add(callbackAware);

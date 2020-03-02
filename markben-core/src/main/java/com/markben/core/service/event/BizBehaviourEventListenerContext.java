@@ -44,13 +44,13 @@ public class BizBehaviourEventListenerContext {
      * 触发事件
      * @param mapper BaseEnhanceMapper对象
      * @param behaviourType Dao行为类型；详情请参考{@link BizBehaviourType}
-     * @param arg 参数（有可能是实体类，如：当<code>behaviourType</code>为：{@link BizBehaviourType#SAVE}时）
+     * @param args 参数（有可能是实体类，如：当<code>behaviourType</code>为：{@link BizBehaviourType#SAVE}时）
      */
-    public void trigger(BaseEnhanceMapper mapper, BizBehaviourType behaviourType, Object arg) {
+    public void trigger(BaseEnhanceMapper mapper, BizBehaviourType behaviourType, Object args) {
         LoggerUtils.debug(logger, "触发DAO事件, 事件类型为：[{}].", behaviourType.getText());
         if(CollectionUtils.isNotEmpty(events)) {
             for(IBizBehaviourEvent event : events) {
-                event.event(mapper, behaviourType, arg);
+                event.event(mapper, behaviourType, args);
             }
         } else {
             LoggerUtils.debug(logger, "未发现触发事件处理类.");
