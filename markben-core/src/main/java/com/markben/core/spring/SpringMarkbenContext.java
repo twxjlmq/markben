@@ -10,7 +10,6 @@ import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.ApplicationContext;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**

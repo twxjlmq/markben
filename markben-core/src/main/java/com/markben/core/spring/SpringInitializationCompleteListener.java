@@ -10,7 +10,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 /**
- * Spring初始化结束后执行该类
+ * Spring初始化结束后执行该类中的方法
  * @autor 乌草坡
  * @since 1.0
  */

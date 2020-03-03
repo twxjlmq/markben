@@ -84,7 +84,6 @@ public class EntityUtils {
         if(entity instanceof IPKPrefix) {
             String prefix = ((IPKPrefix) entity).getPrefix();
             if(StringUtils.isNotEmpty(prefix)) {
-                prefix = prefix.toLowerCase();
                 if(!prefix.endsWith(MarkbenConstant.COMBINE_VALUE_SEPARATOR)) {
                     prefix += MarkbenConstant.COMBINE_VALUE_SEPARATOR;
                 }

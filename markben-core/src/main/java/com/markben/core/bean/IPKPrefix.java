@@ -9,8 +9,8 @@ package com.markben.core.bean;
 public interface IPKPrefix {
 
     /**
-     * 获取前缀；生成主键时，会把前缀中的字母转化为大写；
-     * 如：u_会转化为：U_
+     * 获取前缀；生成主键时，会把前缀加前面并通过“_”连接；
+     * 如：前缀为：u；值为：123456，生成后的主键为：u_123456
      * @return 返回前缀
      */
     String getPrefix();
