@@ -6,7 +6,6 @@ logging:
   level:
     root: INFO
     com.markben: DEBUG
-
 #配置tomcat
 server:
   port: 9090
@@ -51,3 +50,6 @@ spring:
     naming-strategy: org.hibernate.cfg.DefaultNamingStrategy
     show-sql: true
     format-sql: false
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true

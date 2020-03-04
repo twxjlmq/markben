@@ -9,7 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>markben-web</artifactId>
+    <artifactId>markben-basic</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>markben-basic-common</module>
+        <module>markben-basic-api</module>
+    </modules>
 
 
 </project>

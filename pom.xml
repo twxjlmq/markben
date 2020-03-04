@@ -10,11 +10,11 @@
     <modules>
         <module>markben-core</module>
         <module>markben-common</module>
-        <module>markben-web</module>
         <module>markben-form</module>
         <module>markben-flow</module>
         <module>markben-cms</module>
         <module>markben-report</module>
+        <module>markben-basic</module>
     </modules>
 
     <packaging>pom</packaging>

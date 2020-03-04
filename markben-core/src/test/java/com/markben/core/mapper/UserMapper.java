@@ -1,6 +1,6 @@
 package com.markben.core.mapper;
 
-import com.markben.core.entity.TUser;
+import com.markben.core.entity.TTestUser;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -8,6 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 1.0
  */
 @Mapper
-public interface UserMapper extends BaseEnhanceMapper<TUser> {
+public interface UserMapper extends BaseEnhanceMapper<TTestUser> {
 
 }

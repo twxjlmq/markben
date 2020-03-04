@@ -1,7 +1,7 @@
 package com.markben.core.test;
 
 import com.markben.core.ApplicationTest;
-import com.markben.core.entity.TUser;
+import com.markben.core.entity.TTestUser;
 import com.markben.core.service.UserService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -25,25 +25,25 @@ public class UserTest {
 
     //@Test
     public void saveTest() {
-        TUser user = new TUser();
+        TTestUser user = new TTestUser();
         user.setId("11122");
         user.setAge(30);
-        user.setName("李四");
+        user.setFullName("李四");
         user.setCreateTime(new Date());
         userServ.save(user);
     }
 
     //@Test
     public void getTest() {
-        TUser user = userServ.getById("11111");
-        System.out.println(user.getName());
+        TTestUser user = userServ.getById("11111");
+        System.out.println(user.getFullName());
         Assert.assertNotNull(user);
     }
 
     @Test
     public void updateUser() {
-        TUser user = userServ.getById("11111");
-        System.out.println(user.getName());
+        TTestUser user = userServ.getById("11111");
+        System.out.println(user.getFullName());
         user.setAge(100);
         boolean is = userServ.updateById(user);
         Assert.assertTrue(is);

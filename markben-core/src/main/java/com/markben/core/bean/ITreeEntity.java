@@ -1,11 +1,13 @@
 package com.markben.core.bean;
 
+import java.io.Serializable;
+
 /**
  * 树型结构接口
  * @author 乌草坡
  * @since 1.0
  */
-public interface IBaseTreeEntity<T> extends IEntityBean {
+public interface ITreeEntity<T extends Serializable> extends IPKEntityBean<T> {
 
     /**
      * 名称

@@ -3,6 +3,7 @@ package com.markben.core.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.markben.core.bean.BaseEntity;
 import com.markben.core.bean.IPKStringEntity;
 
 import java.util.Date;
@@ -11,36 +12,21 @@ import java.util.Date;
  * @autor 乌草坡 2020-02-28
  * @since 1.0
  */
-@TableName(value = "t_user")
-public class TUser implements IPKStringEntity {
+@TableName(value = "t_test_user")
+public class TTestUser extends BaseEntity {
 
-    @TableId
-    @TableField(value = "id")
-    private String id;
+    private String fullName;
 
-    @TableField(value = "name")
-    private String name;
-
-    @TableField(value = "create_time")
     private Date createTime;
 
-    @TableField(value = "age")
     private Integer age;
 
-    public String getId() {
-        return id;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public Date getCreateTime() {

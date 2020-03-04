@@ -1,6 +1,6 @@
 package com.markben.core.service;
 
-import com.markben.core.entity.TUser;
+import com.markben.core.entity.TTestUser;
 import org.springframework.stereotype.Service;
 
 /**
@@ -8,6 +8,6 @@ import org.springframework.stereotype.Service;
  * @since 1.0
  */
 @Service
-public class UserService extends EnhanceServiceImpl<TUser> {
+public class UserService extends EnhanceServiceImpl<TTestUser> {
 
 }
