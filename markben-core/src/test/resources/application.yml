@@ -18,11 +18,11 @@ server:
     min-spare-threads: 3
     #队列长度
     accept-count: 1000
-  connection-timeout: 30000
+    connection-timeout: 30000
 spring:
   #配置数据库
   datasource:
-    url: jdbc:mysql://localhost:3306/markben?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=CTT&autoReconnect=true
+    url: jdbc:mysql://localhost:3306/markben?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&autoReconnect=true
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
