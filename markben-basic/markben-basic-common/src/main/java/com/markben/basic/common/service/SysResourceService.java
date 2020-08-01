@@ -5,6 +5,7 @@ import com.markben.core.service.EnhanceServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
+ * 系统资源服务类
  * @autor 乌草坡 2020-03-04
  * @since 1.0
  */

@@ -50,8 +50,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.ehcache</groupId>
-            <artifactId>ehcache</artifactId>
+            <groupId>com.markben</groupId>
+            <artifactId>markben-cache-interface</artifactId>
         </dependency>
     </dependencies>
 

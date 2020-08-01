@@ -16,18 +16,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 增强服务实现类
  * @autor 乌草坡 2020-02-28
  * @since 1.0
  */
-public class EnhanceServiceImpl<T extends IEntityBean> extends ServiceImpl<BaseEnhanceMapper<T>, T>{
+public class EnhanceServiceImpl<T extends IEntityBean> extends ServiceImpl<BaseEnhanceMapper<T>, T> implements IMgrService<T> {
 
-    protected ILogger logger;
+    private ILogger logger;
 
     @Autowired
     private BaseEnhanceMapper<T> baseMapper;
@@ -39,6 +38,31 @@ public class EnhanceServiceImpl<T extends IEntityBean> extends ServiceImpl<BaseE
     @Override
     public BaseEnhanceMapper<T> getBaseMapper() {
         return baseMapper;
+    }
+
+    @Override
+    public T find(String id) {
+        return getById(id);
+    }
+
+    @Override
+    public List<T> finds(String[] ids) {
+        return finds("id", ids);
+    }
+
+    @Override
+    public List<T> finds(String columnName, Object value) {
+        if(null == value) {
+            return Collections.EMPTY_LIST;
+        }
+        Wrapper<T> wrapper = null;
+        if(value.getClass().isArray()) {
+            Object[] values = (Object[]) value;
+            wrapper = query().in(columnName, values);
+        } else {
+            wrapper = query().eq(columnName, value);
+        }
+        return getBaseMapper().selectList(wrapper);
     }
 
     @Override
@@ -54,7 +78,7 @@ public class EnhanceServiceImpl<T extends IEntityBean> extends ServiceImpl<BaseE
     @Transactional
     public boolean saveBatch(Collection<T> entityList) {
         if(CollectionUtils.isEmpty(entityList)) {
-            LoggerUtils.error(logger, "实体对象列表为空，无法批量保存");
+            LoggerUtils.error(getLogger(), "实体对象列表为空，无法批量保存");
             return false;
         }
         handleSaveEntity(entityList);
@@ -67,7 +91,7 @@ public class EnhanceServiceImpl<T extends IEntityBean> extends ServiceImpl<BaseE
     @Transactional
     public boolean saveOrUpdateBatch(Collection<T> entityList) {
         if(CollectionUtils.isEmpty(entityList)) {
-            LoggerUtils.error(logger, "实体对象列表为空，无法批量保存或更新");
+            LoggerUtils.error(getLogger(), "实体对象列表为空，无法批量保存或更新");
             return false;
         }
         handleUpdateEntity(entityList);
@@ -112,7 +136,7 @@ public class EnhanceServiceImpl<T extends IEntityBean> extends ServiceImpl<BaseE
     @Transactional
     public boolean updateBatchById(Collection<T> entityList) {
         if(CollectionUtils.isEmpty(entityList)) {
-            LoggerUtils.error(logger, "实体对象列表为空，无法批量更新");
+            LoggerUtils.error(getLogger(), "实体对象列表为空，无法批量更新");
             return false;
         }
         handleUpdateEntity(entityList);
@@ -134,7 +158,7 @@ public class EnhanceServiceImpl<T extends IEntityBean> extends ServiceImpl<BaseE
     @Transactional
     public boolean saveBatch(Collection<T> entityList, int batchSize) {
         if(CollectionUtils.isEmpty(entityList)) {
-            LoggerUtils.error(logger, "实体对象列表为空，无法批量保存");
+            LoggerUtils.error(getLogger(), "实体对象列表为空，无法批量保存");
             return false;
         }
         handleSaveEntity(entityList);
@@ -156,7 +180,7 @@ public class EnhanceServiceImpl<T extends IEntityBean> extends ServiceImpl<BaseE
     @Transactional
     public boolean saveOrUpdateBatch(Collection<T> entityList, int batchSize) {
         if(CollectionUtils.isEmpty(entityList)) {
-            LoggerUtils.error(logger, "实体对象列表为空，无法批量保存或更新");
+            LoggerUtils.error(getLogger(), "实体对象列表为空，无法批量保存或更新");
             return false;
         }
         handleUpdateEntity(entityList);
@@ -168,7 +192,7 @@ public class EnhanceServiceImpl<T extends IEntityBean> extends ServiceImpl<BaseE
     @Transactional
     public boolean updateBatchById(Collection<T> entityList, int batchSize) {
         if(CollectionUtils.isEmpty(entityList)) {
-            LoggerUtils.error(logger, "实体对象列表为空，无法批量更新");
+            LoggerUtils.error(getLogger(), "实体对象列表为空，无法批量更新");
             return false;
         }
         handleUpdateEntity(entityList);
@@ -212,6 +236,69 @@ public class EnhanceServiceImpl<T extends IEntityBean> extends ServiceImpl<BaseE
         boolean is = super.removeByIds(idList);
         triggerBehaviourEvent(BizBehaviourType.DELETE, idList);
         return is;
+    }
+
+    @Override
+    @Transactional
+    public boolean save(Collection<T> ts) {
+        return saveBatch(ts);
+    }
+
+    @Override
+    @Transactional
+    public boolean update(T t) {
+        return updateById(t);
+    }
+
+    @Override
+    @Transactional
+    public boolean update(Collection<T> ts) {
+        return updateBatchById(ts);
+    }
+
+    @Override
+    @Transactional
+    public boolean delete(T t) {
+        if(null == t) {
+            return false;
+        }
+        Serializable id = null;
+        if(t instanceof IPKEntityBean) {
+            id = ((IPKEntityBean)t).getId();
+        }
+        if(null == id) {
+            return false;
+        }
+        return removeById(id);
+    }
+
+    @Override
+    @Transactional
+    public boolean delete(Collection<T> ts) {
+        if(CollectionUtils.isEmpty(ts)) {
+            return false;
+        }
+        Set<Serializable> ids = ts.stream().filter(t -> t instanceof  IPKEntityBean)
+                .map(bean -> ((IPKEntityBean) bean).getId()).collect(Collectors.toSet());
+        return removeByIds(ids);
+    }
+
+    @Override
+    @Transactional
+    public boolean delete(String id) {
+        if(StringUtils.isEmpty(id)) {
+            return false;
+        }
+        return removeById(id);
+    }
+
+    @Override
+    @Transactional
+    public boolean delete(String[] ids) {
+        if(null == ids || ids.length == 0) {
+            return false;
+        }
+        return removeByIds(Arrays.asList(ids));
     }
 
     /**
@@ -282,7 +369,11 @@ public class EnhanceServiceImpl<T extends IEntityBean> extends ServiceImpl<BaseE
      * @param behaviourType 行为类型
      * @param value 值（可能是实体类或ID）
      */
-    protected void triggerBehaviourEvent(BizBehaviourType behaviourType, Object value) {
+    private void triggerBehaviourEvent(BizBehaviourType behaviourType, Object value) {
         BizBehaviourEventListenerContext.getInstance().trigger(getBaseMapper(), behaviourType, value);
+    }
+
+    protected ILogger getLogger() {
+        return logger;
     }
 }

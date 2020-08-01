@@ -1,4 +1,4 @@
-package com.markben.core.cache;
+package com.markben.cache;
 
 
 /**
@@ -24,6 +24,14 @@ public interface ICacheManager {
      * @throws CacheException
      */
     <K, V> ICache<K, V> getCache(String name) throws CacheException;
+
+	/**
+	 * 根据名称获取缓存，如果该名称对应的缓存不存在，否则返回null
+	 * @param name 名称
+	 * @return ICache<K, V>
+	 * @throws CacheException
+	 */
+	<K, V> ICache<K, V>  getCacheIfAbsent(String name) throws CacheException;
 	
 	/**
 	 * 销毁缓存

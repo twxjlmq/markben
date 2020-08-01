@@ -1,8 +1,7 @@
 package com.markben.basic.common.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.markben.common.enums.YesOrNoType;
-import com.markben.core.bean.BaseTreeEntity;
+import com.markben.core.bean.AbstractBaseTreeEntity;
 
 /**
  * 系统菜单实体类
@@ -10,8 +9,13 @@ import com.markben.core.bean.BaseTreeEntity;
  * @since 1.0
  */
 @TableName(value = "t_sys_menu")
-public class TSysMenu extends BaseTreeEntity {
+public class TSysMenu extends AbstractBaseTreeEntity {
 
+    /**
+     * 资源ID；
+     * 该直为{@link TSysResource}实体类中的ID值，
+     * 通过该字段与{@link TSysResource}数据表关联
+     */
     private String resourceId;
 
     private String menuType;
@@ -19,8 +23,6 @@ public class TSysMenu extends BaseTreeEntity {
     private String pcIcon;
 
     private String mobileIcon;
-
-    private Integer state = YesOrNoType.YES.getIndex();
 
     public String getResourceId() {
         return resourceId;
@@ -54,11 +56,4 @@ public class TSysMenu extends BaseTreeEntity {
         this.mobileIcon = mobileIcon;
     }
 
-    public Integer getState() {
-        return state;
-    }
-
-    public void setState(Integer state) {
-        this.state = state;
-    }
 }

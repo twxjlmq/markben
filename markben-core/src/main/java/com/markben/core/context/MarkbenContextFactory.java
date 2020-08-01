@@ -1,6 +1,5 @@
 package com.markben.core.context;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -53,7 +52,13 @@ public class MarkbenContextFactory {
      * @return T
      */
     public static <T> T find(Class<T> clazz) {
-        return context.find(clazz);
+        T t = null;
+        try {
+            t = context.find(clazz);
+        } catch (Exception ex) {
+
+        }
+        return t;
     }
 
     /**

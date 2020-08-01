@@ -1,4 +1,4 @@
-package com.markben.core.cache;
+package com.markben.cache;
 
 /**
  * 该接口的实现类，设置cache管理器 

@@ -41,15 +41,7 @@ spring:
       #数据库连接超时时间,默认30秒，即30000
       connection-timeout: 30000
       connection-test-query: SELECT 1
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-    hibernate:
-      ddl-auto: update
-    naming-strategy: org.hibernate.cfg.DefaultNamingStrategy
-    show-sql: true
-    format-sql: false
+
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true

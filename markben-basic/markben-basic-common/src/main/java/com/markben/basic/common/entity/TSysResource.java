@@ -2,10 +2,8 @@ package com.markben.basic.common.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.markben.common.enums.YesOrNoType;
-import com.markben.core.bean.BaseTreeEntity;
-import com.markben.core.bean.ICreateTime;
-
-import java.util.Date;
+import com.markben.core.bean.AbstractBaseTreeEntity;
+import com.markben.core.bean.ITenantEntity;
 
 /**
  * 系统资源实体类
@@ -13,7 +11,9 @@ import java.util.Date;
  * @since 1.0
  */
 @TableName(value = "t_sys_resource")
-public class TSysResource extends BaseTreeEntity implements ICreateTime {
+public class TSysResource extends AbstractBaseTreeEntity implements ITenantEntity {
+
+    private String corpId;
 
     private String restUrl;
 
@@ -21,15 +21,36 @@ public class TSysResource extends BaseTreeEntity implements ICreateTime {
 
     private String pcUrl;
 
-    private Integer isFun;
+    /**
+     * 是否功能菜单（按钮）
+     * 1 -- 是
+     * 0 -- 否
+     */
+    private Integer isFun = YesOrNoType.NO.getIndex();
 
-    private Integer state = YesOrNoType.YES.getIndex();
+    /**
+     * 是否需要授权
+     * 1--需要
+     * 0--不需要
+     */
+    private Integer isAuth = YesOrNoType.YES.getIndex();
 
-    private Integer isAuth;
-
+    /**
+     * 企业用户ID；
+     * 该直为{@link TSysCorpUser}实体类中的ID值，
+     * 通过该字段与{@link TSysCorpUser}数据表关联
+     */
     private String corpUserId;
 
-    private Date createTime;
+    @Override
+    public String getCorpId() {
+        return corpId;
+    }
+
+    @Override
+    public void setCorpId(String corpId) {
+        this.corpId = corpId;
+    }
 
     public String getRestUrl() {
         return restUrl;
@@ -63,14 +84,6 @@ public class TSysResource extends BaseTreeEntity implements ICreateTime {
         this.isFun = isFun;
     }
 
-    public Integer getState() {
-        return state;
-    }
-
-    public void setState(Integer state) {
-        this.state = state;
-    }
-
     public Integer getIsAuth() {
         return isAuth;
     }
@@ -87,13 +100,4 @@ public class TSysResource extends BaseTreeEntity implements ICreateTime {
         this.corpUserId = corpUserId;
     }
 
-    @Override
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    @Override
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
 }

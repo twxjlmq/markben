@@ -1,4 +1,4 @@
-package com.markben.core.cache;
+package com.markben.cache;
 
 /**
  * 缓存异常

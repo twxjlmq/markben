@@ -38,15 +38,8 @@
         </logger>
         <logger name="org.hibernate.sql" level="DEBUG">
         </logger>
-        <!--
-        <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>
-        <logger name="org.hibernate.type.descriptor.sql.BasicExtractor" level="TRACE"/>
-        -->
-        <logger name="com.mixsmart" level="DEBUG">
-        </logger>
-        <logger name="com.bingo.dingtalk" level="DEBUG">
-        </logger>
-        <logger name="cn.com.bingo" level="DEBUG">
+
+        <logger name="com.markben" level="DEBUG">
         </logger>
         <root level="INFO">
             <appender-ref ref="Console"/>

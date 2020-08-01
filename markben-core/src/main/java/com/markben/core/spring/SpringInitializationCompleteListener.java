@@ -2,6 +2,8 @@ package com.markben.core.spring;
 
 import com.markben.common.logger.ILogger;
 import com.markben.common.utils.LoggerUtils;
+import com.markben.core.config.DefaultMarkbenConfiguration;
+import com.markben.core.config.IMarkbenConfiguration;
 import com.markben.core.context.MarkbenContextFactory;
 import com.markben.core.initialization.MarkbenInitializationImpl;
 import org.springframework.context.ApplicationContext;
@@ -26,7 +28,12 @@ public class SpringInitializationCompleteListener implements ApplicationListener
             LoggerUtils.debug(logger, "正在初始化，自定义初始化类....");
             SpringMarkbenContext markbenContext = new SpringMarkbenContext(context);
             MarkbenContextFactory.setContext(markbenContext);
-            new MarkbenInitializationImpl().init();
+            //判断有没有配置实现类
+            IMarkbenConfiguration configuration = MarkbenContextFactory.find(IMarkbenConfiguration.class);
+            if(null == configuration) {
+                configuration = new DefaultMarkbenConfiguration(markbenContext);
+            }
+            new MarkbenInitializationImpl(configuration).init();
         }
     }
 }

@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
  * @autor 乌草坡
  * @since 1.0
  */
-public abstract class BaseEntity implements IPKStringEntity {
+public abstract class AbstractBaseEntity implements IPKStringEntity {
 
     @TableId(value = "id")
     @TableField(value = "id")

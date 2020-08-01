@@ -1,8 +1,13 @@
-package com.markben.core.cache.ehcache;
+package com.markben.cache.ehcache;
 
-import com.markben.core.cache.ICache;
+import com.markben.cache.ICache;
 import org.ehcache.Cache;
 
+/**
+ * Ehcache缓存实现类
+ * @param <K>
+ * @param <V>
+ */
 public class Ehcache<K, V> implements ICache<K, V> {
 
     private Cache<K, V> cache;

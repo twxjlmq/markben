@@ -7,7 +7,7 @@ import com.markben.common.constant.MarkbenConstant;
  * @autor 乌草坡
  * @since 1.0
  */
-public class BaseTreeEntity extends BaseEntity implements ITreeEntity<String> {
+public class AbstractBaseTreeEntity extends AbstractCommonPropEntity implements ITreeEntity<String> {
 
     private String name;
 
