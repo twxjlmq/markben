@@ -2,7 +2,7 @@ package com.markben.basic.common.service;
 
 import com.markben.basic.common.entity.TSysUser;
 import com.markben.beans.response.IResultResponse;
-import com.markben.core.bean.IUserInfo;
+import com.markben.beans.bean.IUserInfo;
 import com.markben.core.service.IMgrService;
 
 /**

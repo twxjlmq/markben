@@ -1,4 +1,4 @@
-package com.markben.core.bean;
+package com.markben.beans.bean;
 
 import java.io.Serializable;
 import java.util.Collection;
