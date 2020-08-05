@@ -11,12 +11,13 @@
         <module>markben-common</module>
         <module>markben-cache</module>
         <module>markben-core</module>
+        <module>markben-beans</module>
+        <module>markben-api-common</module>
+        <module>markben-basic</module>
         <module>markben-form</module>
         <module>markben-flow</module>
         <module>markben-cms</module>
         <module>markben-report</module>
-        <module>markben-basic</module>
-        <module>markben-api-common</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -208,6 +209,12 @@
             <dependency>
                 <groupId>com.markben</groupId>
                 <artifactId>markben-cache-interface</artifactId>
+                <version>${markben.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.markben</groupId>
+                <artifactId>markben-beans</artifactId>
                 <version>${markben.version}</version>
             </dependency>
         </dependencies>

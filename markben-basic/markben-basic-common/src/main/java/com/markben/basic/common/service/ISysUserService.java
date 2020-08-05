@@ -1,6 +1,7 @@
 package com.markben.basic.common.service;
 
 import com.markben.basic.common.entity.TSysUser;
+import com.markben.beans.response.IResultResponse;
 import com.markben.core.bean.IUserInfo;
 import com.markben.core.service.IMgrService;
 
@@ -31,6 +32,6 @@ public interface ISysUserService extends IMgrService<TSysUser> {
      * @param password 密码
      * @return 返回用户信息；如果登录成功
      */
-    IUserInfo login(String username, String password);
+    IResultResponse<IUserInfo> login(String username, String password);
 
 }
