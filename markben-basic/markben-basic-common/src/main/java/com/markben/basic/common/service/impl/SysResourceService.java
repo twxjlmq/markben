@@ -1,4 +1,4 @@
-package com.markben.basic.common.service;
+package com.markben.basic.common.service.impl;
 
 import com.markben.basic.common.entity.TSysResource;
 import com.markben.core.service.EnhanceServiceImpl;

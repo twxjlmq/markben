@@ -1,6 +1,7 @@
 package com.markben.basic.common.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.markben.common.enums.YesOrNoType;
 import com.markben.core.bean.AbstractTenantEntity;
 import com.markben.core.bean.IPKPrefix;
 
@@ -26,9 +27,9 @@ public class TSysCorpUser extends AbstractTenantEntity implements IPKPrefix {
     private String nickname;
 
     /**
-     * 是否默认默认主组织
+     * 是否默认主组织
      */
-    private Integer isDefault;
+    private Integer isDefault = YesOrNoType.NO.getIndex();
 
     /**
      * 是否为组织的超级管理员

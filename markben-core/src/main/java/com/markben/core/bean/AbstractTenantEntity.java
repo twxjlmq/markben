@@ -7,6 +7,9 @@ package com.markben.core.bean;
  */
 public class AbstractTenantEntity extends AbstractCommonPropEntity implements ITenantEntity {
 
+    /**
+     * 企业或组织ID
+     */
     private String corpId;
 
     public String getCorpId() {

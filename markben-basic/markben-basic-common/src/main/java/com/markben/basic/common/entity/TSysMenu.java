@@ -2,6 +2,7 @@ package com.markben.basic.common.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.markben.core.bean.AbstractBaseTreeEntity;
+import com.markben.core.bean.ITenantEntity;
 
 /**
  * 系统菜单实体类
@@ -9,7 +10,9 @@ import com.markben.core.bean.AbstractBaseTreeEntity;
  * @since 1.0
  */
 @TableName(value = "t_sys_menu")
-public class TSysMenu extends AbstractBaseTreeEntity {
+public class TSysMenu extends AbstractBaseTreeEntity implements ITenantEntity {
+
+    private String corpId;
 
     /**
      * 资源ID；
@@ -23,6 +26,16 @@ public class TSysMenu extends AbstractBaseTreeEntity {
     private String pcIcon;
 
     private String mobileIcon;
+
+    @Override
+    public String getCorpId() {
+        return corpId;
+    }
+
+    @Override
+    public void setCorpId(String corpId) {
+        this.corpId = corpId;
+    }
 
     public String getResourceId() {
         return resourceId;

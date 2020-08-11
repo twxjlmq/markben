@@ -6,6 +6,7 @@ import com.markben.beans.bean.IUserInfo;
 import com.markben.core.service.IMgrService;
 
 /**
+ * 系统用户服务类接口
  * @author 乌草坡
  * @since 1.0
  */

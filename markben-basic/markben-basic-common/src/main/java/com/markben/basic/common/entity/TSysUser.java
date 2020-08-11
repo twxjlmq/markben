@@ -11,14 +11,29 @@ import com.markben.core.bean.AbstractCommonPropEntity;
 @TableName(value = "t_sys_user")
 public class TSysUser extends AbstractCommonPropEntity {
 
+    /**
+     * 密码
+     */
     private String password;
 
+    /**
+     * 用户名
+     */
     private String username;
 
+    /**
+     * 手机号
+     */
     private String mobile;
 
+    /**
+     * 头像地址
+     */
     private String avatar;
 
+    /**
+     * 备注
+     */
     private String remarks;
 
     public String getPassword() {
