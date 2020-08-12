@@ -1,10 +1,10 @@
 package com.markben.core.initialization;
 
+import com.markben.cache.ICacheManager;
+import com.markben.cache.ICacheManagerAware;
 import com.markben.common.logger.ILogger;
 import com.markben.common.utils.CollectionUtils;
 import com.markben.common.utils.LoggerUtils;
-import com.markben.core.cache.ICacheManager;
-import com.markben.core.cache.ICacheManagerAware;
 import com.markben.core.context.MarkbenContextFactory;
 
 import java.util.Collection;

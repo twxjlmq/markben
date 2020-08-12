@@ -21,6 +21,13 @@ public interface ISysUserService extends IMgrService<TSysUser> {
     void changePwd(String userId, String newPassword, String oldPassword);
 
     /**
+     * 获取通过盐值加密过的md5密码
+     * @param password
+     * @return 返回加密后的密码
+     */
+    String getMd5SaltPassword(String password);
+
+    /**
      * 获取用户实体信息
      * @param username 用户名
      * @return 返回用户实体信息

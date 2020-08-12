@@ -27,6 +27,12 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.markben</groupId>
+            <artifactId>markben-cache-ehcache</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>

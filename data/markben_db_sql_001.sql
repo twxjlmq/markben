@@ -1,6 +1,6 @@
 CREATE TABLE `t_sys_corp` (
   `id` VARCHAR(50) NOT NULL COMMENT '主键ID',
-  `state` INT(1) NOT NULL COMMENT '状态;1--有效；0--无效',
+  `state` INT(1) NOT NULL DEFAULT 1 COMMENT '状态;1--有效；0--无效',
   `create_time` DATETIME NOT NULL COMMENT '创建时间',
   `name` VARCHAR(127) NOT NULL COMMENT '企业（组织）名称',
   `parent_id` VARCHAR(50) NOT NULL DEFAULT 0 COMMENT '父ID，默认值为：0',
@@ -46,26 +46,26 @@ COMMENT = '数据字典表';
 
 CREATE TABLE `t_sys_corp_user` (
   `id` VARCHAR(50) NOT NULL COMMENT '主键ID',
-  `state` INT(1) NOT NULL COMMENT '状态;1--有效；0--无效',
+  `state` INT(1) NOT NULL DEFAULT 1 COMMENT '状态;1--有效；0--无效',
   `create_time` DATETIME NOT NULL COMMENT '创建时间',
   `corp_id` VARCHAR(50) NOT NULL COMMENT '企业（组织）ID;和t_sys_corp表中的主键ID关联',
   `user_id` VARCHAR(50) NOT NULL COMMENT '用户ID;和t_sys_user表中的主键ID关联',
   `is_default` INT(1) NOT NULL DEFAULT 0 COMMENT '是否默认主组织;1--是；0--否',
   `nickname` VARCHAR(127) NOT NULL COMMENT '匿名',
-  `is_supper_admin` INT(1) NOT NULL DEFAULT 0 COMMENT '是否为组织的超级管理员;1--是；0--否',
-  `update_time` DATETIME NOT NULL COMMENT '更新时间',
+  `is_super_admin` INT(1) NOT NULL DEFAULT 0 COMMENT '是否为组织的超级管理员;1--是；0--否',
+  `update_time` DATETIME NULL COMMENT '更新时间',
   PRIMARY KEY (`id`))
 COMMENT = '企业用户表';
 
 CREATE TABLE `t_sys_user` (
   `id` VARCHAR(50) NOT NULL COMMENT '主键ID',
-  `state` INT(1) NOT NULL COMMENT '状态;1--有效；0--无效',
+  `state` INT(1) NOT NULL DEFAULT 1 COMMENT '状态;1--有效；0--无效',
   `create_time` DATETIME NOT NULL COMMENT '创建时间',
   `password` VARCHAR(64) NOT NULL COMMENT '密码',
   `username` VARCHAR(127) NOT NULL COMMENT '用户名',
-  `mobile` VARCHAR(20) NULL DEFAULT 0 COMMENT '手机号',
-  `avatar` VARCHAR(127) NOT NULL COMMENT '头像地址',
-  `remarks` VARCHAR(500) NOT NULL DEFAULT 0 COMMENT '备注',
+  `mobile` VARCHAR(20) NULL COMMENT '手机号',
+  `avatar` VARCHAR(127) NULL COMMENT '头像地址',
+  `remarks` VARCHAR(500) NULL COMMENT '备注',
   PRIMARY KEY (`id`))
 COMMENT = '用户表';
 
@@ -164,3 +164,38 @@ CREATE TABLE `t_sys_role_resource` (
   `resource_id` VARCHAR(50) NOT NULL COMMENT '资源ID',
   PRIMARY KEY (`id`))
 COMMENT = '角色表与资源表的关联表';
+
+CREATE TABLE `t_sys_org_head` (
+  `id` VARCHAR(50) NOT NULL COMMENT '主键ID',
+  `corp_id` VARCHAR(50) NOT NULL COMMENT '企业ID',
+  `org_id` VARCHAR(50) NOT NULL COMMENT '部门（组织机构）ID',
+  `corp_user_id` VARCHAR(50) NOT NULL COMMENT '企业用户ID',
+  PRIMARY KEY (`id`))
+COMMENT = '部门（组织机构）主管表';
+
+CREATE TABLE `t_sys_position` (
+  `id` VARCHAR(50) NOT NULL COMMENT '主键ID',
+  `corp_id` VARCHAR(50) NOT NULL COMMENT '企业ID',
+  `state` INT(1) NOT NULL DEFAULT 1 COMMENT '状态；1--有效；0--无效',
+  `create_time` DATETIME NOT NULL COMMENT '创建时间',
+  `name` VARCHAR(127) NOT NULL COMMENT '名称',
+  `sort_order` INT(5) NOT NULL DEFAULT 0 COMMENT '排序序号',
+  `corp_user_id` VARCHAR(50) NOT NULL COMMENT '企业用户ID',
+  PRIMARY KEY (`id`))
+COMMENT = '职位表';
+
+CREATE TABLE `t_sys_position_corp_user` (
+  `id` VARCHAR(50) NOT NULL COMMENT '主键ID',
+  `corp_id` VARCHAR(50) NOT NULL COMMENT '企业ID',
+  `position_id` VARCHAR(50) NOT NULL COMMENT '职位ID',
+  `corp_user_id` VARCHAR(50) NOT NULL COMMENT '企业用户ID',
+  PRIMARY KEY (`id`))
+COMMENT = '职位表与企业用户表的关联关系表';
+
+CREATE TABLE `t_sys_role_position` (
+  `id` VARCHAR(50) NOT NULL COMMENT '主键ID',
+  `corp_id` VARCHAR(50) NOT NULL COMMENT '企业ID',
+  `role_id` VARCHAR(50) NOT NULL COMMENT '角色ID',
+  `position_id` VARCHAR(50) NOT NULL COMMENT '职位ID',
+  PRIMARY KEY (`id`))
+COMMENT = '角色表与职位表的关联表';

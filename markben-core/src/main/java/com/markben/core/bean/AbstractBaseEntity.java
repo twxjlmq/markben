@@ -11,7 +11,6 @@ import com.baomidou.mybatisplus.annotation.TableId;
 public abstract class AbstractBaseEntity implements IPKStringEntity {
 
     @TableId(value = "id")
-    @TableField(value = "id")
     private String id;
 
     @Override

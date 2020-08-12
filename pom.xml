@@ -32,7 +32,7 @@
         <commons-io.version>2.6</commons-io.version>
         <commons-fileupload.version>1.4</commons-fileupload.version>
 
-        <commons-codec.version>1.12</commons-codec.version>
+        <commons-codec.version>1.14</commons-codec.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
 
         <slf4j.version>1.7.30</slf4j.version>
@@ -209,6 +209,17 @@
             <dependency>
                 <groupId>com.markben</groupId>
                 <artifactId>markben-cache-interface</artifactId>
+                <version>${markben.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.markben</groupId>
+                <artifactId>markben-cache-ehcache</artifactId>
+                <version>${markben.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.markben</groupId>
+                <artifactId>markben-cache-redis</artifactId>
                 <version>${markben.version}</version>
             </dependency>
 
