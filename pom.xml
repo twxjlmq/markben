@@ -248,7 +248,7 @@
 
             <dependency>
                 <groupId>com.markben</groupId>
-                <artifactId>markben-api-common</artifactId>
+                <artifactId>markben-rest-common</artifactId>
                 <version>${markben.version}</version>
             </dependency>
         </dependencies>
