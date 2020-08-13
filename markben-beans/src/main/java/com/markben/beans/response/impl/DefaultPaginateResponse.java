@@ -17,31 +17,31 @@ public class DefaultPaginateResponse<T> extends DefaultCollectionResponse<T> imp
 
     @Override
     public Long getTotal() {
-        return null;
+        return total;
     }
 
     @Override
     public void setTotal(Long total) {
-
+        this.total = total;
     }
 
     @Override
     public Integer getSize() {
-        return null;
+        return size;
     }
 
     @Override
     public void setSize(Integer size) {
-
+        this.size = size;
     }
 
     @Override
     public Integer getTotalPage() {
-        return null;
+        return totalPage;
     }
 
     @Override
     public void setTotalPage(Integer totalPage) {
-
+        this.totalPage = totalPage;
     }
 }

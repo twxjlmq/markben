@@ -25,7 +25,7 @@
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <hibernate-validator.version>6.1.2.Final</hibernate-validator.version>
+        <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
         <mysql.connector.version>8.0.19</mysql.connector.version>
 
         <commons-text.version>1.8</commons-text.version>
@@ -39,8 +39,9 @@
         <junit.version>4.13</junit.version>
         <ehcache.version>3.8.1</ehcache.version>
         <fastjson.version>1.2.62</fastjson.version>
+        <jackson.version>2.11.2</jackson.version>
+        <jackson-bom.version>${jackson.version}</jackson-bom.version>
         <javax.servlet.api.version>4.0.1</javax.servlet.api.version>
-        <UserAgentUtils.version>1.21</UserAgentUtils.version>
 
         <aspectjrt.version>1.9.5</aspectjrt.version>
         <cglib.version>3.3.0</cglib.version>
@@ -59,7 +60,7 @@
         <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
         <maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
 
-        <swagger.version>2.9.2</swagger.version>
+        <swagger.version>3.0.0</swagger.version>
     </properties>
 
     <parent>
@@ -88,7 +89,7 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.hibernate</groupId>
+                <groupId>org.hibernate.validator</groupId>
                 <artifactId>hibernate-validator</artifactId>
                 <version>${hibernate-validator.version}</version>
             </dependency>
@@ -178,9 +179,19 @@
             </dependency>
 
             <dependency>
-                <groupId>eu.bitwalker</groupId>
-                <artifactId>UserAgentUtils</artifactId>
-                <version>${UserAgentUtils.version}</version>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
             </dependency>
 
             <dependency>
@@ -191,6 +202,12 @@
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-boot-starter</artifactId>
                 <version>${swagger.version}</version>
             </dependency>
 
@@ -226,6 +243,12 @@
             <dependency>
                 <groupId>com.markben</groupId>
                 <artifactId>markben-beans</artifactId>
+                <version>${markben.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.markben</groupId>
+                <artifactId>markben-api-common</artifactId>
                 <version>${markben.version}</version>
             </dependency>
         </dependencies>

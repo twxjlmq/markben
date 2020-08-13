@@ -55,82 +55,42 @@ public interface MarkbenConstant {
     /**
      * 角色状态---超级管理员角色
      */
-    public final static String ROLE_SUPER_ADMIN = "super_admin";
+    String ROLE_SUPER_ADMIN = "super_admin";
 
     /**
      * 角色状态---普通角色
      */
-    public final static String ROLE_GENERAL = "general";
+     String ROLE_GENERAL = "general";
 
     /**
      * 角色状态 --- 企业管理员角色
      */
-    public final static String ROLE_CORP_ADMIN = "corp_admin";
-
-    /////////////操作结果常量定义///////////////////
-    /**
-     * 操作标识--成功
-     */
-    public final static String OP_SUCCESS = "1";
-
-    /**
-     * 成功标识返回的默认提示信息
-     */
-    public final static String OP_SUCCESS_MSG = "数据操作成功";
-
-    /**
-     * 成功获取数据的提示信息
-     */
-    public final static String GET_DATA_SUCCESS_MSG = "数据获取成功";
-
-    /**
-     * 操作标识--没有数据
-     */
-    public final static String OP_NOT_DATA_SUCCESS = "0";
-
-    /**
-     * 没有数据标识返回的默认提示信息
-     */
-    public final static String OP_NOT_DATA_SUCCESS_MSG = "没有查询到相关数据";
-
-    /**
-     * 操作标识--失败
-     */
-    public final static String OP_FAIL = "-1";
-
-    /**
-     * 数据操作失败
-     */
-    public final static String OP_FAIL_MSG = "数据操作失败";
+    String ROLE_CORP_ADMIN = "corp_admin";
 
     /**
      * 每页显示数量
      */
-    public final static int PRE_PAGE_SIZE = 20;
+    int PRE_PAGE_SIZE = 20;
 
     /**
      * MD5盐值
      */
-    public final static String MD5_SALT = "&_markben_$";
+    String MD5_SALT = "&_markben_$";
 
     /**
      * 默认密码
      */
-    public static final String DEFAULT_PWD = "123456";
+    String DEFAULT_PWD = "123456";
 
     /**
      * 超级管理员的企业ID
      */
-    public static final String SUPER_ADMIN_CORP_ID = "1";
+    String SUPER_ADMIN_CORP_ID = "1";
 
     /**
      * 主键ID的长度
      */
-    public static final int ID_LENGTH = 50;
+    int ID_LENGTH = 50;
 
-    /**
-     * 统计SQL语句名称的后缀
-     */
-    public static final String SQL_NAME_COUNT_SUFFIX = "_count";
 
 }

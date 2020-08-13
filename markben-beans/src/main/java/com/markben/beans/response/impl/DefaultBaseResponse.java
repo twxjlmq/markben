@@ -1,5 +1,6 @@
 package com.markben.beans.response.impl;
 
+import com.markben.beans.enums.MarkbenStatusEnums;
 import com.markben.beans.response.IBaseResponse;
 
 /**
@@ -9,9 +10,9 @@ import com.markben.beans.response.IBaseResponse;
  */
 public class DefaultBaseResponse implements IBaseResponse {
 
-    private Integer status;
+    private Integer status = MarkbenStatusEnums.SUCCESS.getStatus();
 
-    private String msg;
+    private String msg = MarkbenStatusEnums.SUCCESS.getMsg();;
 
     @Override
     public Integer getStatus() {
