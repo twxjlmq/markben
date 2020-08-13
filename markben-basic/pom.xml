@@ -13,7 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>markben-basic-common</module>
-        <module>markben-basic-api</module>
+        <module>markben-basic-rest</module>
     </modules>
 
 

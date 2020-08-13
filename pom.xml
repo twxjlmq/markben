@@ -12,7 +12,7 @@
         <module>markben-cache</module>
         <module>markben-core</module>
         <module>markben-beans</module>
-        <module>markben-api-common</module>
+        <module>markben-rest-common</module>
         <module>markben-basic</module>
         <module>markben-form</module>
         <module>markben-flow</module>
