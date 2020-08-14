@@ -12,20 +12,23 @@ public enum MarkbenStatusEnums {
     FAIL(-1, "FAIL"),
 
 
-    NULL_ERROR(1000, "空指针异常"),
-
-    NOT_LOGIN(1003, "用户未登录"),
-
-    LOGIN_USER_ERROR(1004, "用户名错误"),
-
-    LOGIN_PWD_ERROR(1005, "密码错误"),
-
-    LOGIN_CAPTCHA_ERROR(1006, "验证码错误"),
+    NULL_ERROR(10000, "空指针异常"),
 
 
-    NOT_DATA(2000, "没有查询到数据"),
+    NOT_LOGIN(20003, "用户未登录"),
 
-    REQUEST_ARG_ERROR(2001, "请求参数错误(异常)");
+    LOGIN_USER_ERROR(20004, "用户名错误"),
+
+    LOGIN_PWD_ERROR(20005, "密码错误"),
+
+    LOGIN_CAPTCHA_ERROR(20006, "验证码错误"),
+
+
+    NOT_DATA(30000, "没有查询到数据"),
+
+    REQUEST_ARG_ERROR(30001, "请求参数错误(异常)"),
+
+    UNAUTHORIZED(40001, "没有权限");
 
     private int status;
 

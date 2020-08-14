@@ -4,6 +4,7 @@ import com.markben.common.logger.ILogger;
 import com.markben.common.utils.LoggerUtils;
 import com.markben.core.config.DefaultMarkbenConfiguration;
 import com.markben.core.config.IMarkbenConfiguration;
+import com.markben.core.context.IMarkbenContextAware;
 import com.markben.core.context.MarkbenContextFactory;
 import com.markben.core.initialization.MarkbenInitializationImpl;
 import org.springframework.context.ApplicationContext;
@@ -32,6 +33,11 @@ public class SpringInitializationCompleteListener implements ApplicationListener
             IMarkbenConfiguration configuration = MarkbenContextFactory.find(IMarkbenConfiguration.class);
             if(null == configuration) {
                 configuration = new DefaultMarkbenConfiguration(markbenContext);
+            } else {
+                if(configuration instanceof IMarkbenContextAware) {
+                    IMarkbenContextAware contextAware = (IMarkbenContextAware)configuration;
+                    contextAware.setContext(markbenContext);
+                }
             }
             new MarkbenInitializationImpl(configuration).init();
         }

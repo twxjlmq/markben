@@ -93,4 +93,9 @@ public interface MarkbenConstant {
     int ID_LENGTH = 50;
 
 
+    /**
+     * 授权token头标记
+     */
+    String AUTHORIZATION_TOKEN_HEADER = "X-Authorization-Token";
+
 }

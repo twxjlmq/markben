@@ -194,6 +194,7 @@
                 <version>${jackson.version}</version>
             </dependency>
 
+            <!--
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>
@@ -204,6 +205,7 @@
                 <artifactId>springfox-swagger-ui</artifactId>
                 <version>${swagger.version}</version>
             </dependency>
+            -->
 
             <dependency>
                 <groupId>io.springfox</groupId>
@@ -249,6 +251,12 @@
             <dependency>
                 <groupId>com.markben</groupId>
                 <artifactId>markben-rest-common</artifactId>
+                <version>${markben.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.markben</groupId>
+                <artifactId>markben-basic-common</artifactId>
                 <version>${markben.version}</version>
             </dependency>
         </dependencies>
