@@ -811,13 +811,21 @@ public class StringUtils {
 		StringBuilder strBuilder = new StringBuilder();
 		for (int i=0; i < objs.length; i++) {
 			if(i < objs.length-1 ) {
-				strBuilder.append(String.valueOf(objs[i]) + separate);
+				strBuilder.append(objs[i] + separate);
 			} else {
-				strBuilder.append(String.valueOf(objs[i]));
+				strBuilder.append(objs[i]);
 			}
 		}//for
-		objs = null;
 		return (null != strBuilder)?strBuilder.toString():null;
+	}
+
+	/**
+	 * 数组转化为字符串；使用默认分隔符，值为：{@link MarkbenConstant#MULTI_VALUE_SPLIT}
+	 * @param objs 数组
+	 * @return 返回数组转化成功后的字符串;失败返回：null
+	 */
+	public static String arrayToString(Object[] objs) {
+		return arrayToString(objs, null);
 	}
 
 
@@ -836,8 +844,16 @@ public class StringUtils {
 		if(StringUtils.isNotEmpty(value)) {
 			array = value.split(separate);
 		}
-		value = null;
 		return array;
+	}
+
+	/**
+	 * 字符串转化为数组；使用默认分隔符，值为：{@link MarkbenConstant#MULTI_VALUE_SPLIT}
+	 * @param value 原字符串
+	 * @return 返回字符串分割成功后的数组
+	 */
+	public static String[] stringToArray(String value) {
+		return stringToArray(value, null);
 	}
 
 

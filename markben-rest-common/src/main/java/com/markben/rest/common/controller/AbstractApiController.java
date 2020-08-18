@@ -1,9 +1,11 @@
 package com.markben.rest.common.controller;
 
+import com.markben.beans.enums.MarkbenStatusEnums;
+import com.markben.beans.response.IBaseResponse;
 import com.markben.beans.validator.BeanValidatorFactory;
 import com.markben.beans.validator.IBeanValidator;
 import com.markben.common.enable.ICheckable;
-import com.markben.rest.common.IBaseVO;
+import com.markben.rest.common.vo.IBaseVO;
 
 /**
  * 抽象API控制器类
@@ -30,6 +32,17 @@ public abstract class AbstractApiController extends AbstractBaseController {
     protected void checkRequestVO(IBaseVO baseVO) {
         if(baseVO instanceof ICheckable) {
             getBeanValidator().validate((ICheckable)baseVO);
+        }
+    }
+
+    /**
+     * 设置成功结果
+     * @param response 响应对象
+     */
+    protected void setSuccessResult(IBaseResponse response) {
+        if(null != response) {
+            response.setStatus(MarkbenStatusEnums.SUCCESS.getStatus());
+            response.setMsg(MarkbenStatusEnums.SUCCESS.getMsg());
         }
     }
 

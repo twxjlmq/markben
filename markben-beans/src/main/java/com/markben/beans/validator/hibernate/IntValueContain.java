@@ -15,7 +15,7 @@ import java.lang.annotation.*;
 @Documented
 public @interface IntValueContain {
 
-    String message() default "{markben.validator.valuecontain.message}";
+    String message() default "{markben.validator.value.contain.message}";
 
     Class<?>[] groups() default {};
 

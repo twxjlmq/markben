@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.markben.beans.validator.hibernate.IntValueContain;
 import com.markben.common.enable.ICheckable;
-import com.markben.rest.common.IBaseVO;
+import com.markben.rest.common.vo.IBaseVO;
 import com.markben.common.constant.MarkbenConstant;
 import io.swagger.annotations.ApiModelProperty;
 

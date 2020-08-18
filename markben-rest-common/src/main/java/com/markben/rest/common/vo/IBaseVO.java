@@ -1,4 +1,4 @@
-package com.markben.rest.common;
+package com.markben.rest.common.vo;
 
 /**
  * 基础VO接口

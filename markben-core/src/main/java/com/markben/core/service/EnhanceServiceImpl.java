@@ -289,7 +289,7 @@ public class EnhanceServiceImpl<T extends IEntityBean> extends ServiceImpl<BaseE
         if(StringUtils.isEmpty(id)) {
             return false;
         }
-        return removeById(id);
+        return delete(StringUtils.stringToArray(id));
     }
 
     @Override
