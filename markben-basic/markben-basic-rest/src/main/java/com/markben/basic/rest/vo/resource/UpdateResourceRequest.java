@@ -1,4 +1,4 @@
-package com.markben.basic.rest.vo.dict;
+package com.markben.basic.rest.vo.resource;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -7,12 +7,12 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.NotEmpty;
 
 /**
- * 更新数据字典请求对象
+ * 更新资源请求对象
  * @author 乌草坡
  * @since 1.0
  */
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class UpdateDictRequest extends CreateDictRequest {
+public class UpdateResourceRequest extends CreateResourceRequest {
 
     @ApiModelProperty(value = "ID", required = true)
     @NotEmpty

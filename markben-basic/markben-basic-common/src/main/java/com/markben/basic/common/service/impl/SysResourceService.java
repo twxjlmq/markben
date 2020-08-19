@@ -1,6 +1,7 @@
 package com.markben.basic.common.service.impl;
 
 import com.markben.basic.common.entity.TSysResource;
+import com.markben.basic.common.service.ISysResourceService;
 import com.markben.core.service.EnhanceServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,6 @@ import org.springframework.stereotype.Service;
  * @since 1.0
  */
 @Service
-public class SysResourceService extends EnhanceServiceImpl<TSysResource> {
+public class SysResourceService extends EnhanceServiceImpl<TSysResource> implements ISysResourceService {
 
 }

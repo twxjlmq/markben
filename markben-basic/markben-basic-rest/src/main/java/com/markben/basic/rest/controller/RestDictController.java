@@ -4,6 +4,7 @@ import com.markben.basic.common.entity.TSysDict;
 import com.markben.basic.common.service.ISysDictService;
 import com.markben.basic.rest.helper.DictHelper;
 import com.markben.basic.rest.vo.dict.CreateDictRequest;
+import com.markben.basic.rest.vo.dict.DictDetailVO;
 import com.markben.basic.rest.vo.dict.DictItemVO;
 import com.markben.basic.rest.vo.dict.UpdateDictRequest;
 import com.markben.beans.bean.IUserInfo;
@@ -25,18 +26,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 数据字典接口
+ * 数据字典控制器类
  * @author 乌草坡
  * @since 1.0
  */
 @RestController
-@RequestMapping("/api/dict")
+@RequestMapping("/rest/dict")
 @Api(value = "数据字典接口", tags = {"数据字典接口"})
-public class ApiDictController extends AbstractApiController {
+public class RestDictController extends AbstractApiController {
 
     @Autowired
     private ISysDictService dictService;
@@ -122,9 +124,18 @@ public class ApiDictController extends AbstractApiController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "path", name="id", value = "数据字典ID", required = true, dataType = "String")
     })
-    @ApiOperation(value = "获取数据字典列表", notes = "获取数据字典列表")
-    public IResultResponse<DictItemVO> get(@PathVariable String id) {
-        return null;
+    @ApiOperation(value = "获取数据字典详细信息", notes = "获取数据字典详细信息")
+    public IResultResponse<DictDetailVO> get(@PathVariable String id) {
+        IResultResponse<DictDetailVO> response = new RestResultResponse<>();
+        TSysDict dict = dictService.find(id);
+        if(null != dict) {
+            DictDetailVO detailVO = new DictDetailVO(dict.getId(), dict.getParentId(), dict.getName(),
+                    dict.getSortOrder(), dict.getValue(), dict.getState(), dict.getCorpId(), dict.getCorpUserId());
+            detailVO.setCreateTime(dict.getCreateTime());
+            response.setResult(detailVO);
+            super.setSuccessResult(response);
+        }
+        return response;
     }
 
     /**
@@ -138,7 +149,13 @@ public class ApiDictController extends AbstractApiController {
     })
     @ApiOperation(value = "获取数据字典列表", notes = "获取数据字典列表")
     public ICollectionResponse<LabelValueVO> itemsById(@PathVariable String id) {
-        return null;
+        ICollectionResponse<LabelValueVO> response = new RestCollectionResponse<>();
+        List<TSysDict> items = dictService.getSubItemById(id);
+        if(CollectionUtils.isNotEmpty(items)) {
+            response.setData(convert(items));
+            super.setSuccessResult(response);
+        }
+        return response;
     }
 
     /**
@@ -152,7 +169,21 @@ public class ApiDictController extends AbstractApiController {
     })
     @ApiOperation(value = "获取数据字典列表", notes = "获取数据字典列表")
     public ICollectionResponse<LabelValueVO> item(@PathVariable String value) {
-        return null;
+        ICollectionResponse<LabelValueVO> response = new RestCollectionResponse<>();
+        List<TSysDict> items = dictService.getItemByValue(value);
+        if(CollectionUtils.isNotEmpty(items)) {
+            response.setData(convert(items));
+            super.setSuccessResult(response);
+        }
+        return response;
     }
 
+    /**
+     * 转换列表
+     * @param list
+     * @return
+     */
+    private List<LabelValueVO> convert(Collection<TSysDict> list) {
+        return list.stream().map(d -> new LabelValueVO(d.getName(), d.getValue())).collect(Collectors.toList());
+    }
 }

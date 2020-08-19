@@ -1,6 +1,7 @@
 package com.markben.basic.common.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.markben.basic.common.enums.ResourceFunType;
 import com.markben.common.enums.YesOrNoType;
 import com.markben.core.bean.AbstractBaseTreeEntity;
 import com.markben.core.bean.ITenantEntity;
@@ -17,16 +18,17 @@ public class TSysResource extends AbstractBaseTreeEntity implements ITenantEntit
 
     private String restUrl;
 
-    private String mobileUrl;
-
-    private String pcUrl;
-
     /**
      * 是否功能菜单（按钮）
      * 1 -- 是
      * 0 -- 否
      */
     private Integer isFun = YesOrNoType.NO.getIndex();
+
+    /**
+     * 功能类型
+     */
+    private String funType = ResourceFunType.LIST.getValue();
 
     /**
      * 是否需要授权
@@ -60,22 +62,6 @@ public class TSysResource extends AbstractBaseTreeEntity implements ITenantEntit
         this.restUrl = restUrl;
     }
 
-    public String getMobileUrl() {
-        return mobileUrl;
-    }
-
-    public void setMobileUrl(String mobileUrl) {
-        this.mobileUrl = mobileUrl;
-    }
-
-    public String getPcUrl() {
-        return pcUrl;
-    }
-
-    public void setPcUrl(String pcUrl) {
-        this.pcUrl = pcUrl;
-    }
-
     public Integer getIsFun() {
         return isFun;
     }
@@ -100,4 +86,11 @@ public class TSysResource extends AbstractBaseTreeEntity implements ITenantEntit
         this.corpUserId = corpUserId;
     }
 
+    public String getFunType() {
+        return funType;
+    }
+
+    public void setFunType(String funType) {
+        this.funType = funType;
+    }
 }

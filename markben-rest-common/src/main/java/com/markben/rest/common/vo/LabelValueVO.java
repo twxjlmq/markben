@@ -15,6 +15,14 @@ public class LabelValueVO {
     @ApiModelProperty(value = "文本对应的业务值")
     private String value;
 
+    public LabelValueVO() {
+    }
+
+    public LabelValueVO(String label, String value) {
+        this.label = label;
+        this.value = value;
+    }
+
     public String getLabel() {
         return label;
     }

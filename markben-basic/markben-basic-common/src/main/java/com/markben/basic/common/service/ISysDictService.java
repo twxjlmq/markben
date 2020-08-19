@@ -13,9 +13,29 @@ import java.util.List;
 public interface ISysDictService extends IMgrService<TSysDict> {
 
     /**
-     * 获取所有数据字典信息
+     * 获取所有数据字典实体列表
      * @return 返回数据字典实体列表
      */
     List<TSysDict> findAll();
+
+    /**
+     * 获取有效的数据字典实体列表
+     * @return 返回有效的数据字典实体列表
+     */
+    List<TSysDict> findAllByValid();
+
+    /**
+     * 获取数据字典子项通过ID
+     * @param id ID
+     * @return 返回数据字典实体列表
+     */
+    List<TSysDict> getSubItemById(String id);
+
+    /**
+     * 获取数据字典子项通过业务值
+     * @param value 业务值
+     * @return 返回数据字典实体列表
+     */
+    List<TSysDict> getItemByValue(String value);
 
 }
