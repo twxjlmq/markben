@@ -112,4 +112,15 @@ public class EntityUtils {
             throw new IllegalArgumentException("主键ID长度已超过50，请检查是否是前缀设置过长.");
         }
     }
+
+    /**
+     * 实体属性名称转化为数据库字段名称；
+     * 注：默认为驼峰名词转化为下划线分隔的名称；
+     * 如：userId ===> user_id
+     * @param propertyName 实体属性名称
+     * @return 返回对应数据库字段的名称
+     */
+    public static String toDbField(String propertyName) {
+        return StringUtils.toUnderlineCase(propertyName);
+    }
 }

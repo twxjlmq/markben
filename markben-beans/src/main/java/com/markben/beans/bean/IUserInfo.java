@@ -36,6 +36,18 @@ public interface IUserInfo extends Serializable {
     void setCorpId(String corpId);
 
     /**
+     * 获取企业名称
+     * @return 返回企业名称
+     */
+    String getCorpName();
+
+    /**
+     * 设置企业名称
+     * @param corpName 企业名称
+     */
+    void setCorpName(String corpName);
+
+    /**
      * 获取企业用户ID
      * @return 返回企业用户ID
      */
@@ -76,6 +88,44 @@ public interface IUserInfo extends Serializable {
      * @return 返回部门ID
      */
     Collection<String> getOrgIds();
+
+    void setOrgIds(Collection<String> orgIds);
+
+    /**
+     * 获取部门ID
+     * @return 返回部门ID
+     */
+    String getDeptId();
+
+    /**
+     * 设置部门ID
+     * @param deptId 部门ID
+     */
+    void setDeptId(String deptId);
+
+    /**
+     * 获取部门名称
+     * @return 返回部门名称
+     */
+    String getDeptName();
+
+    /**
+     * 设置部门名称
+     * @param deptName 部门名称
+     */
+    void setDeptName(String deptName);
+
+    /**
+     * 获取企业LOGO
+     * @return 返回企业LOGO
+     */
+    String getLogo();
+
+    /**
+     * 设置企业LOGO
+     * @param logo 企业LOGO
+     */
+    void setLogo(String logo);
 
     /**
      * 获取手机号

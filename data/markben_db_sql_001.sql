@@ -22,11 +22,10 @@ CREATE TABLE `t_sys_resource` (
   `sort_order` INT(5) NOT NULL DEFAULT 0 COMMENT '排序序号',
   `corp_id` VARCHAR(50) NULL COMMENT '企业ID',
   `rest_url` VARCHAR(255) NULL COMMENT 'REST URL地址',
-  `mobile_url` VARCHAR(255) NULL COMMENT '移动端URL地址',
-  `pc_url` VARCHAR(255) NULL COMMENT 'PC端前端地址',
   `is_fun` INT(1) NULL COMMENT '是否是功能资源；1--是；0--否',
   `is_auth` INT(1) NULL COMMENT '是否授权；1--需要授权；0--不需要授权',
   `corp_user_id` VARCHAR(50) NULL COMMENT '企业用户ID',
+  `is_group` int NOT NULL DEFAULT 0 COMMENT '是否分组；1--是；0--否' ,
   PRIMARY KEY (`id`))
 COMMENT = '系统资源表';
 
@@ -66,7 +65,8 @@ CREATE TABLE `t_sys_user` (
   `mobile` VARCHAR(20) NULL COMMENT '手机号',
   `avatar` VARCHAR(127) NULL COMMENT '头像地址',
   `remarks` VARCHAR(500) NULL COMMENT '备注',
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username_UNIQUE` (`username`))
 COMMENT = '用户表';
 
 CREATE TABLE `t_sys_org` (

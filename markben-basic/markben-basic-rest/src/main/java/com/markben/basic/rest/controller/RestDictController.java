@@ -1,7 +1,7 @@
 package com.markben.basic.rest.controller;
 
 import com.markben.basic.common.entity.TSysDict;
-import com.markben.basic.common.service.ISysDictService;
+import com.markben.basic.common.service.IDictService;
 import com.markben.basic.rest.helper.DictHelper;
 import com.markben.basic.rest.vo.dict.CreateDictRequest;
 import com.markben.basic.rest.vo.dict.DictDetailVO;
@@ -12,7 +12,7 @@ import com.markben.beans.response.IBaseResponse;
 import com.markben.beans.response.ICollectionResponse;
 import com.markben.beans.response.IResultResponse;
 import com.markben.common.utils.CollectionUtils;
-import com.markben.rest.common.controller.AbstractApiController;
+import com.markben.rest.common.controller.AbstractRestController;
 import com.markben.rest.common.response.RestBaseResponse;
 import com.markben.rest.common.response.RestCollectionResponse;
 import com.markben.rest.common.response.RestResultResponse;
@@ -38,10 +38,10 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/rest/dict")
 @Api(value = "数据字典接口", tags = {"数据字典接口"})
-public class RestDictController extends AbstractApiController {
+public class RestDictController extends AbstractRestController {
 
     @Autowired
-    private ISysDictService dictService;
+    private IDictService dictService;
 
     /**
      * 创建数据字典
@@ -49,7 +49,7 @@ public class RestDictController extends AbstractApiController {
      * @param createRequest 创建请求对象
      * @return 返回结果
      */
-    @PostMapping(value = "/create", produces = PRODUCES_JSON)
+    @PostMapping(value = "/create", produces = PRODUCES_FORMAT_TYPE)
     @ApiOperation(value = "创建数据字典", notes = "添加数据字典")
     public IResultResponse<String> create(HttpServletRequest request, @RequestBody CreateDictRequest createRequest) {
         super.checkRequestVO(createRequest);
@@ -65,7 +65,7 @@ public class RestDictController extends AbstractApiController {
         return resultResp;
     }
 
-    @PostMapping(value = "/update", produces = PRODUCES_JSON)
+    @PostMapping(value = "/update", produces = PRODUCES_FORMAT_TYPE)
     @ApiOperation(value = "更新数据字典", notes = "更新数据字典")
     public IResultResponse<String> update(HttpServletRequest request, @RequestBody UpdateDictRequest updateRequest) {
         super.checkRequestVO(updateRequest);
@@ -83,7 +83,7 @@ public class RestDictController extends AbstractApiController {
      * @param idRequest 请求对象
      * @return 返回结果
      */
-    @PostMapping(value = "/delete", produces = PRODUCES_JSON)
+    @PostMapping(value = "/delete", produces = PRODUCES_FORMAT_TYPE)
     @ApiOperation(value = "删除数据字典", notes = "删除数据字典")
     public IBaseResponse delete(@RequestBody IdRequest idRequest) {
         super.checkRequestVO(idRequest);
@@ -98,7 +98,7 @@ public class RestDictController extends AbstractApiController {
      * 获取所有数据字典列表
      * @return 返回结果
      */
-    @GetMapping(value = "/list", produces = PRODUCES_JSON)
+    @GetMapping(value = "/list", produces = PRODUCES_FORMAT_TYPE)
     @ApiOperation(value = "获取数据字典列表", notes = "获取数据字典列表")
     public ICollectionResponse<DictItemVO> list() {
         ICollectionResponse<DictItemVO> response = new RestCollectionResponse<>();
@@ -120,7 +120,7 @@ public class RestDictController extends AbstractApiController {
      * 获取数据字典详情信息
      * @return 返回结果
      */
-    @GetMapping(value = "/get/{id}", produces = PRODUCES_JSON)
+    @GetMapping(value = "/get/{id}", produces = PRODUCES_FORMAT_TYPE)
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "path", name="id", value = "数据字典ID", required = true, dataType = "String")
     })
@@ -143,7 +143,7 @@ public class RestDictController extends AbstractApiController {
      * @param id 数据字典ID
      * @return 返回结果
      */
-    @GetMapping(value = "/items/id/{id}", produces = PRODUCES_JSON)
+    @GetMapping(value = "/items/id/{id}", produces = PRODUCES_FORMAT_TYPE)
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "path", name="id", value = "数据字典ID", required = true, dataType = "String")
     })
@@ -163,7 +163,7 @@ public class RestDictController extends AbstractApiController {
      * @param value 数据字典业务值
      * @return 返回结果
      */
-    @GetMapping(value = "/item/{value}", produces = PRODUCES_JSON)
+    @GetMapping(value = "/item/{value}", produces = PRODUCES_FORMAT_TYPE)
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "path", name="value", value = "数据字典业务值", required = true, dataType = "String")
     })

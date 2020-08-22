@@ -25,6 +25,14 @@ public class DefaultUserInfo implements IUserInfo {
 
     private String token;
 
+    private String deptId;
+
+    private String corpName;
+
+    private String deptName;
+
+    private String logo;
+
     private Collection<String> orgIds;
 
     private Collection<String> menuRoleIds;
@@ -78,6 +86,46 @@ public class DefaultUserInfo implements IUserInfo {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    @Override
+    public String getDeptId() {
+        return deptId;
+    }
+
+    @Override
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
+
+    @Override
+    public String getCorpName() {
+        return corpName;
+    }
+
+    @Override
+    public void setCorpName(String corpName) {
+        this.corpName = corpName;
+    }
+
+    @Override
+    public String getDeptName() {
+        return deptName;
+    }
+
+    @Override
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    @Override
+    public String getLogo() {
+        return logo;
+    }
+
+    @Override
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
     @Override

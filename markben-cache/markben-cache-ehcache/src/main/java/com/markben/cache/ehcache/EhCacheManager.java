@@ -77,4 +77,11 @@ public class EhCacheManager implements ICacheManager {
         cacheManager.close();
     }
 
+    @Override
+    public void remove(String name) {
+        if(StringUtils.isEmpty(name)) {
+            return;
+        }
+        cacheManager.removeCache(name);
+    }
 }

@@ -11,13 +11,13 @@ public interface IBaseResponse {
      * 获取状态码
      * @return 返回状态码
      */
-    Integer getStatus();
+    int getStatus();
 
     /**
      * 设置状态码
      * @param status 状态码
      */
-    void setStatus(Integer status);
+    void setStatus(int status);
 
     /**
      * 获取状态对应的状态信息

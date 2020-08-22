@@ -98,4 +98,9 @@ public interface MarkbenConstant {
      */
     String AUTHORIZATION_TOKEN_HEADER = "X-Authorization-Token";
 
+    /**
+     * 异常指示符
+     */
+    String EXCEPTION_INDICATOR = "===>";
+
 }

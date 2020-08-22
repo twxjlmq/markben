@@ -6,6 +6,7 @@ import com.markben.beans.validator.hibernate.IntValueContain;
 import com.markben.common.constant.MarkbenConstant;
 import com.markben.common.enable.ICheckable;
 import com.markben.common.enums.YesOrNoType;
+import com.markben.rest.common.vo.AbstractRestRequest;
 import com.markben.rest.common.vo.IBaseVO;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -17,7 +18,7 @@ import javax.validation.constraints.NotEmpty;
  * @since 1.0
  */
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class CreateResourceRequest implements IBaseVO, ICheckable {
+public class CreateResourceRequest extends AbstractRestRequest implements IBaseVO, ICheckable {
 
     @ApiModelProperty(value = "名称", required = true)
     @NotEmpty
@@ -36,6 +37,9 @@ public class CreateResourceRequest implements IBaseVO, ICheckable {
     @ApiModelProperty(value = "REST接口地址", required = true)
     @NotEmpty
     private String restUrl;
+
+    @ApiModelProperty(value = "是否为分组资源；1--是；0--否;默认为0")
+    private Integer isGroup = YesOrNoType.NO.getIndex();
 
     @ApiModelProperty(value = "是否是功能按钮；1--是；0--否;默认为0")
     private Integer isFun = YesOrNoType.NO.getIndex();
@@ -92,6 +96,14 @@ public class CreateResourceRequest implements IBaseVO, ICheckable {
 
     public void setIsFun(Integer isFun) {
         this.isFun = isFun;
+    }
+
+    public Integer getIsGroup() {
+        return isGroup;
+    }
+
+    public void setIsGroup(Integer isGroup) {
+        this.isGroup = isGroup;
     }
 
     public Integer getIsAuth() {

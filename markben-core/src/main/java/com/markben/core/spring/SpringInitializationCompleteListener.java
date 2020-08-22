@@ -39,6 +39,7 @@ public class SpringInitializationCompleteListener implements ApplicationListener
                     contextAware.setContext(markbenContext);
                 }
             }
+            MarkbenContextFactory.setConfiguration(configuration);
             new MarkbenInitializationImpl(configuration).init();
         }
     }

@@ -72,6 +72,15 @@ public class RedisCacheManager implements ICacheManager {
         throw new UnsupportedOperationException("不支持该操作");
     }
 
+    @Override
+    public void remove(String name) {
+        if(StringUtils.isEmpty(name)) {
+            return;
+        }
+        name = handleName(name);
+        redisTemplate.delete(name);
+    }
+
     private String handleName(String name) {
         if(StringUtils.isNotEmpty(this.redisNamespace) && !name.startsWith(this.redisNamespace)) {
             return this.redisNamespace + name;

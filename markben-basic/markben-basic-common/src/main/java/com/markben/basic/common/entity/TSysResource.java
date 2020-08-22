@@ -26,12 +26,17 @@ public class TSysResource extends AbstractBaseTreeEntity implements ITenantEntit
     private Integer isFun = YesOrNoType.NO.getIndex();
 
     /**
-     * 功能类型
+     * 资源是否分组名称；分组的话，restUrl等属性值为空
      */
-    private String funType = ResourceFunType.LIST.getValue();
+    private Integer isGroup = YesOrNoType.NO.getIndex();
 
     /**
-     * 是否需要授权
+     * 功能类型；
+     */
+    private String funType;
+
+    /**
+     * 是否需要授权;默认为1；但如果<code>isGroup</code>属性为1时，其值为0；
      * 1--需要
      * 0--不需要
      */
@@ -71,6 +76,9 @@ public class TSysResource extends AbstractBaseTreeEntity implements ITenantEntit
     }
 
     public Integer getIsAuth() {
+        if(YesOrNoType.YES.getIndex() == this.isGroup) {
+            isAuth = YesOrNoType.NO.getIndex();
+        }
         return isAuth;
     }
 

@@ -1,7 +1,10 @@
 package com.markben.common;
 
 import com.markben.common.config.SystemConfig;
+import com.markben.common.enums.ProjectEnvironmentType;
 import com.markben.common.utils.StringUtils;
+
+import java.io.Serializable;
 
 
 /**
@@ -9,7 +12,7 @@ import com.markben.common.utils.StringUtils;
  * @author 乌草坡
  * @since 1.0
  */
-public class ProjectInfo {
+public class ProjectInfo implements Serializable {
 
 	/**
 	 * 项目名称
@@ -17,9 +20,12 @@ public class ProjectInfo {
 	private String name;
 	
 	/**
-	 * 开发模式
+	 * 项目环境；
+	 * 如： development--开发环境；
+	 * test--测试环境；
+	 * production--生产环境
 	 */
-	private String devModel;
+	private Integer environment;
 	
 	/**
 	 * 版权
@@ -53,20 +59,24 @@ public class ProjectInfo {
 	}
 
 	/**
-	 * 开发模式
-	 * @return 返回值为1或0;
-	 * 1--表示开发模式；0--表示产品模式
+	 * 获取项目环境；
+	 * 具体的类型请参看{@link ProjectEnvironmentType }中的定义
+	 * @return 返回环境类型值
 	 */
-	public String getDevModel() {
-		return devModel;
+	public Integer getEnvironment() {
+		if(null == environment) {
+			environment = ProjectEnvironmentType.DEVELOPMENT.getIndex();
+		}
+		return environment;
 	}
 
 	/**
-	 * 设置开发模式
-	 * @param devModel
+	 * 设置项目环境；
+	 * 具体的类型请参看{@link ProjectEnvironmentType }中的定义
+	 * @param environment 项目环境类型值；
 	 */
-	public void setDevModel(String devModel) {
-		this.devModel = devModel;
+	public void setEnvironment(Integer environment) {
+		this.environment = environment;
 	}
 
 	/**
@@ -128,10 +138,23 @@ public class ProjectInfo {
 		}
 		this.name = StringUtils.handleNull(config.getValue(prefix+"name"));
 		
-		this.devModel = StringUtils.handleNull(config.getValue(prefix+"devModel"));
+		String environmentStr = StringUtils.handleNull(config.getValue(prefix+"environment"));
+		if(StringUtils.isEmpty(environmentStr) || !StringUtils.isInteger(environmentStr)) {
+			this.environment = ProjectEnvironmentType.DEVELOPMENT.getIndex();
+		} else {
+			this.environment = ProjectEnvironmentType.getObject(Integer.parseInt(environmentStr)).getIndex();
+		}
 		this.copyright = StringUtils.handleNull(config.getValue(prefix+"copyright"));
 			
 		this.contactInfo = StringUtils.handleNull(config.getValue(prefix+"contactInfo"));
 		this.version = StringUtils.handleNull(config.getValue(prefix+"version"));
+	}
+
+	/**
+	 * 获取当前项目的环境类型
+	 * @return 返回当前项目的环境类型对象
+	 */
+	public ProjectEnvironmentType getEnvironmentType() {
+		return ProjectEnvironmentType.getObject(getEnvironment());
 	}
 }

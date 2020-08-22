@@ -18,7 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class SysCorpServiceTest {
 
     @Autowired
-    private ISysCorpService corpService;
+    private ICorpService corpService;
 
     @Test
     public void saveTest() {

@@ -26,12 +26,34 @@ public abstract class AbstractBaseController {
 
     /**
      * 获取用户信息从本次请求对象中
-     * @param request Http请求对象
+     * @param request HttpServletRequest对象
      * @return 返回用户信息对象
      */
     protected IUserInfo getUserInfoByRequest(HttpServletRequest request) {
         return HttpRequestHelper.getUserInfoFromSession(request);
     }
 
+    /**
+     * 添加用户信息到session
+     * @param request HttpServletRequest对象
+     * @param userInfo 用户信息
+     */
+    protected void setUserInfo2Session(HttpServletRequest request, IUserInfo userInfo) {
+        if(null != request && null != userInfo) {
+            HttpRequestHelper.setUserInfoToSession(request, userInfo);
+        }
+    }
 
+    /**
+     * 从session中获取用户信息
+     * @param request HttpServletRequest对象
+     * @return 返回session中的用户信息
+     */
+    protected IUserInfo getUserInfoFromSession(HttpServletRequest request) {
+        IUserInfo userInfo = null;
+        if(null != request) {
+            userInfo = HttpRequestHelper.getUserInfoFromSession(request);
+        }
+        return userInfo;
+    }
 }

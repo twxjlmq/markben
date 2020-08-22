@@ -16,6 +16,12 @@ import java.util.regex.Pattern;
  */
 public class StringUtils {
 
+	public static final String UNDERLINE = "_";
+
+	public static final char UNDERLINE_CHAR = '_';
+
+	public static final char DASHED_CHAR = '-';
+
 	private StringUtils() {
 		throw new UnsupportedOperationException("StringUtils类无法实例化"); 
 	}
@@ -37,7 +43,29 @@ public class StringUtils {
 	public static boolean isNotEmpty(String value) {
 		return !isEmpty(value);
 	}
-	
+
+	/**
+	 * 判断对象是否为空，或转换为字符串后的值是否为空
+	 * @param value 需要判断的值
+	 * @return 为空（null或“”）返回true；否则返回false
+	 */
+	public static boolean isEmpty(Object value) {
+		if(null == value) {
+			return true;
+		} else {
+			return isEmpty(handleNull(value));
+		}
+	}
+
+	/**
+	 * 判断对象是否不为空；
+	 * @param value 需要判断的值
+	 * @return 如果不为空返回true；否则返回false
+	 */
+	public static boolean isNotEmpty(Object value) {
+		return !isEmpty(value);
+	}
+
 	/**
 	 * 判断参数；如果参数<code>value</code> 为空；
 	 * 则抛出参数为空异常（运行时异常）
@@ -45,22 +73,39 @@ public class StringUtils {
 	 * @param msg 提示信息
 	 */
 	public static void isAssert(Object value, String msg) {
+		isAssert(value, msg, null);
+	}
+
+	/**
+	 * 判断参数；如果参数<code>value</code> 为空；
+	 * 则抛出参数为空异常（运行时异常）
+	 * @param value 需要判断的参数
+	 * @param msg 提示信息
+	 */
+	public static void isAssert(Object value, String msg, Object obj) {
 		msg = isEmpty(msg)?"提供的参数为空":msg;
+
+		boolean isException = false;
 		if(null == value) {
-			throw new NullArgumentException(msg);
-		}
-		if(value instanceof String) {
+			isException = true;
+		} else if(value instanceof String) {
 			if(isEmpty(value.toString())) {
-				throw new NullArgumentException(msg);
+				isException = true;
 			}
 		} else if(value instanceof Collection) {
-		    if(CollectionUtils.isEmpty((Collection<?>)value)) {
-		        throw new NullArgumentException(msg);
-		    }
+			if(CollectionUtils.isEmpty((Collection<?>)value)) {
+				isException = true;
+			}
 		} else if(value.getClass().isArray()) {
-		    if(ArrayUtils.isEmpty((Object[])value)) {
-		        throw new NullArgumentException(msg);
-		    }
+			if(ArrayUtils.isEmpty((Object[])value)) {
+				isException = true;
+			}
+		}
+		if(isException) {
+			if(null != obj) {
+				msg = msg  + MarkbenConstant.EXCEPTION_INDICATOR + obj.getClass().getName();
+			}
+			throw new NullArgumentException(msg);
 		}
 	}
 	
@@ -117,17 +162,6 @@ public class StringUtils {
 	}
 	
 	/**
-	 * null转换为“” 
-	 * <p>注：该方法已过时，请用{@link #handleNull(Object)} 代替</p>
-     * @param obj
-     * @return 返回处理后的结果
-	 */
-	@Deprecated
-	public static String handNull(Object obj) {
-	    return handleNull(obj);
-	}
-	
-	/**
 	 * null转换为“”
 	 * @param obj
 	 * @return 返回处理后的结果
@@ -152,17 +186,6 @@ public class StringUtils {
 			return obj.toString().trim();
 		}
 	}
-	
-	/**
-     * 对象转化为整型
-     * <p>注：该方法已过时，请用{@link #handleObj2Integer(Object)} 代替</p>
-     * @param obj
-     * @return 返回转化结果
-     */
-	public static Integer handObj2Integer(Object obj) {
-	    return handleObj2Integer(obj);
-	}
-	
 	
 	/**
 	 * 对象转化为整型
@@ -269,15 +292,14 @@ public class StringUtils {
 	
 	/**
 	 * 按日期格式生成序列号
-	 * @param dateFormaterStr 日期格式
+	 * @param dateFormatStr 日期格式
 	 * @return 返回序列号
 	 */
-	public static String createSerialNum(String dateFormaterStr) {
+	public static String createSerialNum(String dateFormatStr) {
 		String serialNum = null;
-		if(!isEmpty(dateFormaterStr)) {
-			SimpleDateFormat dateFormatter = new SimpleDateFormat(dateFormaterStr);
+		if(!isEmpty(dateFormatStr)) {
+			SimpleDateFormat dateFormatter = new SimpleDateFormat(dateFormatStr);
 			serialNum = dateFormatter.format(new Date());
-			dateFormatter = null;
 		}
 		return serialNum;
 	}
@@ -326,8 +348,8 @@ public class StringUtils {
 	
 	
 	/**
-	 * 大写字母直接用下划线分割，并把大写转换为小写 <br />
-	 * 如:HelloWorld转换为hello_world
+	 * 大写字母直接用下划线分割，并把大写转换为小写；
+	 * 如:HelloWorld ===> hello_world
 	 * @param value
 	 * @return 返回处理结果
 	 */
@@ -526,30 +548,7 @@ public class StringUtils {
 		}
 		return params;
 	}
-	
-	/**
-	 * 根据regex分隔字符串
-	 * 然后用逗号","重组
-	 * @param ids
-	 * @param regex
-	 * @return 返回处理后的结果
-	 */
-	public static String splitIds(String ids,String regex){
-		String newIds = "";
-		if(null != ids && !StringUtils.isEmpty(ids.toString())) {
-			String[] idsArr = ids.split(regex);
-			for (int i = 0; i < idsArr.length; i++) {
-				if(i != (idsArr.length-1)) {
-					newIds += "'"+idsArr[i]+"',";
-				} else {
-					newIds += "'"+idsArr[i]+"'";
-				}
-			}
-		}
-		return newIds;
-	}
-	
-	
+
 	/**
 	 * 计算出文件大小
 	 * @param size
@@ -559,22 +558,21 @@ public class StringUtils {
 	public static String fileSize(long size) {
 		DecimalFormat df = new DecimalFormat("0.0#");
 		long KB = 1024;
-		long MB = KB*1024;
-		long GB = MB*1024;
+		long MB = KB * 1024;
+		long GB = MB * 1024;
 		String valueStr = null;
-		if(size<0) {
+		if(size < 0) {
 			valueStr = "0 KB";
-		} else if(size<KB*1024) {
+		} else if(size < KB * 1024) {
 			double value = (double)size/KB;
 			valueStr = df.format(value)+" KB";
-		} else if(size<MB*1024) {
+		} else if(size < MB * 1024) {
 			double value = (double)size/MB;
 			valueStr = df.format(value)+" M";
 		} else {
 			double value = (double)size/GB;
 			valueStr = df.format(value)+" G";
 		}
-		df = null;
 		return valueStr;
 	}
 	
@@ -681,7 +679,7 @@ public class StringUtils {
 	 * @param value 预处理的字符串
 	 * @return 返回处理后的结果
 	 */
-	public static String repaceSpecialChar(String value) {
+	public static String replaceSpecialChar(String value) {
 		if(isNotEmpty(value)) {
 			value = value.replaceAll("\r|\n|\t", "");
 		}
@@ -693,7 +691,7 @@ public class StringUtils {
 	 * @param value
 	 * @return 返回处理后的结果
 	 */
-	public static String repaceSlash(String value) {
+	public static String replaceSlash(String value) {
 		if(isNotEmpty(value)) {
 			//value = value.replaceAll("\\\\", "\\\\\\\\\\\\\\\\");
 			value = value.replaceAll("\\\\", "\\\\\\\\");
@@ -971,4 +969,104 @@ public class StringUtils {
 		}
 		return is;
 	}
+
+
+	/**
+	 * 将驼峰式命名的字符串转换为下划线方式。如果转换前的驼峰式命名的字符串为空，则返回空字符串。<br>
+	 * 例如：
+	 * <pre>
+	 * HelloWorld ===> hello_world
+	 * Hello_World ===> hello_world
+	 * HelloWorld_test ===> hello_world_test
+	 * </pre>
+	 * @param str 转换前的驼峰式命名的字符串，也可以为下划线形式
+	 * @return 转换后下划线方式命名的字符串
+	 */
+	public static String toUnderlineCase(CharSequence str) {
+		return toSymbolCase(str, UNDERLINE_CHAR);
+	}
+
+	/**
+	 * 将驼峰式命名的字符串转换为使用符号连接方式。如果转换前的驼峰式命名的字符串为空，则返回空字符串。<br>
+	 *
+	 * @param str    转换前的驼峰式命名的字符串，也可以为符号连接形式
+	 * @param symbol 连接符
+	 * @return 转换后符号连接方式命名的字符串
+	 * @since 4.0.10
+	 */
+	public static String toSymbolCase(CharSequence str, char symbol) {
+		if (str == null) {
+			return null;
+		}
+
+		final int length = str.length();
+		final StringBuilder sb = new StringBuilder();
+		char c;
+		for (int i = 0; i < length; i++) {
+			c = str.charAt(i);
+			final Character preChar = (i > 0) ? str.charAt(i - 1) : null;
+			if (Character.isUpperCase(c)) {
+				// 遇到大写字母处理
+				final Character nextChar = (i < str.length() - 1) ? str.charAt(i + 1) : null;
+				if (null != preChar && Character.isUpperCase(preChar)) {
+					// 前一个字符为大写，则按照一个词对待
+					sb.append(c);
+				} else if (null != nextChar && Character.isUpperCase(nextChar)) {
+					// 后一个为大写字母，按照一个词对待
+					if (null != preChar && symbol != preChar) {
+						// 前一个是非大写时按照新词对待，加连接符
+						sb.append(symbol);
+					}
+					sb.append(c);
+				} else {
+					// 前后都为非大写按照新词对待
+					if (null != preChar && symbol != preChar) {
+						// 前一个非连接符，补充连接符
+						sb.append(symbol);
+					}
+					sb.append(Character.toLowerCase(c));
+				}
+			} else {
+				if (sb.length() > 0 && Character.isUpperCase(sb.charAt(sb.length() - 1)) && symbol != c) {
+					// 当结果中前一个字母为大写，当前为小写，说明此字符为新词开始（连接符也表示新词）
+					sb.append(symbol);
+				}
+				// 小写或符号
+				sb.append(c);
+			}
+		}
+		return sb.toString();
+	}
+
+	/**
+	 * 将下划线方式命名的字符串转换为驼峰式。如果转换前的下划线大写方式命名的字符串为空，则返回空字符串。<br>
+	 * 例如：hello_world ===> helloWorld
+	 * @param name 转换前的下划线大写方式命名的字符串
+	 * @return 转换后的驼峰式命名的字符串
+	 */
+	public static String toCamelCase(CharSequence name) {
+		if (null == name) {
+			return null;
+		}
+		String handleName = name.toString();
+		if (handleName.contains(UNDERLINE)) {
+			final StringBuilder sb = new StringBuilder(handleName.length());
+			boolean upperCase = false;
+			for (int i = 0; i < handleName.length(); i++) {
+				char c = handleName.charAt(i);
+				if (c == UNDERLINE_CHAR) {
+					upperCase = true;
+				} else if (upperCase) {
+					sb.append(Character.toUpperCase(c));
+					upperCase = false;
+				} else {
+					sb.append(Character.toLowerCase(c));
+				}
+			}
+			return sb.toString();
+		} else {
+			return handleName;
+		}
+	}
+
 }

@@ -1,8 +1,10 @@
 package com.markben.core.service;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
+import com.markben.common.enums.YesOrNoType;
 import com.markben.common.logger.ILogger;
 import com.markben.common.utils.CollectionUtils;
 import com.markben.common.utils.LoggerUtils;
@@ -63,6 +65,18 @@ public class EnhanceServiceImpl<T extends IEntityBean> extends ServiceImpl<BaseE
             wrapper = query().eq(columnName, value);
         }
         return getBaseMapper().selectList(wrapper);
+    }
+
+    @Override
+    public List<T> findListByValid(String[] ids) {
+        if(null == ids) {
+            return Collections.EMPTY_LIST;
+        }
+        QueryChainWrapper<T> queryWrapper = query().in("id", ids);
+        if(IStateEntity.class.isAssignableFrom(entityClass)) {
+            queryWrapper.and(q -> q.eq("state", YesOrNoType.YES.getIndex()));
+        }
+        return super.list(queryWrapper);
     }
 
     @Override
@@ -299,6 +313,11 @@ public class EnhanceServiceImpl<T extends IEntityBean> extends ServiceImpl<BaseE
             return false;
         }
         return removeByIds(Arrays.asList(ids));
+    }
+
+    @Override
+    public List<T> finds(Wrapper<T> queryWrapper) {
+        return super.list(queryWrapper);
     }
 
     /**

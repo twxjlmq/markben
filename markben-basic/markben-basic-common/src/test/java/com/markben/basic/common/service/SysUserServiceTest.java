@@ -1,7 +1,6 @@
 package com.markben.basic.common.service;
 
 import com.markben.basic.common.ApplicationBasicCommonTest;
-import com.markben.basic.common.entity.TSysCorp;
 import com.markben.basic.common.entity.TSysCorpUser;
 import com.markben.basic.common.entity.TSysUser;
 import com.markben.common.enums.YesOrNoType;
@@ -21,9 +20,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class SysUserServiceTest {
 
     @Autowired
-    private ISysUserService userService;
+    private IUserService userService;
     @Autowired
-    private ISysCorpUserService corpUserService;
+    private ICorpUserService corpUserService;
 
     @Test
     public void saveTest() {

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.markben.beans.validator.hibernate.IntValueContain;
 import com.markben.common.enable.ICheckable;
+import com.markben.rest.common.vo.AbstractRestRequest;
 import com.markben.rest.common.vo.IBaseVO;
 import com.markben.common.constant.MarkbenConstant;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,7 +17,7 @@ import javax.validation.constraints.NotEmpty;
  * @since 1.0
  */
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class CreateDictRequest implements IBaseVO, ICheckable {
+public class CreateDictRequest extends AbstractRestRequest implements IBaseVO, ICheckable {
 
     @ApiModelProperty(value = "名称", required = true)
     @NotEmpty

@@ -3,10 +3,17 @@ package com.markben.basic.common.enums;
 import com.markben.common.utils.StringUtils;
 
 /**
+ * 资源功能类型
  * @author 乌草坡
  * @since 1.0
  */
 public enum ResourceFunType {
+
+    /**
+     * null -- “”
+     * 没有资源类型
+     */
+    NONE(null, ""),
 
     /**
      * list -- 列表

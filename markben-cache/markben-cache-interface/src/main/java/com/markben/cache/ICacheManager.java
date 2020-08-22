@@ -38,5 +38,11 @@ public interface ICacheManager {
 	 * @throws CacheException
 	 */
 	void destroy() throws CacheException;
+
+	/**
+	 * 移除指定的缓存数据
+	 * @param name 缓存名称
+	 */
+	void remove(String name);
 	
 }

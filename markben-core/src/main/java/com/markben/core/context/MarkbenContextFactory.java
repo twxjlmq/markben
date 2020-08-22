@@ -1,5 +1,7 @@
 package com.markben.core.context;
 
+import com.markben.core.config.IMarkbenConfiguration;
+
 import java.util.List;
 
 /**
@@ -11,12 +13,18 @@ public class MarkbenContextFactory {
 
     private static IMarkbenContext context;
 
+    private static IMarkbenConfiguration configuration;
+
     public static IMarkbenContext getContext() {
         return context;
     }
 
     public static void setContext(IMarkbenContext context) {
         MarkbenContextFactory.context = context;
+    }
+
+    public static void setConfiguration(IMarkbenConfiguration configuration) {
+        MarkbenContextFactory.configuration = configuration;
     }
 
     /**
@@ -96,5 +104,9 @@ public class MarkbenContextFactory {
      */
     public static Object findByName(String name) {
         return context.findByName(name);
+    }
+
+    public static IMarkbenConfiguration getConfiguration() {
+        return configuration;
     }
 }

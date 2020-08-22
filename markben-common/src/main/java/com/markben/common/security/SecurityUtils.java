@@ -1,5 +1,6 @@
 package com.markben.common.security;
 
+import com.markben.common.constant.MarkbenConstant;
 import com.markben.common.utils.StringUtils;
 import org.apache.commons.codec.binary.Base64;
 
@@ -122,5 +123,18 @@ public class SecurityUtils {
 			e.printStackTrace();
 		}
 		return value;
+	}
+
+	/**
+	 * 对密码加密
+	 * @param password 密码
+	 * @return 返回加密处理后的密码
+	 */
+	public static String encryptPassword(String password) {
+		if(StringUtils.isEmpty(password)) {
+			return null;
+		}
+		String saltPassword =  MarkbenConstant.MD5_SALT + password;
+		return SecurityUtils.md5(saltPassword);
 	}
 }
