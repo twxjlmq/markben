@@ -1,6 +1,5 @@
 package com.markben.basic.common.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
 import com.markben.basic.common.entity.TSysCorpUser;
 import com.markben.basic.common.entity.TSysOrg;

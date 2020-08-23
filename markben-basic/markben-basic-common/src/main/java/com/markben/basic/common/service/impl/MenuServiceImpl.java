@@ -1,0 +1,14 @@
+package com.markben.basic.common.service.impl;
+
+import com.markben.basic.common.entity.TSysMenu;
+import com.markben.basic.common.service.IMenuService;
+import com.markben.core.service.EnhanceServiceImpl;
+import org.springframework.stereotype.Service;
+
+/**
+ * @author 乌草坡
+ * @since 1.0
+ */
+@Service
+public class MenuServiceImpl extends EnhanceServiceImpl<TSysMenu> implements IMenuService {
+}

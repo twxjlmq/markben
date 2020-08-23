@@ -13,6 +13,7 @@ import com.markben.rest.common.helper.HttpRequestHelper;
 import com.markben.rest.common.helper.SecurityFilterHelper;
 import com.markben.rest.common.response.RestResultResponse;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,6 +43,7 @@ public class RestUserController extends AbstractRestController {
      */
     @PostMapping(value = "/login", produces = PRODUCES_FORMAT_TYPE)
     @ApiOperation(value = "登录接口", notes = "登录接口；注：调用登录接口之后需要再次调用“确认登录接口”后，才完成整个登录的过程。")
+    @ApiImplicitParam(name ="loginRequest", value = "登录请求参数", required = true, dataType = "LoginRequest", dataTypeClass = LoginRequest.class)
     public IResultResponse<LoginResultVO> login(@RequestBody LoginRequest loginRequest) {
         LoggerUtils.debug(getLogger(), "正在登录,请求的信息为--username:[{}]--password:[{}]--code:[{}].",
                 loginRequest.getUsername(), SecurityFilterHelper.filterPassword(loginRequest.getPassword()),

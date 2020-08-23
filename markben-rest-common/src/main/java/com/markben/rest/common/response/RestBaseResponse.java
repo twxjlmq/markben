@@ -15,7 +15,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class RestBaseResponse implements IBaseResponse {
 
     @ApiModelProperty(value = "返回状态码；如果为1表示成功；非1表示失败")
-    private Integer status = MarkbenStatusEnums.SUCCESS.getStatus();
+    private int status = MarkbenStatusEnums.SUCCESS.getStatus();
 
     @ApiModelProperty(value = "返回状态码对应的结果说明")
     private String msg = MarkbenStatusEnums.SUCCESS.getMsg();
@@ -23,18 +23,18 @@ public class RestBaseResponse implements IBaseResponse {
     public RestBaseResponse() {
     }
 
-    public RestBaseResponse(Integer status, String msg) {
+    public RestBaseResponse(int status, String msg) {
         this.status = status;
         this.msg = msg;
     }
 
     @Override
-    public Integer getStatus() {
+    public int getStatus() {
         return status;
     }
 
     @Override
-    public void setStatus(Integer status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

@@ -15,11 +15,11 @@ public class DefaultBaseResponse implements IBaseResponse {
     private String msg = MarkbenStatusEnums.SUCCESS.getMsg();;
 
     @Override
-    public Integer getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
