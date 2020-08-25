@@ -1,6 +1,7 @@
 package com.markben.core.spring;
 
 import com.markben.common.logger.ILogger;
+import com.markben.common.utils.CollectionUtils;
 import com.markben.common.utils.LoggerUtils;
 import com.markben.common.utils.StringUtils;
 import com.markben.core.context.IMarkbenContext;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.ApplicationContext;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -52,7 +54,11 @@ public class SpringMarkbenContext implements IMarkbenContext {
 
     @Override
     public <T> T find(Class<T> clazz) {
-        return applicationContext.getBean(clazz);
+        try {
+            return applicationContext.getBean(clazz);
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
     @Override
@@ -60,7 +66,7 @@ public class SpringMarkbenContext implements IMarkbenContext {
         StringUtils.isAssert(clazz, "clazz参数不能为空");
         String[] beanNames = applicationContext.getBeanNamesForType(clazz);
         List<T> beans = null;
-        if(null != beanNames && beanNames.length>0) {
+        if(null != beanNames && beanNames.length > 0) {
             beans = new ArrayList<T>();
             for (String beanName : beanNames) {
                 beans.add(applicationContext.getBean(beanName, clazz));
@@ -73,6 +79,9 @@ public class SpringMarkbenContext implements IMarkbenContext {
     public <T> List<T> findsAndOrder(Class<T> clazz) {
         StringUtils.isAssert(clazz, "clazz参数不能为空");
         List<T> list = finds(clazz);
+        if(CollectionUtils.isEmpty(list)) {
+            return Collections.EMPTY_LIST;
+        }
         list = SpringHelper.objectOrdered(list);
         return list;
     }

@@ -15,17 +15,39 @@ public class MarkbenContextFactory {
 
     private static IMarkbenConfiguration configuration;
 
+    /**
+     * 获取上下文
+     * @return 返回上下文
+     */
     public static IMarkbenContext getContext() {
         return context;
     }
 
+    /**
+     * 设置上下文
+     * @param context
+     */
     public static void setContext(IMarkbenContext context) {
         MarkbenContextFactory.context = context;
     }
 
+    /**
+     * 获取配置实现对象
+     * @return 返回配置实现对象
+     */
+    public static IMarkbenConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    /**
+     * 设置配置对象
+     * @param configuration 配置对象
+     */
     public static void setConfiguration(IMarkbenConfiguration configuration) {
         MarkbenContextFactory.configuration = configuration;
     }
+
+
 
     /**
      * 根据服务名称，添加一个服务实例
@@ -106,7 +128,4 @@ public class MarkbenContextFactory {
         return context.findByName(name);
     }
 
-    public static IMarkbenConfiguration getConfiguration() {
-        return configuration;
-    }
 }

@@ -1,7 +1,7 @@
 package com.markben.core.context;
 
 /**
- * 服务查询接口
+ * 获取Markben上下文接口
  * @author 乌草坡
  * @since 1.0
  */

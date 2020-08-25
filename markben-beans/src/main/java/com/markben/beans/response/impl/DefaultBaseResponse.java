@@ -10,7 +10,7 @@ import com.markben.beans.response.IBaseResponse;
  */
 public class DefaultBaseResponse implements IBaseResponse {
 
-    private Integer status = MarkbenStatusEnums.SUCCESS.getStatus();
+    private int status = MarkbenStatusEnums.SUCCESS.getStatus();
 
     private String msg = MarkbenStatusEnums.SUCCESS.getMsg();;
 

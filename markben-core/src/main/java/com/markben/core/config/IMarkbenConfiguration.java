@@ -9,6 +9,10 @@ import com.markben.cache.ICacheManager;
  */
 public interface IMarkbenConfiguration {
 
+    /**
+     * 获取缓存管理实例
+     * @return 返回缓存管理实例对象
+     */
     ICacheManager getCacheManager();
 
 }

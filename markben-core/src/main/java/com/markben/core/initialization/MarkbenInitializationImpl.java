@@ -1,6 +1,5 @@
 package com.markben.core.initialization;
 
-import com.markben.cache.ICacheManager;
 import com.markben.core.config.IMarkbenConfiguration;
 import com.markben.core.context.IMarkbenContext;
 import com.markben.core.context.MarkbenContextFactory;
@@ -15,28 +14,13 @@ import java.util.Observable;
  */
 public class MarkbenInitializationImpl extends Observable implements IMarkbenInitialization {
 
-    private IMarkbenConfiguration configuration;
-
-    public MarkbenInitializationImpl(IMarkbenConfiguration configuration) {
-        this.configuration = configuration;
-    }
-
     @Override
     public void init() {
-        ICacheManager cacheManager = getConfiguration().getCacheManager();
         IMarkbenContext context = MarkbenContextFactory.getContext();
-        Collection<IMarkbenInitializeListener> listeners = context.findsAndOrder(IMarkbenInitializeListener.class);
+        Collection<IMarkbenInitializeAware> listeners = context.findsAndOrder(IMarkbenInitializeAware.class);
         MarkbenInitializeObserver observer = new MarkbenInitializeObserver(listeners);
         super.addObserver(observer);
         super.setChanged();
-        super.notifyObservers(cacheManager);
-    }
-
-    public IMarkbenConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(IMarkbenConfiguration configuration) {
-        this.configuration = configuration;
+        super.notifyObservers();
     }
 }

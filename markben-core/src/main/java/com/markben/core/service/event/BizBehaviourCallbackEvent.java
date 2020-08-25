@@ -8,7 +8,7 @@ import com.markben.core.callback.IDeleteCallbackAware;
 import com.markben.core.callback.ISaveCallbackAware;
 import com.markben.core.callback.IUpdateCallbackAware;
 import com.markben.core.context.MarkbenContextFactory;
-import com.markben.core.initialization.IMarkbenInitializeListener;
+import com.markben.core.initialization.IMarkbenInitializeAware;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.ParameterizedType;
@@ -21,7 +21,7 @@ import java.util.*;
  * @since 1.0
  */
 @Component
-public class BizBehaviourCallbackEvent implements IBizBehaviourEvent, IMarkbenInitializeListener {
+public class BizBehaviourCallbackEvent implements IBizBehaviourEvent, IMarkbenInitializeAware {
 
     private static final ILogger logger = LoggerUtils.getLogger(BizBehaviourCallbackEvent.class);
     
