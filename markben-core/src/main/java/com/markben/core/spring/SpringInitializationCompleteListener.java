@@ -31,9 +31,15 @@ public class SpringInitializationCompleteListener implements ApplicationListener
             MarkbenContextFactory.setContext(markbenContext);
             //判断有没有配置实现类
             IMarkbenConfiguration configuration = MarkbenContextFactory.find(IMarkbenConfiguration.class);
-            if(null != configuration) {
-                MarkbenContextFactory.setConfiguration(configuration);
+            if(null == configuration) {
+                configuration = new DefaultMarkbenConfiguration(markbenContext);
+            } else {
+                if(configuration instanceof IMarkbenContextAware) {
+                    IMarkbenContextAware contextAware = (IMarkbenContextAware)configuration;
+                    contextAware.setContext(markbenContext);
+                }
             }
+            MarkbenContextFactory.setConfiguration(configuration);
             new MarkbenInitializationImpl().init();
         }
     }

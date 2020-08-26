@@ -39,6 +39,7 @@ public class DefaultRestInterceptor implements HandlerInterceptor {
             if (isLogin(request)) {
                 return true;
             } else {
+                LoggerUtils.debug(logger, "用户未登录无法访问接口");
                 throw new NotLoginException();
             }
         }

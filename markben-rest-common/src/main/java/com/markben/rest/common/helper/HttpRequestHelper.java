@@ -185,7 +185,7 @@ public class HttpRequestHelper {
                 token = getToken(request);
             }
             if(StringUtils.isNotEmpty(token)) {
-                userInfo = getUserInfoFromSession(request, token);
+                userInfo = getUserInfoFromSession(request.getSession(), token);
             } else {
                 userInfo = getUserInfoFromSession(request);
             }

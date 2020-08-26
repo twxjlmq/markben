@@ -1,6 +1,5 @@
 package com.markben.core.initialization;
 
-import com.markben.core.config.IMarkbenConfiguration;
 import com.markben.core.context.IMarkbenContext;
 import com.markben.core.context.MarkbenContextFactory;
 

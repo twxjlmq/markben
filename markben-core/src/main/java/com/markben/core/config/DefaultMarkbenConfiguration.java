@@ -11,13 +11,11 @@ import org.springframework.stereotype.Component;
  * @author 乌草坡
  * @since 1.0
  */
-@Component
-public class DefaultMarkbenConfiguration implements IMarkbenConfiguration, IMarkbenContextAware {
+public class DefaultMarkbenConfiguration implements IMarkbenConfiguration {
 
     private IMarkbenContext context;
 
-    @Override
-    public void setContext(IMarkbenContext context) {
+    public DefaultMarkbenConfiguration(IMarkbenContext context) {
         this.context = context;
     }
 

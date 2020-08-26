@@ -5,6 +5,7 @@ import com.markben.cache.ICacheManagerAware;
 import com.markben.common.logger.ILogger;
 import com.markben.common.utils.CollectionUtils;
 import com.markben.common.utils.LoggerUtils;
+import com.markben.core.config.IMarkbenConfiguration;
 import com.markben.core.context.IMarkbenContext;
 import com.markben.core.context.IMarkbenContextAware;
 import com.markben.core.context.MarkbenContextFactory;
@@ -52,6 +53,11 @@ public class MarkbenInitializeObserver implements Observer {
         if(CollectionUtils.isNotEmpty(contextAwareList)) {
             IMarkbenContext context = MarkbenContextFactory.getContext();
             for (IMarkbenContextAware contextAware : contextAwareList) {
+                if(contextAware instanceof IMarkbenConfiguration) {
+                    //因为配置接口类在Spring初始化完的时候就已经处理过，这里不再处理
+                    //在SpringInitializationCompleteListener类中已经处理过
+                    continue;
+                }
                 contextAware.setContext(context);
             }
         }

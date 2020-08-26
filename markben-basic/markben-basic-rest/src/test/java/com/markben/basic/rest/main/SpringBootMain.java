@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @ComponentScan(value = "com.markben")
-@MapperScan("com.markben.basic.common.mapper")
+@MapperScan("com.markben.**.mapper")
 public class SpringBootMain {
 
     public static void main(String[] args) {
