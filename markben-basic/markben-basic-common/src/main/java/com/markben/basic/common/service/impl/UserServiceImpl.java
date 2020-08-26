@@ -1,10 +1,12 @@
 package com.markben.basic.common.service.impl;
 
+import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
 import com.markben.basic.common.entity.TSysUser;
 import com.markben.basic.common.service.IUserService;
 import com.markben.beans.bean.IUserInfo;
 import com.markben.beans.response.IResultResponse;
 import com.markben.common.constant.MarkbenConstant;
+import com.markben.common.enums.YesOrNoType;
 import com.markben.common.security.SecurityUtils;
 import com.markben.common.utils.CollectionUtils;
 import com.markben.common.utils.StringUtils;
@@ -54,6 +56,8 @@ public class UserServiceImpl extends EnhanceServiceImpl<TSysUser> implements IUs
 
     @Override
     public TSysUser getUserOfLogin(String username) {
-        return getOne(super.query().eq("username", username).or().eq("mobile", username), false);
+        QueryChainWrapper queryWrapper = super.query().eq("state", YesOrNoType.YES.getIndex())
+                .and(w -> w.eq("username", username).or().eq("mobile", username));
+        return getOne(queryWrapper, false);
     }
 }
