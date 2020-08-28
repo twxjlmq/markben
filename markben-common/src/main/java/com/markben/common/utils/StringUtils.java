@@ -81,6 +81,7 @@ public class StringUtils {
 	 * 则抛出参数为空异常（运行时异常）
 	 * @param value 需要判断的参数
 	 * @param msg 提示信息
+	 * @param obj 对象
 	 */
 	public static void isAssert(Object value, String msg, Object obj) {
 		msg = isEmpty(msg)?"提供的参数为空":msg;
