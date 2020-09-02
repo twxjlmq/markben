@@ -24,9 +24,9 @@ public class MarkbenInitializeObserver implements Observer {
 
     private static final ILogger logger = LoggerUtils.getLogger(MarkbenInitializeObserver.class);
 
-    private Collection<IMarkbenInitializeAware> listeners;
+    private Collection<IMarkbenInitializeListener> listeners;
 
-    public MarkbenInitializeObserver(Collection<IMarkbenInitializeAware> listeners) {
+    public MarkbenInitializeObserver(Collection<IMarkbenInitializeListener> listeners) {
         this.listeners = listeners;
     }
 
@@ -37,7 +37,7 @@ public class MarkbenInitializeObserver implements Observer {
         initCacheManagerAware();
         LoggerUtils.debug(logger, "实现处理初始化的有[{}]个实例.", (null == listeners ? 0 : listeners.size()));
         if(CollectionUtils.isNotEmpty(listeners)) {
-            for (IMarkbenInitializeAware listener : listeners) {
+            for (IMarkbenInitializeListener listener : listeners) {
                 listener.initialize();
             }
         }

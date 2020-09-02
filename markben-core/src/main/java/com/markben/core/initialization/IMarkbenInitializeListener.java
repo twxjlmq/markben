@@ -5,7 +5,7 @@ package com.markben.core.initialization;
  * @autor 乌草坡 2020-03-02
  * @since 1.0
  */
-public interface IMarkbenInitializeAware {
+public interface IMarkbenInitializeListener {
 
     /**
      * 初始化方法

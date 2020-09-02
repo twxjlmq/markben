@@ -16,7 +16,7 @@ public class MarkbenInitializationImpl extends Observable implements IMarkbenIni
     @Override
     public void init() {
         IMarkbenContext context = MarkbenContextFactory.getContext();
-        Collection<IMarkbenInitializeAware> listeners = context.findsAndOrder(IMarkbenInitializeAware.class);
+        Collection<IMarkbenInitializeListener> listeners = context.findsAndOrder(IMarkbenInitializeListener.class);
         MarkbenInitializeObserver observer = new MarkbenInitializeObserver(listeners);
         super.addObserver(observer);
         super.setChanged();

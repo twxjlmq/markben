@@ -1,6 +1,5 @@
 package com.markben.core.context;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -16,6 +15,12 @@ public interface IMarkbenContext {
 	 * @param obj 对象实例
 	 */
 	void put(String name, Object obj);
+
+	/**
+	 * 根据服务名称，添加一个服务实例
+	 * @param obj 对象实例
+	 */
+	void put(Object obj);
 
 	/**
 	 * 根据服务名称，添加一个服务类(类型)

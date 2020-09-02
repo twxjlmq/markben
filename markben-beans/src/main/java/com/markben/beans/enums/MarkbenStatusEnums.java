@@ -16,6 +16,13 @@ public enum MarkbenStatusEnums {
 
     INVALID_TOKEN(10001, "无效的TOKEN"),
 
+    //上传文件相关错误码定义
+    MULTIPART_UPLOAD_ERROR(10500, "文件上传失败"),
+
+    MULTIPART_UPLOAD_MAX_SIZE(10101, "文件大小超出限制"),
+
+    MULTIPART_UPLOAD_NOT_ALLOW_FILE_TYPE(10102, "不允许的文件类型"),
+
 
     NOT_LOGIN(20003, "用户未登录"),
 
