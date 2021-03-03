@@ -1,5 +1,6 @@
 package com.markben.basic.rest.vo.dict;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.markben.rest.common.vo.AbstractTreeVO;
@@ -12,7 +13,7 @@ import java.util.Date;
  * @author 乌草坡
  * @since 1.0
  */
-@JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
+@JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class DictItemVO extends AbstractTreeVO {
 
     @ApiModelProperty(value = "业务值")

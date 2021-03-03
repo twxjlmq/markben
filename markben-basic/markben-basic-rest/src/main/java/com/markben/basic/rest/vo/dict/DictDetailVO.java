@@ -1,18 +1,22 @@
 package com.markben.basic.rest.vo.dict;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 数据字典详情信息
  * @author 乌草坡
  * @since 1.0
  */
-@JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
+@JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class DictDetailVO extends DictItemVO {
 
+    @ApiModelProperty(value = "企业ID")
     private String corpId;
 
+    @ApiModelProperty(value = "企业用户ID")
     private String corpUserId;
 
     public DictDetailVO() {

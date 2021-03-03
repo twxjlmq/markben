@@ -2,6 +2,7 @@ package com.markben.basic.rest.controller;
 
 import com.markben.basic.common.entity.TSysResource;
 import com.markben.basic.common.service.IResourceService;
+import com.markben.basic.rest.helper.DictHelper;
 import com.markben.basic.rest.vo.dict.DictDetailVO;
 import com.markben.basic.rest.vo.dict.DictItemVO;
 import com.markben.basic.rest.vo.resource.CreateResourceRequest;
@@ -32,10 +33,13 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/rest/resource")
 @Api(value = "数据字典接口", tags = {"数据字典接口"})
-public class RestResourceController extends AbstractRestController {
+public class RestResourceController extends AbstractBasicRestController {
 
-    @Autowired
     private IResourceService resourceService;
+
+    public RestResourceController(IResourceService resourceService) {
+        this.resourceService = resourceService;
+    }
 
     /**
      * 创建资源
@@ -43,20 +47,10 @@ public class RestResourceController extends AbstractRestController {
      * @param createRequest 创建请求对象
      * @return 返回结果
      */
-    @PostMapping(value = "/create", produces = PRODUCES_FORMAT_TYPE)
+    @PostMapping(value = "/create", produces = PRODUCES_FORMAT)
     @ApiOperation(value = "创建资源", notes = "添加资源")
     public IResultResponse<String> create(HttpServletRequest request, @RequestBody CreateResourceRequest createRequest) {
-        super.checkRequestVO(createRequest);
-        IResultResponse<String> resultResp = new RestResultResponse<>();
-        IUserInfo userInfo = getUserInfoByRequest(request);
-        TSysResource resource = new TSysResource();
-        resource.setCorpUserId(userInfo.getCorpUserId());
-        resource.setCorpId(userInfo.getCorpId());
-        if(resourceService.save(resource)) {
-            super.setSuccessResult(resultResp);
-            resultResp.setResult(resource.getId());
-        }
-        return resultResp;
+        return super.create(request, createRequest, resourceService, TSysResource::new);
     }
 
     /**
@@ -65,7 +59,7 @@ public class RestResourceController extends AbstractRestController {
      * @param updateRequest 更新请求对象
      * @return 返回结果
      */
-    @PostMapping(value = "/update", produces = PRODUCES_FORMAT_TYPE)
+    @PostMapping(value = "/update", produces = PRODUCES_FORMAT)
     @ApiOperation(value = "更新资源", notes = "更新资源")
     public IResultResponse<String> update(HttpServletRequest request, @RequestBody UpdateResourceRequest updateRequest) {
         super.checkRequestVO(updateRequest);
@@ -83,7 +77,7 @@ public class RestResourceController extends AbstractRestController {
      * @param idRequest 请求对象
      * @return 返回结果
      */
-    @PostMapping(value = "/delete", produces = PRODUCES_FORMAT_TYPE)
+    @PostMapping(value = "/delete", produces = PRODUCES_FORMAT)
     @ApiOperation(value = "删除资源", notes = "删除资源")
     public IBaseResponse delete(@RequestBody IdRequest idRequest) {
         super.checkRequestVO(idRequest);
@@ -98,7 +92,7 @@ public class RestResourceController extends AbstractRestController {
      * 获取所有资源列表
      * @return 返回结果
      */
-    @GetMapping(value = "/list", produces = PRODUCES_FORMAT_TYPE)
+    @GetMapping(value = "/list", produces = PRODUCES_FORMAT)
     @ApiOperation(value = "获取资源列表", notes = "获取资源列表")
     public ICollectionResponse<DictItemVO> list() {
         ICollectionResponse<DictItemVO> response = new RestCollectionResponse<>();
@@ -110,7 +104,7 @@ public class RestResourceController extends AbstractRestController {
      * 获取数据字典详情信息
      * @return 返回结果
      */
-    @GetMapping(value = "/get/{id}", produces = PRODUCES_FORMAT_TYPE)
+    @GetMapping(value = "/get/{id}", produces = PRODUCES_FORMAT)
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "path", name="id", value = "资源ID", required = true, dataType = "String")
     })

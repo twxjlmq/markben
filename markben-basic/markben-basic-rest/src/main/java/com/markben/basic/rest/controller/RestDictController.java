@@ -38,10 +38,13 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/rest/dict")
 @Api(value = "数据字典接口", tags = {"数据字典接口"})
-public class RestDictController extends AbstractRestController {
+public class RestDictController extends AbstractBasicRestController {
 
-    @Autowired
     private IDictService dictService;
+
+    public RestDictController(IDictService dictService) {
+        this.dictService = dictService;
+    }
 
     /**
      * 创建数据字典
@@ -49,33 +52,16 @@ public class RestDictController extends AbstractRestController {
      * @param createRequest 创建请求对象
      * @return 返回结果
      */
-    @PostMapping(value = "/create", produces = PRODUCES_FORMAT_TYPE)
+    @PostMapping(value = "/create", produces = PRODUCES_FORMAT)
     @ApiOperation(value = "创建数据字典", notes = "添加数据字典")
     public IResultResponse<String> create(HttpServletRequest request, @RequestBody CreateDictRequest createRequest) {
-        super.checkRequestVO(createRequest);
-        IResultResponse<String> resultResp = new RestResultResponse<>();
-        IUserInfo userInfo = getUserInfoByRequest(request);
-        TSysDict dict = DictHelper.convert(createRequest);
-        dict.setCorpUserId(userInfo.getCorpUserId());
-        dict.setCorpId(userInfo.getCorpId());
-        if(dictService.save(dict)) {
-            super.setSuccessResult(resultResp);
-            resultResp.setResult(dict.getId());
-        }
-        return resultResp;
+        return super.create(request, createRequest, dictService, () -> DictHelper.convert(createRequest));
     }
 
-    @PostMapping(value = "/update", produces = PRODUCES_FORMAT_TYPE)
+    @PostMapping(value = "/update", produces = PRODUCES_FORMAT)
     @ApiOperation(value = "更新数据字典", notes = "更新数据字典")
     public IResultResponse<String> update(HttpServletRequest request, @RequestBody UpdateDictRequest updateRequest) {
-        super.checkRequestVO(updateRequest);
-        IResultResponse<String> resultResp = new RestResultResponse<>();
-        TSysDict dict = DictHelper.convert(updateRequest);
-        if(dictService.update(dict)) {
-            super.setSuccessResult(resultResp);
-            resultResp.setResult(dict.getId());
-        }
-        return resultResp;
+        return super.update(updateRequest, dictService, () -> DictHelper.convert(updateRequest));
     }
 
     /**
@@ -83,22 +69,17 @@ public class RestDictController extends AbstractRestController {
      * @param idRequest 请求对象
      * @return 返回结果
      */
-    @PostMapping(value = "/delete", produces = PRODUCES_FORMAT_TYPE)
+    @PostMapping(value = "/delete", produces = PRODUCES_FORMAT)
     @ApiOperation(value = "删除数据字典", notes = "删除数据字典")
     public IBaseResponse delete(@RequestBody IdRequest idRequest) {
-        super.checkRequestVO(idRequest);
-        IBaseResponse response = new RestBaseResponse();
-        if(dictService.delete(idRequest.getId())) {
-            super.setSuccessResult(response);
-        }
-        return response;
+        return super.delete(idRequest, dictService);
     }
 
     /**
      * 获取所有数据字典列表
      * @return 返回结果
      */
-    @GetMapping(value = "/list", produces = PRODUCES_FORMAT_TYPE)
+    @GetMapping(value = "/list", produces = PRODUCES_FORMAT)
     @ApiOperation(value = "获取数据字典列表", notes = "获取数据字典列表")
     public ICollectionResponse<DictItemVO> list() {
         ICollectionResponse<DictItemVO> response = new RestCollectionResponse<>();
@@ -120,7 +101,7 @@ public class RestDictController extends AbstractRestController {
      * 获取数据字典详情信息
      * @return 返回结果
      */
-    @GetMapping(value = "/get/{id}", produces = PRODUCES_FORMAT_TYPE)
+    @GetMapping(value = "/get/{id}", produces = PRODUCES_FORMAT)
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "path", name="id", value = "数据字典ID", required = true, dataType = "String")
     })
@@ -143,7 +124,7 @@ public class RestDictController extends AbstractRestController {
      * @param id 数据字典ID
      * @return 返回结果
      */
-    @GetMapping(value = "/items/id/{id}", produces = PRODUCES_FORMAT_TYPE)
+    @GetMapping(value = "/items/id/{id}", produces = PRODUCES_FORMAT)
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "path", name="id", value = "数据字典ID", required = true, dataType = "String")
     })
@@ -163,7 +144,7 @@ public class RestDictController extends AbstractRestController {
      * @param value 数据字典业务值
      * @return 返回结果
      */
-    @GetMapping(value = "/item/{value}", produces = PRODUCES_FORMAT_TYPE)
+    @GetMapping(value = "/item/{value}", produces = PRODUCES_FORMAT)
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "path", name="value", value = "数据字典业务值", required = true, dataType = "String")
     })

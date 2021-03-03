@@ -2,6 +2,7 @@ package com.markben.basic.common.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.markben.core.bean.AbstractTenantEntity;
+import com.markben.core.bean.ICreatorEntity;
 
 /**
  * 角色实体类
@@ -9,7 +10,7 @@ import com.markben.core.bean.AbstractTenantEntity;
  * @since 1.0
  */
 @TableName(value = "t_sys_role")
-public class TSysRole extends AbstractTenantEntity {
+public class TSysRole extends AbstractTenantEntity implements ICreatorEntity {
 
     private String name;
 

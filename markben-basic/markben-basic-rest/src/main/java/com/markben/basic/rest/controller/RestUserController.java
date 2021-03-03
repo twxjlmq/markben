@@ -33,8 +33,11 @@ import javax.servlet.http.HttpServletRequest;
 @Api(value = "用户接口", tags = {"用户接口"})
 public class RestUserController extends AbstractRestController {
 
-    @Autowired
     private ILoginService loginService;
+
+    public RestUserController(ILoginService loginService) {
+        this.loginService = loginService;
+    }
 
     /**
      * 登录接口方法

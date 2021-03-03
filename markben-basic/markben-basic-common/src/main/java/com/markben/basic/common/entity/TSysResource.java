@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.markben.basic.common.enums.ResourceFunType;
 import com.markben.common.enums.YesOrNoType;
 import com.markben.core.bean.AbstractBaseTreeEntity;
+import com.markben.core.bean.ICreatorEntity;
 import com.markben.core.bean.ITenantEntity;
 
 /**
@@ -12,7 +13,7 @@ import com.markben.core.bean.ITenantEntity;
  * @since 1.0
  */
 @TableName(value = "t_sys_resource")
-public class TSysResource extends AbstractBaseTreeEntity implements ITenantEntity {
+public class TSysResource extends AbstractBaseTreeEntity implements ICreatorEntity {
 
     private String corpId;
 

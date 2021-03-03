@@ -1,5 +1,6 @@
 package com.markben.basic.rest.vo.dict;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.markben.beans.validator.hibernate.IntValueContain;
@@ -16,7 +17,7 @@ import javax.validation.constraints.NotEmpty;
  * @author 乌草坡
  * @since 1.0
  */
-@JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
+@JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class CreateDictRequest extends AbstractRestRequest implements IBaseVO, ICheckable {
 
     @ApiModelProperty(value = "名称", required = true)

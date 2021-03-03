@@ -30,7 +30,7 @@ public abstract class AbstractRestController extends AbstractBaseController {
     /**
      * 生产格式类型；默认为JSON数据格式
      */
-    protected static final String PRODUCES_FORMAT_TYPE = PRODUCES_JSON;
+    protected static final String PRODUCES_FORMAT = PRODUCES_JSON;
 
     /**
      * 成功状态码

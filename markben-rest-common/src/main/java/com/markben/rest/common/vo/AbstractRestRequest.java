@@ -8,5 +8,4 @@ package com.markben.rest.common.vo;
 public abstract class AbstractRestRequest implements IBaseVO {
 
 
-
 }

@@ -39,7 +39,7 @@ public class RedisCacheManager implements ICacheManager {
         if(null == cacheMap) {
             cacheMap = new HashMap<>();
             redisTemplate.opsForHash().putAll(name, cacheMap);
-            if(expiry > 0) {
+            if(null != expiry && expiry > 0) {
                 redisTemplate.expire(name, expiry, TimeUnit.MILLISECONDS);
             }
             return new RedisCache(redisTemplate, name);

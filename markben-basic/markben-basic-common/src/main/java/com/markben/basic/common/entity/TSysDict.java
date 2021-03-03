@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.markben.common.enums.YesOrNoType;
 import com.markben.core.bean.AbstractBaseTreeEntity;
 import com.markben.core.bean.ICreateTime;
+import com.markben.core.bean.ICreatorEntity;
 import com.markben.core.bean.ITenantEntity;
 
 import java.util.Date;
@@ -14,7 +15,7 @@ import java.util.Date;
  * @since 1.0
  */
 @TableName(value = "t_sys_dict")
-public class TSysDict extends AbstractBaseTreeEntity implements ITenantEntity {
+public class TSysDict extends AbstractBaseTreeEntity implements ICreatorEntity {
 
     /**
      * 企业ID；
