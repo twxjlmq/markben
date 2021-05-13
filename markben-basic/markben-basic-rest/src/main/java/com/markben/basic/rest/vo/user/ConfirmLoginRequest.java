@@ -1,5 +1,6 @@
 package com.markben.basic.rest.vo.user;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.markben.common.enable.ICheckable;
@@ -13,16 +14,16 @@ import javax.validation.constraints.NotEmpty;
  * @author 乌草坡
  * @since 1.0
  */
-@JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
+@JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class ConfirmLoginRequest implements IBaseVO, ICheckable {
 
     @ApiModelProperty(value = "用户ID", required = true)
     @NotEmpty
     private String userId;
 
-    @ApiModelProperty(value = "企业ID或组织ID", required = true)
+    @ApiModelProperty(value = "租户ID", required = true)
     @NotEmpty
-    private String corpId;
+    private String tenantId;
 
     @ApiModelProperty(value = "部门ID", required = true)
     @NotEmpty
@@ -40,12 +41,12 @@ public class ConfirmLoginRequest implements IBaseVO, ICheckable {
         this.userId = userId;
     }
 
-    public String getCorpId() {
-        return corpId;
+    public String getTenantId() {
+        return tenantId;
     }
 
-    public void setCorpId(String corpId) {
-        this.corpId = corpId;
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
     }
 
     public String getDeptId() {

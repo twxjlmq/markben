@@ -72,4 +72,22 @@ public interface IMarkbenContext {
      * @return 返回实现类
      */
     Object findByName(String name);
+
+	/**
+	 * 移除一个bean的定义
+	 * @param name
+	 */
+	void removeBean(String name);
+
+	/**
+	 * 销毁一个Bean实例
+	 * @param bean 实例
+	 */
+	void destroyBean(Object bean);
+
+	/**
+	 * 获取注册的数量
+	 * @return 返回注册数
+	 */
+	int getRegisterCount();
 }

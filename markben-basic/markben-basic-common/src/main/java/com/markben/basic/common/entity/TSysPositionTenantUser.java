@@ -6,16 +6,16 @@ import com.markben.core.bean.ICreatorEntity;
 import com.markben.core.bean.ITenantEntity;
 
 /**
- * 部门主管实体类
+ * 职位与租户用户关联实体类
  * @author 乌草坡
  * @since 1.0.0
  */
-@TableName(value = "t_sys_org_head")
-public class TSysOrgHead extends AbstractBaseEntity implements ICreatorEntity {
+@TableName(value = "t_sys_position_tenant_user")
+public class TSysPositionTenantUser extends AbstractBaseEntity implements ICreatorEntity {
 
     private String tenantId;
 
-    private String orgId;
+    private String positionId;
 
     private String tenantUserId;
 
@@ -29,12 +29,12 @@ public class TSysOrgHead extends AbstractBaseEntity implements ICreatorEntity {
         this.tenantId = tenantId;
     }
 
-    public String getOrgId() {
-        return orgId;
+    public String getPositionId() {
+        return positionId;
     }
 
-    public void setOrgId(String orgId) {
-        this.orgId = orgId;
+    public void setPositionId(String positionId) {
+        this.positionId = positionId;
     }
 
     @Override

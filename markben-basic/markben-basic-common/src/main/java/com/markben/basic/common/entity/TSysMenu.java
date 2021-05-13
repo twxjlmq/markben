@@ -6,13 +6,13 @@ import com.markben.core.bean.ITenantEntity;
 
 /**
  * 系统菜单实体类
- * @autor 乌草坡 2020-03-04
- * @since 1.0
+ * @author 乌草坡
+ * @since 1.0.0
  */
 @TableName(value = "t_sys_menu")
 public class TSysMenu extends AbstractBaseTreeEntity implements ITenantEntity {
 
-    private String corpId;
+    private String tenantId;
 
     /**
      * 资源ID；
@@ -28,13 +28,13 @@ public class TSysMenu extends AbstractBaseTreeEntity implements ITenantEntity {
     private String mobileIcon;
 
     @Override
-    public String getCorpId() {
-        return corpId;
+    public String getTenantId() {
+        return tenantId;
     }
 
     @Override
-    public void setCorpId(String corpId) {
-        this.corpId = corpId;
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
     }
 
     public String getResourceId() {

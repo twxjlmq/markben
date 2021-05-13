@@ -24,40 +24,40 @@ public interface IUserInfo extends Serializable {
     void setUserId(String userId);
 
     /**
-     * 获取企业ID
-     * @return 返回企业ID
+     * 获取租户ID
+     * @return 返回租户ID
      */
-    String getCorpId();
+    String getTenantId();
 
     /**
-     * 设置用户ID
-     * @param corpId
+     * 设置租户ID
+     * @param tenantId
      */
-    void setCorpId(String corpId);
+    void setTenantId(String tenantId);
 
     /**
-     * 获取企业名称
-     * @return 返回企业名称
+     * 获取租户组织的名称
+     * @return 返回租户组织的名称
      */
-    String getCorpName();
+    String getTenantName();
 
     /**
-     * 设置企业名称
-     * @param corpName 企业名称
+     * 设置租户组织的名称
+     * @param tenantName 租户组织的名称
      */
-    void setCorpName(String corpName);
+    void setTenantName(String tenantName);
 
     /**
-     * 获取企业用户ID
-     * @return 返回企业用户ID
+     * 获取租户组织的用户ID
+     * @return 返回租户组织的用户ID
      */
-    String getCorpUserId();
+    String getTenantUserId();
 
     /**
-     * 设置企业用户ID
-     * @param corpUserId 企业用户ID
+     * 设置租户组织的用户ID
+     * @param tenantUserId 租户组织的用户ID
      */
-    void setCorpUserId(String corpUserId);
+    void setTenantUserId(String tenantUserId);
 
     /**
      * 获取用户名

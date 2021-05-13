@@ -5,8 +5,8 @@ import com.markben.core.bean.AbstractCommonPropEntity;
 
 /**
  * 系统用户实体类
- * @autor 乌草坡 2020-03-04
- * @since 1.0
+ * @autor 乌草坡
+ * @since 1.0.0
  */
 @TableName(value = "t_sys_user")
 public class TSysUser extends AbstractCommonPropEntity {

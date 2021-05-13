@@ -111,7 +111,7 @@ public class RestDictController extends AbstractBasicRestController {
         TSysDict dict = dictService.find(id);
         if(null != dict) {
             DictDetailVO detailVO = new DictDetailVO(dict.getId(), dict.getParentId(), dict.getName(),
-                    dict.getSortOrder(), dict.getValue(), dict.getState(), dict.getCorpId(), dict.getCorpUserId());
+                    dict.getSortOrder(), dict.getValue(), dict.getState(), dict.getTenantId(), dict.getTenantUserId());
             detailVO.setCreateTime(dict.getCreateTime());
             response.setResult(detailVO);
             super.setSuccessResult(response);

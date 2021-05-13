@@ -1,21 +1,19 @@
 package com.markben.basic.common.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.markben.basic.common.enums.ResourceFunType;
 import com.markben.common.enums.YesOrNoType;
 import com.markben.core.bean.AbstractBaseTreeEntity;
 import com.markben.core.bean.ICreatorEntity;
-import com.markben.core.bean.ITenantEntity;
 
 /**
  * 系统资源实体类
- * @autor 乌草坡
- * @since 1.0
+ * @author 乌草坡
+ * @since 1.0.0
  */
 @TableName(value = "t_sys_resource")
 public class TSysResource extends AbstractBaseTreeEntity implements ICreatorEntity {
 
-    private String corpId;
+    private String tenantId;
 
     private String restUrl;
 
@@ -44,20 +42,20 @@ public class TSysResource extends AbstractBaseTreeEntity implements ICreatorEnti
     private Integer isAuth = YesOrNoType.YES.getIndex();
 
     /**
-     * 企业用户ID；
-     * 该直为{@link TSysCorpUser}实体类中的ID值，
-     * 通过该字段与{@link TSysCorpUser}数据表关联
+     * 租户用户ID；
+     * 该直为{@link TSysTenantUser}实体类中的ID值，
+     * 通过该字段与{@link TSysTenantUser}数据表关联
      */
-    private String corpUserId;
+    private String tenantUserId;
 
     @Override
-    public String getCorpId() {
-        return corpId;
+    public String getTenantId() {
+        return tenantId;
     }
 
     @Override
-    public void setCorpId(String corpId) {
-        this.corpId = corpId;
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
     }
 
     public String getRestUrl() {
@@ -87,12 +85,22 @@ public class TSysResource extends AbstractBaseTreeEntity implements ICreatorEnti
         this.isAuth = isAuth;
     }
 
-    public String getCorpUserId() {
-        return corpUserId;
+    public Integer getIsGroup() {
+        return isGroup;
     }
 
-    public void setCorpUserId(String corpUserId) {
-        this.corpUserId = corpUserId;
+    public void setIsGroup(Integer isGroup) {
+        this.isGroup = isGroup;
+    }
+
+    @Override
+    public String getTenantUserId() {
+        return tenantUserId;
+    }
+
+    @Override
+    public void setTenantUserId(String tenantUserId) {
+        this.tenantUserId = tenantUserId;
     }
 
     public String getFunType() {

@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * @author 乌草坡
- * @since 1.0
+ * @since 1.0.0
  */
 @Mapper
 public interface UserMapper extends BaseEnhanceMapper<TSysUser> {

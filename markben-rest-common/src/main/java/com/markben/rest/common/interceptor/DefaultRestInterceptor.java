@@ -70,9 +70,9 @@ public class DefaultRestInterceptor implements HandlerInterceptor {
         boolean is = false;
         if (null != request) {
             IUserInfo userInfo = HttpRequestHelper.getUserInfoFromSession(request);
-            if(null != userInfo && StringUtils.isNotEmpty(userInfo.getCorpId())) {
-                LoggerUtils.debug(logger, "当前企业用户ID为：[{}]---部门ID为: deptId:[{}].",
-                        userInfo.getCorpUserId(), userInfo.getDeptId());
+            if(null != userInfo && StringUtils.isNotEmpty(userInfo.getTenantId())) {
+                LoggerUtils.debug(logger, "当前租户的用户ID为：[{}]---部门ID为: deptId:[{}].",
+                        userInfo.getTenantUserId(), userInfo.getDeptId());
                 is = true;
             }
         }

@@ -15,7 +15,6 @@ import com.markben.rest.common.response.RestResultResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 用户REST接口控制器类
  * @author 乌草坡
- * @since 1.0
+ * @since 1.0.0
  */
 @RestController
 @RequestMapping("/rest/user")
@@ -44,7 +43,7 @@ public class RestUserController extends AbstractRestController {
      * @param loginRequest 登录请求对象
      * @return 返回结果
      */
-    @PostMapping(value = "/login", produces = PRODUCES_FORMAT_TYPE)
+    @PostMapping(value = "/login", produces = PRODUCES_FORMAT)
     @ApiOperation(value = "登录接口", notes = "登录接口；注：调用登录接口之后需要再次调用“确认登录接口”后，才完成整个登录的过程。")
     @ApiImplicitParam(name ="loginRequest", value = "登录请求参数", required = true, dataType = "LoginRequest", dataTypeClass = LoginRequest.class)
     public IResultResponse<LoginResultVO> login(@RequestBody LoginRequest loginRequest) {
@@ -61,12 +60,12 @@ public class RestUserController extends AbstractRestController {
      * @param confirmLoginRequest 确认登录请求对象
      * @return 返回结果
      */
-    @PostMapping(value = "/confirm/login", produces = PRODUCES_FORMAT_TYPE)
+    @PostMapping(value = "/confirm/login", produces = PRODUCES_FORMAT)
     @ApiOperation(value = "确认登录接口", notes = "确认登录接口；注：需要先调用“登录接口”")
     public IResultResponse<ConfirmLoginResultVO> confirmLogin(HttpServletRequest request, @RequestBody ConfirmLoginRequest confirmLoginRequest) {
         super.checkRequestVO(confirmLoginRequest);
         IResultResponse<ConfirmLoginResultVO> response = new RestResultResponse<>();
-        IResultResponse<IUserInfo> confirmResponse = loginService.confirmLogin(confirmLoginRequest.getUserId(), confirmLoginRequest.getCorpId(),
+        IResultResponse<IUserInfo> confirmResponse = loginService.confirmLogin(confirmLoginRequest.getUserId(), confirmLoginRequest.getTenantId(),
                 confirmLoginRequest.getDeptId(), confirmLoginRequest.getToken());
         response.setStatus(confirmResponse.getStatus());
         response.setMsg(confirmResponse.getMsg());
@@ -77,10 +76,10 @@ public class RestUserController extends AbstractRestController {
 
             ConfirmLoginResultVO confirmLoginResult = new ConfirmLoginResultVO();
             confirmLoginResult.setUserId(userInfo.getUserId());
-            confirmLoginResult.setCorpUserId(userInfo.getCorpUserId());
-            confirmLoginResult.setCorpId(userInfo.getCorpId());
+            confirmLoginResult.setTenantUserId(userInfo.getTenantUserId());
+            confirmLoginResult.setTenantId(userInfo.getTenantId());
             confirmLoginResult.setDeptId(userInfo.getDeptId());
-            confirmLoginResult.setCorpName(userInfo.getCorpName());
+            confirmLoginResult.setTenantName(userInfo.getTenantName());
             confirmLoginResult.setDeptName(userInfo.getDeptName());
             confirmLoginResult.setAvatar(userInfo.getAvatar());
             confirmLoginResult.setLogo(userInfo.getLogo());

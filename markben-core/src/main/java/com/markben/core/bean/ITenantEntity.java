@@ -8,15 +8,15 @@ package com.markben.core.bean;
 public interface ITenantEntity {
 
     /**
-     * 返回租户的组织（或公司）ID
-     * @return 返回组织ID
+     * 返回租户ID
+     * @return 返回租户ID
      */
-    String getCorpId();
+    String getTenantId();
 
     /**
-     * 设置组织ID
-     * @param corpId 组织ID
+     * 设置租户ID
+     * @param tenantId 租户ID
      */
-    void setCorpId(String corpId);
+    void setTenantId(String tenantId);
 
 }

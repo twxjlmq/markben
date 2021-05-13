@@ -1,7 +1,7 @@
 package com.markben.basic.common.service.impl;
 
-import com.markben.basic.common.entity.TSysCorp;
-import com.markben.basic.common.service.ICorpService;
+import com.markben.basic.common.entity.TSysTenant;
+import com.markben.basic.common.service.ITenantService;
 import com.markben.core.service.EnhanceServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +11,6 @@ import org.springframework.stereotype.Service;
  * @since 1.0
  */
 @Service
-public class CorpServiceImpl extends EnhanceServiceImpl<TSysCorp> implements ICorpService {
+public class TenantServiceImpl extends EnhanceServiceImpl<TSysTenant> implements ITenantService {
 
 }

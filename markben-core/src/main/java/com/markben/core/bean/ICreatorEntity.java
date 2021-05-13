@@ -8,15 +8,15 @@ package com.markben.core.bean;
 public interface ICreatorEntity extends ITenantEntity, IPKStringEntity {
 
     /**
-     * 设置创建人对应的企业用户的id
-     * @param corpUserId 企业用户ID
+     * 设置创建人对应的租户用户的id
+     * @param tenantUserId 租户的用户ID
      */
-    void setCorpUserId(String corpUserId);
+    void setTenantUserId(String tenantUserId);
 
     /**
-     * 获取企业用户ID
-     * @return 返回企业用户ID
+     * 获取租户用户ID
+     * @return 返回租户用户ID
      */
-    String getCorpUserId();
+    String getTenantUserId();
 
 }

@@ -22,11 +22,11 @@ public interface ILoginService {
     /**
      * 确认登录方法
      * @param userId 用户ID
-     * @param corpId 企业ID
+     * @param tenantId 租户ID
      * @param deptId 部门ID
      * @param token TOKEN
      * @return 返回结果
      */
-    IResultResponse<IUserInfo> confirmLogin(String userId, String corpId, String deptId, String token);
+    IResultResponse<IUserInfo> confirmLogin(String userId, String tenantId, String deptId, String token);
 
 }

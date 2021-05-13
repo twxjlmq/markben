@@ -17,7 +17,7 @@ import java.util.function.Supplier;
 /**
  * 基础Rest抽象控制器类
  * @author 乌草坡
- * @since 1.0
+ * @since 1.0.0
  */
 public abstract class AbstractBasicRestController extends AbstractRestController {
 
@@ -36,8 +36,8 @@ public abstract class AbstractBasicRestController extends AbstractRestController
         IUserInfo userInfo = getUserInfoByRequest(request);
         ICreatorEntity entity = supplier.get();
         if(null != entity) {
-            entity.setCorpUserId(userInfo.getCorpUserId());
-            entity.setCorpId(userInfo.getCorpId());
+            entity.setTenantUserId(userInfo.getTenantUserId());
+            entity.setTenantId(userInfo.getTenantId());
             if(mgrService.save(entity)) {
                 super.setSuccessResult(resultResp);
                 resultResp.setResult(entity.getId());

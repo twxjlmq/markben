@@ -15,8 +15,8 @@ public class ConfirmLoginResultVO {
     @ApiModelProperty(value = "用户ID")
     private String userId;
 
-    @ApiModelProperty(value = "企业或组织中的用户ID，简称“企业用户ID”")
-    private String corpUserId;
+    @ApiModelProperty(value = "租户组织中的用户ID，简称“租户的用户ID”")
+    private String tenantUserId;
 
     @ApiModelProperty(value = "匿名")
     private String nickname;
@@ -24,11 +24,11 @@ public class ConfirmLoginResultVO {
     @ApiModelProperty(value = "头像地址")
     private String avatar;
 
-    @ApiModelProperty(value = "企业或组织ID，简称“企业ID”")
-    private String corpId;
+    @ApiModelProperty(value = "租户ID，简称“租户ID”")
+    private String tenantId;
 
-    @ApiModelProperty(value = "企业或组织名称，简称“企业名称”")
-    private String corpName;
+    @ApiModelProperty(value = "租户或组织名称，简称“租户名称”")
+    private String tenantName;
 
     @ApiModelProperty(value = "企业或组织的LOGO；如果系统中设置了的话")
     private String logo;
@@ -50,12 +50,12 @@ public class ConfirmLoginResultVO {
         this.userId = userId;
     }
 
-    public String getCorpUserId() {
-        return corpUserId;
+    public String getTenantUserId() {
+        return tenantUserId;
     }
 
-    public void setCorpUserId(String corpUserId) {
-        this.corpUserId = corpUserId;
+    public void setTenantUserId(String tenantUserId) {
+        this.tenantUserId = tenantUserId;
     }
 
     public String getNickname() {
@@ -74,20 +74,20 @@ public class ConfirmLoginResultVO {
         this.avatar = avatar;
     }
 
-    public String getCorpId() {
-        return corpId;
+    public String getTenantId() {
+        return tenantId;
     }
 
-    public void setCorpId(String corpId) {
-        this.corpId = corpId;
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
     }
 
-    public String getCorpName() {
-        return corpName;
+    public String getTenantName() {
+        return tenantName;
     }
 
-    public void setCorpName(String corpName) {
-        this.corpName = corpName;
+    public void setTenantName(String tenantName) {
+        this.tenantName = tenantName;
     }
 
     public String getLogo() {

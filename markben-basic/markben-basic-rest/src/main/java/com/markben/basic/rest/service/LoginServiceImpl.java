@@ -1,12 +1,12 @@
 package com.markben.basic.rest.service;
 
-import com.markben.basic.common.entity.TSysCorp;
-import com.markben.basic.common.entity.TSysCorpUser;
+import com.markben.basic.common.entity.TSysTenant;
+import com.markben.basic.common.entity.TSysTenantUser;
 import com.markben.basic.common.entity.TSysOrg;
 import com.markben.basic.common.entity.TSysUser;
-import com.markben.basic.common.service.ICorpUserService;
+import com.markben.basic.common.service.ITenantUserService;
 import com.markben.basic.common.service.IUserService;
-import com.markben.basic.common.wrapper.CorpUserWrapper;
+import com.markben.basic.common.wrapper.TenantUserWrapper;
 import com.markben.basic.rest.vo.user.LoginResultVO;
 import com.markben.beans.bean.DefaultUserInfo;
 import com.markben.beans.bean.IUserInfo;
@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 /**
  * 登录服务类实现类
  * @author 乌草坡
- * @since 1.0
+ * @since 1.0.0
  */
 @Service
 public class LoginServiceImpl implements ILoginService {
@@ -42,10 +42,13 @@ public class LoginServiceImpl implements ILoginService {
 
     private static final long TEMP_TOKEN_VALID_TIME = 1000 * 60 * 5;  //5分钟
 
-    @Autowired
     private IUserService userService;
-    @Autowired
-    private ICorpUserService corpUserService;
+    private ITenantUserService tenantUserService;
+
+    public LoginServiceImpl(IUserService userService, ITenantUserService tenantUserService) {
+        this.userService = userService;
+        this.tenantUserService = tenantUserService;
+    }
 
     @Override
     public IResultResponse<LoginResultVO> login(String username, String password) {
@@ -80,10 +83,10 @@ public class LoginServiceImpl implements ILoginService {
     }
 
     @Override
-    public IResultResponse<IUserInfo> confirmLogin(String userId, String corpId, String deptId, String token) {
+    public IResultResponse<IUserInfo> confirmLogin(String userId, String tenantId, String deptId, String token) {
         LoggerUtils.debug(logger, "正在确认登录处理中...");
         StringUtils.isAssert(userId, "用户ID不能为空", this);
-        StringUtils.isAssert(corpId, "企业ID不能为空", this);
+        StringUtils.isAssert(tenantId, "租户ID不能为空", this);
         StringUtils.isAssert(deptId, "部门ID不能为空", this);
         IResultResponse<IUserInfo> response = new RestResultResponse<>();
         //验证token
@@ -105,12 +108,12 @@ public class LoginServiceImpl implements ILoginService {
         cache.remove(userId);
         cacheManager.remove(userId);
 
-        TSysCorpUser corpUser = corpUserService.getCorpUser(userId, corpId);
-        if(null == corpUser) {
+        TSysTenantUser tenantUser = tenantUserService.getTenantUser(userId, tenantId);
+        if(null == tenantUser) {
             RestCommonHelper.setResponseStatus(response, MarkbenStatusEnums.CORP_USER_NOT_EXIST);
             return response;
         }
-        IUserInfo userInfo = startInitUserInfo(corpUser, deptId);
+        IUserInfo userInfo = startInitUserInfo(tenantUser, deptId);
         checkUserInfo(userInfo, response);
         return response;
     }
@@ -122,28 +125,28 @@ public class LoginServiceImpl implements ILoginService {
      * @return 如果登录成功则返回：登录结果对象，否则返回null
      */
     private LoginResultVO createLoginResult(String userId, IResultResponse response) {
-        List<TSysCorpUser> corpUsers = corpUserService.getCorpUser(userId);
-        if(CollectionUtils.isEmpty(corpUsers)) {
+        List<TSysTenantUser> tenantUsers = tenantUserService.getTenantUser(userId);
+        if(CollectionUtils.isEmpty(tenantUsers)) {
             RestCommonHelper.setResponseStatus(response, MarkbenStatusEnums.USER_NOT_IN_CORP);
-            LoggerUtils.warn(logger, "用户不在企业中,userId:[{}].", userId);
+            LoggerUtils.warn(logger, "用户不在租户组织中,userId:[{}].", userId);
             return null;
         }
-        List<LoginResultVO.SimpleCorpInfoVO> corpInfoList = new ArrayList<>(corpUsers.size());
+        List<LoginResultVO.SimpleTenantInfoVO> tenantInfoList = new ArrayList<>(tenantUsers.size());
         boolean isUserInOrg = false; //判断用户是否在部门中
-        for(TSysCorpUser corpUser : corpUsers) {
-            CorpUserWrapper corpUserWrapper = new CorpUserWrapper(corpUser);
-            LoginResultVO.SimpleCorpInfoVO simpleCorpInfo = createSimpleCorpInfo(corpUserWrapper);
-            if(null != simpleCorpInfo) {
-                simpleCorpInfo.setIsDefault(corpUser.getIsDefault());
-                List<LoginResultVO.SimpleOrgInfoVO> simpleOrgList = createSimpleOrgList(corpUserWrapper);
+        for(TSysTenantUser tenantUser : tenantUsers) {
+            TenantUserWrapper tenantUserWrapper = new TenantUserWrapper(tenantUser);
+            LoginResultVO.SimpleTenantInfoVO simpleTenantInfo = createSimpleTenantInfo(tenantUserWrapper);
+            if(null != simpleTenantInfo) {
+                simpleTenantInfo.setIsDefault(tenantUser.getIsDefault());
+                List<LoginResultVO.SimpleOrgInfoVO> simpleOrgList = createSimpleOrgList(tenantUserWrapper);
                 if(CollectionUtils.isNotEmpty(simpleOrgList)) {
-                    simpleCorpInfo.setOrgList(simpleOrgList);
+                    simpleTenantInfo.setOrgList(simpleOrgList);
                     isUserInOrg = isUserInOrg || true;
                 } else {
-                    LoggerUtils.warn(logger, "企业用户不在部门中,corpUserId:[{}]---nickname:[{}].",
-                            corpUser.getId(), corpUser.getNickname());
+                    LoggerUtils.warn(logger, "租户用户不在部门中,tenantUserId:[{}]---nickname:[{}].",
+                            tenantUser.getId(), tenantUser.getNickname());
                 }
-                corpInfoList.add(simpleCorpInfo);
+                tenantInfoList.add(simpleTenantInfo);
             }
         }
         if(!isUserInOrg) {
@@ -151,26 +154,26 @@ public class LoginServiceImpl implements ILoginService {
             return null;
         }
         LoginResultVO loginResult = new LoginResultVO(userId);
-        loginResult.setCorps(corpInfoList);
+        loginResult.setTenants(tenantInfoList);
         return loginResult;
     }
 
 
     /**
-     * 创建简单企业信息；如果有企业信息返回简单企业信息；否则返回null
-     * @param corpUserWrapper 企业用户封装对象
-     * @return 返回简单企业信息或null
+     * 创建简单租户信息；如果有租户信息返回简单租户信息；否则返回null
+     * @param tenantUserWrapper 租户的用户封装对象
+     * @return 返回简单租户信息或null
      */
-    private LoginResultVO.SimpleCorpInfoVO createSimpleCorpInfo(CorpUserWrapper corpUserWrapper) {
-        TSysCorp corp = corpUserWrapper.getCorp();
-        if(null == corp) {
+    private LoginResultVO.SimpleTenantInfoVO createSimpleTenantInfo(TenantUserWrapper tenantUserWrapper) {
+        TSysTenant tenant = tenantUserWrapper.getTenant();
+        if(null == tenant) {
             return null;
         }
-        LoginResultVO.SimpleCorpInfoVO simpleCorpInfo = new LoginResultVO.SimpleCorpInfoVO();
-        simpleCorpInfo.setCorpId(corp.getId());
-        simpleCorpInfo.setName(corp.getName());
-        simpleCorpInfo.setLogo(corp.getLogo());
-        return simpleCorpInfo;
+        LoginResultVO.SimpleTenantInfoVO simpleTenantInfo = new LoginResultVO.SimpleTenantInfoVO();
+        simpleTenantInfo.setTenantId(tenant.getId());
+        simpleTenantInfo.setName(tenant.getName());
+        simpleTenantInfo.setLogo(tenant.getLogo());
+        return simpleTenantInfo;
     }
 
     /**
@@ -179,7 +182,7 @@ public class LoginServiceImpl implements ILoginService {
      * @param corpUserWrapper 企业用户封装对象
      * @return 返回简单部门信息或null
      */
-    private List<LoginResultVO.SimpleOrgInfoVO> createSimpleOrgList(CorpUserWrapper corpUserWrapper) {
+    private List<LoginResultVO.SimpleOrgInfoVO> createSimpleOrgList(TenantUserWrapper corpUserWrapper) {
         List<TSysOrg> orgList = corpUserWrapper.getOrgList();
         if(CollectionUtils.isEmpty(orgList)) {
             return null;
@@ -190,18 +193,18 @@ public class LoginServiceImpl implements ILoginService {
 
     /**
      * 开始初始化用户信息
-     * @param corpUser 企业用户实体对象
+     * @param tenantUser 租户组织的用户实体对象
      * @param deptId 部门ID
      * @return 返回用户信息对象
      */
-    private IUserInfo startInitUserInfo(TSysCorpUser corpUser, String deptId) {
-        CorpUserWrapper corpUserWrapper = new CorpUserWrapper(corpUser);
+    private IUserInfo startInitUserInfo(TSysTenantUser tenantUser, String deptId) {
+        TenantUserWrapper tenantUserWrapper = new TenantUserWrapper(tenantUser);
         IUserInfo userInfo = new DefaultUserInfo();
-        userInfo.setNickname(corpUser.getNickname());
-        userInfo.setCorpUserId(corpUser.getId());
-        userInfo.setCorpId(corpUser.getCorpId());
+        userInfo.setNickname(tenantUser.getNickname());
+        userInfo.setTenantUserId(tenantUser.getId());
+        userInfo.setTenantId(tenantUser.getTenantId());
 
-        TSysUser user = corpUserWrapper.getUser();
+        TSysUser user = tenantUserWrapper.getUser();
         if(null != user) {
             userInfo.setUserId(user.getId());
             userInfo.setAvatar(user.getAvatar());
@@ -209,15 +212,15 @@ public class LoginServiceImpl implements ILoginService {
             userInfo.setUsername(user.getUsername());
         }
 
-        //初始化企业信息
-        TSysCorp corp = corpUserWrapper.getCorp();
-        if(null != corp) {
-            userInfo.setCorpName(corp.getName());
-            userInfo.setLogo(corp.getLogo());
+        //初始化租户组织的信息
+        TSysTenant tenant = tenantUserWrapper.getTenant();
+        if(null != tenant) {
+            userInfo.setTenantName(tenant.getName());
+            userInfo.setLogo(tenant.getLogo());
         }
 
         //初始化部门信息
-        TSysOrg org = corpUserWrapper.getDepartment(deptId);
+        TSysOrg org = tenantUserWrapper.getDepartment(deptId);
         if(null != org && YesOrNoType.YES.getIndex() == org.getState()) {
             userInfo.setDeptId(deptId);
             userInfo.setDeptName(org.getName());
@@ -234,7 +237,7 @@ public class LoginServiceImpl implements ILoginService {
      * @param response
      */
     private void checkUserInfo(IUserInfo userInfo, IResultResponse response) {
-        if(StringUtils.isEmpty(userInfo.getCorpId()) || StringUtils.isEmpty(userInfo.getCorpName())) {
+        if(StringUtils.isEmpty(userInfo.getTenantId()) || StringUtils.isEmpty(userInfo.getTenantName())) {
             RestCommonHelper.setResponseStatus(response, MarkbenStatusEnums.CORP_NOT_EXIST);
             return;
         }

@@ -6,7 +6,7 @@ import com.markben.core.bean.AbstractCommonPropEntity;
 /**
  * 功能类型实体类
  * @author 乌草坡
- * @since 1.0
+ * @since 1.0.0
  */
 @TableName(value = "t_sys_fun_type")
 public class TSysFunType extends AbstractCommonPropEntity {

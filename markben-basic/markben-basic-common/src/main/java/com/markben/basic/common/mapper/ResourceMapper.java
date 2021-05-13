@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 系统资源Mapper类
- * @autor 乌草坡 2020-03-04
+ * @autor 乌草坡
  * @since 1.0
  */
 @Mapper

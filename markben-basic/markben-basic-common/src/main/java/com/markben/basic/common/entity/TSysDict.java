@@ -1,17 +1,12 @@
 package com.markben.basic.common.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.markben.common.enums.YesOrNoType;
 import com.markben.core.bean.AbstractBaseTreeEntity;
-import com.markben.core.bean.ICreateTime;
 import com.markben.core.bean.ICreatorEntity;
-import com.markben.core.bean.ITenantEntity;
-
-import java.util.Date;
 
 /**
  * 数据字典实体类
- * @autor 乌草坡
+ * @author 乌草坡
  * @since 1.0
  */
 @TableName(value = "t_sys_dict")
@@ -19,10 +14,10 @@ public class TSysDict extends AbstractBaseTreeEntity implements ICreatorEntity {
 
     /**
      * 企业ID；
-     * 该直为{@link TSysCorp}实体类中的ID值，
-     * 通过该字段与{@link TSysCorp}数据表关联
+     * 该直为{@link TSysTenant}实体类中的ID值，
+     * 通过该字段与{@link TSysTenant}数据表关联
      */
-    private String corpId;
+    private String tenantId;
 
     /**
      * 数据项的值
@@ -35,20 +30,28 @@ public class TSysDict extends AbstractBaseTreeEntity implements ICreatorEntity {
     private Integer intValue;
 
     /**
-     * 企业用户ID；
-     * 该直为{@link TSysCorpUser}实体类中的ID值，
-     * 通过该字段与{@link TSysCorpUser}数据表关联
+     * 租户用户ID；
+     * 该直为{@link TSysTenantUser}实体类中的ID值，
+     * 通过该字段与{@link TSysTenantUser}数据表关联
      */
-    private String corpUserId;
+    private String tenantUserId;
 
     @Override
-    public String getCorpId() {
-        return corpId;
+    public String getTenantId() {
+        return tenantId;
     }
 
     @Override
-    public void setCorpId(String corpId) {
-        this.corpId = corpId;
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
+    }
+
+    public String getTenantUserId() {
+        return tenantUserId;
+    }
+
+    public void setTenantUserId(String tenantUserId) {
+        this.tenantUserId = tenantUserId;
     }
 
     public String getValue() {
@@ -65,14 +68,6 @@ public class TSysDict extends AbstractBaseTreeEntity implements ICreatorEntity {
 
     public void setIntValue(Integer intValue) {
         this.intValue = intValue;
-    }
-
-    public String getCorpUserId() {
-        return corpUserId;
-    }
-
-    public void setCorpUserId(String corpUserId) {
-        this.corpUserId = corpUserId;
     }
 
 }

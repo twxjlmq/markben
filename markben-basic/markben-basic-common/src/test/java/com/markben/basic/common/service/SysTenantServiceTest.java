@@ -1,7 +1,7 @@
 package com.markben.basic.common.service;
 
 import com.markben.basic.common.ApplicationBasicCommonTest;
-import com.markben.basic.common.entity.TSysCorp;
+import com.markben.basic.common.entity.TSysTenant;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,17 +15,17 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ApplicationBasicCommonTest.class)
-public class SysCorpServiceTest {
+public class SysTenantServiceTest {
 
     @Autowired
-    private ICorpService corpService;
+    private ITenantService corpService;
 
     @Test
     public void saveTest() {
-        TSysCorp corp = new TSysCorp();
+        TSysTenant corp = new TSysTenant();
         corp.setName("Markben");
         corp.setShortName("markben");
-        corp.setCorpUserId("admin");
+        corp.setTenantUserId("admin");
         boolean is = corpService.save(corp);
         Assert.assertTrue(is);
     }

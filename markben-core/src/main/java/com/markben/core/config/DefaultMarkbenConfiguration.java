@@ -11,6 +11,8 @@ import com.markben.core.context.IMarkbenContextAware;
 import com.markben.core.context.MarkbenContextFactory;
 import com.markben.core.exception.SystemInitializationException;
 import com.markben.core.initialization.IMarkbenInitializeListener;
+import com.markben.core.multipart.IMultipartManager;
+import com.markben.core.validator.IBeanValidator;
 import org.springframework.stereotype.Component;
 
 /**
@@ -27,6 +29,10 @@ public class DefaultMarkbenConfiguration implements IMarkbenConfiguration, IMark
     private AbstractConfig systemConfig;
 
     private ICacheManager cacheManager;
+
+    private IMultipartManager multipartManager;
+
+    private IBeanValidator beanValidator;
 
     public DefaultMarkbenConfiguration(IMarkbenContext context) {
         this.context = context;
@@ -79,6 +85,30 @@ public class DefaultMarkbenConfiguration implements IMarkbenConfiguration, IMark
     @Override
     public AbstractConfig getSystemConfig() {
         return systemConfig;
+    }
+
+    @Override
+    public IBeanValidator getBeanValidator() {
+        if(null == beanValidator) {
+            beanValidator = getContext().find(IBeanValidator.class);
+        }
+        return beanValidator;
+    }
+
+    @Override
+    public IMultipartManager getMultipartManager() {
+        if(null == multipartManager) {
+            multipartManager = getContext().find(IMultipartManager.class);
+        }
+        return null;
+    }
+
+    public void setMultipartManager(IMultipartManager multipartManager) {
+        this.multipartManager = multipartManager;
+    }
+
+    public void setBeanValidator(IBeanValidator beanValidator) {
+        this.beanValidator = beanValidator;
     }
 
     public void setSystemConfig(AbstractConfig systemConfig) {

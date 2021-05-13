@@ -8,8 +8,8 @@ import com.markben.core.bean.ITenantEntity;
 
 /**
  * 组织架构实体类
- * @autor 乌草坡 2020-03-04
- * @since 1.0
+ * @author  乌草坡
+ * @since 1.0.0
  */
 @TableName(value = "t_sys_org")
 public class TSysOrg extends AbstractBaseTreeEntity implements ITenantEntity {
@@ -19,7 +19,7 @@ public class TSysOrg extends AbstractBaseTreeEntity implements ITenantEntity {
      */
     private String type = OrgType.DEPT.getValue();
 
-    private String corpId;
+    private String tenantId;
 
     /**
      * 编号
@@ -39,13 +39,13 @@ public class TSysOrg extends AbstractBaseTreeEntity implements ITenantEntity {
     private String remarks;
 
     @Override
-    public String getCorpId() {
-        return corpId;
+    public String getTenantId() {
+        return tenantId;
     }
 
     @Override
-    public void setCorpId(String corpId) {
-        this.corpId = corpId;
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
     }
 
     public String getType() {

@@ -10,19 +10,19 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * 企业用户实体对象的封装；
+ * 租户的用户实体对象的封装；
  * 用于获取与它相关联的其他实体信息；
- * 如：用户信息、企业信息、部门信息等
+ * 如：用户信息、租户信息、部门信息等
  * @author 乌草坡
- * @since 1.0
+ * @since 1.0.0
  */
-public class CorpUserWrapper {
+public class TenantUserWrapper {
 
-    private TSysCorpUser corpUser;
+    private TSysTenantUser tenantUser;
 
     private TSysUser user;
 
-    private TSysCorp corp;
+    private TSysTenant tenant;
 
     private List<TSysOrg> orgList;
 
@@ -30,13 +30,13 @@ public class CorpUserWrapper {
 
     private List<TSysRole> roleList;
 
-    public CorpUserWrapper(TSysCorpUser corpUser) {
-        StringUtils.isAssert(corpUser, "corpUser参数不能为空", this);
-        this.corpUser = corpUser;
+    public TenantUserWrapper(TSysTenantUser tenantUser) {
+        StringUtils.isAssert(tenantUser, "tenantUser参数不能为空", this);
+        this.tenantUser = tenantUser;
     }
 
-    public TSysCorpUser getCorpUser() {
-        return corpUser;
+    public TSysTenantUser getTenantUser() {
+        return tenantUser;
     }
 
     /**
@@ -54,11 +54,11 @@ public class CorpUserWrapper {
      * 获取企业用户所在的企业实体对象
      * @return 返回企业实体对象
      */
-    public TSysCorp getCorp() {
-        if(null == corp) {
-            initCorp();
+    public TSysTenant getTenant() {
+        if(null == tenant) {
+            initTenant();
         }
-        return corp;
+        return tenant;
     }
 
     /**
@@ -82,21 +82,17 @@ public class CorpUserWrapper {
         }
         if(CollectionUtils.isNotEmpty(this.orgList)) {
             Optional<TSysOrg> orgOptional = this.orgList.stream().filter(o -> deptId.equals(o.getId())).findFirst();
-            if(orgOptional.isPresent()) {
-                return orgOptional.get();
-            } else {
-                return null;
-            }
+            return orgOptional.orElse(null);
         }
-        IOrgCorpUserService orgCorpUserService = MarkbenContextFactory.find(IOrgCorpUserService.class);
-        if(null != orgCorpUserService) {
-            this.org = orgCorpUserService.getDepartment(deptId, getCorpUser().getId());
+        IOrgTenantUserService orgTenantUserService = MarkbenContextFactory.find(IOrgTenantUserService.class);
+        if(null != orgTenantUserService) {
+            this.org = orgTenantUserService.getDepartment(deptId, getTenantUser().getId());
         }
         return org;
     }
 
     /**
-     * 获取企业用户所拥有的角色列表
+     * 获取租户的用户所拥有的角色列表
      * @return 返回角色实体列表
      */
     public List<TSysRole> getRoleList() {
@@ -109,28 +105,28 @@ public class CorpUserWrapper {
     private void initUser() {
         IUserService userService = MarkbenContextFactory.find(IUserService.class);
         if(null != userService) {
-            this.user = userService.find(getCorpUser().getUserId());
+            this.user = userService.find(getTenantUser().getUserId());
         }
     }
 
-    private void initCorp() {
-        ICorpService corpService = MarkbenContextFactory.find(ICorpService.class);
-        if(null != corpService) {
-            this.corp = corpService.find(getCorpUser().getCorpId());
+    private void initTenant() {
+        ITenantService tenantService = MarkbenContextFactory.find(ITenantService.class);
+        if(null != tenantService) {
+            this.tenant = tenantService.find(getTenantUser().getTenantId());
         }
     }
 
     private void initOrgList() {
-        IOrgCorpUserService orgCorpUserService = MarkbenContextFactory.find(IOrgCorpUserService.class);
-        if(null != orgCorpUserService) {
-            this.orgList = orgCorpUserService.getDepartmentList(getCorpUser().getId());
+        IOrgTenantUserService orgTenantUserService = MarkbenContextFactory.find(IOrgTenantUserService.class);
+        if(null != orgTenantUserService) {
+            this.orgList = orgTenantUserService.getDepartmentList(getTenantUser().getId());
         }
     }
 
     private void initRoleList() {
-        IRoleCorpUserService roleCorpUserService = MarkbenContextFactory.find(IRoleCorpUserService.class);
-        if(null != roleCorpUserService) {
-            this.roleList = roleCorpUserService.getRoleListByCorpUserId(getCorpUser().getId());
+        IRoleTenantUserService roleTenantUserService = MarkbenContextFactory.find(IRoleTenantUserService.class);
+        if(null != roleTenantUserService) {
+            this.roleList = roleTenantUserService.getRoleListByTenantUserId(getTenantUser().getId());
         }
     }
 }

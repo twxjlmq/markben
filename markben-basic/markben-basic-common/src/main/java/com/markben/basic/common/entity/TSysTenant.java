@@ -5,12 +5,12 @@ import com.markben.core.bean.AbstractBaseTreeEntity;
 import com.markben.core.bean.IPKPrefix;
 
 /**
- * 企业实体类
- * @autor 乌草坡 2020-03-04
- * @since 1.0
+ * 系统租户实体类
+ * @author  乌草坡
+ * @since 1.0.0
  */
-@TableName(value = "t_sys_corp")
-public class TSysCorp extends AbstractBaseTreeEntity implements IPKPrefix {
+@TableName(value = "t_sys_tenant")
+public class TSysTenant extends AbstractBaseTreeEntity implements IPKPrefix {
 
     public static final String PREFIX = "markben";
 
@@ -29,11 +29,11 @@ public class TSysCorp extends AbstractBaseTreeEntity implements IPKPrefix {
     private String remarks;
 
     /**
-     * 添加该组织的企业用户ID；
-     * 该直为{@link TSysCorpUser}实体类中的ID值，
-     * 通过该字段与{@link TSysCorpUser}数据表关联
+     * 添加该组织的租户的用户ID；
+     * 该直为{@link TSysTenantUser}实体类中的ID值，
+     * 通过该字段与{@link TSysTenantUser}数据表关联
      */
-    private String corpUserId;
+    private String tenantUserId;
 
     public String getLogo() {
         return logo;
@@ -67,12 +67,12 @@ public class TSysCorp extends AbstractBaseTreeEntity implements IPKPrefix {
         this.remarks = remarks;
     }
 
-    public String getCorpUserId() {
-        return corpUserId;
+    public String getTenantUserId() {
+        return tenantUserId;
     }
 
-    public void setCorpUserId(String corpUserId) {
-        this.corpUserId = corpUserId;
+    public void setTenantUserId(String tenantUserId) {
+        this.tenantUserId = tenantUserId;
     }
 
     @Override

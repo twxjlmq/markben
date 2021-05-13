@@ -8,14 +8,14 @@ import com.markben.core.bean.IPKPrefix;
 import java.util.Date;
 
 /**
- * 企业用户实体类
- * @autor 乌草坡 2020-03-04
- * @since 1.0
+ * 租户用户实体类
+ * @autor 乌草坡
+ * @since 1.0.0
  */
-@TableName(value = "t_sys_corp_user")
-public class TSysCorpUser extends AbstractTenantEntity implements IPKPrefix {
+@TableName(value = "t_sys_tenant_user")
+public class TSysTenantUser extends AbstractTenantEntity implements IPKPrefix {
 
-    public static final String PREFIX = "cu";
+    public static final String PREFIX = "tu";
 
     /**
      * 用户ID；

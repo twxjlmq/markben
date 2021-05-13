@@ -11,9 +11,9 @@ public class DefaultUserInfo implements IUserInfo {
 
     private String userId;
 
-    private String corpId;
+    private String tenantId;
 
-    private String corpUserId;
+    private String tenantUserId;
 
     private String username;
 
@@ -27,7 +27,7 @@ public class DefaultUserInfo implements IUserInfo {
 
     private String deptId;
 
-    private String corpName;
+    private String tenantName;
 
     private String deptName;
 
@@ -53,21 +53,33 @@ public class DefaultUserInfo implements IUserInfo {
     }
 
     @Override
-    public String getCorpId() {
-        return corpId;
-    }
-
-    public void setCorpId(String corpId) {
-        this.corpId = corpId;
+    public String getTenantId() {
+        return tenantId;
     }
 
     @Override
-    public String getCorpUserId() {
-        return corpUserId;
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
     }
 
-    public void setCorpUserId(String corpUserId) {
-        this.corpUserId = corpUserId;
+    @Override
+    public String getTenantUserId() {
+        return tenantUserId;
+    }
+
+    @Override
+    public void setTenantUserId(String tenantUserId) {
+        this.tenantUserId = tenantUserId;
+    }
+
+    @Override
+    public String getTenantName() {
+        return tenantName;
+    }
+
+    @Override
+    public void setTenantName(String tenantName) {
+        this.tenantName = tenantName;
     }
 
     @Override
@@ -96,16 +108,6 @@ public class DefaultUserInfo implements IUserInfo {
     @Override
     public void setDeptId(String deptId) {
         this.deptId = deptId;
-    }
-
-    @Override
-    public String getCorpName() {
-        return corpName;
-    }
-
-    @Override
-    public void setCorpName(String corpName) {
-        this.corpName = corpName;
     }
 
     @Override

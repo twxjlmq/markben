@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 登录接口
  * @author 乌草坡
- * @since 1.0
+ * @since 1.0.0
  */
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class LoginResultVO implements IBaseVO {
@@ -30,8 +30,8 @@ public class LoginResultVO implements IBaseVO {
         this.userId = userId;
     }
 
-    @ApiModelProperty(value = "所在组织列表")
-    private List<SimpleCorpInfoVO> corps;
+    @ApiModelProperty(value = "所在租户的组织列表")
+    private List<SimpleTenantInfoVO> tenants;
 
     public String getUserId() {
         return userId;
@@ -49,21 +49,21 @@ public class LoginResultVO implements IBaseVO {
         this.token = token;
     }
 
-    public List<SimpleCorpInfoVO> getCorps() {
-        return corps;
+    public List<SimpleTenantInfoVO> getTenants() {
+        return tenants;
     }
 
-    public void setCorps(List<SimpleCorpInfoVO> corps) {
-        this.corps = corps;
+    public void setTenants(List<SimpleTenantInfoVO> tenants) {
+        this.tenants = tenants;
     }
 
     @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
-    public static class SimpleCorpInfoVO {
+    public static class SimpleTenantInfoVO {
 
-        @ApiModelProperty(value = "组织ID或企业ID")
-        private String corpId;
+        @ApiModelProperty(value = "租户ID")
+        private String tenantId;
 
-        @ApiModelProperty(value = "组织名称或企业名称")
+        @ApiModelProperty(value = "租户组织的名称")
         private String name;
 
         @ApiModelProperty(value = "LOGO地址")
@@ -75,12 +75,12 @@ public class LoginResultVO implements IBaseVO {
         @ApiModelProperty(value = "所在部门列表")
         private List<SimpleOrgInfoVO> orgList;
 
-        public String getCorpId() {
-            return corpId;
+        public String getTenantId() {
+            return tenantId;
         }
 
-        public void setCorpId(String corpId) {
-            this.corpId = corpId;
+        public void setTenantId(String tenantId) {
+            this.tenantId = tenantId;
         }
 
         public String getName() {

@@ -3,6 +3,8 @@ package com.markben.core.spring;
 import com.markben.common.utils.CollectionUtils;
 import org.springframework.core.OrderComparator;
 import org.springframework.core.Ordered;
+import org.springframework.core.annotation.AnnotationAwareOrderComparator;
+import org.springframework.core.annotation.Order;
 
 import java.util.*;
 
@@ -26,13 +28,13 @@ public class SpringHelper {
         List<T> orderedList = new ArrayList<>();
         List<T> unorderedList = new ArrayList<>();
         for(T t : list) {
-            if(t instanceof Ordered) {
+            if(t instanceof Ordered || t.getClass().isAnnotationPresent(Order.class)) {
                 orderedList.add(t);
             } else {
                 unorderedList.add(t);
             }
         }
-        Comparator<Object> comparator = OrderComparator.INSTANCE;
+        Comparator<Object> comparator = AnnotationAwareOrderComparator.INSTANCE;
         Collections.sort(orderedList, comparator);
         if(CollectionUtils.isNotEmpty(unorderedList)) {
             orderedList.addAll(unorderedList);

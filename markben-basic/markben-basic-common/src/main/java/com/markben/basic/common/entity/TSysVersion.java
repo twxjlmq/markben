@@ -6,8 +6,8 @@ import com.markben.core.bean.AbstractCommonPropEntity;
 
 /**
  * 版本信息实体类
- * @autor 乌草坡 2020-03-04
- * @since 1.0
+ * @author 乌草坡
+ * @since 1.0.0
  */
 @TableName(value = "t_sys_version")
 public class TSysVersion extends AbstractCommonPropEntity {
@@ -26,7 +26,7 @@ public class TSysVersion extends AbstractCommonPropEntity {
      */
     private String describe;
 
-    private String corpUserId;
+    private String tenantUserId;
 
     /**
      * 更新日期
@@ -65,12 +65,12 @@ public class TSysVersion extends AbstractCommonPropEntity {
         this.describe = describe;
     }
 
-    public String getCorpUserId() {
-        return corpUserId;
+    public String getTenantUserId() {
+        return tenantUserId;
     }
 
-    public void setCorpUserId(String corpUserId) {
-        this.corpUserId = corpUserId;
+    public void setTenantUserId(String tenantUserId) {
+        this.tenantUserId = tenantUserId;
     }
 
     public String getUpdateDate() {

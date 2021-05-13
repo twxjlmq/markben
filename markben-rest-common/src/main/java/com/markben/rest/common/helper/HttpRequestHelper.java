@@ -290,11 +290,11 @@ public class HttpRequestHelper {
         }
         IUserInfo userInfo = getUserInfoFromSession(request);
         param.put("userId", userInfo.getUserId());
-        param.put("corpUserId", userInfo.getCorpUserId());
+        param.put("tenantUserId", userInfo.getTenantUserId());
         param.put("username", userInfo.getUsername());
         param.put("nickname", userInfo.getNickname());
         param.put("mobile", userInfo.getMobile());
-        param.put("corpId", userInfo.getCorpId());
+        param.put("tenantId", userInfo.getTenantId());
         if(CollectionUtils.isNotEmpty(userInfo.getOrgIds()))
             param.put("orgIds", StringUtils.list2Array(userInfo.getOrgIds()));
         if(CollectionUtils.isNotEmpty(userInfo.getRoleIds()))

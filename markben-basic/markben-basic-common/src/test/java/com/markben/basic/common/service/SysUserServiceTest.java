@@ -1,7 +1,7 @@
 package com.markben.basic.common.service;
 
 import com.markben.basic.common.ApplicationBasicCommonTest;
-import com.markben.basic.common.entity.TSysCorpUser;
+import com.markben.basic.common.entity.TSysTenantUser;
 import com.markben.basic.common.entity.TSysUser;
 import com.markben.common.enums.YesOrNoType;
 import org.junit.Assert;
@@ -22,12 +22,12 @@ public class SysUserServiceTest {
     @Autowired
     private IUserService userService;
     @Autowired
-    private ICorpUserService corpUserService;
+    private ITenantUserService corpUserService;
 
     @Test
     public void saveTest() {
 
-        String corpId = "markben_bae8885699a24246bba5491e4964dd2e";
+        String tenantId = "markben_bae8885699a24246bba5491e4964dd2e";
 
         userService.delete("bbe598f7b4b6495ea445dc245865567b");
 
@@ -39,12 +39,12 @@ public class SysUserServiceTest {
         boolean is = userService.save(user);
         Assert.assertTrue(is);
 
-        TSysCorpUser corpUser = new TSysCorpUser();
+        TSysTenantUser corpUser = new TSysTenantUser();
         corpUser.setIsDefault(YesOrNoType.YES.getIndex());
         corpUser.setIsSuperAdmin(YesOrNoType.YES.getIndex());
         corpUser.setNickname("超级管理员");
         corpUser.setUserId(user.getId());
-        corpUser.setCorpId(corpId);
+        corpUser.setTenantId(tenantId);
 
         is = corpUserService.save(corpUser);
         Assert.assertTrue(is);

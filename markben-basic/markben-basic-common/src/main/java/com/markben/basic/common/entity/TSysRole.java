@@ -7,7 +7,7 @@ import com.markben.core.bean.ICreatorEntity;
 /**
  * 角色实体类
  * @author 乌草坡
- * @since 1.0
+ * @since 1.0.0
  */
 @TableName(value = "t_sys_role")
 public class TSysRole extends AbstractTenantEntity implements ICreatorEntity {
@@ -16,7 +16,7 @@ public class TSysRole extends AbstractTenantEntity implements ICreatorEntity {
 
     private String describe;
 
-    private String corpUserId;
+    private String tenantUserId;
 
     public String getName() {
         return name;
@@ -34,11 +34,13 @@ public class TSysRole extends AbstractTenantEntity implements ICreatorEntity {
         this.describe = describe;
     }
 
-    public String getCorpUserId() {
-        return corpUserId;
+    @Override
+    public String getTenantUserId() {
+        return tenantUserId;
     }
 
-    public void setCorpUserId(String corpUserId) {
-        this.corpUserId = corpUserId;
+    @Override
+    public void setTenantUserId(String tenantUserId) {
+        this.tenantUserId = tenantUserId;
     }
 }

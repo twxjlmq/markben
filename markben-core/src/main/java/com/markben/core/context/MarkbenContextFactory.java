@@ -128,4 +128,27 @@ public class MarkbenContextFactory {
         return context.findByName(name);
     }
 
+    /**
+     * 移除一个bean的定义
+     * @param name bean名称
+     */
+    public static void removeBean(String name) {
+        context.removeBean(name);
+    }
+
+    /**
+     * 销毁一个Bean实例
+     * @param bean 实例
+     */
+    public static void destroyBean(Object bean) {
+        context.destroyBean(bean);
+    }
+
+    /**
+     * 获取注册的数量
+     * @return 返回注册数
+     */
+    public static int getRegisterCount() {
+        return context.getRegisterCount();
+    }
 }

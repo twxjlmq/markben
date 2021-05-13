@@ -145,6 +145,25 @@ public class SpringMarkbenContext implements IMarkbenContext {
         return object;
     }
 
+    @Override
+    public void removeBean(String name) {
+        if(StringUtils.isNotEmpty(name)) {
+            getBeanFactory().removeBeanDefinition(name);
+        }
+    }
+
+    @Override
+    public void destroyBean(Object bean) {
+        if(null != bean) {
+            getBeanFactory().destroyBean(bean);
+        }
+    }
+
+    @Override
+    public int getRegisterCount() {
+        return getBeanFactory().getBeanDefinitionCount();
+    }
+
     public DefaultListableBeanFactory getBeanFactory() {
         return beanFactory;
     }
