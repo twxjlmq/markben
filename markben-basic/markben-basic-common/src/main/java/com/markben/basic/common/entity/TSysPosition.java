@@ -1,22 +1,22 @@
 package com.markben.basic.common.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.markben.core.bean.AbstractTenantEntity;
-import com.markben.core.bean.ICreatorEntity;
+import com.markben.multi.tenancy.entity.AbstractSupportTenantEntity;
+import com.markben.core.bean.SupportCreatorEntity;
 
 /**
  * 职位实体类
  * @author 乌草坡
- * @since 1.0.0
+ * @since 0.0.1
  */
 @TableName(value = "t_sys_position")
-public class TSysPosition extends AbstractTenantEntity implements ICreatorEntity {
+public class TSysPosition extends AbstractSupportTenantEntity implements SupportCreatorEntity {
 
     private String name;
 
     private Integer sortOrder;
 
-    private String tenantUserId;
+    private String creator;
 
     public String getName() {
         return name;
@@ -35,12 +35,12 @@ public class TSysPosition extends AbstractTenantEntity implements ICreatorEntity
     }
 
     @Override
-    public String getTenantUserId() {
-        return tenantUserId;
+    public String getCreator() {
+        return creator;
     }
 
     @Override
-    public void setTenantUserId(String tenantUserId) {
-        this.tenantUserId = tenantUserId;
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 }

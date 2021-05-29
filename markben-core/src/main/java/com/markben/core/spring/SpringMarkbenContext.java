@@ -1,10 +1,10 @@
 package com.markben.core.spring;
 
-import com.markben.common.logger.ILogger;
+import com.markben.common.logger.Logger;
 import com.markben.common.utils.CollectionUtils;
 import com.markben.common.utils.LoggerUtils;
 import com.markben.common.utils.StringUtils;
-import com.markben.core.context.IMarkbenContext;
+import com.markben.core.context.MarkbenContext;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.RootBeanDefinition;
@@ -15,12 +15,12 @@ import java.util.stream.Collectors;
 
 /**
  * Markben框架上下文Spring实现类
- * @autor 乌草坡 2020-03-02
- * @since 1.0
+ * @autor 乌草坡
+ * @since 0.0.1
  */
-public class SpringMarkbenContext implements IMarkbenContext {
+public class SpringMarkbenContext implements MarkbenContext {
 
-    private static final ILogger logger = LoggerUtils.getLogger(SpringMarkbenContext.class);
+    private static final Logger logger = LoggerUtils.getLogger(SpringMarkbenContext.class);
 
     //用于实现自定义注册类
     Map<String, Object> registerMap = Collections.synchronizedMap(new HashMap<>());

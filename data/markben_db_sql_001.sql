@@ -9,7 +9,7 @@ CREATE TABLE `t_sys_tenant` (
   `short_name` VARCHAR(127) NOT NULL COMMENT '租户简称；如果不设置该值时，其值和name字段值一致',
   `describe` VARCHAR(1000) NULL COMMENT '描述',
   `remarks` VARCHAR(500) NULL COMMENT '备注',
-  `tenant_user_id` VARCHAR(50) NOT NULL COMMENT '添加租户的租户用户ID；和t_sys_tenant_user表中的主键ID关联',
+  `creator` VARCHAR(50) NOT NULL COMMENT '创建人ID（值为：租户用户ID）；和t_sys_tenant_user表中的主键ID关联',
   PRIMARY KEY (`id`))
 COMMENT = '系统租户信息表';
 
@@ -24,7 +24,7 @@ CREATE TABLE `t_sys_resource` (
   `rest_url` VARCHAR(255) NULL COMMENT 'REST URL地址',
   `is_fun` INT(1) NULL COMMENT '是否是功能资源；1--是；0--否',
   `is_auth` INT(1) NULL COMMENT '是否授权；1--需要授权；0--不需要授权',
-  `tenant_user_id` VARCHAR(50) NULL COMMENT '租户用户ID',
+  `creator` VARCHAR(50) NULL COMMENT '创建人ID（值为：租户用户ID）',
   `is_group` int NOT NULL DEFAULT 0 COMMENT '是否分组；1--是；0--否' ,
   PRIMARY KEY (`id`))
 COMMENT = '系统资源表';
@@ -36,10 +36,9 @@ CREATE TABLE `t_sys_dict` (
   `create_time` DATETIME NOT NULL COMMENT '创建时间',
   `name` VARCHAR(127) NOT NULL COMMENT '名称',
   `sort_order` INT(5) NOT NULL DEFAULT 0 COMMENT '排序序号',
-  `tenant_id` VARCHAR(50) NULL COMMENT '租户ID',
   `value` VARCHAR(127) NULL COMMENT '数据项的值',
   `int_value` INT(5) NULL COMMENT '数据项值对应的整型值,否则该字段为null',
-  `tenant_user_id` VARCHAR(50) NULL COMMENT '租户用户ID',
+  `creator` VARCHAR(50) NULL COMMENT '创建人ID',
   PRIMARY KEY (`id`))
 COMMENT = '数据字典表';
 
@@ -69,7 +68,7 @@ CREATE TABLE `t_sys_user` (
   UNIQUE KEY `username_UNIQUE` (`username`))
 COMMENT = '用户表';
 
-CREATE TABLE `t_sys_org` (
+CREATE TABLE `t_sys_department` (
   `id` VARCHAR(50) NOT NULL COMMENT '主键ID',
   `parent_id` VARCHAR(50) NOT NULL DEFAULT 0 COMMENT '父ID',
   `state` INT(1) NOT NULL DEFAULT 1 COMMENT '状态；1--有效；0--无效',
@@ -82,7 +81,7 @@ CREATE TABLE `t_sys_org` (
   `seq_name` VARCHAR(500) NULL COMMENT '名称序列;如: xxx有限公司>软件部>产品组',
   `remarks` VARCHAR(500) NULL COMMENT '备注',
   PRIMARY KEY (`id`))
-COMMENT = '组织架构表';
+COMMENT = '部门表';
 
 CREATE TABLE `t_sys_menu` (
   `id` VARCHAR(50) NOT NULL COMMENT '主键ID',
@@ -118,7 +117,7 @@ CREATE TABLE `t_sys_version` (
   `type` VARCHAR(20) NULL COMMENT '类型',
   `describe` VARCHAR(4000) NULL COMMENT '版本描述',
   `update_date` VARCHAR(20) NULL COMMENT '更新日期',
-  `tenant_user_id` VARCHAR(50) NOT NULL COMMENT '租户用户ID；和t_sys_corp_user表中的主键ID关联',
+  `creator` VARCHAR(50) NOT NULL COMMENT '创建人ID（值为：租户用户ID）；和t_sys_corp_user表中的主键ID关联',
   PRIMARY KEY (`id`))
 COMMENT = '版本信息表';
 
@@ -129,17 +128,17 @@ CREATE TABLE `t_sys_role` (
   `tenant_id` VARCHAR(50) NOT NULL COMMENT '租户ID',
   `name` VARCHAR(127) NOT NULL COMMENT '名称',
   `describe` VARCHAR(500) NULL COMMENT '角色描述',
-  `tenant_user_id` VARCHAR(50) NOT NULL COMMENT '租户用户ID；和t_sys_corp_user表中的主键ID关联',
+  `creator` VARCHAR(50) NOT NULL COMMENT '创建人ID（值为：租户用户ID）；和t_sys_corp_user表中的主键ID关联',
   PRIMARY KEY (`id`))
 COMMENT = '角色信息表';
 
-CREATE TABLE `t_sys_org_tenant_user` (
+CREATE TABLE `t_sys_dept_tenant_user` (
   `id` VARCHAR(50) NOT NULL COMMENT '主键ID',
   `tenant_id` VARCHAR(50) NOT NULL COMMENT '租户ID',
-  `org_id` VARCHAR(50) NOT NULL COMMENT '组织机构ID',
+  `dept_id` VARCHAR(50) NOT NULL COMMENT '部门ID',
   `tenant_user_id` VARCHAR(50) NOT NULL COMMENT '租户用户ID；和t_sys_tenant_user表中的主键ID关联',
   PRIMARY KEY (`id`))
-COMMENT = '组织机构与租户用户的关联表';
+COMMENT = '部门与租户用户的关联表';
 
 CREATE TABLE `t_sys_role_tenant_user` (
   `id` VARCHAR(50) NOT NULL COMMENT '主键ID',
@@ -165,10 +164,10 @@ CREATE TABLE `t_sys_role_resource` (
   PRIMARY KEY (`id`))
 COMMENT = '角色表与资源表的关联表';
 
-CREATE TABLE `t_sys_org_head` (
+CREATE TABLE `t_sys_dept_head` (
   `id` VARCHAR(50) NOT NULL COMMENT '主键ID',
   `tenant_id` VARCHAR(50) NOT NULL COMMENT '租户ID',
-  `org_id` VARCHAR(50) NOT NULL COMMENT '部门（组织机构）ID',
+  `dept_id` VARCHAR(50) NOT NULL COMMENT '部门（组织机构）ID',
   `tenant_user_id` VARCHAR(50) NOT NULL COMMENT '租户用户ID',
   PRIMARY KEY (`id`))
 COMMENT = '部门（组织机构）主管表';

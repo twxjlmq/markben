@@ -18,7 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class SysTenantServiceTest {
 
     @Autowired
-    private ITenantService corpService;
+    private TenantService corpService;
 
     @Test
     public void saveTest() {

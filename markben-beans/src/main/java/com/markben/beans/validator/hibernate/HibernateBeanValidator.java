@@ -1,9 +1,8 @@
 package com.markben.beans.validator.hibernate;
 
-import com.markben.beans.validator.IBeanValidator;
-import com.markben.common.enable.ICheckable;
-import com.markben.common.exception.NullArgumentException;
-import com.markben.common.logger.ILogger;
+import com.markben.beans.validator.BeanValidator;
+import com.markben.common.enable.Checkable;
+import com.markben.common.logger.Logger;
 import com.markben.common.utils.LoggerUtils;
 
 import javax.validation.ConstraintViolation;
@@ -15,11 +14,11 @@ import java.util.Set;
 /**
  * hibernate验证工具类
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
-public class HibernateBeanValidator implements IBeanValidator {
+public class HibernateBeanValidator implements BeanValidator {
 
-    private static final ILogger logger = LoggerUtils.getLogger(HibernateBeanValidator.class);
+    private static final Logger logger = LoggerUtils.getLogger(HibernateBeanValidator.class);
 
     private static Validator validator;
 
@@ -32,7 +31,7 @@ public class HibernateBeanValidator implements IBeanValidator {
      * 验证参数
      * @param obj
      */
-    public void validate(ICheckable obj) {
+    public void validate(Checkable obj) {
         if(null == obj) {
             LoggerUtils.warn(logger, "参数对象为空");
             return;

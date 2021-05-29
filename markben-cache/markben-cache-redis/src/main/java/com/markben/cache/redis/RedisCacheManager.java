@@ -3,7 +3,7 @@ package com.markben.cache.redis;
 import com.markben.cache.CacheException;
 import com.markben.cache.ICacheManager;
 import com.markben.common.config.SystemConfig;
-import com.markben.common.logger.ILogger;
+import com.markben.common.logger.Logger;
 import com.markben.common.utils.LoggerUtils;
 import com.markben.common.utils.StringUtils;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -21,7 +21,7 @@ public class RedisCacheManager implements ICacheManager {
 
     private RedisTemplate<String, Object> redisTemplate;
 
-    private ILogger logger = LoggerUtils.getLogger(RedisCacheManager.class);
+    private Logger logger = LoggerUtils.getLogger(RedisCacheManager.class);
 
     private String redisNamespace = "";
 

@@ -3,7 +3,7 @@ package com.markben.core.service.event;
 /**
  * 回调类型的属性
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 public class CallbackTypeProperty {
 

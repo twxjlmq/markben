@@ -3,7 +3,7 @@ package com.markben.basic.rest.vo.user;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.markben.common.enums.YesOrNoType;
-import com.markben.rest.common.vo.IBaseVO;
+import com.markben.rest.common.vo.BaseVO;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.List;
@@ -11,10 +11,10 @@ import java.util.List;
 /**
  * 登录接口
  * @author 乌草坡
- * @since 1.0.0
+ * @since 0.0.1
  */
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class LoginResultVO implements IBaseVO {
+public class LoginResultVO implements BaseVO {
 
     @ApiModelProperty(value = "用户ID")
     private String userId;

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.markben.common.enums.YesOrNoType;
-import com.markben.common.logger.ILogger;
+import com.markben.common.logger.Logger;
 import com.markben.common.utils.CollectionUtils;
 import com.markben.common.utils.LoggerUtils;
 import com.markben.common.utils.StringUtils;
@@ -23,12 +23,12 @@ import java.util.stream.Collectors;
 
 /**
  * 增强服务实现类
- * @autor 乌草坡 2020-02-28
- * @since 1.0
+ * @autor 乌草坡
+ * @since 0.0.1
  */
-public class EnhanceServiceImpl<T extends IEntityBean> extends ServiceImpl<BaseEnhanceMapper<T>, T> implements IMgrService<T> {
+public class EnhanceServiceImpl<T extends EntityBean> extends ServiceImpl<BaseEnhanceMapper<T>, T> implements MgrService<T> {
 
-    private ILogger logger;
+    private Logger logger;
 
     @Autowired
     private BaseEnhanceMapper<T> baseMapper;
@@ -43,8 +43,8 @@ public class EnhanceServiceImpl<T extends IEntityBean> extends ServiceImpl<BaseE
     }
 
     @Override
-    public T find(String id) {
-        return getById(id);
+    public Optional<T> find(String id) {
+        return Optional.ofNullable(getById(id));
     }
 
     @Override
@@ -73,7 +73,7 @@ public class EnhanceServiceImpl<T extends IEntityBean> extends ServiceImpl<BaseE
             return Collections.EMPTY_LIST;
         }
         QueryChainWrapper<T> queryWrapper = query().in("id", ids);
-        if(IStateEntity.class.isAssignableFrom(entityClass)) {
+        if(SupportStateEntity.class.isAssignableFrom(entityClass)) {
             queryWrapper.and(q -> q.eq("state", YesOrNoType.YES.getIndex()));
         }
         return super.list(queryWrapper);
@@ -277,8 +277,8 @@ public class EnhanceServiceImpl<T extends IEntityBean> extends ServiceImpl<BaseE
             return false;
         }
         Serializable id = null;
-        if(t instanceof IPKEntityBean) {
-            id = ((IPKEntityBean)t).getId();
+        if(t instanceof PKEntityBean) {
+            id = ((PKEntityBean)t).getId();
         }
         if(null == id) {
             return false;
@@ -292,8 +292,8 @@ public class EnhanceServiceImpl<T extends IEntityBean> extends ServiceImpl<BaseE
         if(CollectionUtils.isEmpty(ts)) {
             return false;
         }
-        Set<Serializable> ids = ts.stream().filter(t -> t instanceof  IPKEntityBean)
-                .map(bean -> ((IPKEntityBean) bean).getId()).collect(Collectors.toSet());
+        Set<Serializable> ids = ts.stream().filter(t -> t instanceof PKEntityBean)
+                .map(bean -> ((PKEntityBean) bean).getId()).collect(Collectors.toSet());
         return removeByIds(ids);
     }
 
@@ -325,15 +325,15 @@ public class EnhanceServiceImpl<T extends IEntityBean> extends ServiceImpl<BaseE
      * @param entity
      */
     private void handleSaveEntity(T entity) {
-        if(entity instanceof IPKStringEntity) {
-            IPKStringEntity pkStrEntity = (IPKStringEntity) entity;
+        if(entity instanceof PKStringEntity) {
+            PKStringEntity pkStrEntity = (PKStringEntity) entity;
             String id = pkStrEntity.getId();
             if(StringUtils.isEmpty(id)) {
                 EntityUtils.createEntityId(pkStrEntity);
             }
         }
-        if(entity instanceof ICreateTime && null == ((ICreateTime)entity).getCreateTime()) {
-            ((ICreateTime)entity).setCreateTime(new Date());
+        if(entity instanceof SupportCreateTime && null == ((SupportCreateTime)entity).getCreateTime()) {
+            ((SupportCreateTime)entity).setCreateTime(new Date());
         }
     }
 
@@ -352,8 +352,8 @@ public class EnhanceServiceImpl<T extends IEntityBean> extends ServiceImpl<BaseE
      * @param entity
      */
     private void handleUpdateEntity(T entity) {
-        if(entity instanceof IPKEntityBean) {
-            IPKEntityBean pkEntity = (IPKEntityBean) entity;
+        if(entity instanceof PKEntityBean) {
+            PKEntityBean pkEntity = (PKEntityBean) entity;
             Serializable id = pkEntity.getId();
             if(null != id) {
                 handleUpdateTimeEntity(entity);
@@ -368,8 +368,8 @@ public class EnhanceServiceImpl<T extends IEntityBean> extends ServiceImpl<BaseE
      * @param entity
      */
     private void handleUpdateTimeEntity(T entity) {
-        if (entity instanceof IUpdateTime && null == ((IUpdateTime) entity).getUpdateTime()) {
-            ((IUpdateTime) entity).setUpdateTime(new Date());
+        if (entity instanceof SupportUpdateTime && null == ((SupportUpdateTime) entity).getUpdateTime()) {
+            ((SupportUpdateTime) entity).setUpdateTime(new Date());
         }
     }
 
@@ -392,7 +392,7 @@ public class EnhanceServiceImpl<T extends IEntityBean> extends ServiceImpl<BaseE
         BizBehaviourEventListenerContext.getInstance().trigger(getBaseMapper(), behaviourType, value);
     }
 
-    protected ILogger getLogger() {
+    protected Logger getLogger() {
         return logger;
     }
 }

@@ -2,13 +2,13 @@ package com.markben.common.utils;
 
 import com.markben.common.exception.NullArgumentException;
 import com.markben.common.logger.DefaultLogger;
-import com.markben.common.logger.ILogger;
+import com.markben.common.logger.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * 日志工具类
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 public class LoggerUtils {
 
@@ -17,7 +17,7 @@ public class LoggerUtils {
 	 * @param clazz 对象类型
 	 * @return 返回日志对象
 	 */
-	public static ILogger getLogger(Class<?> clazz) {
+	public static Logger getLogger(Class<?> clazz) {
 		if(null == clazz) {
 			throw new NullArgumentException("传入的参数[clazz]为空");
 		}
@@ -25,11 +25,11 @@ public class LoggerUtils {
 	}
 
 	/**
-	 * 记录INFO日志；如果 <code>msg</code> 参数需要拼接字符串，请使用{@link #info(ILogger, String, Object...)} 方法
+	 * 记录INFO日志；如果 <code>msg</code> 参数需要拼接字符串，请使用{@link #info(Logger, String, Object...)} 方法
 	 * @param logger 日志实现类
 	 * @param msg 日志内容
 	 */
-	public static void info(ILogger logger, String msg) {
+	public static void info(Logger logger, String msg) {
 		if(logger.isInfoEnabled() && StringUtils.isNotEmpty(msg)) {
 			logger.info(msg);
 		}
@@ -41,18 +41,18 @@ public class LoggerUtils {
 	 * @param msg 日志内容
 	 * @param args 日志参数
 	 */
-	public static void info(ILogger logger, String msg, Object...args ) {
+	public static void info(Logger logger, String msg, Object...args ) {
 		if(logger.isInfoEnabled() && StringUtils.isNotEmpty(msg)) {
 			logger.info(msg, args);
 		}
 	}
 	
 	/**
-	 * 记录DEBUG日志；如果 <code>msg</code> 参数需要拼接字符串，请使用{@link #debug(ILogger, String, Object...)} 方法
+	 * 记录DEBUG日志；如果 <code>msg</code> 参数需要拼接字符串，请使用{@link #debug(Logger, String, Object...)} 方法
 	 * @param logger 日志实现类
 	 * @param msg 日志内容
 	 */
-	public static void debug(ILogger logger, String msg) {
+	public static void debug(Logger logger, String msg) {
 		if(logger.isDebugEnabled() && StringUtils.isNotEmpty(msg)) {
 			logger.debug(msg);
 		}
@@ -64,7 +64,7 @@ public class LoggerUtils {
 	 * @param msg 日志内容
 	 * @param args 日志参数
 	 */
-	public static void debug(ILogger logger, String msg, Object...args ) {
+	public static void debug(Logger logger, String msg, Object...args ) {
 		if(logger.isDebugEnabled() && StringUtils.isNotEmpty(msg)) {
 			logger.debug(msg, args);
 		}
@@ -75,7 +75,7 @@ public class LoggerUtils {
 	 * @param logger 日志实现类
 	 * @param msg 日志内容
 	 */
-	public static void error(ILogger logger, String msg) {
+	public static void error(Logger logger, String msg) {
 		if(logger.isErrorEnabled() && StringUtils.isNotEmpty(msg)) {
 			logger.error(msg);
 		}
@@ -87,7 +87,7 @@ public class LoggerUtils {
 	 * @param msg 日志内容
 	 * @param args 日志参数
 	 */
-	public static void error(ILogger logger, String msg, Object...args ) {
+	public static void error(Logger logger, String msg, Object...args ) {
 		if(logger.isErrorEnabled() && StringUtils.isNotEmpty(msg)) {
 			logger.error(msg, args);
 		}
@@ -99,7 +99,7 @@ public class LoggerUtils {
      * @param msg 日志内容
      * @param t 异常对象
      */
-    public static void error(ILogger logger, String msg, Throwable t) {
+    public static void error(Logger logger, String msg, Throwable t) {
         if(logger.isErrorEnabled() && StringUtils.isNotEmpty(msg)) {
             logger.error(msg, t);
         }
@@ -110,7 +110,7 @@ public class LoggerUtils {
      * @param logger 日志实现类
      * @param t 异常对象
      */
-    public static void error(ILogger logger, Throwable t) {
+    public static void error(Logger logger, Throwable t) {
         if(logger.isErrorEnabled()) {
             logger.error("异常信息", t);
         }
@@ -121,7 +121,7 @@ public class LoggerUtils {
 	 * @param logger 日志实现类
 	 * @param msg 日志内容
 	 */
-	public static void warn(ILogger logger, String msg) {
+	public static void warn(Logger logger, String msg) {
 		if(logger.isWarnEnabled() && StringUtils.isNotEmpty(msg)) {
 			logger.warn(msg);
 		}
@@ -133,7 +133,7 @@ public class LoggerUtils {
 	 * @param msg 日志内容
 	 * @param args 日志参数
 	 */
-	public static void warn(ILogger logger, String msg, Object...args ) {
+	public static void warn(Logger logger, String msg, Object...args ) {
 		if(logger.isWarnEnabled() && StringUtils.isNotEmpty(msg)) {
 			logger.warn(msg, args);
 		}
@@ -144,7 +144,7 @@ public class LoggerUtils {
 	 * @param logger 日志实现类
 	 * @param msg 日志内容
 	 */
-	public static void trace(ILogger logger, String msg) {
+	public static void trace(Logger logger, String msg) {
 		if(logger.isTraceEnabled() && StringUtils.isNotEmpty(msg)) {
 			logger.trace(msg);
 		}
@@ -156,7 +156,7 @@ public class LoggerUtils {
 	 * @param msg 日志内容
 	 * @param args 日志参数
 	 */
-	public static void trace(ILogger logger, String msg, Object...args ) {
+	public static void trace(Logger logger, String msg, Object...args ) {
 		if(logger.isTraceEnabled() && StringUtils.isNotEmpty(msg)) {
 			logger.trace(msg, args);
 		}

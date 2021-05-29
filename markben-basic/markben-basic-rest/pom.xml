@@ -15,7 +15,7 @@
 
         <dependency>
             <groupId>com.markben</groupId>
-            <artifactId>markben-rest-common</artifactId>
+            <artifactId>markben-rest-organization</artifactId>
         </dependency>
 
         <dependency>

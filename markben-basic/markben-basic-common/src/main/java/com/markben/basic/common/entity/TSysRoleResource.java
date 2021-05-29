@@ -1,16 +1,15 @@
 package com.markben.basic.common.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.markben.core.bean.AbstractBaseTenantEntity;
-import com.markben.core.bean.ITenantEntity;
+import com.markben.multi.tenancy.entity.AbstractSupportTenantEntity;
 
 /**
  * 角色表与资源表的关联表
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 @TableName(value = "t_sys_role_resource")
-public class TSysRoleResource extends AbstractBaseTenantEntity implements ITenantEntity {
+public class TSysRoleResource extends AbstractSupportTenantEntity {
 
     private String roleId;
 

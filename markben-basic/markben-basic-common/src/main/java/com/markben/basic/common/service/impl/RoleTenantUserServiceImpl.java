@@ -3,14 +3,13 @@ package com.markben.basic.common.service.impl;
 import com.markben.basic.common.entity.TSysTenantUser;
 import com.markben.basic.common.entity.TSysRole;
 import com.markben.basic.common.entity.TSysRoleTenantUser;
-import com.markben.basic.common.service.ITenantUserService;
-import com.markben.basic.common.service.IRoleTenantUserService;
-import com.markben.basic.common.service.IRoleService;
+import com.markben.basic.common.service.TenantUserService;
+import com.markben.basic.common.service.RoleTenantUserService;
+import com.markben.basic.common.service.RoleService;
 import com.markben.common.utils.CollectionUtils;
 import com.markben.common.utils.LoggerUtils;
 import com.markben.core.service.EnhanceServiceImpl;
 import com.markben.core.utils.EntityUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -18,16 +17,16 @@ import java.util.List;
 
 /**
  * @author 乌草坡
- * @since 1.0.0
+ * @since 0.0.1
  */
 @Service
-public class RoleTenantUserServiceImpl extends EnhanceServiceImpl<TSysRoleTenantUser> implements IRoleTenantUserService {
+public class RoleTenantUserServiceImpl extends EnhanceServiceImpl<TSysRoleTenantUser> implements RoleTenantUserService {
 
-    private IRoleService roleService;
+    private RoleService roleService;
 
-    private ITenantUserService tenantUserService;
+    private TenantUserService tenantUserService;
 
-    public RoleTenantUserServiceImpl(IRoleService roleService, ITenantUserService tenantUserService) {
+    public RoleTenantUserServiceImpl(RoleService roleService, TenantUserService tenantUserService) {
         this.roleService = roleService;
         this.tenantUserService = tenantUserService;
     }

@@ -1,8 +1,8 @@
 package com.markben.core.test;
 
-import com.markben.common.logger.ILogger;
+import com.markben.common.logger.Logger;
 import com.markben.common.utils.LoggerUtils;
-import com.markben.core.callback.IUpdateCallbackAware;
+import com.markben.core.callback.UpdateCallbackAware;
 import com.markben.core.entity.TTestUser;
 import com.markben.core.mapper.UserMapper;
 import org.springframework.stereotype.Component;
@@ -12,9 +12,9 @@ import org.springframework.stereotype.Component;
  * @since 1.0
  */
 @Component
-public class UserUpdateCallback implements IUpdateCallbackAware<UserMapper, TTestUser> {
+public class UserUpdateCallback implements UpdateCallbackAware<UserMapper, TTestUser> {
 
-    private static final ILogger logger = LoggerUtils.getLogger(UserUpdateCallback.class);
+    private static final Logger logger = LoggerUtils.getLogger(UserUpdateCallback.class);
 
     @Override
     public void callback(UserMapper target, TTestUser value) {

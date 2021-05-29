@@ -8,13 +8,10 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * 数据字典详情信息
  * @author 乌草坡
- * @since 1.0.0
+ * @since 0.0.1
  */
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class DictDetailVO extends DictItemVO {
-
-    @ApiModelProperty(value = "租户ID")
-    private String tenantId;
 
     @ApiModelProperty(value = "租户的用户ID")
     private String tenantUserId;
@@ -23,18 +20,9 @@ public class DictDetailVO extends DictItemVO {
         super();
     }
 
-    public DictDetailVO(String id, String parentId, String name, Integer sortOrder, String value, Integer state, String tenantId, String tenantUserId) {
+    public DictDetailVO(String id, String parentId, String name, Integer sortOrder, String value, Integer state,  String tenantUserId) {
         super(id, parentId, name, sortOrder, value, state);
-        this.tenantId = tenantId;
         this.tenantUserId = tenantUserId;
-    }
-
-    public String getTenantId() {
-        return tenantId;
-    }
-
-    public void setTenantId(String tenantId) {
-        this.tenantId = tenantId;
     }
 
     public String getTenantUserId() {

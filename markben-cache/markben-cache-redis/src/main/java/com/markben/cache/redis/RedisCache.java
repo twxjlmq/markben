@@ -1,7 +1,7 @@
 package com.markben.cache.redis;
 
 import com.markben.cache.ICache;
-import com.markben.common.logger.ILogger;
+import com.markben.common.logger.Logger;
 import com.markben.common.utils.LoggerUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 
@@ -16,7 +16,7 @@ public class RedisCache implements ICache<String, Object> {
 
     private RedisTemplate<String, Object> redisTemplate;
 
-    private static final ILogger logger = LoggerUtils.getLogger(RedisCache.class);
+    private static final Logger logger = LoggerUtils.getLogger(RedisCache.class);
 
     public RedisCache(RedisTemplate<String, Object> redisTemplate, String mainKey) {
         this.redisTemplate = redisTemplate;

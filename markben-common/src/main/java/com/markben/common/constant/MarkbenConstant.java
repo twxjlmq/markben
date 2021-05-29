@@ -3,7 +3,7 @@ package com.markben.common.constant;
 /**
  * 定义常亮
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 public interface MarkbenConstant {
 

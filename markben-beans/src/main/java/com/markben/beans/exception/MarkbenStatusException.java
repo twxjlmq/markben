@@ -2,8 +2,8 @@ package com.markben.beans.exception;
 
 /**
  * 框架运行时异常
- * @autor 乌草坡 2020-09-02
- * @since 1.0
+ * @autor 乌草坡
+ * @since 0.0.1
  */
 public class MarkbenStatusException extends RuntimeException {
 

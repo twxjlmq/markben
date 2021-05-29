@@ -3,7 +3,7 @@ package com.markben.common.exception;
 /**
  * 实例类未找到异常
  * @author 乌草坡
- * @since 1.0.0
+ * @since 0.0.1
  */
 public class InstanceClassNotFindException extends RuntimeException {
 

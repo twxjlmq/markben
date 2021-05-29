@@ -5,15 +5,15 @@ import com.markben.beans.validator.hibernate.HibernateBeanValidator;
 /**
  * Bean验证工厂
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 public class BeanValidatorFactory {
 
-    private IBeanValidator beanValidator;
+    private BeanValidator beanValidator;
 
     private static BeanValidatorFactory instance = new BeanValidatorFactory();
 
-    private void setBeanValidator(IBeanValidator beanValidator) {
+    private void setBeanValidator(BeanValidator beanValidator) {
         this.beanValidator = beanValidator;
     }
 
@@ -22,7 +22,7 @@ public class BeanValidatorFactory {
      * @param validator 验证器实现类
      * @return 返回验证器工厂实例
      */
-    public static BeanValidatorFactory setValidator(IBeanValidator validator) {
+    public static BeanValidatorFactory setValidator(BeanValidator validator) {
         instance.setBeanValidator(validator);
         return instance;
     }
@@ -40,7 +40,7 @@ public class BeanValidatorFactory {
      * 构建验证器
      * @return 返回Bean验证器
      */
-    public IBeanValidator build() {
+    public BeanValidator build() {
         return beanValidator;
     }
 

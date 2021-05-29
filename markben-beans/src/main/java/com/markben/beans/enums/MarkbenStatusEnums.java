@@ -3,7 +3,7 @@ package com.markben.beans.enums;
 /**
  * 状态码枚举类
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 public enum MarkbenStatusEnums {
 

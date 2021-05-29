@@ -9,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 /**
  * 更新资源请求对象
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class UpdateResourceRequest extends CreateResourceRequest {

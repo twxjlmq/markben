@@ -3,38 +3,35 @@ package com.markben.core.config;
 import com.markben.cache.ICacheManager;
 import com.markben.common.config.AbstractConfig;
 import com.markben.common.config.SystemConfig;
-import com.markben.common.logger.ILogger;
+import com.markben.common.logger.Logger;
 import com.markben.common.utils.LoaderClassUtils;
 import com.markben.common.utils.LoggerUtils;
-import com.markben.core.context.IMarkbenContext;
-import com.markben.core.context.IMarkbenContextAware;
-import com.markben.core.context.MarkbenContextFactory;
+import com.markben.core.context.MarkbenContext;
 import com.markben.core.exception.SystemInitializationException;
-import com.markben.core.initialization.IMarkbenInitializeListener;
-import com.markben.core.multipart.IMultipartManager;
-import com.markben.core.validator.IBeanValidator;
-import org.springframework.stereotype.Component;
+import com.markben.core.initialization.MarkbenInitializeListener;
+import com.markben.core.multipart.MultipartManager;
+import com.markben.core.validator.BeanValidator;
 
 /**
  * 默认markben配置接口实现类
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
-public class DefaultMarkbenConfiguration implements IMarkbenConfiguration, IMarkbenInitializeListener {
+public class DefaultMarkbenConfiguration implements MarkbenConfiguration, MarkbenInitializeListener {
 
-    private static final ILogger logger = LoggerUtils.getLogger(DefaultMarkbenConfiguration.class);
+    private static final Logger logger = LoggerUtils.getLogger(DefaultMarkbenConfiguration.class);
 
-    private IMarkbenContext context;
+    private MarkbenContext context;
 
     private AbstractConfig systemConfig;
 
     private ICacheManager cacheManager;
 
-    private IMultipartManager multipartManager;
+    private MultipartManager multipartManager;
 
-    private IBeanValidator beanValidator;
+    private BeanValidator beanValidator;
 
-    public DefaultMarkbenConfiguration(IMarkbenContext context) {
+    public DefaultMarkbenConfiguration(MarkbenContext context) {
         this.context = context;
     }
 
@@ -78,7 +75,7 @@ public class DefaultMarkbenConfiguration implements IMarkbenConfiguration, IMark
         return this.cacheManager;
     }
 
-    public IMarkbenContext getContext() {
+    public MarkbenContext getContext() {
         return context;
     }
 
@@ -88,26 +85,26 @@ public class DefaultMarkbenConfiguration implements IMarkbenConfiguration, IMark
     }
 
     @Override
-    public IBeanValidator getBeanValidator() {
+    public BeanValidator getBeanValidator() {
         if(null == beanValidator) {
-            beanValidator = getContext().find(IBeanValidator.class);
+            beanValidator = getContext().find(BeanValidator.class);
         }
         return beanValidator;
     }
 
     @Override
-    public IMultipartManager getMultipartManager() {
+    public MultipartManager getMultipartManager() {
         if(null == multipartManager) {
-            multipartManager = getContext().find(IMultipartManager.class);
+            multipartManager = getContext().find(MultipartManager.class);
         }
         return null;
     }
 
-    public void setMultipartManager(IMultipartManager multipartManager) {
+    public void setMultipartManager(MultipartManager multipartManager) {
         this.multipartManager = multipartManager;
     }
 
-    public void setBeanValidator(IBeanValidator beanValidator) {
+    public void setBeanValidator(BeanValidator beanValidator) {
         this.beanValidator = beanValidator;
     }
 

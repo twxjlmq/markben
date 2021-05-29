@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 集合工具类
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 public class CollectionUtils {
 

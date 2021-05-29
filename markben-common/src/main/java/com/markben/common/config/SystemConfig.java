@@ -1,6 +1,6 @@
 package com.markben.common.config;
 
-import com.markben.common.ProjectInfo;
+import com.markben.common.SystemInfo;
 import com.markben.common.constant.MarkbenConstant;
 import com.markben.common.utils.LoggerUtils;
 import com.markben.common.utils.StringUtils;
@@ -14,7 +14,7 @@ import java.util.Properties;
 /**
  * 初始化系统配置文件
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 public class SystemConfig extends AbstractConfig {
 
@@ -125,10 +125,10 @@ public class SystemConfig extends AbstractConfig {
 	 * 获取项目信息
 	 * @return 获取项目信息对象
 	 */
-	public ProjectInfo getProjectInfo() {
-		ProjectInfo projectInfo = null;
+	public SystemInfo getProjectInfo() {
+		SystemInfo projectInfo = null;
 		if(null != prop){
-			projectInfo = new ProjectInfo();
+			projectInfo = new SystemInfo();
 			projectInfo.initParam("project", this);
 		}
 		return projectInfo;

@@ -10,7 +10,7 @@ import java.security.MessageDigest;
 
 /**
  * 算法定义
- * @author lmq
+ * @author 乌草坡
  *
  */
 public abstract class Coder {

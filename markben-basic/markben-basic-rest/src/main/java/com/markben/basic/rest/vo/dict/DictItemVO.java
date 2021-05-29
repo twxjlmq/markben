@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * 数据字典项对象
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class DictItemVO extends AbstractTreeVO {

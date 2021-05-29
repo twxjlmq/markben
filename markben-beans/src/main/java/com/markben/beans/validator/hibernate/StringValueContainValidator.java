@@ -6,8 +6,9 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 /**
+ * 字符串值范围验证器
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 public class StringValueContainValidator implements ConstraintValidator<StringValueContain, String> {
 

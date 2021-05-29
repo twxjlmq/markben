@@ -3,7 +3,7 @@ package com.markben.core.service.event;
 /**
  * 业务的行为类型
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 public enum BizBehaviourType {
 

@@ -1,16 +1,16 @@
 package com.markben.basic.common.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.markben.core.bean.AbstractBaseTreeEntity;
-import com.markben.core.bean.IPKPrefix;
+import com.markben.core.bean.AbstractSupportTreeEntity;
+import com.markben.core.bean.PKPrefix;
 
 /**
  * 系统租户实体类
  * @author  乌草坡
- * @since 1.0.0
+ * @since 0.0.1
  */
 @TableName(value = "t_sys_tenant")
-public class TSysTenant extends AbstractBaseTreeEntity implements IPKPrefix {
+public class TSysTenant extends AbstractSupportTreeEntity implements PKPrefix {
 
     public static final String PREFIX = "markben";
 

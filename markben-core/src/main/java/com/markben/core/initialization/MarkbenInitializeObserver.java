@@ -2,12 +2,12 @@ package com.markben.core.initialization;
 
 import com.markben.cache.ICacheManager;
 import com.markben.cache.ICacheManagerAware;
-import com.markben.common.logger.ILogger;
+import com.markben.common.logger.Logger;
 import com.markben.common.utils.CollectionUtils;
 import com.markben.common.utils.LoggerUtils;
-import com.markben.core.config.IMarkbenConfiguration;
-import com.markben.core.context.IMarkbenContext;
-import com.markben.core.context.IMarkbenContextAware;
+import com.markben.core.config.MarkbenConfiguration;
+import com.markben.core.context.MarkbenContext;
+import com.markben.core.context.MarkbenContextAware;
 import com.markben.core.context.MarkbenContextFactory;
 
 import java.util.Collection;
@@ -18,15 +18,15 @@ import java.util.Observer;
 /**
  * 框架初始化观察者
  * @autor 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 public class MarkbenInitializeObserver implements Observer {
 
-    private static final ILogger logger = LoggerUtils.getLogger(MarkbenInitializeObserver.class);
+    private static final Logger logger = LoggerUtils.getLogger(MarkbenInitializeObserver.class);
 
-    private Collection<IMarkbenInitializeListener> listeners;
+    private Collection<MarkbenInitializeListener> listeners;
 
-    public MarkbenInitializeObserver(Collection<IMarkbenInitializeListener> listeners) {
+    public MarkbenInitializeObserver(Collection<MarkbenInitializeListener> listeners) {
         this.listeners = listeners;
     }
 
@@ -37,7 +37,7 @@ public class MarkbenInitializeObserver implements Observer {
         initCacheManagerAware();
         LoggerUtils.debug(logger, "实现处理初始化的有[{}]个实例.", (null == listeners ? 0 : listeners.size()));
         if(CollectionUtils.isNotEmpty(listeners)) {
-            for (IMarkbenInitializeListener listener : listeners) {
+            for (MarkbenInitializeListener listener : listeners) {
                 listener.initialize();
             }
         }
@@ -48,12 +48,12 @@ public class MarkbenInitializeObserver implements Observer {
      */
     private void initContextAware() {
         LoggerUtils.debug(logger, "正在初始化IMarkbenContextAware接口实现类...");
-        List<IMarkbenContextAware> contextAwareList = MarkbenContextFactory.finds(IMarkbenContextAware.class);
+        List<MarkbenContextAware> contextAwareList = MarkbenContextFactory.finds(MarkbenContextAware.class);
         LoggerUtils.debug(logger, "实现IMarkbenContextAware接口的有[{}]个实例.", (null == contextAwareList ? 0 :contextAwareList.size()));
         if(CollectionUtils.isNotEmpty(contextAwareList)) {
-            IMarkbenContext context = MarkbenContextFactory.getContext();
-            for (IMarkbenContextAware contextAware : contextAwareList) {
-                if(contextAware instanceof IMarkbenConfiguration) {
+            MarkbenContext context = MarkbenContextFactory.getContext();
+            for (MarkbenContextAware contextAware : contextAwareList) {
+                if(contextAware instanceof MarkbenConfiguration) {
                     //因为配置接口类在Spring初始化完的时候就已经处理过，这里不再处理
                     //在SpringInitializationCompleteListener类中已经处理过
                     continue;

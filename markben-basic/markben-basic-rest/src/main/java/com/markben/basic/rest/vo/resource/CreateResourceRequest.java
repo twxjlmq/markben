@@ -4,10 +4,10 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.markben.beans.validator.hibernate.IntValueContain;
 import com.markben.common.constant.MarkbenConstant;
-import com.markben.common.enable.ICheckable;
+import com.markben.common.enable.Checkable;
 import com.markben.common.enums.YesOrNoType;
 import com.markben.rest.common.vo.AbstractRestRequest;
-import com.markben.rest.common.vo.IBaseVO;
+import com.markben.rest.common.vo.BaseVO;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotEmpty;
@@ -15,10 +15,10 @@ import javax.validation.constraints.NotEmpty;
 /**
  * 创建资源请求对象
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class CreateResourceRequest extends AbstractRestRequest implements IBaseVO, ICheckable {
+public class CreateResourceRequest extends AbstractRestRequest implements BaseVO, Checkable {
 
     @ApiModelProperty(value = "名称", required = true)
     @NotEmpty

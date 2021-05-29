@@ -5,9 +5,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 /**
  * 基础实体
  * @autor 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
-public abstract class AbstractBaseEntity implements IPKStringEntity {
+public abstract class AbstractBaseEntity implements PKStringEntity {
 
     @TableId(value = "id")
     private String id;

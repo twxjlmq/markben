@@ -7,9 +7,9 @@ import java.util.Date;
 /**
  * 通用属性实体抽象类
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
-public abstract class AbstractCommonPropEntity extends AbstractBaseEntity implements ICreateTime, IStateEntity {
+public abstract class AbstractCommonPropEntity extends AbstractBaseEntity implements SupportCreateTime, SupportStateEntity {
 
     private Date createTime;
 

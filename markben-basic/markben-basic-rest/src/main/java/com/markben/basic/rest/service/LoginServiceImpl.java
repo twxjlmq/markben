@@ -1,21 +1,19 @@
 package com.markben.basic.rest.service;
 
+import com.markben.basic.common.entity.TSysDepartment;
 import com.markben.basic.common.entity.TSysTenant;
 import com.markben.basic.common.entity.TSysTenantUser;
-import com.markben.basic.common.entity.TSysOrg;
-import com.markben.basic.common.entity.TSysUser;
-import com.markben.basic.common.service.ITenantUserService;
-import com.markben.basic.common.service.IUserService;
+import com.markben.basic.common.service.TenantUserService;
 import com.markben.basic.common.wrapper.TenantUserWrapper;
 import com.markben.basic.rest.vo.user.LoginResultVO;
-import com.markben.beans.bean.DefaultUserInfo;
-import com.markben.beans.bean.IUserInfo;
+import com.markben.beans.entity.TSysUser;
 import com.markben.beans.enums.MarkbenStatusEnums;
-import com.markben.beans.response.IResultResponse;
+import com.markben.beans.response.ResultResponse;
+import com.markben.beans.service.UserService;
 import com.markben.cache.ICache;
 import com.markben.cache.ICacheManager;
 import com.markben.common.enums.YesOrNoType;
-import com.markben.common.logger.ILogger;
+import com.markben.common.logger.Logger;
 import com.markben.common.utils.CollectionUtils;
 import com.markben.common.utils.LoggerUtils;
 import com.markben.common.utils.StringUtils;
@@ -23,50 +21,54 @@ import com.markben.core.context.MarkbenContextFactory;
 import com.markben.rest.common.helper.RestCommonHelper;
 import com.markben.rest.common.helper.SecurityFilterHelper;
 import com.markben.rest.common.response.RestResultResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.markben.rest.org.bean.OrgUserInfo;
+import com.markben.rest.org.bean.OrgUserInfoImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
  * 登录服务类实现类
  * @author 乌草坡
- * @since 1.0.0
+ * @since 0.0.1
  */
 @Service
-public class LoginServiceImpl implements ILoginService {
+public class LoginServiceImpl implements LoginService {
 
-    private static final ILogger logger = LoggerUtils.getLogger(LoginServiceImpl.class);
+    private static final Logger logger = LoggerUtils.getLogger(LoginServiceImpl.class);
 
     private static final long TEMP_TOKEN_VALID_TIME = 1000 * 60 * 5;  //5分钟
 
-    private IUserService userService;
-    private ITenantUserService tenantUserService;
+    private UserService userService;
+    private TenantUserService tenantUserService;
 
-    public LoginServiceImpl(IUserService userService, ITenantUserService tenantUserService) {
+    public LoginServiceImpl(UserService userService, TenantUserService tenantUserService) {
         this.userService = userService;
         this.tenantUserService = tenantUserService;
     }
 
     @Override
-    public IResultResponse<LoginResultVO> login(String username, String password) {
+    public ResultResponse<LoginResultVO> login(String username, String password) {
         StringUtils.isAssert(username, "用户名不能为空", this);
         StringUtils.isAssert(password, "密码不能为空", this);
-        IResultResponse<LoginResultVO> response = new RestResultResponse<>();
-        TSysUser user = userService.getUserOfLogin(username);
-        if(null == user) {
+        ResultResponse<LoginResultVO> response = new RestResultResponse<>();
+        Optional<TSysUser> userOpt = userService.getUserOfLogin(username);
+        if(!userOpt.isPresent()) {
             LoggerUtils.error(logger, "用户名输入错误,输入的用户名为:[{}].", username);
             RestCommonHelper.setResponseStatus(response, MarkbenStatusEnums.LOGIN_USER_OR_PWD_ERROR);
             return response;
         }
-        String md5Password = userService.getMd5SaltPassword(password);
-        if(!md5Password.equals(user.getPassword())) {
+        TSysUser user = userOpt.get();
+        Optional<String> md5PasswordOpt = userService.getMd5SaltPassword(password);
+        if(!md5PasswordOpt.isPresent() || !md5PasswordOpt.get().equals(user.getPassword())) {
             LoggerUtils.error(logger, "密码输入错误,输入的密码为:[{}].", SecurityFilterHelper.filterPassword(password));
             RestCommonHelper.setResponseStatus(response, MarkbenStatusEnums.LOGIN_USER_OR_PWD_ERROR);
             return response;
         }
+
         LoginResultVO loginResult = createLoginResult(user.getId(), response);
         if(null != loginResult) {
             RestCommonHelper.setSuccessResult(response);
@@ -83,12 +85,12 @@ public class LoginServiceImpl implements ILoginService {
     }
 
     @Override
-    public IResultResponse<IUserInfo> confirmLogin(String userId, String tenantId, String deptId, String token) {
+    public ResultResponse<OrgUserInfo> confirmLogin(String userId, String tenantId, String deptId, String token) {
         LoggerUtils.debug(logger, "正在确认登录处理中...");
         StringUtils.isAssert(userId, "用户ID不能为空", this);
         StringUtils.isAssert(tenantId, "租户ID不能为空", this);
         StringUtils.isAssert(deptId, "部门ID不能为空", this);
-        IResultResponse<IUserInfo> response = new RestResultResponse<>();
+        ResultResponse<OrgUserInfo> response = new RestResultResponse<>();
         //验证token
         LoggerUtils.debug(logger, "正在验证token，传入的token值为:[{}].", token);
         ICacheManager cacheManager = MarkbenContextFactory.getConfiguration().getCacheManager();
@@ -108,14 +110,15 @@ public class LoginServiceImpl implements ILoginService {
         cache.remove(userId);
         cacheManager.remove(userId);
 
-        TSysTenantUser tenantUser = tenantUserService.getTenantUser(userId, tenantId);
-        if(null == tenantUser) {
+        Optional<TSysTenantUser> tenantUserOpt = tenantUserService.getTenantUser(userId, tenantId);
+        if(!tenantUserOpt.isPresent()) {
             RestCommonHelper.setResponseStatus(response, MarkbenStatusEnums.CORP_USER_NOT_EXIST);
             return response;
+        } else {
+            OrgUserInfo userInfo = startInitUserInfo(tenantUserOpt.get(), deptId);
+            checkUserInfo(userInfo, response);
+            return response;
         }
-        IUserInfo userInfo = startInitUserInfo(tenantUser, deptId);
-        checkUserInfo(userInfo, response);
-        return response;
     }
 
     /**
@@ -124,7 +127,7 @@ public class LoginServiceImpl implements ILoginService {
      * @param response 返回对象
      * @return 如果登录成功则返回：登录结果对象，否则返回null
      */
-    private LoginResultVO createLoginResult(String userId, IResultResponse response) {
+    private LoginResultVO createLoginResult(String userId, ResultResponse response) {
         List<TSysTenantUser> tenantUsers = tenantUserService.getTenantUser(userId);
         if(CollectionUtils.isEmpty(tenantUsers)) {
             RestCommonHelper.setResponseStatus(response, MarkbenStatusEnums.USER_NOT_IN_CORP);
@@ -183,7 +186,7 @@ public class LoginServiceImpl implements ILoginService {
      * @return 返回简单部门信息或null
      */
     private List<LoginResultVO.SimpleOrgInfoVO> createSimpleOrgList(TenantUserWrapper corpUserWrapper) {
-        List<TSysOrg> orgList = corpUserWrapper.getOrgList();
+        List<TSysDepartment> orgList = corpUserWrapper.getDeptList();
         if(CollectionUtils.isEmpty(orgList)) {
             return null;
         }
@@ -197,9 +200,9 @@ public class LoginServiceImpl implements ILoginService {
      * @param deptId 部门ID
      * @return 返回用户信息对象
      */
-    private IUserInfo startInitUserInfo(TSysTenantUser tenantUser, String deptId) {
+    private OrgUserInfo startInitUserInfo(TSysTenantUser tenantUser, String deptId) {
         TenantUserWrapper tenantUserWrapper = new TenantUserWrapper(tenantUser);
-        IUserInfo userInfo = new DefaultUserInfo();
+        OrgUserInfo userInfo = new OrgUserInfoImpl();
         userInfo.setNickname(tenantUser.getNickname());
         userInfo.setTenantUserId(tenantUser.getId());
         userInfo.setTenantId(tenantUser.getTenantId());
@@ -220,10 +223,10 @@ public class LoginServiceImpl implements ILoginService {
         }
 
         //初始化部门信息
-        TSysOrg org = tenantUserWrapper.getDepartment(deptId);
-        if(null != org && YesOrNoType.YES.getIndex() == org.getState()) {
+        TSysDepartment department = tenantUserWrapper.getDepartment(deptId);
+        if(null != department && YesOrNoType.YES.getIndex() == department.getState()) {
             userInfo.setDeptId(deptId);
-            userInfo.setDeptName(org.getName());
+            userInfo.setDeptName(department.getName());
         }
 
         //TODO 初始化权限信息
@@ -236,7 +239,7 @@ public class LoginServiceImpl implements ILoginService {
      * @param userInfo
      * @param response
      */
-    private void checkUserInfo(IUserInfo userInfo, IResultResponse response) {
+    private void checkUserInfo(OrgUserInfo userInfo, ResultResponse response) {
         if(StringUtils.isEmpty(userInfo.getTenantId()) || StringUtils.isEmpty(userInfo.getTenantName())) {
             RestCommonHelper.setResponseStatus(response, MarkbenStatusEnums.CORP_NOT_EXIST);
             return;

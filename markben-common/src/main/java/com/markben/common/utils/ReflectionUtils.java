@@ -1,6 +1,6 @@
 package com.markben.common.utils;
 
-import com.markben.common.logger.ILogger;
+import com.markben.common.logger.Logger;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -8,11 +8,11 @@ import java.lang.reflect.Type;
 /**
  * 反射工具类
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 public class ReflectionUtils {
 
-	public static final ILogger logger = LoggerUtils.getLogger(ReflectionUtils.class);
+	public static final Logger logger = LoggerUtils.getLogger(ReflectionUtils.class);
 	
 	private ReflectionUtils() {
 		throw new UnsupportedOperationException("ReflectionUtils类无法实例化"); 

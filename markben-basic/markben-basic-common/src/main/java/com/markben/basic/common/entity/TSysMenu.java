@@ -1,16 +1,16 @@
 package com.markben.basic.common.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.markben.core.bean.AbstractBaseTreeEntity;
-import com.markben.core.bean.ITenantEntity;
+import com.markben.core.bean.AbstractSupportTreeEntity;
+import com.markben.multi.tenancy.entity.SupportTenantEntity;
 
 /**
  * 系统菜单实体类
  * @author 乌草坡
- * @since 1.0.0
+ * @since 0.0.1
  */
 @TableName(value = "t_sys_menu")
-public class TSysMenu extends AbstractBaseTreeEntity implements ITenantEntity {
+public class TSysMenu extends AbstractSupportTreeEntity implements SupportTenantEntity {
 
     private String tenantId;
 

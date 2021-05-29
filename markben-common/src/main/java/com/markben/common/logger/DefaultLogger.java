@@ -1,17 +1,15 @@
 package com.markben.common.logger;
 
-import org.slf4j.Logger;
-
 /**
  * 默认日志实现类
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
-public class DefaultLogger implements ILogger {
+public class DefaultLogger implements Logger {
 
-    private Logger logger;
+    private org.slf4j.Logger logger;
 
-    public DefaultLogger(Logger logger) {
+    public DefaultLogger(org.slf4j.Logger logger) {
         this.logger = logger;
     }
 

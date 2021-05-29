@@ -1,9 +1,8 @@
 package com.markben.common.config;
 
-import com.markben.common.logger.ILogger;
+import com.markben.common.logger.Logger;
 import com.markben.common.utils.LoggerUtils;
 import com.markben.common.utils.StringUtils;
-import org.slf4j.Logger;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,11 +10,11 @@ import java.util.regex.Pattern;
 /**
  * 配置抽象类
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 public abstract class AbstractConfig {
 
-	protected final ILogger logger;
+	protected final Logger logger;
 
 	public AbstractConfig() {
 	    logger = LoggerUtils.getLogger(getClass());

@@ -1,16 +1,14 @@
 package com.markben.basic.rest.helper;
 
-import com.markben.basic.common.entity.TSysDict;
+import com.markben.beans.entity.TSysDict;
 import com.markben.basic.rest.vo.dict.CreateDictRequest;
-import com.markben.basic.rest.vo.dict.UpdateDictRequest;
-import com.markben.common.utils.CollectionUtils;
 import com.markben.common.utils.StringUtils;
-import com.markben.rest.common.vo.IUpdateRequest;
+import com.markben.rest.common.vo.UpdateRequest;
 
 /**
  * 数据字典辅助类
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 public class DictHelper {
 
@@ -32,8 +30,8 @@ public class DictHelper {
         dict.setSortOrder(createRequest.getSortOrder());
         dict.setState(createRequest.getState());
 
-        if(createRequest instanceof IUpdateRequest) {
-            IUpdateRequest updateRequest = (IUpdateRequest) createRequest;
+        if(createRequest instanceof UpdateRequest) {
+            UpdateRequest updateRequest = (UpdateRequest) createRequest;
             dict.setId(updateRequest.getId());
         }
         return dict;

@@ -1,17 +1,17 @@
 package com.markben.common.utils;
 
-import com.markben.common.logger.ILogger;
+import com.markben.common.logger.Logger;
 
 import java.lang.reflect.Modifier;
 
 /**
  * 加载工具类
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 public class LoaderClassUtils {
 
-    private static final ILogger logger = LoggerUtils.getLogger(LoaderClassUtils.class);
+    private static final Logger logger = LoggerUtils.getLogger(LoaderClassUtils.class);
 
     /**
      * 判断指定的类是否能加载

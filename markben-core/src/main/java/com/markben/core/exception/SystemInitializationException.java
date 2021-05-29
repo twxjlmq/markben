@@ -1,8 +1,9 @@
 package com.markben.core.exception;
 
 /**
- * @autor 乌草坡 2020-09-02
- * @since 1.0
+ * 系统初始时的异常类
+ * @autor 乌草坡
+ * @since 0.0.1
  */
 public class SystemInitializationException extends RuntimeException {
 

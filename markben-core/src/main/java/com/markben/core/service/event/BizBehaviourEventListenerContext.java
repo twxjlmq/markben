@@ -1,6 +1,6 @@
 package com.markben.core.service.event;
 
-import com.markben.common.logger.ILogger;
+import com.markben.common.logger.Logger;
 import com.markben.common.utils.CollectionUtils;
 import com.markben.common.utils.LoggerUtils;
 import com.markben.core.context.MarkbenContextFactory;
@@ -11,15 +11,15 @@ import java.util.List;
 /**
  * 业务行为事件监听上下文
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 public class BizBehaviourEventListenerContext {
 
     private static BizBehaviourEventListenerContext instance = new BizBehaviourEventListenerContext();
     
-    private static final ILogger logger = LoggerUtils.getLogger(BizBehaviourEventListenerContext.class);
+    private static final Logger logger = LoggerUtils.getLogger(BizBehaviourEventListenerContext.class);
     
-    private static List<IBizBehaviourEvent> events;
+    private static List<BizBehaviourEvent> events;
     
     private BizBehaviourEventListenerContext() {
         
@@ -49,7 +49,7 @@ public class BizBehaviourEventListenerContext {
     public void trigger(BaseEnhanceMapper mapper, BizBehaviourType behaviourType, Object args) {
         LoggerUtils.debug(logger, "触发DAO事件, 事件类型为：[{}].", behaviourType.getText());
         if(CollectionUtils.isNotEmpty(events)) {
-            for(IBizBehaviourEvent event : events) {
+            for(BizBehaviourEvent event : events) {
                 event.event(mapper, behaviourType, args);
             }
         } else {
@@ -58,7 +58,7 @@ public class BizBehaviourEventListenerContext {
     }
 
     private void init() {
-        events = MarkbenContextFactory.finds(IBizBehaviourEvent.class);
+        events = MarkbenContextFactory.finds(BizBehaviourEvent.class);
     }
     
 }

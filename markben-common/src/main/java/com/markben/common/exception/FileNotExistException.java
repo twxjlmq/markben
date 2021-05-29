@@ -3,7 +3,7 @@ package com.markben.common.exception;
 /**
  * 文件不存在异常
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 public class FileNotExistException extends RuntimeException {
 

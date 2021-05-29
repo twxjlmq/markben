@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * 确认登录结果信息对象
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class ConfirmLoginResultVO {

@@ -10,8 +10,7 @@ import java.util.Random;
 
 /**
  * PBE安全编码组件
- * @version 1.0
- * @since 1.0
+ * @since 0.0.1
  */
 public class PBECoder extends Coder {
 	/**

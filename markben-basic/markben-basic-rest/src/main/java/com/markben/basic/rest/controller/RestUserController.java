@@ -1,17 +1,17 @@
 package com.markben.basic.rest.controller;
 
-import com.markben.basic.rest.service.ILoginService;
+import com.markben.basic.rest.service.LoginService;
 import com.markben.basic.rest.vo.user.ConfirmLoginRequest;
 import com.markben.basic.rest.vo.user.ConfirmLoginResultVO;
 import com.markben.basic.rest.vo.user.LoginRequest;
 import com.markben.basic.rest.vo.user.LoginResultVO;
-import com.markben.beans.bean.IUserInfo;
-import com.markben.beans.response.IResultResponse;
+import com.markben.beans.response.ResultResponse;
 import com.markben.common.utils.LoggerUtils;
 import com.markben.rest.common.controller.AbstractRestController;
 import com.markben.rest.common.helper.HttpRequestHelper;
 import com.markben.rest.common.helper.SecurityFilterHelper;
 import com.markben.rest.common.response.RestResultResponse;
+import com.markben.rest.org.bean.OrgUserInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -25,16 +25,16 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 用户REST接口控制器类
  * @author 乌草坡
- * @since 1.0.0
+ * @since 0.0.1
  */
 @RestController
 @RequestMapping("/rest/user")
 @Api(value = "用户接口", tags = {"用户接口"})
 public class RestUserController extends AbstractRestController {
 
-    private ILoginService loginService;
+    private LoginService loginService;
 
-    public RestUserController(ILoginService loginService) {
+    public RestUserController(LoginService loginService) {
         this.loginService = loginService;
     }
 
@@ -46,7 +46,7 @@ public class RestUserController extends AbstractRestController {
     @PostMapping(value = "/login", produces = PRODUCES_FORMAT)
     @ApiOperation(value = "登录接口", notes = "登录接口；注：调用登录接口之后需要再次调用“确认登录接口”后，才完成整个登录的过程。")
     @ApiImplicitParam(name ="loginRequest", value = "登录请求参数", required = true, dataType = "LoginRequest", dataTypeClass = LoginRequest.class)
-    public IResultResponse<LoginResultVO> login(@RequestBody LoginRequest loginRequest) {
+    public ResultResponse<LoginResultVO> login(@RequestBody LoginRequest loginRequest) {
         LoggerUtils.debug(getLogger(), "正在登录,请求的信息为--username:[{}]--password:[{}]--code:[{}].",
                 loginRequest.getUsername(), SecurityFilterHelper.filterPassword(loginRequest.getPassword()),
                 loginRequest.getCode());
@@ -62,15 +62,15 @@ public class RestUserController extends AbstractRestController {
      */
     @PostMapping(value = "/confirm/login", produces = PRODUCES_FORMAT)
     @ApiOperation(value = "确认登录接口", notes = "确认登录接口；注：需要先调用“登录接口”")
-    public IResultResponse<ConfirmLoginResultVO> confirmLogin(HttpServletRequest request, @RequestBody ConfirmLoginRequest confirmLoginRequest) {
+    public ResultResponse<ConfirmLoginResultVO> confirmLogin(HttpServletRequest request, @RequestBody ConfirmLoginRequest confirmLoginRequest) {
         super.checkRequestVO(confirmLoginRequest);
-        IResultResponse<ConfirmLoginResultVO> response = new RestResultResponse<>();
-        IResultResponse<IUserInfo> confirmResponse = loginService.confirmLogin(confirmLoginRequest.getUserId(), confirmLoginRequest.getTenantId(),
+        ResultResponse<ConfirmLoginResultVO> response = new RestResultResponse<>();
+        ResultResponse<OrgUserInfo> confirmResponse = loginService.confirmLogin(confirmLoginRequest.getUserId(), confirmLoginRequest.getTenantId(),
                 confirmLoginRequest.getDeptId(), confirmLoginRequest.getToken());
         response.setStatus(confirmResponse.getStatus());
         response.setMsg(confirmResponse.getMsg());
         if(SUCCESS == confirmResponse.getStatus()) {
-            IUserInfo userInfo = confirmResponse.getResult();
+            OrgUserInfo userInfo = confirmResponse.getResult();
             //用户信息放到session中
             HttpRequestHelper.setUserInfoToSession(request, userInfo);
 

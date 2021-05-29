@@ -7,7 +7,7 @@ import java.lang.annotation.*;
 /**
  * 值包含验证（整型）
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)

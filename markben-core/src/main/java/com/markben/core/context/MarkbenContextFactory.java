@@ -1,25 +1,25 @@
 package com.markben.core.context;
 
-import com.markben.core.config.IMarkbenConfiguration;
+import com.markben.core.config.MarkbenConfiguration;
 
 import java.util.List;
 
 /**
  * 框架上下文工厂类
  * @autor 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 public class MarkbenContextFactory {
 
-    private static IMarkbenContext context;
+    private static MarkbenContext context;
 
-    private static IMarkbenConfiguration configuration;
+    private static MarkbenConfiguration configuration;
 
     /**
      * 获取上下文
      * @return 返回上下文
      */
-    public static IMarkbenContext getContext() {
+    public static MarkbenContext getContext() {
         return context;
     }
 
@@ -27,7 +27,7 @@ public class MarkbenContextFactory {
      * 设置上下文
      * @param context
      */
-    public static void setContext(IMarkbenContext context) {
+    public static void setContext(MarkbenContext context) {
         MarkbenContextFactory.context = context;
     }
 
@@ -35,7 +35,7 @@ public class MarkbenContextFactory {
      * 获取配置实现对象
      * @return 返回配置实现对象
      */
-    public static IMarkbenConfiguration getConfiguration() {
+    public static MarkbenConfiguration getConfiguration() {
         return configuration;
     }
 
@@ -43,7 +43,7 @@ public class MarkbenContextFactory {
      * 设置配置对象
      * @param configuration 配置对象
      */
-    public static void setConfiguration(IMarkbenConfiguration configuration) {
+    public static void setConfiguration(MarkbenConfiguration configuration) {
         MarkbenContextFactory.configuration = configuration;
     }
 

@@ -2,6 +2,8 @@ package com.markben.basic.common.wrapper;
 
 import com.markben.basic.common.entity.*;
 import com.markben.basic.common.service.*;
+import com.markben.beans.entity.TSysUser;
+import com.markben.beans.service.UserService;
 import com.markben.common.utils.CollectionUtils;
 import com.markben.common.utils.StringUtils;
 import com.markben.core.context.MarkbenContextFactory;
@@ -14,7 +16,7 @@ import java.util.Optional;
  * 用于获取与它相关联的其他实体信息；
  * 如：用户信息、租户信息、部门信息等
  * @author 乌草坡
- * @since 1.0.0
+ * @since 0.0.1
  */
 public class TenantUserWrapper {
 
@@ -24,9 +26,9 @@ public class TenantUserWrapper {
 
     private TSysTenant tenant;
 
-    private List<TSysOrg> orgList;
+    private List<TSysDepartment> deptList;
 
-    private TSysOrg org;
+    private TSysDepartment dept;
 
     private List<TSysRole> roleList;
 
@@ -65,30 +67,30 @@ public class TenantUserWrapper {
      * 获取企业用户所在的部门列表（用户有可能在多个部门）
      * @return 返回部门实体列表
      */
-    public List<TSysOrg> getOrgList() {
-        if(CollectionUtils.isEmpty(this.orgList)) {
-            initOrgList();
+    public List<TSysDepartment> getDeptList() {
+        if(CollectionUtils.isEmpty(this.deptList)) {
+            initDeptList();
         }
-        return orgList;
+        return deptList;
     }
 
     /**
      * 获取企业用户所在的部门列表（用户有可能在多个部门）
      * @return 返回部门实体列表
      */
-    public TSysOrg getDepartment(String deptId) {
-        if(null != org) {
-            return org;
+    public TSysDepartment getDepartment(String deptId) {
+        if(null != dept) {
+            return dept;
         }
-        if(CollectionUtils.isNotEmpty(this.orgList)) {
-            Optional<TSysOrg> orgOptional = this.orgList.stream().filter(o -> deptId.equals(o.getId())).findFirst();
+        if(CollectionUtils.isNotEmpty(this.deptList)) {
+            Optional<TSysDepartment> orgOptional = this.deptList.stream().filter(o -> deptId.equals(o.getId())).findFirst();
             return orgOptional.orElse(null);
         }
-        IOrgTenantUserService orgTenantUserService = MarkbenContextFactory.find(IOrgTenantUserService.class);
-        if(null != orgTenantUserService) {
-            this.org = orgTenantUserService.getDepartment(deptId, getTenantUser().getId());
+        DeptTenantUserService deptTenantUserService = MarkbenContextFactory.find(DeptTenantUserService.class);
+        if(null != deptTenantUserService) {
+            deptTenantUserService.getDepartment(deptId, getTenantUser().getId()).ifPresent(dept -> this.dept = dept);
         }
-        return org;
+        return dept;
     }
 
     /**
@@ -103,28 +105,28 @@ public class TenantUserWrapper {
     }
 
     private void initUser() {
-        IUserService userService = MarkbenContextFactory.find(IUserService.class);
+        UserService userService = MarkbenContextFactory.find(UserService.class);
         if(null != userService) {
-            this.user = userService.find(getTenantUser().getUserId());
+            userService.find(getTenantUser().getUserId()).ifPresent(user -> this.user = user);
         }
     }
 
     private void initTenant() {
-        ITenantService tenantService = MarkbenContextFactory.find(ITenantService.class);
+        TenantService tenantService = MarkbenContextFactory.find(TenantService.class);
         if(null != tenantService) {
-            this.tenant = tenantService.find(getTenantUser().getTenantId());
+            tenantService.find(getTenantUser().getTenantId()).ifPresent(tenant -> this.tenant = tenant);
         }
     }
 
-    private void initOrgList() {
-        IOrgTenantUserService orgTenantUserService = MarkbenContextFactory.find(IOrgTenantUserService.class);
-        if(null != orgTenantUserService) {
-            this.orgList = orgTenantUserService.getDepartmentList(getTenantUser().getId());
+    private void initDeptList() {
+        DeptTenantUserService deptTenantUserService = MarkbenContextFactory.find(DeptTenantUserService.class);
+        if(null != deptTenantUserService) {
+            this.deptList = deptTenantUserService.getDepartmentList(getTenantUser().getId());
         }
     }
 
     private void initRoleList() {
-        IRoleTenantUserService roleTenantUserService = MarkbenContextFactory.find(IRoleTenantUserService.class);
+        RoleTenantUserService roleTenantUserService = MarkbenContextFactory.find(RoleTenantUserService.class);
         if(null != roleTenantUserService) {
             this.roleList = roleTenantUserService.getRoleListByTenantUserId(getTenantUser().getId());
         }

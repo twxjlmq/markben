@@ -1,12 +1,12 @@
 package com.markben.core.spring;
 
-import com.markben.common.logger.ILogger;
+import com.markben.common.logger.Logger;
 import com.markben.common.utils.LoggerUtils;
 import com.markben.core.config.DefaultMarkbenConfiguration;
-import com.markben.core.config.IMarkbenConfiguration;
-import com.markben.core.context.IMarkbenContextAware;
+import com.markben.core.config.MarkbenConfiguration;
+import com.markben.core.context.MarkbenContextAware;
 import com.markben.core.context.MarkbenContextFactory;
-import com.markben.core.initialization.IMarkbenInitializeListener;
+import com.markben.core.initialization.MarkbenInitializeListener;
 import com.markben.core.initialization.MarkbenInitializationImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
@@ -16,12 +16,12 @@ import org.springframework.stereotype.Component;
 /**
  * Spring初始化结束后执行该类中的方法
  * @autor 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 @Component
 public class SpringInitializationCompleteListener implements ApplicationListener<ContextRefreshedEvent> {
 
-    private static final ILogger logger = LoggerUtils.getLogger(SpringInitializationCompleteListener.class);
+    private static final Logger logger = LoggerUtils.getLogger(SpringInitializationCompleteListener.class);
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -31,18 +31,18 @@ public class SpringInitializationCompleteListener implements ApplicationListener
             SpringMarkbenContext markbenContext = new SpringMarkbenContext(context);
             MarkbenContextFactory.setContext(markbenContext);
             //判断有没有配置实现类
-            IMarkbenConfiguration configuration = MarkbenContextFactory.find(IMarkbenConfiguration.class);
+            MarkbenConfiguration configuration = MarkbenContextFactory.find(MarkbenConfiguration.class);
             if(null == configuration) {
                 configuration = new DefaultMarkbenConfiguration(markbenContext);
                 markbenContext.put(configuration);
             } else {
-                if(configuration instanceof IMarkbenContextAware) {
-                    IMarkbenContextAware contextAware = (IMarkbenContextAware)configuration;
+                if(configuration instanceof MarkbenContextAware) {
+                    MarkbenContextAware contextAware = (MarkbenContextAware)configuration;
                     contextAware.setContext(markbenContext);
                 }
             }
-            if(configuration instanceof IMarkbenInitializeListener) {
-                ((IMarkbenInitializeListener) configuration).initialize();
+            if(configuration instanceof MarkbenInitializeListener) {
+                ((MarkbenInitializeListener) configuration).initialize();
             }
             MarkbenContextFactory.setConfiguration(configuration);
             new MarkbenInitializationImpl().init();

@@ -8,8 +8,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
+ * 整型数据类型范围验证器
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 public class IntValueContainValidator implements ConstraintValidator<IntValueContain, Integer> {
 

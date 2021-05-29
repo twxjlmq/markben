@@ -1,14 +1,14 @@
 package com.markben.core.service.event;
 
-import com.markben.common.logger.ILogger;
+import com.markben.common.logger.Logger;
 import com.markben.common.utils.CollectionUtils;
 import com.markben.common.utils.LoggerUtils;
-import com.markben.core.callback.ICallbackAware;
-import com.markben.core.callback.IDeleteCallbackAware;
-import com.markben.core.callback.ISaveCallbackAware;
-import com.markben.core.callback.IUpdateCallbackAware;
+import com.markben.core.callback.CallbackAware;
+import com.markben.core.callback.DeleteCallbackAware;
+import com.markben.core.callback.SaveCallbackAware;
+import com.markben.core.callback.UpdateCallbackAware;
 import com.markben.core.context.MarkbenContextFactory;
-import com.markben.core.initialization.IMarkbenInitializeListener;
+import com.markben.core.initialization.MarkbenInitializeListener;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.ParameterizedType;
@@ -18,35 +18,35 @@ import java.util.*;
 /**
  * 业务行为回调事件类
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 @Component
-public class BizBehaviourCallbackEvent implements IBizBehaviourEvent, IMarkbenInitializeListener {
+public class BizBehaviourCallbackEvent implements BizBehaviourEvent, MarkbenInitializeListener {
 
-    private static final ILogger logger = LoggerUtils.getLogger(BizBehaviourCallbackEvent.class);
+    private static final Logger logger = LoggerUtils.getLogger(BizBehaviourCallbackEvent.class);
     
     @SuppressWarnings("rawtypes")
-    private List<ICallbackAware> callbacks;
+    private List<CallbackAware> callbacks;
     
     //用来存放回调实现类
     @SuppressWarnings("rawtypes")
-    private Map<BizBehaviourType, Map<String, List<ICallbackAware>>> callbackMap = new HashMap<BizBehaviourType, Map<String, List<ICallbackAware>>>();
+    private Map<BizBehaviourType, Map<String, List<CallbackAware>>> callbackMap = new HashMap<BizBehaviourType, Map<String, List<CallbackAware>>>();
     //回调泛型参数类型名称缓存
     private Map<String, CallbackTypeProperty> callbackTypePropCache = new HashMap<String, CallbackTypeProperty>();
     
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public void event(final Object target, final BizBehaviourType behaviourType, Object value) {
-        Map<String, List<ICallbackAware>> callbackAwareMap = callbackMap.get(behaviourType);
+        Map<String, List<CallbackAware>> callbackAwareMap = callbackMap.get(behaviourType);
         if(null != callbackAwareMap) {
             Type[] types = target.getClass().getGenericInterfaces();
             String targetMapperName = types[0].getTypeName();
-            List<ICallbackAware> callbackAwareList = callbackAwareMap.get(targetMapperName);
+            List<CallbackAware> callbackAwareList = callbackAwareMap.get(targetMapperName);
             if(CollectionUtils.isNotEmpty(callbackAwareList)) {
                 String targetEntityName = value.getClass().getTypeName();
                 callbackAwareList.parallelStream().forEach(callbackAware -> {
                     String valueTypeName = callbackTypePropCache.get(callbackAware.getClass().getName()).getValueTypeName();
-                    if((null == valueTypeName && callbackAware instanceof IDeleteCallbackAware) || (null != valueTypeName && valueTypeName.equals(targetEntityName))) {
+                    if((null == valueTypeName && callbackAware instanceof DeleteCallbackAware) || (null != valueTypeName && valueTypeName.equals(targetEntityName))) {
                         LoggerUtils.debug(logger, "正在执行[{}]的回调方法，实现类为：[{}].", behaviourType.getText(), callbackAware.getClass());
                         callbackAware.callback(target, value);
                     }
@@ -64,7 +64,7 @@ public class BizBehaviourCallbackEvent implements IBizBehaviourEvent, IMarkbenIn
     @Override
     public void initialize() {
         LoggerUtils.debug(logger, "正在初始化业务回调事件的注册...");
-        callbacks = MarkbenContextFactory.finds(ICallbackAware.class);
+        callbacks = MarkbenContextFactory.finds(CallbackAware.class);
         int num = 0;
         if(CollectionUtils.isNotEmpty(callbacks)) {
             num = callbacks.size();
@@ -78,15 +78,15 @@ public class BizBehaviourCallbackEvent implements IBizBehaviourEvent, IMarkbenIn
      */
     @SuppressWarnings("rawtypes")
     private void handleClassifyCallback() {
-        Set<ICallbackAware> removeList = new HashSet<>();
-        for(ICallbackAware callbackAware : callbacks) {
-            if(callbackAware instanceof ISaveCallbackAware) {
+        Set<CallbackAware> removeList = new HashSet<>();
+        for(CallbackAware callbackAware : callbacks) {
+            if(callbackAware instanceof SaveCallbackAware) {
                 addClassifyCallback(BizBehaviourType.SAVE, removeList, callbackAware);
             }
-            if(callbackAware instanceof IUpdateCallbackAware) {
+            if(callbackAware instanceof UpdateCallbackAware) {
                 addClassifyCallback(BizBehaviourType.UPDATE, removeList, callbackAware);
             }
-            if(callbackAware instanceof IDeleteCallbackAware) {
+            if(callbackAware instanceof DeleteCallbackAware) {
                 addClassifyCallback(BizBehaviourType.DELETE, removeList, callbackAware);
             }
         }
@@ -102,8 +102,8 @@ public class BizBehaviourCallbackEvent implements IBizBehaviourEvent, IMarkbenIn
      * @param callbackAware
      */
     @SuppressWarnings("rawtypes")
-    private void addClassifyCallback(BizBehaviourType type, Set<ICallbackAware> removeList, ICallbackAware callbackAware) {
-        Map<String, List<ICallbackAware>> classifyCallbackMap =  callbackMap.get(type);
+    private void addClassifyCallback(BizBehaviourType type, Set<CallbackAware> removeList, CallbackAware callbackAware) {
+        Map<String, List<CallbackAware>> classifyCallbackMap =  callbackMap.get(type);
         if(null == classifyCallbackMap) {
             classifyCallbackMap = new HashMap<>();
             callbackMap.put(type, classifyCallbackMap);
@@ -115,7 +115,7 @@ public class BizBehaviourCallbackEvent implements IBizBehaviourEvent, IMarkbenIn
             valueTypeName = types[1].getTypeName();
         }
         callbackTypePropCache.put(callbackAware.getClass().getName(), new CallbackTypeProperty(mapperName, valueTypeName));
-        List<ICallbackAware> callbackList = classifyCallbackMap.get(mapperName);
+        List<CallbackAware> callbackList = classifyCallbackMap.get(mapperName);
         if(CollectionUtils.isEmpty(callbackList)) {
             callbackList = new ArrayList<>();
             classifyCallbackMap.put(mapperName, callbackList);

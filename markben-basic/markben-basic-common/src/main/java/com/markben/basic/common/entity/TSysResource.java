@@ -2,16 +2,17 @@ package com.markben.basic.common.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.markben.common.enums.YesOrNoType;
-import com.markben.core.bean.AbstractBaseTreeEntity;
-import com.markben.core.bean.ICreatorEntity;
+import com.markben.core.bean.AbstractSupportTreeEntity;
+import com.markben.core.bean.SupportCreatorEntity;
+import com.markben.multi.tenancy.entity.SupportTenantEntity;
 
 /**
  * 系统资源实体类
  * @author 乌草坡
- * @since 1.0.0
+ * @since 0.0.1
  */
 @TableName(value = "t_sys_resource")
-public class TSysResource extends AbstractBaseTreeEntity implements ICreatorEntity {
+public class TSysResource extends AbstractSupportTreeEntity implements SupportTenantEntity, SupportCreatorEntity {
 
     private String tenantId;
 
@@ -46,7 +47,7 @@ public class TSysResource extends AbstractBaseTreeEntity implements ICreatorEnti
      * 该直为{@link TSysTenantUser}实体类中的ID值，
      * 通过该字段与{@link TSysTenantUser}数据表关联
      */
-    private String tenantUserId;
+    private String creator;
 
     @Override
     public String getTenantId() {
@@ -94,13 +95,13 @@ public class TSysResource extends AbstractBaseTreeEntity implements ICreatorEnti
     }
 
     @Override
-    public String getTenantUserId() {
-        return tenantUserId;
+    public String getCreator() {
+        return creator;
     }
 
     @Override
-    public void setTenantUserId(String tenantUserId) {
-        this.tenantUserId = tenantUserId;
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 
     public String getFunType() {

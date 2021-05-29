@@ -2,18 +2,18 @@ package com.markben.common.helper;
 
 import com.markben.common.config.SystemConfig;
 import com.markben.common.constant.MarkbenConstant;
-import com.markben.common.logger.ILogger;
+import com.markben.common.logger.Logger;
 import com.markben.common.utils.LoggerUtils;
 import com.markben.common.utils.StringUtils;
 
 /**
  * 分页助手类
  * @author 乌草坡
- * @version 1.0
+ * @version 0.0.1
  */
 public class PageHelper {
 
-    protected static final ILogger logger = LoggerUtils.getLogger(PageHelper.class);
+    protected static final Logger logger = LoggerUtils.getLogger(PageHelper.class);
 	
     /**
      * 获取每页显示数量

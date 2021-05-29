@@ -1,19 +1,20 @@
 package com.markben.basic.common.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.markben.beans.entity.TSysUser;
 import com.markben.common.enums.YesOrNoType;
-import com.markben.core.bean.AbstractTenantEntity;
-import com.markben.core.bean.IPKPrefix;
+import com.markben.multi.tenancy.entity.AbstractSupportTenantEntity;
+import com.markben.core.bean.PKPrefix;
 
 import java.util.Date;
 
 /**
  * 租户用户实体类
  * @autor 乌草坡
- * @since 1.0.0
+ * @since 0.0.1
  */
 @TableName(value = "t_sys_tenant_user")
-public class TSysTenantUser extends AbstractTenantEntity implements IPKPrefix {
+public class TSysTenantUser extends AbstractSupportTenantEntity implements PKPrefix {
 
     public static final String PREFIX = "tu";
 
