@@ -16,9 +16,9 @@ import org.ehcache.config.builders.ResourcePoolsBuilder;
 import java.time.Duration;
 
 /**
- * ehcache缓存管理
+ * EhCache缓存管理
  * @author 乌草坡
- * @since 1.0
+ * @since 0.0.1
  */
 public class EhCacheManager implements ICacheManager {
 
@@ -26,10 +26,9 @@ public class EhCacheManager implements ICacheManager {
     
     public EhCacheManager() {
         cacheManager = CacheManagerBuilder.newCacheManagerBuilder() 
-                .withCache("preConfigured",
-                    CacheConfigurationBuilder.newCacheConfigurationBuilder(Object.class, Object.class, ResourcePoolsBuilder.heap(1)))
+                .withCache("preConfigured", CacheConfigurationBuilder.newCacheConfigurationBuilder(Object.class, Object.class, ResourcePoolsBuilder.heap(1)))
                 .build(); 
-                cacheManager.init();
+        cacheManager.init();
     }
 
     @Override
@@ -45,7 +44,7 @@ public class EhCacheManager implements ICacheManager {
         }
         Cache<Object, Object> cache = cacheManager.getCache(name, Object.class, Object.class);
         if(null == cache){
-            CacheConfigurationBuilder<Object, Object> cacheCfgBuilder = CacheConfigurationBuilder.newCacheConfigurationBuilder(Object.class, Object.class, ResourcePoolsBuilder.heap(100));
+            CacheConfigurationBuilder<Object, Object> cacheCfgBuilder = CacheConfigurationBuilder.newCacheConfigurationBuilder(Object.class, Object.class, ResourcePoolsBuilder.heap(2000));
             CacheConfiguration<Object, Object> cacheConfiguration = null;
             if(null != expiry) {
                 cacheConfiguration = cacheCfgBuilder.withExpiry(ExpiryPolicyBuilder.timeToLiveExpiration(Duration.ofMillis(expiry))).build();
@@ -55,7 +54,7 @@ public class EhCacheManager implements ICacheManager {
                 cache = cacheManager.createCache(name, cacheConfiguration);
             }
         }
-        Ehcache ehCache = new Ehcache<Object, Object>(cache);
+        Ehcache ehCache = new Ehcache<>(cache);
         return ehCache;
     }
 
