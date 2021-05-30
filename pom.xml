@@ -15,6 +15,7 @@
         <module>markben-rest</module>
         <module>markben-basic</module>
         <module>markben-organization</module>
+        <module>markben-rest-server</module>
     </modules>
 
     <packaging>pom</packaging>
