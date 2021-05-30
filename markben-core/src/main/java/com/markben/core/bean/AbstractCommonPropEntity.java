@@ -1,6 +1,6 @@
 package com.markben.core.bean;
 
-import com.markben.common.enums.YesOrNoType;
+import com.markben.common.enums.YesNoType;
 
 import java.util.Date;
 
@@ -18,7 +18,7 @@ public abstract class AbstractCommonPropEntity extends AbstractBaseEntity implem
      * 1--有效;
      * 0--无效
      */
-    private Integer state = YesOrNoType.YES.getIndex();
+    private Integer state = YesNoType.YES.getIndex();
 
     public Date getCreateTime() {
         return createTime;

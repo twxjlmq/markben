@@ -8,7 +8,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @author 乌草坡
  * @since 0.0.1
  */
-public abstract class AbstractTreeVO implements SupportTreeEntity<String> {
+public abstract class AbstractTreeVO implements SupportTreeEntity<String>, BaseVO {
 
     @ApiModelProperty(value = "ID")
     private String id;

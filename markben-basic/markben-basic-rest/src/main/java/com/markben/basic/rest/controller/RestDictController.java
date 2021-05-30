@@ -1,20 +1,21 @@
 package com.markben.basic.rest.controller;
 
-import com.markben.beans.entity.TSysDict;
-import com.markben.beans.service.DictService;
-import com.markben.basic.rest.helper.DictHelper;
-import com.markben.basic.rest.vo.dict.CreateDictRequest;
-import com.markben.basic.rest.vo.dict.DictDetailVO;
-import com.markben.basic.rest.vo.dict.DictItemVO;
-import com.markben.basic.rest.vo.dict.UpdateDictRequest;
+import com.markben.basic.rest.entity.TSysDict;
 import com.markben.beans.response.BaseResponse;
 import com.markben.beans.response.CollectionResponse;
 import com.markben.beans.response.ResultResponse;
+import com.markben.basic.rest.service.DictService;
 import com.markben.common.utils.CollectionUtils;
+import com.markben.rest.common.controller.AbstractRestController;
+import com.markben.basic.rest.helper.DictHelper;
 import com.markben.rest.common.response.RestCollectionResponse;
 import com.markben.rest.common.response.RestResultResponse;
 import com.markben.rest.common.vo.IdRequest;
 import com.markben.rest.common.vo.LabelValueVO;
+import com.markben.basic.rest.vo.dict.CreateDictRequest;
+import com.markben.basic.rest.vo.dict.DictDetailVO;
+import com.markben.basic.rest.vo.dict.DictItemVO;
+import com.markben.basic.rest.vo.dict.UpdateDictRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -35,7 +36,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/rest/dict")
 @Api(value = "数据字典接口", tags = {"数据字典接口"})
-public class RestDictController extends AbstractBasicRestController {
+public class RestDictController extends AbstractRestController {
 
     private DictService dictService;
 

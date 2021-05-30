@@ -1,7 +1,7 @@
 package com.markben.core.callback;
 
 import com.markben.core.bean.EntityBean;
-import com.markben.core.mapper.BaseEnhanceMapper;
+import com.markben.core.dao.BaseDao;
 
 /**
  * 保存回调接口；实现该接口的实现类，当有实体对象被保存时，触发该接口的callback方法
@@ -10,7 +10,7 @@ import com.markben.core.mapper.BaseEnhanceMapper;
  * @param <T>
  * @param <V>
  */
-public interface SaveCallbackAware<T extends BaseEnhanceMapper, V extends EntityBean> extends CallbackAware<T, V> {
+public interface SaveCallbackAware<T extends BaseDao, V extends EntityBean> extends CallbackAware<T, V> {
 
     
 }

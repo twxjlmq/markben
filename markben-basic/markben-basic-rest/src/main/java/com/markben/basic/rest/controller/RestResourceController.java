@@ -1,14 +1,15 @@
 package com.markben.basic.rest.controller;
 
-import com.markben.basic.common.entity.TSysResource;
-import com.markben.basic.common.service.ResourceService;
+import com.markben.basic.rest.entity.TSysResource;
+import com.markben.basic.rest.service.ResourceService;
+import com.markben.basic.rest.vo.CreateResourceRequest;
+import com.markben.basic.rest.vo.UpdateResourceRequest;
 import com.markben.basic.rest.vo.dict.DictDetailVO;
 import com.markben.basic.rest.vo.dict.DictItemVO;
-import com.markben.basic.rest.vo.resource.CreateResourceRequest;
-import com.markben.basic.rest.vo.resource.UpdateResourceRequest;
 import com.markben.beans.response.BaseResponse;
 import com.markben.beans.response.CollectionResponse;
 import com.markben.beans.response.ResultResponse;
+import com.markben.rest.common.controller.AbstractRestController;
 import com.markben.rest.common.response.RestBaseResponse;
 import com.markben.rest.common.response.RestCollectionResponse;
 import com.markben.rest.common.response.RestResultResponse;
@@ -29,7 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/rest/resource")
 @Api(value = "数据字典接口", tags = {"数据字典接口"})
-public class RestResourceController extends AbstractBasicRestController {
+public class RestResourceController extends AbstractRestController {
 
     private ResourceService resourceService;
 

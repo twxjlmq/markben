@@ -4,7 +4,7 @@ import com.markben.common.logger.Logger;
 import com.markben.common.utils.CollectionUtils;
 import com.markben.common.utils.LoggerUtils;
 import com.markben.core.context.MarkbenContextFactory;
-import com.markben.core.mapper.BaseEnhanceMapper;
+import com.markben.core.dao.BaseDao;
 
 import java.util.List;
 
@@ -46,7 +46,7 @@ public class BizBehaviourEventListenerContext {
      * @param behaviourType Dao行为类型；详情请参考{@link BizBehaviourType}
      * @param args 参数（有可能是实体类，如：当<code>behaviourType</code>为：{@link BizBehaviourType#SAVE}时）
      */
-    public void trigger(BaseEnhanceMapper mapper, BizBehaviourType behaviourType, Object args) {
+    public void trigger(BaseDao mapper, BizBehaviourType behaviourType, Object args) {
         LoggerUtils.debug(logger, "触发DAO事件, 事件类型为：[{}].", behaviourType.getText());
         if(CollectionUtils.isNotEmpty(events)) {
             for(BizBehaviourEvent event : events) {

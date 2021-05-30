@@ -4,13 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
-import com.markben.common.enums.YesOrNoType;
+import com.markben.common.enums.YesNoType;
 import com.markben.common.logger.Logger;
 import com.markben.common.utils.CollectionUtils;
 import com.markben.common.utils.LoggerUtils;
 import com.markben.common.utils.StringUtils;
 import com.markben.core.bean.*;
-import com.markben.core.mapper.BaseEnhanceMapper;
+import com.markben.core.dao.BaseDao;
 import com.markben.core.service.event.BizBehaviourEventListenerContext;
 import com.markben.core.service.event.BizBehaviourType;
 import com.markben.core.utils.EntityUtils;
@@ -26,19 +26,19 @@ import java.util.stream.Collectors;
  * @autor 乌草坡
  * @since 0.0.1
  */
-public class EnhanceServiceImpl<T extends EntityBean> extends ServiceImpl<BaseEnhanceMapper<T>, T> implements MgrService<T> {
+public class EnhanceServiceImpl<T extends EntityBean> extends ServiceImpl<BaseDao<T>, T> implements MgrService<T> {
 
     private Logger logger;
 
     @Autowired
-    private BaseEnhanceMapper<T> baseMapper;
+    private BaseDao<T> baseMapper;
 
     public EnhanceServiceImpl() {
         logger = LoggerUtils.getLogger(getClass());
     }
 
     @Override
-    public BaseEnhanceMapper<T> getBaseMapper() {
+    public BaseDao<T> getBaseMapper() {
         return baseMapper;
     }
 
@@ -74,7 +74,7 @@ public class EnhanceServiceImpl<T extends EntityBean> extends ServiceImpl<BaseEn
         }
         QueryChainWrapper<T> queryWrapper = query().in("id", ids);
         if(SupportStateEntity.class.isAssignableFrom(entityClass)) {
-            queryWrapper.and(q -> q.eq("state", YesOrNoType.YES.getIndex()));
+            queryWrapper.and(q -> q.eq("state", YesNoType.YES.getIndex()));
         }
         return super.list(queryWrapper);
     }
@@ -276,6 +276,15 @@ public class EnhanceServiceImpl<T extends EntityBean> extends ServiceImpl<BaseEn
         if(null == t) {
             return false;
         }
+        //处理逻辑删除
+        if(t instanceof SupportLogicalDelete) {
+            SupportLogicalDelete logicalDelete = (SupportLogicalDelete) t;
+            logicalDelete.setIsDelete(YesNoType.YES.getIndex());
+            handleUpdateTimeEntity(t);
+            super.updateById(t);
+            triggerBehaviourEvent(BizBehaviourType.DELETE, t);
+            return true;
+        }
         Serializable id = null;
         if(t instanceof PKEntityBean) {
             id = ((PKEntityBean)t).getId();
@@ -292,8 +301,20 @@ public class EnhanceServiceImpl<T extends EntityBean> extends ServiceImpl<BaseEn
         if(CollectionUtils.isEmpty(ts)) {
             return false;
         }
+        T entity = ts.iterator().next();
+        //处理逻辑删除
+        if(entity instanceof SupportLogicalDelete) {
+            ts.forEach(t -> {
+                SupportLogicalDelete logicalDelete = (SupportLogicalDelete) t;
+                logicalDelete.setIsDelete(YesNoType.YES.getIndex());
+                handleUpdateTimeEntity(t);
+            });
+            super.updateBatchById(ts);
+            triggerBehaviourEvent(BizBehaviourType.DELETE, ts);
+            return true;
+        }
         Set<Serializable> ids = ts.stream().filter(t -> t instanceof PKEntityBean)
-                .map(bean -> ((PKEntityBean) bean).getId()).collect(Collectors.toSet());
+                    .map(bean -> ((PKEntityBean) bean).getId()).collect(Collectors.toSet());
         return removeByIds(ids);
     }
 

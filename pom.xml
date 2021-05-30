@@ -6,7 +6,7 @@
 
     <groupId>com.markben</groupId>
     <artifactId>markben</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>markben-common</module>
         <module>markben-cache</module>
@@ -14,11 +14,6 @@
         <module>markben-beans</module>
         <module>markben-rest</module>
         <module>markben-basic</module>
-        <module>markben-form</module>
-        <module>markben-flow</module>
-        <module>markben-cms</module>
-        <module>markben-report</module>
-        <module>markben-multi-tenancy</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -37,12 +32,11 @@
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
 
         <slf4j.version>1.7.30</slf4j.version>
-        <log4j2.version>2.13.3</log4j2.version>
+        <log4j2.version>2.14.1</log4j2.version>
 
-        <junit.version>4.13</junit.version>
-        <ehcache.version>3.9.2</ehcache.version>
-        <fastjson.version>1.2.75</fastjson.version>
-        <jackson.version>2.12.1</jackson.version>
+        <junit.version>4.13.2</junit.version>
+        <ehcache.version>3.9.4</ehcache.version>
+        <jackson.version>2.12.3</jackson.version>
         <jackson-bom.version>${jackson.version}</jackson-bom.version>
         <javax.servlet.api.version>4.0.1</javax.servlet.api.version>
 
@@ -54,14 +48,14 @@
         <markben.version>${project.version}</markben.version>
 
         <!-- plugins -->
-        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
-        <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
-        <maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
-        <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
+        <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
+        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
-        <maven-war-plugin.version>3.2.2</maven-war-plugin.version>
-        <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
-        <maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
+        <maven-war-plugin.version>3.3.1</maven-war-plugin.version>
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <maven-javadoc-plugin.version>3.3.0</maven-javadoc-plugin.version>
 
         <swagger.version>3.0.0</swagger.version>
     </properties>
@@ -69,7 +63,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.3</version>
+        <version>2.5.0</version>
     </parent>
 
     <build>
@@ -107,6 +101,7 @@
                 <artifactId>commons-beanutils</artifactId>
                 <version>${commons-beanutils.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
@@ -219,19 +214,6 @@
                 <version>${jackson.version}</version>
             </dependency>
 
-            <!--
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger2</artifactId>
-                <version>${swagger.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger-ui</artifactId>
-                <version>${swagger.version}</version>
-            </dependency>
-            -->
-
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-boot-starter</artifactId>
@@ -241,18 +223,13 @@
             <!-- markben依赖定义 -->
             <dependency>
                 <groupId>com.markben</groupId>
-                <artifactId>markben-common</artifactId>
-                <version>${markben.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.markben</groupId>
-                <artifactId>markben-core</artifactId>
+                <artifactId>markben-common-utils</artifactId>
                 <version>${markben.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.markben</groupId>
-                <artifactId>markben-multi-tenancy</artifactId>
+                <artifactId>markben-core</artifactId>
                 <version>${markben.version}</version>
             </dependency>
 
@@ -287,15 +264,10 @@
 
             <dependency>
                 <groupId>com.markben</groupId>
-                <artifactId>markben-rest-organization</artifactId>
+                <artifactId>markben-basic-rest</artifactId>
                 <version>${markben.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.markben</groupId>
-                <artifactId>markben-basic-common</artifactId>
-                <version>${markben.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 

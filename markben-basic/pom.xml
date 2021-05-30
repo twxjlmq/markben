@@ -5,16 +5,14 @@
     <parent>
         <artifactId>markben</artifactId>
         <groupId>com.markben</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>markben-basic</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>markben-basic-common</module>
         <module>markben-basic-rest</module>
     </modules>
-
 
 </project>

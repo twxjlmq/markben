@@ -1,9 +1,9 @@
 package com.markben.basic.rest.helper;
 
-import com.markben.beans.entity.TSysDict;
-import com.markben.basic.rest.vo.dict.CreateDictRequest;
+import com.markben.basic.rest.entity.TSysDict;
 import com.markben.common.utils.StringUtils;
 import com.markben.rest.common.vo.UpdateRequest;
+import com.markben.basic.rest.vo.dict.CreateDictRequest;
 
 /**
  * 数据字典辅助类
