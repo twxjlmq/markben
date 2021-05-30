@@ -25,7 +25,7 @@ public class TSysDepartment extends AbstractSupportTreeEntity {
     private String seqParentId;
 
     /**
-     * 名称序列;如: xxx有限公司>软件部>产品组
+     * 名称序列;如: 软件部>产品组
      */
     private String seqName;
 
