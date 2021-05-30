@@ -12,6 +12,7 @@ import java.util.Collection;
 /**
  * REST接口集合响应对象
  * @author 乌草坡
+ * @param <T> data属性的类型
  * @since 0.0.1
  */
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)

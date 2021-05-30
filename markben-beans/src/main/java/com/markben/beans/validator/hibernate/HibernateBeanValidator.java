@@ -29,7 +29,7 @@ public class HibernateBeanValidator implements BeanValidator {
 
     /**
      * 验证参数
-     * @param obj
+     * @param obj 需要验证的对象
      */
     public void validate(Checkable obj) {
         if(null == obj) {

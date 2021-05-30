@@ -24,10 +24,10 @@ public class ControllerExceptionHandler {
     
     /**
      * 处理未登录异常信息
-     * @param request
-     * @param response
-     * @param e
-     * @return
+     * @param request HTTP请求对象
+     * @param response HTTP响应对象
+     * @param e 异常对象
+     * @return 返回异常处理结果
      */
     @ExceptionHandler(value = NotLoginException.class)
     public BaseResponse unLoginErrorHandler(HttpServletRequest request, HttpServletResponse response , NotLoginException e) {

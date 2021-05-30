@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 /**
  * 增强服务实现类
- * @autor 乌草坡
+ * @author 乌草坡
  * @since 0.0.1
  */
 public class EnhanceServiceImpl<T extends EntityBean> extends ServiceImpl<BaseDao<T>, T> implements MgrService<T> {

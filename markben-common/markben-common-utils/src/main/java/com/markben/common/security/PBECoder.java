@@ -27,11 +27,9 @@ public class PBECoder extends Coder {
   
     /**
      * 盐初始化
-     * 
      * @return 返回字节数组
-     * @throws Exception
      */
-    public static byte[] initSalt() throws Exception {
+    public static byte[] initSalt() {
         byte[] salt = new byte[8];
         Random random = new Random();
         random.nextBytes(salt);
@@ -39,17 +37,15 @@ public class PBECoder extends Coder {
     }
   
     /**
-     * 转换密钥<br>
-     * 
-     * @param password
+     * 转换密钥
+     * @param password 密码
      * @return 返回key
-     * @throws Exception
+     * @throws Exception 没有找到算法或key初始化失败时抛出该异常
      */
     private static Key toKey(String password) throws Exception {
         PBEKeySpec keySpec = new PBEKeySpec(password.toCharArray());
         SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(ALGORITHM);
         SecretKey secretKey = keyFactory.generateSecret(keySpec);
-  
         return secretKey;
     }
   
@@ -60,7 +56,7 @@ public class PBECoder extends Coder {
      * @param password 密码
      * @param salt  盐
      * @return 返回字节数组
-     * @throws Exception
+     * @throws Exception 没有找到算法或key初始化失败时抛出该异常
      */
     public static byte[] encrypt(byte[] data, String password, byte[] salt) throws Exception {
         Key key = toKey(password);
@@ -77,7 +73,7 @@ public class PBECoder extends Coder {
      * @param password 密码
      * @param salt  盐
      * @return 返回字节数组
-     * @throws Exception
+     * @throws Exception 没有找到算法或key初始化失败时抛出该异常
      */
     public static byte[] decrypt(byte[] data, String password, byte[] salt) throws Exception {
         Key key = toKey(password);

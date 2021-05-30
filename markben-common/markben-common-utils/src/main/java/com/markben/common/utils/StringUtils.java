@@ -3,6 +3,8 @@ package com.markben.common.utils;
 import com.markben.common.constant.MarkbenConstant;
 import com.markben.common.exception.NullArgumentException;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -112,15 +114,15 @@ public class StringUtils {
 	
 	/**
 	 * 判断值是否相等
-	 * @param value1
-	 * @param value2
+	 * @param value1 第一个值
+	 * @param value2 第二个值
 	 * @return 相等返回：true；否则返回：false
 	 */
 	public static boolean isEquals(Object value1, Object value2) {
 		boolean is = false;
-		if(null != value1 && null != value1) {
+		if(null != value1 && null != value2) {
 			is = value1.toString().equals(value2.toString());
-		} else if(null == value1 && null == value1) {
+		} else if(null == value1 && null == value2) {
 			is = true;
 		}
 		return is;
@@ -128,8 +130,8 @@ public class StringUtils {
 	
 	/**
 	 * 判断值是否不相等
-	 * @param value1
-	 * @param value2
+	 * @param value1 第一个值
+	 * @param value2 第二个值
 	 * @return 相等返回：true；否则返回：false
 	 */
 	public static boolean isNotEquals(Object value1, Object value2) {
@@ -138,15 +140,15 @@ public class StringUtils {
 	
 	/**
 	 * 判断值是否相等（不区分大小写）
-	 * @param value1
-	 * @param value2
+	 * @param value1 第一个值
+	 * @param value2 第二个值
 	 * @return 相等返回：true；否则返回：false
 	 */
 	public static boolean isEqualsIgnoreCase(Object value1, Object value2) {
 		boolean is = false;
-		if(null != value1 && null != value1) {
+		if(null != value1 && null != value2) {
 			is = value1.toString().equalsIgnoreCase(value2.toString());
-		} else if(null == value1 && null == value1) {
+		} else if(null == value1 && null == value2) {
 			is = true;
 		}
 		return is;
@@ -154,8 +156,8 @@ public class StringUtils {
 	
 	/**
 	 * 判断值是否不相等（不区分大小写）
-	 * @param value1
-	 * @param value2
+	 * @param value1 第一个值
+	 * @param value2 第二个值
 	 * @return 相等返回：true；否则返回：false
 	 */
 	public static boolean isNotEqualsIgnoreCase(Object value1, Object value2) {
@@ -164,7 +166,7 @@ public class StringUtils {
 	
 	/**
 	 * null转换为“”
-	 * @param obj
+	 * @param obj 需要处理的值
 	 * @return 返回处理后的结果
 	 */
 	public static String handleNull(Object obj) {
@@ -177,7 +179,7 @@ public class StringUtils {
 	
 	/**
 	 * 当值为null转化为“null”
-	 * @param obj
+	 * @param obj 需要处理的值
 	 * @return 返回处理后的结果
 	 */
 	public static String nullToStr(Object obj) {
@@ -190,7 +192,7 @@ public class StringUtils {
 	
 	/**
 	 * 对象转化为整型
-	 * @param obj
+	 * @param obj 需要处理的值
 	 * @return 返回转化结果
 	 */
 	public static Integer handleObj2Integer(Object obj) {
@@ -209,7 +211,7 @@ public class StringUtils {
 	
 	/**
 	 * 数字null转换为“0”
-	 * @param obj
+	 * @param obj 需要处理的值
 	 * @return 返回转化结果
 	 */
 	public static String handleNumNull(Object obj) {
@@ -222,7 +224,7 @@ public class StringUtils {
 	
 	/**
 	 * 判断是否为数字(包括小数)
-	 * @param value
+	 * @param value 需要处理的值
 	 * @return 数字返回：true；否则返回：false
 	 */
 	public static boolean isNum(String value) {
@@ -240,7 +242,7 @@ public class StringUtils {
 	
 	/**
 	 * 判断是否数字整数
-	 * @param value
+	 * @param value 需要处理的值
 	 * @return 是返回：true；否则返回：false
 	 */
 	public static boolean isInteger(String value) {
@@ -260,7 +262,7 @@ public class StringUtils {
 	
 	/**
 	 * 判断是否小数
-	 * @param value
+	 * @param value 需要处理的值
 	 * @return 是返回：true；否则返回：false
 	 */
 	public static boolean isDecimal(String value) {
@@ -330,7 +332,7 @@ public class StringUtils {
 	
 	/**
 	 * 获取文件后缀
-	 * @param fileName
+	 * @param fileName 文件名称
 	 * @return 返回文件后缀
 	 */
 	public static String getFileSuffix(String fileName) {
@@ -340,7 +342,7 @@ public class StringUtils {
 	
 	/**
 	 * 去掉文件后缀
-	 * @param fileName
+	 * @param fileName 文件名称
 	 * @return 返回文件后缀
 	 */
 	public static String trimFileSuffix(String fileName) {
@@ -350,8 +352,8 @@ public class StringUtils {
 	
 	/**
 	 * 大写字母直接用下划线分割，并把大写转换为小写；
-	 * 如:HelloWorld ===> hello_world
-	 * @param value
+	 * 如:HelloWorld 转换为： hello_world
+	 * @param value 需要转换的值
 	 * @return 返回处理结果
 	 */
 	public static String upperSeparateUnderline(String value) {
@@ -377,7 +379,7 @@ public class StringUtils {
 	
 	/**
 	 * 首字母转为大写
-	 * @param value
+	 * @param value 需要处理的值
 	 * @return 返回处理后的结果
 	 */
 	public static String firstToUppercase(String value) {
@@ -393,7 +395,7 @@ public class StringUtils {
 	
 	/**
 	 * 过滤HTML标签.
-	 * @param htmlContent
+	 * @param htmlContent 需要处理的值
 	 * @return 返回过滤后的结果
 	 */
 	public static String html2Text(String htmlContent) {
@@ -430,7 +432,7 @@ public class StringUtils {
 	
 	/**
 	 * 验证手机号码
-	 * @param phoneNo
+	 * @param phoneNo 手机号
 	 * @return 验证成功返回：true；否则返回：false
 	 */
 	public static boolean isPhoneNO(String phoneNo){
@@ -442,7 +444,7 @@ public class StringUtils {
 	
 	/**
 	 * 验证固定电话号码
-	 * @param tel
+	 * @param tel 需要验证的电话号码
 	 * @return 验证成功返回：true；否则返回：false
 	 */
 	public static boolean isFixedTelephone(String tel) {
@@ -454,7 +456,7 @@ public class StringUtils {
 	
 	/**
 	 * 验证匿名
-	 * @param anonymous
+	 * @param anonymous 匿名
 	 * @return 验证成功返回：true；否则返回：false
 	 */
 	public static boolean isAnonymous(String anonymous){
@@ -465,7 +467,7 @@ public class StringUtils {
 	
 	/**
 	 * 验证汉字
-	 * @param value
+	 * @param value 需要处理的值
 	 * @return 验证成功返回：true；否则返回：false
 	 */
 	public static boolean isChinese(String value){
@@ -477,7 +479,8 @@ public class StringUtils {
 	
 	/**
 	 * 验证正则表达式
-	 * @param value
+	 * @param value 需要处理的值
+	 * @param regex 正则表达式
 	 * @return 验证成功返回：true；否则返回：false
 	 */
 	public static boolean isCheckRegex(String value,String regex){
@@ -489,7 +492,7 @@ public class StringUtils {
 	
 	/**
 	 * 验证email
-	 * @param email
+	 * @param email 需要处理的值
 	 * @return 验证成功返回：true；否则返回：false
 	 */
 	public static boolean isEmail(String email) {
@@ -500,7 +503,7 @@ public class StringUtils {
 	
 	/**
 	 * 秒转化为:HH:mm:SS格式
-	 * @param second
+	 * @param second 秒数
 	 * @return 返回转化后的结果
 	 */
 	public static String secondToHHMMSS(long second){
@@ -526,7 +529,7 @@ public class StringUtils {
 	
 	/**
 	 * 过滤特殊字符
-	 * @param params
+	 * @param params 参数
 	 * @return 返回过滤后的结果
 	 */
 	public static String filterSQLParams(String params) {
@@ -552,8 +555,8 @@ public class StringUtils {
 
 	/**
 	 * 计算出文件大小
-	 * @param size
-	 * @return 返回处理后的结果;<br />
+	 * @param size 文件大小
+	 * @return 返回处理后的结果
 	 * 格式为："100 KB"或”100 M“或”100 G“
 	 */
 	public static String fileSize(long size) {
@@ -580,7 +583,7 @@ public class StringUtils {
 	
 	/**
 	 * 过滤目录结构(防止参数传递目录结构)
-	 * @param value
+	 * @param value 需要处理的值
 	 * @return 返回过滤后的结果
 	 */
 	public static String filterFilePath(String value) {
@@ -591,12 +594,12 @@ public class StringUtils {
 	}
 	
 	/**
-	 * 判断是否含有contain指定的值
-	 * @param value
-	 * @param contain
+	 * 判断是否含有<code>contain</code>指定的值
+	 * @param value 需要处理的值
+	 * @param contain 指定需要判断的值
 	 * @return 包含返回：true；否则返回：false
 	 */
-	public static boolean isContains(String value,String contain) {
+	public static boolean isContains(String value, String contain) {
 		boolean is = false;
 		if(!isEmpty(value) && null != contain) {
 			is = value.indexOf(contain)>-1?true:false;
@@ -607,7 +610,7 @@ public class StringUtils {
 	
 	/**
 	 * list转换为数组
-	 * @param values
+	 * @param values 需要处理的集合
 	 * @return 返回转化结果
 	 */
 	public static String[] list2Array(Collection<String> values) {
@@ -621,7 +624,7 @@ public class StringUtils {
 	
 	/**
 	 * 验证IP地址
-	 * @param ip
+	 * @param ip 需要处理的值
 	 * @return 验证成功返回：true；否则返回：false
 	 */
 	public static boolean checkIp(String ip) {
@@ -640,22 +643,23 @@ public class StringUtils {
 	
 	
 	/**
-	 * 集合转换为字符串，字符串之间用separater提供的参数分隔
-	 * @param values
-	 * @param separater
+	 * 集合转换为字符串，字符串之间用separator参数提供的参数分隔
+	 * @param values 需要处理的集合
+	 * @param separator 分隔符
+	 * @param <T> 集合类类型
 	 * @return 返回处理后的结果
 	 */
-	public static <T> String collection2String(Collection<T> values,String separater) {
+	public static <T> String collection2String(Collection<T> values,String separator) {
 	    StringBuilder strBuilder = null;
 		if(null != values && values.size()>0) {
 		    strBuilder = new StringBuilder();
-			if(StringUtils.isEmpty(separater)) {
-				separater = "";
+			if(StringUtils.isEmpty(separator)) {
+				separator = "";
 			}
 			for (T value : values) {
-			    strBuilder.append(StringUtils.handleNull(value) + separater);
+			    strBuilder.append(StringUtils.handleNull(value) + separator);
 			}
-			if(!StringUtils.isEmpty(separater)) {
+			if(!StringUtils.isEmpty(separator)) {
 			    strBuilder.delete(strBuilder.length()-1, strBuilder.length());
 			}
 		}
@@ -689,7 +693,7 @@ public class StringUtils {
 	
 	/**
 	 * 替换斜杠
-	 * @param value
+	 * @param value 需要处理的值
 	 * @return 返回处理后的结果
 	 */
 	public static String replaceSlash(String value) {
@@ -703,14 +707,14 @@ public class StringUtils {
 	/**
 	 * 字符串转换为list
 	 * @param value 要转换的字符串
-	 * @param separater 分隔符
+	 * @param separator 分隔符
 	 * @return 返回转换后的List
 	 */
-	public static List<String> string2List(String value, String separater) {
+	public static List<String> string2List(String value, String separator) {
 		List<String> lists = null;
 		if(isNotEmpty(value)) {
-			separater = isEmpty(separater)?",":separater;
-			String[] array = value.split(separater);
+			separator = isEmpty(separator) ? MarkbenConstant.MULTI_VALUE_SPLIT : separator;
+			String[] array = value.split(separator);
 			lists = Arrays.asList(array);
 		}
 		return lists;
@@ -719,14 +723,14 @@ public class StringUtils {
 	/**
      * 字符串转换为Set
      * @param value 要转换的字符串
-     * @param separater 分隔符
+     * @param separator 分隔符
      * @return 返回转换后的Set
      */
-    public static Set<String> string2Set(String value, String separater) {
+    public static Set<String> string2Set(String value, String separator) {
         Set<String> sets = null;
         if(isNotEmpty(value)) {
-            separater = isEmpty(separater) ? "," : separater;
-            String[] array = value.split(separater);
+			separator = isEmpty(separator) ? MarkbenConstant.MULTI_VALUE_SPLIT : separator;
+            String[] array = value.split(separator);
             sets = new HashSet<String>();
             sets.addAll(Arrays.asList(array));
         }
@@ -735,8 +739,8 @@ public class StringUtils {
 	
 	/**
 	 * 处理URL参数；
-	 * 判断 <code>url</code> 中是否有“?”；
-	 * 如果有则会在 <code>url</code> 后面加“&”，没有则加“?”
+	 * 判断 url 参数中是否有"?"；
+	 * 如果有则会在url参数后面加"&"，没有则加"?"
 	 * @param url URL字符串
 	 * @return 返回处理后的URL
 	 */
@@ -770,8 +774,8 @@ public class StringUtils {
 	
 	/**
 	 * 如果值为空“”转换为NULL
-	 * @param value
-	 * @return
+	 * @param value 需要处理的值
+	 * @return 返回处理后的值
 	 */
 	public static String empty2Null(String value) {
 	    return isEmpty(value) ? null : value;
@@ -795,7 +799,7 @@ public class StringUtils {
 
 	/**
 	 * 数组转化为字符串；
-	 * 如果<code>separate</code>为空，则采用默认值；默认值为：{@link MarkbenConstant#MULTI_VALUE_SPLIT}
+	 * 如果参数separate为空，则采用默认值；默认值为：{@link MarkbenConstant#MULTI_VALUE_SPLIT}
 	 * @param objs 数组
 	 * @param separate 分隔符
 	 * @return 返回数组转化成功后的字符串;失败返回：null
@@ -830,7 +834,7 @@ public class StringUtils {
 
 	/**
 	 * 字符串转化为数组；
-	 * 如果<code>separate</code>为空，则采用默认值；默认值为：{@link MarkbenConstant#MULTI_VALUE_SPLIT}
+	 * 如果separate参数为空，则采用默认值；默认值为：{@link MarkbenConstant#MULTI_VALUE_SPLIT}
 	 * @param value 原字符串
 	 * @param separate 分隔符
 	 * @return 返回字符串分割成功后的数组
@@ -858,7 +862,7 @@ public class StringUtils {
 
 	/**
 	 * 按separate分离成数组,判断该数组里面是否包含subStr；
-	 * 如果<code>separate</code>为空，则采用默认值；默认值为：{@link MarkbenConstant#MULTI_VALUE_SPLIT}
+	 * 如果separate参数为空，则采用默认值；默认值为：{@link MarkbenConstant#MULTI_VALUE_SPLIT}
 	 * @param str 字符串
 	 * @param subStr 子字符串
 	 * @param separate 分隔符
@@ -886,7 +890,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * 填补位数；如果<code>fillText</code>为空，则默认填充内容为“0”
+	 * 填补位数；如果fillText参数为空，则默认填充内容为“0”
 	 * @param value 需要填补的值
 	 * @param num 需要填补的位数
 	 * @param fillText 填充内容
@@ -913,8 +917,8 @@ public class StringUtils {
 
 	/**
 	 * 转换为Long
-	 * @param value
-	 * @return
+	 * @param value 需要转换的值
+	 * @return 返回转换后的值；如果value参数值为null；则返回0
 	 */
 	public static Long convertLong(Object value) {
 		String valueStr = null;
@@ -934,8 +938,8 @@ public class StringUtils {
 
 	/**
 	 * 转换为Integer
-	 * @param value
-	 * @return
+	 * @param value 需要转换的值
+	 * @return 返回转换后的值；如果value参数值为null；则返回0
 	 */
 	public static Integer convertInteger(Object value) {
 		String valueStr = null;
@@ -955,8 +959,8 @@ public class StringUtils {
 
 	/**
 	 * 转换为Boolean
-	 * @param value
-	 * @return
+	 * @param value 需要转换的值
+	 * @return 返回转换后的值; 如果value参数值为null；则返回false
 	 */
 	public static Boolean convertBoolean(Object value) {
 		if(null == value) {
@@ -976,9 +980,9 @@ public class StringUtils {
 	 * 将驼峰式命名的字符串转换为下划线方式。如果转换前的驼峰式命名的字符串为空，则返回空字符串。<br>
 	 * 例如：
 	 * <pre>
-	 * HelloWorld ===> hello_world
-	 * Hello_World ===> hello_world
-	 * HelloWorld_test ===> hello_world_test
+	 * HelloWorld 转换为： hello_world
+	 * Hello_World 转换为： hello_world
+	 * HelloWorld_test 转换为： hello_world_test
 	 * </pre>
 	 * @param str 转换前的驼峰式命名的字符串，也可以为下划线形式
 	 * @return 转换后下划线方式命名的字符串
@@ -990,10 +994,9 @@ public class StringUtils {
 	/**
 	 * 将驼峰式命名的字符串转换为使用符号连接方式。如果转换前的驼峰式命名的字符串为空，则返回空字符串。<br>
 	 *
-	 * @param str    转换前的驼峰式命名的字符串，也可以为符号连接形式
+	 * @param str  转换前的驼峰式命名的字符串，也可以为符号连接形式
 	 * @param symbol 连接符
 	 * @return 转换后符号连接方式命名的字符串
-	 * @since 4.0.10
 	 */
 	public static String toSymbolCase(CharSequence str, char symbol) {
 		if (str == null) {
@@ -1041,7 +1044,7 @@ public class StringUtils {
 
 	/**
 	 * 将下划线方式命名的字符串转换为驼峰式。如果转换前的下划线大写方式命名的字符串为空，则返回空字符串。<br>
-	 * 例如：hello_world ===> helloWorld
+	 * 例如：hello_world 转换为：helloWorld
 	 * @param name 转换前的下划线大写方式命名的字符串
 	 * @return 转换后的驼峰式命名的字符串
 	 */
@@ -1068,6 +1071,128 @@ public class StringUtils {
 		} else {
 			return handleName;
 		}
+	}
+
+	/**
+	 * 移除ID的前缀；注：前缀是通过下划线分隔标记的；
+	 * 如:ps_11111；移除前缀后为：1111
+	 * @param id 需要处理的值
+	 * @return 返回移除前缀后的值
+	 */
+	public static String removeIdPrefix(String id) {
+		if(isEmpty(id)) {
+			return id;
+		}
+		int index = id.indexOf(MarkbenConstant.COMBINE_VALUE_SEPARATOR);
+		if(index > -1) {
+			return id.substring(index + 1);
+		}
+		return id;
+	}
+
+	/**
+	 * 提取名称，从指定的字符串中；
+	 * 如内容为：我的姓名为：${name}，出生于${date}，现居住在${address}.
+	 * <code>
+	 *     extractName("我的姓名为：${name}，出生于${date}，现居住在${address}", "${", "}");
+	 *     提取变量名后，返回列表；结果为：["name", "date", "address"]
+	 * </code>
+	 * @param value 需要提取的内容
+	 * @param prefix 需要提取名称的前缀；如果为空，则使用默认值：“${”
+	 * @param suffix 需要提取名称的后缀；如果为空，则使用默认值：“}”
+	 * @return 返回提取后的名称列表；如果value为空或者未找到提取的名称，则返回空的列表
+	 */
+	public static List<String> extractName(String value, String prefix, String suffix) {
+		if(StringUtils.isEmpty(value)) {
+			return Collections.EMPTY_LIST;
+		}
+		if(StringUtils.isEmpty(prefix)) {
+			prefix = "${";
+		}
+		if(StringUtils.isEmpty(suffix)) {
+			suffix = "}";
+		}
+		int index = value.indexOf(prefix);
+		if(index == -1) {
+			return Collections.EMPTY_LIST;
+		}
+		int suffixIndex = value.indexOf(suffix);
+		if(suffixIndex == -1) {
+			return Collections.EMPTY_LIST;
+		}
+		List<String> names = new ArrayList<>();
+		int prefixLen = prefix.length();
+		while(index > -1 && suffixIndex > -1) {
+			String name = value.substring(index + prefixLen, suffixIndex);
+			if(StringUtils.isNotEmpty(name)) {
+				names.add(name);
+			}
+			index = value.indexOf(prefix, suffixIndex);
+			if(index > -1) {
+				suffixIndex = value.indexOf(suffix, index);
+			}
+		}
+		return names;
+	}
+
+	/**
+	 * Map对象转换为字符串分隔的字符串
+	 * @param values map对象
+	 * @param separator 分隔符
+	 * @return 返回处理后的字符串
+	 */
+	public static String map2String(Map<String, Object> values, String separator) {
+		if(StringUtils.isEmpty(separator)) {
+			separator = MarkbenConstant.MULTI_VALUE_SPLIT;
+		}
+		if(null == values || values.isEmpty()) {
+			return "";
+		}
+		StringBuilder stringBuilder = new StringBuilder();
+		Set<Map.Entry<String, Object>> sets = values.entrySet();
+		for(Map.Entry<String, Object> entry : sets) {
+			stringBuilder.append(entry.getKey()).append("=").append(entry.getValue()).append(separator);
+		}
+		stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+		return stringBuilder.toString();
+	}
+
+	/**
+	 * Map对象转换为字符串分隔的字符串
+	 * @param values map对象
+	 * @return 返回处理后的字符串
+	 */
+	public static String map2String(Map<String, Object> values) {
+		return map2String(values, null);
+	}
+
+	/**
+	 * 获取异常信息
+	 * @param ex 异常对象
+	 * @return 返回异常信息
+	 */
+	public static String getExceptionMsg(Exception ex) {
+		String msg = ex.getMessage();
+		if(StringUtils.isEmpty(msg)) {
+			msg = getExceptionStackTrace(ex);
+		}
+		return msg;
+	}
+
+	/**
+	 * 获取异常栈信息
+	 * @param ex 异常对象
+	 * @return 返回异常信息
+	 */
+	public static String getExceptionStackTrace(Exception ex) {
+		StringWriter stringWriter = new StringWriter();
+		PrintWriter writer = new PrintWriter(stringWriter);
+		try {
+			ex.printStackTrace(writer);
+		} finally {
+			writer.close();
+		}
+		return stringWriter.toString();
 	}
 
 }

@@ -43,20 +43,22 @@ public class CollectionUtils {
 		}//for
 		return is;
 	}
-	
+
+
 	/**
 	 * 判断列表是否为空
 	 * @param objs 集合对象
-	 * @return　如果列表为空，返回：true；否则返回：false
+	 * @return 如果列表为空，返回：true；否则返回：false
 	 */
 	public static boolean isEmpty(Collection<?> objs) {
 		return (null == objs || objs.isEmpty());
 	}
-	
+
 	/**
-	 * 空列表转化为：null <br />
+	 * 空列表转化为：null
 	 * @param objs 集合对象
-	 * @return　返回列表；如果列表为空则返回null
+	 * @param <E> 参数类型
+	 * @return 返回列表；如果列表为空则返回null
 	 */
 	public static <E> List<E> handleNull(List<E> objs) {
 		return (isEmpty(objs)?null:objs);
@@ -65,7 +67,7 @@ public class CollectionUtils {
 	/**
 	 * 判断列表是否不为空
 	 * @param objs 集合对象
-	 * @return　如果列表不为空，返回：true；否则返回：false
+	 * @return 如果列表不为空，返回：true；否则返回：false
 	 */
 	public static boolean isNotEmpty(Collection<?> objs) {
 		return !isEmpty(objs);

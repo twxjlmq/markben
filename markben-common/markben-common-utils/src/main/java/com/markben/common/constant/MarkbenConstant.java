@@ -23,7 +23,7 @@ public interface MarkbenConstant {
     String COMBINE_VALUE_SEPARATOR = "_";
 
     /**
-     * 序列名称分隔符“>”
+     * 序列名称分隔符
      */
     String SEQUENCE_NAME_SEPARATOR = ">";
 
@@ -33,7 +33,7 @@ public interface MarkbenConstant {
     String TREE_ROOT_ID = "0";
 
     /**
-     * 序列号名称分隔符为“>>”
+     * 序列号名称分隔符
      */
     String SERVIAL_NAME_SPLIT = ">>";
 

@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Http请求辅助类
  * @author 乌草坡
  * @since 0.0.1
  */
@@ -20,8 +21,8 @@ public class HttpRequestHelper {
 
     /**
      * 获取当前URI(不含参数)
-     * @param request
-     * @return
+     * @param request 请求对象
+     * @return 返回当前访问的地址
      */
     public static String getCurrentUri(HttpServletRequest request) {
         String currentUri = request.getRequestURI();
@@ -36,8 +37,8 @@ public class HttpRequestHelper {
 
     /**
      * 获取当前URI
-     * @param request
-     * @return
+     * @param request 请求对象
+     * @return 返回当前访问的地址（含参数）
      */
     public static String getCurrentUriParam(HttpServletRequest request) {
         String currentUri = getCurrentUri(request);
@@ -54,9 +55,9 @@ public class HttpRequestHelper {
 
     /**
      * 设置session值
-     * @param request
-     * @param key
-     * @param value
+     * @param request 请求对象
+     * @param key KEY
+     * @param value 值对象
      */
     public static void setSession(HttpServletRequest request, String key, Object value) {
         HttpSession session = request.getSession();
@@ -67,9 +68,9 @@ public class HttpRequestHelper {
 
     /**
      * 获取session值
-     * @param request
-     * @param key
-     * @return
+     * @param request 请求对象
+     * @param key KEY
+     * @return 返回KEY对应的值
      */
     public static Object getSession(HttpServletRequest request, String key) {
         HttpSession session = request.getSession();
@@ -82,8 +83,8 @@ public class HttpRequestHelper {
 
     /**
      * 添加用户信息到session
-     * @param session
-     * @param userInfo
+     * @param session HttpSession
+     * @param userInfo 用户信息对象
      */
     public static void setUserInfoToSession(HttpSession session, UserInfo userInfo) {
         if(null != session) {
@@ -97,9 +98,9 @@ public class HttpRequestHelper {
 
     /**
      * 添加用户信息到session
-     * @param session
-     * @param token
-     * @param userInfo
+     * @param session HttpSession
+     * @param token Token
+     * @param userInfo 用户信息对象
      */
     public static void setUserInfoToSession(HttpSession session, String token, UserInfo userInfo) {
         if(null == session) {
@@ -117,6 +118,7 @@ public class HttpRequestHelper {
 
     /**
      * 生成token
+     * @param session HttpSession
      * @return 返回token
      */
     public static String generateToken(HttpSession session) {
@@ -125,8 +127,9 @@ public class HttpRequestHelper {
 
     /**
      * 从session中获取用户信息
-     * @param session
-     * @return
+     * @param session HttpSession
+     * @param token Token
+     * @return 返回用户信息对象
      */
     public static UserInfo getUserInfoFromSession(HttpSession session, String token) {
         UserInfo userInfo = null;
@@ -139,8 +142,8 @@ public class HttpRequestHelper {
 
     /**
      * 添加用户信息到session
-     * @param request
-     * @param userInfo
+     * @param request Http请求对象
+     * @param userInfo 用户信息对象
      */
     public static void setUserInfoToSession(HttpServletRequest request, UserInfo userInfo) {
         if(null != request) {
@@ -154,8 +157,8 @@ public class HttpRequestHelper {
 
     /**
      * 添加用户信息到session
-     * @param request
-     * @param userInfo
+     * @param request Http请求对象
+     * @param userInfo 用户信息对象
      */
     public static void setUserInfoToSession(HttpServletRequest request, String token, UserInfo userInfo) {
         if(null != request) {
@@ -166,8 +169,8 @@ public class HttpRequestHelper {
 
     /**
      * 从session中获取用户信息
-     * @param request
-     * @return
+     * @param request Http请求对象
+     * @return 返回用户信息对象
      */
     public static UserInfo getUserInfoFromSession(HttpServletRequest request) {
         return getUserInfoFromSession(request, null);
@@ -175,8 +178,8 @@ public class HttpRequestHelper {
 
     /**
      * 从session中获取用户信息
-     * @param request
-     * @return
+     * @param request Http请求对象
+     * @return 返回用户信息对象
      */
     public static UserInfo getUserInfoFromSession(HttpServletRequest request, String token) {
         UserInfo userInfo = null;
@@ -195,8 +198,8 @@ public class HttpRequestHelper {
 
     /**
      * 从HTTP请求头上获取token值
-     * @param request
-     * @return
+     * @param request Http请求对象
+     * @return 返回token
      */
     public static String getToken(HttpServletRequest request) {
         String token = request.getHeader(MarkbenConstant.AUTHORIZATION_TOKEN_HEADER);
@@ -208,8 +211,8 @@ public class HttpRequestHelper {
 
     /**
      * 获取客户端IP地址
-     * @param request
-     * @return
+     * @param request Http请求对象
+     * @return 返回客户端IP地址
      */
     public static String getIP(HttpServletRequest request) {
         String ip = request.getHeader("x-forwarded-for");
@@ -237,8 +240,8 @@ public class HttpRequestHelper {
 
     /**
      * 获取域名（含端口）
-     * @param request
-     * @return
+     * @param request Http请求对象
+     * @return 返回域名
      */
     public static String getDomain(HttpServletRequest request) {
         String domain = null;
@@ -251,8 +254,8 @@ public class HttpRequestHelper {
     /**
      * 获取当前URL(不含参数)
      *
-     * @param request
-     * @return
+     * @param request Http请求对象
+     * @return 获取当前访问地址
      */
     public static String getCurrentUrl(HttpServletRequest request) {
         return request.getRequestURL().toString();
@@ -260,8 +263,8 @@ public class HttpRequestHelper {
 
     /**
      * 获取当前URL（含参数）
-     * @param request
-     * @return
+     * @param request Http请求对象
+     * @return 返回当前访问地址（含参数）
      */
     public static String getCurrentUrlParam(HttpServletRequest request) {
         String urlStr = getCurrentUrl(request);
@@ -280,9 +283,9 @@ public class HttpRequestHelper {
 
     /**
      * 添加系统变量
-     * @param request
-     * @param param
-     * @return
+     * @param request Http请求对象
+     * @param param Map参数对象
+     * @return 返回处理后的Map对象
      */
     public static Map<String, Object> addSystemVariable(HttpServletRequest request, Map<String, Object> param) {
         if(null == param) {
@@ -294,14 +297,6 @@ public class HttpRequestHelper {
         param.put("nickname", userInfo.getNickname());
         param.put("mobile", userInfo.getMobile());
 
-        /*
-        param.put("tenantId", userInfo.getTenantId());
-        param.put("tenantUserId", userInfo.getTenantUserId());
-        if(CollectionUtils.isNotEmpty(userInfo.getOrgIds()))
-            param.put("orgIds", StringUtils.list2Array(userInfo.getOrgIds()));
-        if(CollectionUtils.isNotEmpty(userInfo.getRoleIds()))
-            param.put("roleIds", StringUtils.list2Array(userInfo.getRoleIds()));
-         */
         return param;
     }
 }

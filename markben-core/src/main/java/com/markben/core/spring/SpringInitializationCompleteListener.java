@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * Spring初始化结束后执行该类中的方法
- * @autor 乌草坡
+ * @author 乌草坡
  * @since 0.0.1
  */
 @Component

@@ -24,13 +24,10 @@ public abstract class RSACoder extends Coder{
     /**
      * 用私钥对信息生成数字签名
      * 
-     * @param data
-     *            加密数据
-     * @param privateKey
-     *            私钥
-     * 
+     * @param data 加密数据
+     * @param privateKey 私钥
      * @return 返回数字签名
-     * @throws Exception
+     * @throws Exception 没有找到算法或key初始化失败时抛出该异常
      */
     public static String sign(byte[] data, String privateKey) throws Exception {
         // 解密由base64编码的私钥
@@ -51,19 +48,13 @@ public abstract class RSACoder extends Coder{
     /**
      * 校验数字签名
      * 
-     * @param data
-     *            加密数据
-     * @param publicKey
-     *            公钥
-     * @param sign
-     *            数字签名
-     * 
+     * @param data 加密数据
+     * @param publicKey 公钥
+     * @param sign 数字签名
      * @return 校验成功返回true 失败返回false
-     * @throws Exception
-     * 
+     * @throws Exception 没有找到算法或key初始化失败时抛出该异常
      */
-    public static boolean verify(byte[] data, String publicKey, String sign)
-            throws Exception {
+    public static boolean verify(byte[] data, String publicKey, String sign) throws Exception {
  
         // 解密由base64编码的公钥
         byte[] keyBytes = decryptBASE64(publicKey);
@@ -86,15 +77,13 @@ public abstract class RSACoder extends Coder{
     }
  
    /**
-    * 解密<br>
-    * 用私钥解密
-    * @param data
-    * @param key
+    * 解密；用私钥解密
+    * @param data 需要解密的内容
+    * @param key 秘钥
     * @return 返回字节数组
-    * @throws Exception
+    * @throws Exception 没有找到算法或key初始化失败时抛出该异常
     */
-    public static byte[] decryptByPrivateKey(byte[] data, String key)
-            throws Exception {
+    public static byte[] decryptByPrivateKey(byte[] data, String key) throws Exception {
         // 对密钥解密
         byte[] keyBytes = decryptBASE64(key);
  
@@ -111,16 +100,13 @@ public abstract class RSACoder extends Coder{
     }
  
     /**
-     * 解密<br>
-     * 用私钥解密
-     * 
-     * @param data
-     * @param key
+     * 解密；用私钥解密
+     * @param data 需要解密的内容
+     * @param key 秘钥
      * @return 返回字节数组
-     * @throws Exception
+     * @throws Exception 没有找到算法或key初始化失败时抛出该异常
      */
-    public static byte[] decryptByPublicKey(byte[] data, String key)
-            throws Exception {
+    public static byte[] decryptByPublicKey(byte[] data, String key) throws Exception {
         // 对密钥解密
         byte[] keyBytes = decryptBASE64(key);
  
@@ -137,16 +123,13 @@ public abstract class RSACoder extends Coder{
     }
  
     /**
-     * 加密<br>
-     * 用公钥加密
-     * 
-     * @param data
-     * @param key
+     * 加密；用公钥加密
+     * @param data 需要加密的内容
+     * @param key 秘钥
      * @return 返回字节数组
-     * @throws Exception
+     * @throws Exception 没有找到算法或key初始化失败时抛出该异常
      */
-    public static byte[] encryptByPublicKey(byte[] data, String key)
-            throws Exception {
+    public static byte[] encryptByPublicKey(byte[] data, String key) throws Exception {
         // 对公钥解密
         byte[] keyBytes = decryptBASE64(key);
  
@@ -163,16 +146,13 @@ public abstract class RSACoder extends Coder{
     }
  
     /**
-     * 加密<br>
-     * 用私钥加密
-     * 
-     * @param data
-     * @param key
+     * 加密；用私钥加密
+     * @param data 加密内容
+     * @param key 秘钥
      * @return 返回字节数组
-     * @throws Exception
+     * @throws Exception 没有找到算法或key初始化失败时抛出该异常
      */
-    public static byte[] encryptByPrivateKey(byte[] data, String key)
-            throws Exception {
+    public static byte[] encryptByPrivateKey(byte[] data, String key) throws Exception {
         // 对密钥解密
         byte[] keyBytes = decryptBASE64(key);
  
@@ -190,41 +170,31 @@ public abstract class RSACoder extends Coder{
  
     /**
      * 取得私钥
-     * 
-     * @param keyMap
+     * @param keyMap 秘钥Map对象
      * @return 返回私钥
-     * @throws Exception
      */
-    public static String getPrivateKey(Map<String, Object> keyMap)
-            throws Exception {
+    public static String getPrivateKey(Map<String, Object> keyMap) {
         Key key = (Key) keyMap.get(PRIVATE_KEY);
- 
         return encryptBASE64(key.getEncoded());
     }
  
     /**
      * 取得公钥
-     * 
-     * @param keyMap
+     * @param keyMap 秘钥Map对象
      * @return 返回公钥
-     * @throws Exception
      */
-    public static String getPublicKey(Map<String, Object> keyMap)
-            throws Exception {
+    public static String getPublicKey(Map<String, Object> keyMap) {
         Key key = (Key) keyMap.get(PUBLIC_KEY);
- 
         return encryptBASE64(key.getEncoded());
     }
  
     /**
      * 初始化密钥
-     * 
      * @return 返回初始化密钥
-     * @throws Exception
+     * @throws NoSuchAlgorithmException 没有找到算法时抛出该异常
      */
-    public static Map<String, Object> initKey() throws Exception {
-        KeyPairGenerator keyPairGen = KeyPairGenerator
-                .getInstance(KEY_ALGORITHM);
+    public static Map<String, Object> initKey() throws NoSuchAlgorithmException {
+        KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance(KEY_ALGORITHM);
         keyPairGen.initialize(1024);
         KeyPair keyPair = keyPairGen.generateKeyPair();
         // 公钥

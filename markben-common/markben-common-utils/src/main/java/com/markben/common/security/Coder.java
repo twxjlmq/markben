@@ -7,11 +7,11 @@ import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * 算法定义
  * @author 乌草坡
- *
  */
 public abstract class Coder {
 	public static final String KEY_SHA = "SHA";
@@ -32,35 +32,31 @@ public abstract class Coder {
  
     /**
      * BASE64解密
-     * 
-     * @param key
+     * @param key 秘钥
      * @return 返回字节数组
-     * @throws Exception
      */
-    public static byte[] decryptBASE64(String key) throws Exception {
+    public static byte[] decryptBASE64(String key) {
        // return new BASE64Decoder().decodeBuffer(key);
     	return Base64.decodeBase64(key);
     }
  
     /**
      * BASE64加密
-     * 
-     * @param key
+     * @param key 秘钥
      * @return 返回加密后的值
-     * @throws Exception
      */
-    public static String encryptBASE64(byte[] key) throws Exception {
+    public static String encryptBASE64(byte[] key) {
        // return new BASE64Encoder().encodeBuffer(key);
     	return Base64.encodeBase64String(key);
     }
  
     /**
      * MD5加密
-     * @param data
+     * @param data 需要加密的内容字节数组
      * @return 返回加密后的值
-     * @throws Exception
+     * @throws NoSuchAlgorithmException 没有找到算法时抛出该异常
      */
-    public static byte[] encryptMD5(byte[] data) throws Exception {
+    public static byte[] encryptMD5(byte[] data) throws NoSuchAlgorithmException {
         MessageDigest md5 = MessageDigest.getInstance(KEY_MD5);
         md5.update(data);
         return md5.digest();
@@ -69,12 +65,11 @@ public abstract class Coder {
  
     /**
      * SHA加密
-     * 
-     * @param data
+     * @param data 需要加密的内容字节数组
      * @return 返回加密后的值
-     * @throws Exception
+     * @throws NoSuchAlgorithmException 没有找到算法时抛出该异常
      */
-    public static byte[] encryptSHA(byte[] data) throws Exception {
+    public static byte[] encryptSHA(byte[] data) throws NoSuchAlgorithmException {
         MessageDigest sha = MessageDigest.getInstance(KEY_SHA);
         sha.update(data);
         return sha.digest();
@@ -83,11 +78,10 @@ public abstract class Coder {
  
     /**
      * 初始化HMAC密钥
-     * 
      * @return 返回初始化Key
-     * @throws Exception
+     * @throws NoSuchAlgorithmException 没有找到算法时抛出该异常
      */
-    public static String initMacKey() throws Exception {
+    public static String initMacKey() throws NoSuchAlgorithmException {
         KeyGenerator keyGenerator = KeyGenerator.getInstance(KEY_MAC);
         SecretKey secretKey = keyGenerator.generateKey();
         return encryptBASE64(secretKey.getEncoded());
@@ -96,10 +90,10 @@ public abstract class Coder {
     /**
      * HMAC加密
      * 
-     * @param data
-     * @param key
+     * @param data 需要加密的内容字节数组
+     * @param key 加密秘钥
      * @return 返回加密后的值
-     * @throws Exception
+     * @throws Exception 没有找到算法或key初始化失败时抛出该异常
      */
     public static byte[] encryptHMAC(byte[] data, String key) throws Exception {
         SecretKey secretKey = new SecretKeySpec(decryptBASE64(key), KEY_MAC);

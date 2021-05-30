@@ -8,7 +8,7 @@ import java.util.Observable;
 
 /**
  * 框架初始化接口实现类；继承了Observable类
- * @autor 乌草坡
+ * @author 乌草坡
  * @since 0.0.1
  */
 public class MarkbenInitializationImpl extends Observable implements MarkbenInitialization {

@@ -11,6 +11,7 @@ import java.util.Collection;
 /**
  * REST分页响应对象
  * @author 乌草坡
+ * @param <T> data属性的类型
  * @since 0.0.1
  */
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)

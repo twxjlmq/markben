@@ -10,7 +10,7 @@ import java.util.*;
 
 /**
  * Spring相关辅助类
- * @autor 乌草坡
+ * @author 乌草坡
  * @since 0.0.1
  */
 public class SpringHelper {

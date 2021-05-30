@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * 系统资源服务类
- * @autor 乌草坡
+ * @author 乌草坡
  * @since 0.0.1
  */
 @Service

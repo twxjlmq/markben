@@ -17,7 +17,7 @@ public class FileNotExistException extends RuntimeException {
 
     /**
      *
-     * @param message
+     * @param message 异常信息
      * @param isFilePath <code>message</code>参数值是否为文件路径；
      *                   如果<code>isFilePath</code>值为true；表示<code>message</code>是文件路径；否则不是文件路径
      */

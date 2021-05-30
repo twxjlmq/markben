@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * REST接口结果响应对象
  * @author 乌草坡
+ * @param <T> result属性的类型
  * @since 0.0.1
  */
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)

@@ -38,7 +38,7 @@ public class RestResponseConvertHelper {
      * 结果默认响应 {@link DefaultResultResponseImpl }
      * 对象转化为{@link RestResultResponse} 响应对象
      * @param resultResp 默认响应对象
-     * @param <T>
+     * @param <T> 参数类型
      * @return 返回 {@link RestResultResponse } 对象
      */
     public static <T> ResultResponse<T> convert(ResultResponse<T> resultResp) {
@@ -53,7 +53,7 @@ public class RestResponseConvertHelper {
      * 集合默认响应 {@link DefaultCollectionResponseImpl }
      * 对象转化为{@link RestCollectionResponse} 响应对象
      * @param resultResp 默认响应对象
-     * @param <T>
+     * @param <T> 参数类型
      * @return 返回 {@link RestCollectionResponse } 对象
      */
     public static <T> CollectionResponse<T> convertCollection(CollectionResponse<T> resultResp) {
@@ -68,7 +68,7 @@ public class RestResponseConvertHelper {
      * 分页默认响应 {@link DefaultPaginateResponseImpl }
      * 对象转化为{@link RestPaginateResponse} 响应对象
      * @param resultResp 默认响应对象
-     * @param <T>
+     * @param <T> 参数类型
      * @return 返回 {@link RestPaginateResponse } 对象
      */
     public static <T> PaginateResponse<T> convertPaginate(PaginateResponse<T> resultResp) {

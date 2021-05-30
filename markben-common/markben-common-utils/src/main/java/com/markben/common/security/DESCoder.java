@@ -22,8 +22,7 @@ import java.security.SecureRandom;
  * RC4(ARCFOUR)      key size must be between 40 and 1024 bits
  * 具体内容 需要关注 JDK Document http://.../docs/technotes/guides/security/SunProviders.html
  * </pre>
- * @version 1.0
- * @since 1.0
+ * @since 0.0.1
  */
 public abstract class DESCoder extends Coder{
 
@@ -53,9 +52,9 @@ public abstract class DESCoder extends Coder{
     /**
      * 转换密钥<br>
      * 
-     * @param key
+     * @param key 秘钥
      * @return 返回key对象
-     * @throws Exception
+     * @throws Exception 没有找到算法或key初始化失败时抛出该异常
      */
     private static Key toKey(byte[] key) throws Exception {
         DESKeySpec dks = new DESKeySpec(key);
@@ -69,10 +68,10 @@ public abstract class DESCoder extends Coder{
     /**
      * 解密
      * 
-     * @param data
-     * @param key
+     * @param data 加密内容
+     * @param key 加密秘钥
      * @return 返回解码字节数组
-     * @throws Exception
+     * @throws Exception 没有找到算法或key初始化失败时抛出该异常
      */
     public static byte[] decrypt(byte[] data, String key) throws Exception {
         Key k = toKey(encryptBASE64(key.getBytes()).getBytes());
@@ -85,10 +84,10 @@ public abstract class DESCoder extends Coder{
     /**
      * 加密
      * 
-     * @param data
-     * @param key
+     * @param data 加密内容
+     * @param key 加密秘钥
      * @return 返回加密后的字节数组
-     * @throws Exception
+     * @throws Exception 没有找到算法或key初始化失败时抛出该异常
      */
     public static byte[] encrypt(byte[] data, String key) throws Exception {
         //Key k = toKey(Base64.encodeBase64(key.getBytes()));
@@ -103,20 +102,20 @@ public abstract class DESCoder extends Coder{
      * 生成密钥
      * 
      * @return 返回初始化密钥
-     * @throws Exception
+     * @throws NoSuchAlgorithmException 没有找到算法时抛出该异常
      */
-    public static String initKey() throws Exception {
+    public static String initKey() throws NoSuchAlgorithmException {
         return initKey(null);
     }
  
     /**
      * 生成密钥
      * 
-     * @param seed
+     * @param seed 种子
      * @return 返回初始化密钥
-     * @throws Exception
+     * @throws NoSuchAlgorithmException 没有找到算法时抛出该异常
      */
-    public static String initKey(String seed) throws Exception {
+    public static String initKey(String seed) throws NoSuchAlgorithmException {
         SecureRandom secureRandom = null;
         if (seed != null) {
             secureRandom = new SecureRandom(decryptBASE64(seed));
@@ -133,12 +132,11 @@ public abstract class DESCoder extends Coder{
     /** 
      * 获得秘密密钥 
      *  
-     * @param secretKey 
+     * @param secretKey 秘钥
      * @return 返回秘密密钥
-     * @throws NoSuchAlgorithmException  
      */  
     @SuppressWarnings("unused")
-	private static SecretKey generateKey(String secretKey) throws NoSuchAlgorithmException{  
+	private static SecretKey generateKey(String secretKey) {
         SecureRandom secureRandom = new SecureRandom(secretKey.getBytes());  
         // 为我们选择的DES算法生成一个KeyGenerator对象  
         KeyGenerator kg = null;  
@@ -147,8 +145,7 @@ public abstract class DESCoder extends Coder{
         } catch (NoSuchAlgorithmException e) {  
         }  
         kg.init(secureRandom);  
-        //kg.init(56, secureRandom);  
-          
+        //kg.init(56, secureRandom);
         // 生成密钥  
         return kg.generateKey();  
     }  

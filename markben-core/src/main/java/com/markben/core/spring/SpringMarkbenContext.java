@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 /**
  * Markben框架上下文Spring实现类
- * @autor 乌草坡
+ * @author 乌草坡
  * @since 0.0.1
  */
 public class SpringMarkbenContext implements MarkbenContext {

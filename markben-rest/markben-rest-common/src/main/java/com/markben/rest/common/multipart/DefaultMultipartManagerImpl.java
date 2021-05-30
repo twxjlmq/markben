@@ -92,7 +92,7 @@ public class DefaultMultipartManagerImpl implements MultipartManager {
      * 保存上传的文件到服务器
      * @param source 源文件
      * @param target 目标文件
-     * @throws IOException
+     * @throws IOException 文件复制出错时抛出该异常
      */
     private void saveUploadFile(InputStream source, File target) throws IOException {
         LoggerUtils.info(logger, "正在保存文件...");

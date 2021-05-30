@@ -62,8 +62,8 @@ public class DefaultRestInterceptor implements HandlerInterceptor {
     /**
      * 判断用户是否登录
      *
-     * @param request
-     * @return
+     * @param request 请求对象
+     * @return 返回结果；已登录返回true；否则返回false
      */
     protected boolean isLogin(HttpServletRequest request) {
         boolean is = false;

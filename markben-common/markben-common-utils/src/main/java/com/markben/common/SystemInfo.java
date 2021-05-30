@@ -52,7 +52,7 @@ public class SystemInfo implements Serializable {
 
 	/**
 	 * 设置系统名称
-	 * @param name
+	 * @param name 系统名称
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -89,7 +89,7 @@ public class SystemInfo implements Serializable {
 
 	/**
 	 * 设置版权
-	 * @param copyright
+	 * @param copyright 版权信息
 	 */
 	public void setCopyright(String copyright) {
 		this.copyright = copyright;
@@ -105,7 +105,7 @@ public class SystemInfo implements Serializable {
 
 	/**
 	 * 设置联系信息
-	 * @param contactInfo
+	 * @param contactInfo 联系人信息
 	 */
 	public void setContactInfo(String contactInfo) {
 		this.contactInfo = contactInfo;
@@ -121,7 +121,7 @@ public class SystemInfo implements Serializable {
 
 	/**
 	 * 设置版本信息
-	 * @param version
+	 * @param version 版本号
 	 */
 	public void setVersion(String version) {
 		this.version = version;

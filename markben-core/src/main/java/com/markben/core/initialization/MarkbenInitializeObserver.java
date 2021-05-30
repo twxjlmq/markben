@@ -17,7 +17,7 @@ import java.util.Observer;
 
 /**
  * 框架初始化观察者
- * @autor 乌草坡
+ * @author 乌草坡
  * @since 0.0.1
  */
 public class MarkbenInitializeObserver implements Observer {

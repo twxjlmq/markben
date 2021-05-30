@@ -14,15 +14,15 @@ public class SecurityFilterHelper {
      * 过滤密码处理；结合上下文，
      * 当系统在开发环境或测试环境时，密码明文显示；
      * 当系统在正式环境时，密码用六个*号显示
-     * @param password
-     * @return
+     * @param password 密码
+     * @return 返回处理后的密码
      */
     public static String filterPassword(String password) {
-       SystemInfo projectInfo = SystemConfig.getInstance().getProjectInfo();
-       if(null == projectInfo) {
+       SystemInfo systemInfo = SystemConfig.getInstance().getSystemInfo();
+       if(null == systemInfo) {
            return password;
        }
-       if(projectInfo.getEnvironmentType().isDevelopment() || projectInfo.getEnvironmentType().isTest()) {
+       if(systemInfo.getEnvironmentType().isDevelopment() || systemInfo.getEnvironmentType().isTest()) {
            return password;
        } else {
            return "******";

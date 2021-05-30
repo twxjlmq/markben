@@ -19,10 +19,9 @@ public class ReflectionUtils {
 	}
 	/**
 	 * 通过反射, 获得Class定义中声明的父类的泛型参数的类型.
-	 * 如无法找到, 返回Object.class.
-	 * 如：public UserDao extends BaseDao<User>
-	 * 
-	 * @param clazz 
+	 * 如无法找到, 返回Object.class
+	 * @param clazz 类类型
+	 * @param <T> 返回类类型
 	 * @return 返回父类的泛型参数的类型, 如果不能确定则返回Object.class
 	 */
 	@SuppressWarnings("unchecked")
@@ -31,10 +30,8 @@ public class ReflectionUtils {
 	}
 	
 	/**
-	 * 通过反射, 获得Class定义中声明的父类的泛型参数的类型. <br />
-	 * 如无法找到, 返回Object.class.<br />
-	 * 如public UserDao extends BaseDao<User,Long>
-	 * 
+	 * 通过反射, 获得Class定义中声明的父类的泛型参数的类型.
+	 * 如无法找到, 返回Object.class.
 	 * @param clazz 泛型声明的索引，从0开始.
 	 * @param index 泛型声明的索引，从0开始.
 	 * @return 返回父类的泛型参数的类型, 如果不能确定则返回Object.class
@@ -58,7 +55,8 @@ public class ReflectionUtils {
 	
 	/**
 	 * 使用反射技术得到泛型的真实类型
-	 * @return
+	 * @param clazz 类类型
+	 * @return 返回真实类型
 	 */
     public static Class<?> getRealType(final Class<?> clazz){
         // 获取当前new的对象的泛型的父类类型

@@ -19,8 +19,7 @@ public class MultipartUtils {
     private static final Logger logger = LoggerUtils.getLogger(MultipartUtils.class);
     
     /**
-     * 验证是否为图片类型
-     * <p> 图片类型从配置文件中获取,属性为:upload.image.type </p>
+     * 验证是否为图片类型；图片类型从配置文件中获取,属性为:upload.image.type
      * @param fileSuffix 文件后缀
      * @return 是返回：true，否则返回：false
      */
@@ -39,8 +38,7 @@ public class MultipartUtils {
     
     
     /**
-     * 验证是否为文档类型
-     * <p> 文档类型从配置文件中获取,属性为:upload.doc.type </p>
+     * 验证是否为文档类型；文档类型从配置文件中获取,属性为:upload.doc.type
      * @param fileSuffix 文件后缀
      * @return 是返回：true，否则返回：false
      */
@@ -58,8 +56,7 @@ public class MultipartUtils {
     }
     
     /**
-     * 验证是否为视频文件类型 
-     * <p> 视频文件类型从配置文件中获取,属性为:upload.video.type </p>
+     * 验证是否为视频文件类型；视频文件类型从配置文件中获取,属性为:upload.video.type
      * @param fileSuffix 文件后缀
      * @return 是返回：true，否则返回：false
      */
@@ -78,8 +75,7 @@ public class MultipartUtils {
     
     
     /**
-     * 验证是否为音频文件类型
-     * <p>  音频文件类型从配置文件中获取,属性为:upload.audio.type </p>
+     * 验证是否为音频文件类型；音频文件类型从配置文件中获取,属性为:upload.audio.type
      * @param fileSuffix 文件后缀
      * @return 是返回：true，否则返回：false
      */
@@ -98,9 +94,8 @@ public class MultipartUtils {
     
     
     /**
-     * 验证文件类型
-     * <p> 文件类型从配置文件中获取,属性为:upload.file.type </p>
-     * @param fileSuffix
+     * 验证文件类型；文件类型从配置文件中获取,属性为:upload.file.type
+     * @param fileSuffix 文件后缀
      * @return 验证成功返回：true，否则返回：false
      */
     public static boolean checkFileType(String fileSuffix) {
@@ -118,7 +113,7 @@ public class MultipartUtils {
     
     
     /**
-     * 获取存放图片的路径 <br />
+     * 获取存放图片的路径；
      * 从配置文件中获取,属性为:upload.images.dir
      * @return 返回图片存放目录
      */
@@ -134,7 +129,7 @@ public class MultipartUtils {
     
     
     /**
-     * 获取存放文档的路径 <br />
+     * 获取存放文档的路径；
      * 从配置文件中获取,属性为:upload.doc.dir
      * @return 返回文档存放目录
      */
@@ -149,7 +144,7 @@ public class MultipartUtils {
     }
     
     /**
-     * 获取存放视频的路径 <br />
+     * 获取存放视频的路径；
      * 从配置文件中获取,属性为:upload.video.dir
      * @return 返回视频存放目录
      */
@@ -164,7 +159,7 @@ public class MultipartUtils {
     }
     
     /**
-     * 获取存放音频的路径 <br />
+     * 获取存放音频的路径；
      * 从配置文件中获取,属性为:upload.audio.dir
      * @return 返回音频文件存放目录
      */
@@ -179,7 +174,7 @@ public class MultipartUtils {
     }
     
     /**
-     * 获取存放其他文件的路径 <br />
+     * 获取存放其他文件的路径；
      * 从配置文件中获取,属性为:upload.other.dir
      * @return 返回其他文件存放目录
      */
@@ -226,7 +221,7 @@ public class MultipartUtils {
     }
     
     /**
-     * 获取支持上传文件的最大文件大小 <br />
+     * 获取支持上传文件的最大文件大小；
      * 从配置文件中获取,属性为:upload.max.size
      * @return 返回支持的最大文件大小
      */
@@ -242,8 +237,8 @@ public class MultipartUtils {
     }
 
     /**
-     * 获取系统最原始的根路径
-     * <p> 根目录从配置文件中获取，属性为：root.dir </p>
+     * 获取系统最原始的根路径；
+     * 根目录从配置文件中获取，属性为：root.dir
      * @return 返回根路径
      */
     public static String getOriginalRootDir() {
@@ -264,8 +259,8 @@ public class MultipartUtils {
     
     /**
      * 处理路径
-     * @param dirStr
-     * @return
+     * @param dirStr 目录路径
+     * @return 返回处理后的目录路径
      */
     private static String handleDir(String dirStr) {
         if(StringUtils.isNotEmpty(dirStr)) {

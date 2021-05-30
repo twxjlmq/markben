@@ -93,6 +93,7 @@ public class LoaderClassUtils {
      * 如果加载成功返回对应的Class；否则返回：null
      * @param classPath 类路径
      * @param classLoader 类加载器
+     * @param <T> 加载类的实例
      * @return 如果加载成功返回对应的Class；否则返回：null
      */
     public static <T> T tryLoadingAndInstance(String classPath, ClassLoader classLoader) {

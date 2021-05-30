@@ -80,10 +80,10 @@ public class ObjectUtils {
 
     /**
      * 设置属性值
-     * @param fromSource
-     * @param toTarget
-     * @param sourcePropDescriptors
-     * @param targetPropDescriptors
+     * @param fromSource 来源对象
+     * @param toTarget 目标对象
+     * @param sourcePropDescriptors 源对象属性描述数组
+     * @param targetPropDescriptors 目标对象属性描述数组
      */
     private static void setProperties(Object fromSource, Object toTarget,
                                       PropertyDescriptor[] sourcePropDescriptors,

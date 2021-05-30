@@ -15,7 +15,7 @@ public class SecurityUtils {
 
 	/**
 	 * MD5加密
-	 * @param value
+	 * @param value 加密内容
 	 * @return 返回MD5加密后的值
 	 */
 	public static String md5(String value) {
@@ -45,7 +45,7 @@ public class SecurityUtils {
 	
 	/**
 	 * SHA加密
-	 * @param value
+	 * @param value 加密内容
 	 * @return 返回加密后的值
 	 */
 	public static String sha(String value) {
@@ -68,7 +68,7 @@ public class SecurityUtils {
 	
 	/**
 	 * 字符数组转化为十六进制
-	 * @param byteArray
+	 * @param byteArray 字节数组
 	 * @return 返回十六进制字符串
 	 */
 	private static String byteArrayToHex(byte[] byteArray) {

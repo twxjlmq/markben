@@ -33,12 +33,11 @@ public class ArrayUtils {
 		strBuff = new StringBuilder();
 		for (int i=0;i<objs.length;i++) {
 			if(i < objs.length-1 ) {
-				strBuff.append(String.valueOf(objs[i])+separate);
+				strBuff.append(objs[i] + separate);
 			} else {
-				strBuff.append(String.valueOf(objs[i]));
+				strBuff.append(objs[i]);
 			}	
 		}//for
-		objs = null;
 		return (null != strBuff)?strBuff.toString():null;
 	}
 	
@@ -100,6 +99,7 @@ public class ArrayUtils {
 	 * 判断该数组里面是否包含subObj
 	 * @param objs 数组
 	 * @param subObj 用于判断是否包含的元素；有可能是子元素或非子元素
+	 * @param <E> 数组类型
 	 * @return 包含返回：true；否则返回：false
 	 */
 	public static <E> boolean isArrayContains(E[] objs,E subObj) {
@@ -123,6 +123,7 @@ public class ArrayUtils {
 	 * 判断该数组里面是否包含subObj；不区分大小写
 	 * @param objs 数组
 	 * @param subObj 用于判断是否包含的元素；有可能是子元素或非子元素
+	 * @param <E> 数组类型
 	 * @return 包含返回：true；否则返回：false
 	 */
 	public static <E> boolean isArrayContainsIgnoreCase(E[] objs,E subObj) {
@@ -176,6 +177,7 @@ public class ArrayUtils {
 	 * 判断是否为空；为空的条件是：
 	 * （为null或者长度等于0）
 	 * @param array 要判断的数组
+	 * @param <T> 数组类型
 	 * @return 如果为空，返回：true；否则返回：false
 	 */
 	public static <T> boolean isEmpty(T[] array) {
@@ -186,6 +188,7 @@ public class ArrayUtils {
 	 * 判断是否不为空；不为空的条件是：
 	 * （不为null并且长度大于0）
 	 * @param array 要判断的数组
+	 * @param <T> 数组类型
 	 * @return 如果不为空，返回：true；否则返回：false
 	 */
 	public static <T> boolean isNotEmpty(T[] array) {

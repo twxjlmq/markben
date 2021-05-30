@@ -5,7 +5,7 @@ import com.markben.core.bean.AbstractCommonPropEntity;
 
 /**
  * 系统用户实体类
- * @autor 乌草坡
+ * @author 乌草坡
  * @since 0.0.1
  */
 @TableName(value = "t_sys_user")

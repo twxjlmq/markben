@@ -4,7 +4,7 @@ import com.markben.common.constant.MarkbenConstant;
 
 /**
  * 基础树形实体类
- * @autor 乌草坡
+ * @author 乌草坡
  * @since 0.0.1
  */
 public class AbstractSupportTreeEntity extends AbstractCommonPropEntity implements SupportTreeEntity<String> {
