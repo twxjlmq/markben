@@ -7,7 +7,7 @@
 <configuration status="INFO" monitorInterval="600">
     <properties>
         <!--自定义一些常量，之后使用${变量名}引用-->
-        <property name="logpath">./logs/mgr</property>
+        <property name="logpath">./logs/markben</property>
         <property name="charset">UTF-8</property>
         <!--自定义的输出格式-->
         <property name="pattern">%d{yyyy-MM-dd HH:mm:ss}[%highlight{%p}][%style{%logger}{bright,yellow}]: %msg%n%style{%throwable}{red}</property>
@@ -71,14 +71,7 @@
         <!--过滤掉spring和hibernate的一些无用的debug信息-->
         <logger name="org.springframework" level="ERROR" >
         </logger>
-        <logger name="org.hibernate" level="ERROR">
-        </logger>
-
-        <!--
-        <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>
-        <logger name="org.hibernate.type.descriptor.sql.BasicExtractor" level="TRACE"/>
-        -->
-        <logger name="com.mixsmart" level="DEBUG">
+        <logger name="com.markben" level="DEBUG">
         </logger>
         <root level="INFO">
             <appender-ref ref="Console"/>
