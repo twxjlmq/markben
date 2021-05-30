@@ -1,6 +1,6 @@
 package com.markben.basic.rest.helper;
 
-import com.markben.basic.rest.entity.TSysDict;
+import com.markben.basic.common.entity.TSysDict;
 import com.markben.common.utils.StringUtils;
 import com.markben.rest.common.vo.UpdateRequest;
 import com.markben.basic.rest.vo.dict.CreateDictRequest;
@@ -14,8 +14,8 @@ public class DictHelper {
 
     /**
      * 转换对象
-     * @param createRequest
-     * @return
+     * @param createRequest 创建请求对象
+     * @return 返回数据字典实体对象
      */
     public static TSysDict convert(CreateDictRequest createRequest) {
         TSysDict dict = new TSysDict();

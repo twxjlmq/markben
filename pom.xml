@@ -14,6 +14,7 @@
         <module>markben-beans</module>
         <module>markben-rest</module>
         <module>markben-basic</module>
+        <module>markben-organization</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -264,9 +265,28 @@
 
             <dependency>
                 <groupId>com.markben</groupId>
+                <artifactId>markben-basic-common</artifactId>
+                <version>${markben.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.markben</groupId>
                 <artifactId>markben-basic-rest</artifactId>
                 <version>${markben.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.markben</groupId>
+                <artifactId>markben-org-common</artifactId>
+                <version>${markben.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.markben</groupId>
+                <artifactId>markben-org-rest</artifactId>
+                <version>${markben.version}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>

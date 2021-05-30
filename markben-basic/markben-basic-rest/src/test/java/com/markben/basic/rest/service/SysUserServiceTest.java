@@ -1,7 +1,8 @@
 package com.markben.basic.rest.service;
 
+import com.markben.basic.common.service.UserService;
 import com.markben.basic.rest.ApplicationBasicCommonTest;
-import com.markben.basic.rest.entity.TSysUser;
+import com.markben.basic.common.entity.TSysUser;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

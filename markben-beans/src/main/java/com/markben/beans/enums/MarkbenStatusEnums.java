@@ -35,13 +35,9 @@ public enum MarkbenStatusEnums {
     LOGIN_CAPTCHA_ERROR(20007, "验证码错误"),
 
 
-    USER_NOT_IN_CORP(20100, "用户不在企业中"),
+    USER_NOT_EXIST(20100, "用户不存在"),
 
     USER_NOT_IN_ORG(20101, "用户不在部门中"),
-
-    CORP_USER_NOT_EXIST(20200, "企业用户不存在"),
-
-    CORP_NOT_EXIST(20300, "企业不存在"),
 
 
     NOT_DATA(30000, "没有查询到数据"),

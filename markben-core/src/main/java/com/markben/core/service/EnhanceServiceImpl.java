@@ -55,7 +55,7 @@ public class EnhanceServiceImpl<T extends EntityBean> extends ServiceImpl<BaseDa
     @Override
     public List<T> finds(String columnName, Object value) {
         if(null == value) {
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
         }
         Wrapper<T> wrapper = null;
         if(value.getClass().isArray()) {
@@ -70,7 +70,7 @@ public class EnhanceServiceImpl<T extends EntityBean> extends ServiceImpl<BaseDa
     @Override
     public List<T> findListByValid(String[] ids) {
         if(null == ids) {
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
         }
         QueryChainWrapper<T> queryWrapper = query().in("id", ids);
         if(SupportStateEntity.class.isAssignableFrom(entityClass)) {

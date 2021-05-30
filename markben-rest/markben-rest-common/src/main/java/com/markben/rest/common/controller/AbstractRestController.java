@@ -10,7 +10,7 @@ import com.markben.common.enable.Checkable;
 import com.markben.core.bean.PKStringEntity;
 import com.markben.core.bean.SupportCreatorEntity;
 import com.markben.core.service.MgrService;
-import com.markben.rest.common.helper.RestCommonHelper;
+import com.markben.beans.helper.ResponseHelper;
 import com.markben.rest.common.response.RestBaseResponse;
 import com.markben.rest.common.response.RestResultResponse;
 import com.markben.rest.common.vo.AbstractRestRequest;
@@ -73,7 +73,7 @@ public abstract class AbstractRestController extends AbstractBaseController {
      * @param response 响应对象
      */
     protected void setSuccessResult(BaseResponse response) {
-        RestCommonHelper.setSuccessResult(response);
+        ResponseHelper.setSuccessResult(response);
     }
 
     /**

@@ -12,6 +12,12 @@
     <artifactId>markben-basic-rest</artifactId>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.markben</groupId>
+            <artifactId>markben-basic-common</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.markben</groupId>
             <artifactId>markben-rest-common</artifactId>

@@ -1,7 +1,7 @@
 package com.markben.basic.rest.controller;
 
-import com.markben.basic.rest.entity.TSysResource;
-import com.markben.basic.rest.service.ResourceService;
+import com.markben.basic.common.entity.TSysResource;
+import com.markben.basic.common.service.ResourceService;
 import com.markben.basic.rest.vo.CreateResourceRequest;
 import com.markben.basic.rest.vo.UpdateResourceRequest;
 import com.markben.basic.rest.vo.dict.DictDetailVO;

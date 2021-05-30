@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>markben-basic-rest</module>
+        <module>markben-basic-common</module>
     </modules>
 
 </project>

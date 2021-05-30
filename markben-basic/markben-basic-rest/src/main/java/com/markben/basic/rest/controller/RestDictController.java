@@ -1,10 +1,10 @@
 package com.markben.basic.rest.controller;
 
-import com.markben.basic.rest.entity.TSysDict;
+import com.markben.basic.common.entity.TSysDict;
 import com.markben.beans.response.BaseResponse;
 import com.markben.beans.response.CollectionResponse;
 import com.markben.beans.response.ResultResponse;
-import com.markben.basic.rest.service.DictService;
+import com.markben.basic.common.service.DictService;
 import com.markben.common.utils.CollectionUtils;
 import com.markben.rest.common.controller.AbstractRestController;
 import com.markben.basic.rest.helper.DictHelper;
