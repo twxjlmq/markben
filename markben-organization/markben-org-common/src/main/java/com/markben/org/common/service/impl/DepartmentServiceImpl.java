@@ -2,7 +2,7 @@ package com.markben.org.common.service.impl;
 
 import com.markben.org.common.entity.TSysDepartment;
 import com.markben.org.common.service.DepartmentService;
-import com.markben.core.service.EnhanceServiceImpl;
+import com.markben.core.service.MgrServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,5 +10,5 @@ import org.springframework.stereotype.Service;
  * @since 0.0.1
  */
 @Service
-public class DepartmentServiceImpl extends EnhanceServiceImpl<TSysDepartment> implements DepartmentService {
+public class DepartmentServiceImpl extends MgrServiceImpl<TSysDepartment> implements DepartmentService {
 }

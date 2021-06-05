@@ -2,7 +2,7 @@ package com.markben.basic.common.service.impl;
 
 import com.markben.basic.common.entity.TSysFunType;
 import com.markben.basic.common.service.FunTypeService;
-import com.markben.core.service.EnhanceServiceImpl;
+import com.markben.core.service.MgrServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,6 +10,6 @@ import org.springframework.stereotype.Service;
  * @since 0.0.1
  */
 @Service
-public class FunTypeServiceImpl extends EnhanceServiceImpl<TSysFunType> implements FunTypeService {
+public class FunTypeServiceImpl extends MgrServiceImpl<TSysFunType> implements FunTypeService {
 
 }

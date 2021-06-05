@@ -7,7 +7,7 @@ import com.markben.common.enums.YesNoType;
 import com.markben.common.security.SecurityUtils;
 import com.markben.common.utils.CollectionUtils;
 import com.markben.common.utils.StringUtils;
-import com.markben.core.service.EnhanceServiceImpl;
+import com.markben.core.service.MgrServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +20,7 @@ import java.util.Optional;
  * @since 0.0.1
  */
 @Service
-public class UserServiceImpl extends EnhanceServiceImpl<TSysUser> implements UserService {
+public class UserServiceImpl extends MgrServiceImpl<TSysUser> implements UserService {
 
     @Override
     @Transactional

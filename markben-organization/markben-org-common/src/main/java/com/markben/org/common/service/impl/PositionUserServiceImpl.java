@@ -1,6 +1,6 @@
 package com.markben.org.common.service.impl;
 
-import com.markben.core.service.EnhanceServiceImpl;
+import com.markben.core.service.MgrServiceImpl;
 import com.markben.org.common.entity.TSysPositionUser;
 import com.markben.org.common.service.PositionUserService;
 import org.springframework.stereotype.Service;
@@ -10,5 +10,5 @@ import org.springframework.stereotype.Service;
  * @since 0.0.1
  */
 @Service
-public class PositionUserServiceImpl extends EnhanceServiceImpl<TSysPositionUser> implements PositionUserService {
+public class PositionUserServiceImpl extends MgrServiceImpl<TSysPositionUser> implements PositionUserService {
 }

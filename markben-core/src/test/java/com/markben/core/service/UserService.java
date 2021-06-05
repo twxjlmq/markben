@@ -8,6 +8,6 @@ import org.springframework.stereotype.Service;
  * @since 1.0
  */
 @Service
-public class UserService extends EnhanceServiceImpl<TTestUser> {
+public class UserService extends MgrServiceImpl<TTestUser> {
 
 }

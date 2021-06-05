@@ -6,7 +6,7 @@ import com.markben.beans.response.ResultResponse;
 import com.markben.common.utils.LoggerUtils;
 import com.markben.common.utils.ObjectUtils;
 import com.markben.personal.rest.service.LoginService;
-import com.markben.personal.rest.vo.LoginRequest;
+import com.markben.basic.rest.vo.LoginRequest;
 import com.markben.personal.rest.vo.LoginResultVO;
 import com.markben.rest.common.controller.AbstractRestController;
 import com.markben.rest.common.helper.SecurityFilterHelper;

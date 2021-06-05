@@ -5,7 +5,7 @@ import com.markben.basic.common.service.DictService;
 import com.markben.common.enums.YesNoType;
 import com.markben.common.utils.CollectionUtils;
 import com.markben.common.utils.StringUtils;
-import com.markben.core.service.EnhanceServiceImpl;
+import com.markben.core.service.MgrServiceImpl;
 import com.markben.core.utils.EntityUtils;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * @since 0.0.1
  */
 @Service
-public class DictServiceImpl extends EnhanceServiceImpl<TSysDict> implements DictService {
+public class DictServiceImpl extends MgrServiceImpl<TSysDict> implements DictService {
 
     @Override
     public List<TSysDict> findAll() {

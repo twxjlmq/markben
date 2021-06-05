@@ -26,14 +26,14 @@ import java.util.stream.Collectors;
  * @author 乌草坡
  * @since 0.0.1
  */
-public class EnhanceServiceImpl<T extends EntityBean> extends ServiceImpl<BaseDao<T>, T> implements MgrService<T> {
+public class MgrServiceImpl<T extends EntityBean> extends ServiceImpl<BaseDao<T>, T> implements MgrService<T> {
 
     private Logger logger;
 
     @Autowired
     private BaseDao<T> baseMapper;
 
-    public EnhanceServiceImpl() {
+    public MgrServiceImpl() {
         logger = LoggerUtils.getLogger(getClass());
     }
 

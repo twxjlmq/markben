@@ -9,7 +9,7 @@ import com.markben.basic.common.service.RoleUserService;
 import com.markben.basic.common.service.UserService;
 import com.markben.common.utils.CollectionUtils;
 import com.markben.common.utils.LoggerUtils;
-import com.markben.core.service.EnhanceServiceImpl;
+import com.markben.core.service.MgrServiceImpl;
 import com.markben.core.utils.EntityUtils;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +22,7 @@ import java.util.List;
  * @since 0.0.1
  */
 @Service
-public class RoleUserServiceImpl extends EnhanceServiceImpl<TSysRoleUser> implements RoleUserService {
+public class RoleUserServiceImpl extends MgrServiceImpl<TSysRoleUser> implements RoleUserService {
 
     private RoleService roleService;
 

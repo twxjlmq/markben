@@ -5,7 +5,7 @@ import com.markben.basic.common.entity.TSysUser;
 import com.markben.basic.common.service.UserService;
 import com.markben.common.utils.CollectionUtils;
 import com.markben.common.utils.LoggerUtils;
-import com.markben.core.service.EnhanceServiceImpl;
+import com.markben.core.service.MgrServiceImpl;
 import com.markben.core.utils.EntityUtils;
 import com.markben.org.common.entity.TSysDepartment;
 import com.markben.org.common.entity.TSysDeptUser;
@@ -23,7 +23,7 @@ import java.util.Optional;
  * @since 0.0.1
  */
 @Service
-public class DeptUserServiceImpl extends EnhanceServiceImpl<TSysDeptUser> implements DeptUserService {
+public class DeptUserServiceImpl extends MgrServiceImpl<TSysDeptUser> implements DeptUserService {
 
     private DepartmentService deptService;
 

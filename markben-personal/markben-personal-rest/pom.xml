@@ -12,7 +12,6 @@
     <artifactId>markben-personal-rest</artifactId>
 
     <dependencies>
-
         <dependency>
             <groupId>com.markben</groupId>
             <artifactId>markben-basic-rest</artifactId>

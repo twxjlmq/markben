@@ -9,16 +9,9 @@ import java.util.Date;
  * @author 乌草坡
  * @since 0.0.1
  */
-public abstract class AbstractCommonPropEntity extends AbstractBaseEntity implements SupportCreateTime, SupportStateEntity {
+public abstract class AbstractCommonPropEntity extends AbstractSupportStateEntity implements SupportCreateTime {
 
     private Date createTime;
-
-    /**
-     * 是否有效
-     * 1--有效;
-     * 0--无效
-     */
-    private Integer state = YesNoType.YES.getIndex();
 
     public Date getCreateTime() {
         return createTime;
@@ -28,11 +21,4 @@ public abstract class AbstractCommonPropEntity extends AbstractBaseEntity implem
         this.createTime = createTime;
     }
 
-    public Integer getState() {
-        return state;
-    }
-
-    public void setState(Integer state) {
-        this.state = state;
-    }
 }
