@@ -1,4 +1,4 @@
-package com.markben.basic.rest.service;
+package com.markben.personal.rest.service;
 
 import com.markben.basic.common.entity.TSysUser;
 import com.markben.basic.common.service.UserService;

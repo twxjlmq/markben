@@ -16,6 +16,7 @@
         <module>markben-basic</module>
         <module>markben-organization</module>
         <module>markben-rest-server</module>
+        <module>markben-personal</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -288,6 +289,11 @@
                 <version>${markben.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.markben</groupId>
+                <artifactId>markben-personal-rest</artifactId>
+                <version>${markben.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>

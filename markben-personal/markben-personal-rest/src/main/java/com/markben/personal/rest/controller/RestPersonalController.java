@@ -1,16 +1,16 @@
-package com.markben.basic.rest.controller;
+package com.markben.personal.rest.controller;
 
 import com.markben.beans.bean.UserInfo;
 import com.markben.beans.enums.MarkbenStatusEnums;
 import com.markben.beans.response.ResultResponse;
 import com.markben.common.utils.LoggerUtils;
 import com.markben.common.utils.ObjectUtils;
+import com.markben.personal.rest.service.LoginService;
+import com.markben.personal.rest.vo.LoginRequest;
+import com.markben.personal.rest.vo.LoginResultVO;
 import com.markben.rest.common.controller.AbstractRestController;
 import com.markben.rest.common.helper.SecurityFilterHelper;
 import com.markben.rest.common.response.RestResultResponse;
-import com.markben.basic.rest.service.LoginService;
-import com.markben.basic.rest.vo.LoginRequest;
-import com.markben.basic.rest.vo.LoginResultVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,18 +22,18 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 /**
- * 用户REST接口控制器类
+ * 个人用户REST接口控制器类
  * @author 乌草坡
  * @since 0.0.1
  */
 @RestController
-@RequestMapping("/rest/user")
+@RequestMapping("/rest/personal")
 @Api(value = "用户接口", tags = {"用户接口"})
-public class RestUserController extends AbstractRestController {
+public class RestPersonalController extends AbstractRestController {
 
     private LoginService loginService;
 
-    public RestUserController(LoginService loginService) {
+    public RestPersonalController(LoginService loginService) {
         this.loginService = loginService;
     }
 

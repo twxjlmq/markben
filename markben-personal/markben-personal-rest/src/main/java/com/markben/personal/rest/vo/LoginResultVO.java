@@ -1,4 +1,4 @@
-package com.markben.basic.rest.vo;
+package com.markben.personal.rest.vo;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;

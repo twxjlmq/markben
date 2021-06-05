@@ -1,4 +1,4 @@
-package com.markben.basic.rest.service;
+package com.markben.personal.rest.service;
 
 import com.markben.beans.bean.UserInfo;
 import com.markben.beans.response.ResultResponse;

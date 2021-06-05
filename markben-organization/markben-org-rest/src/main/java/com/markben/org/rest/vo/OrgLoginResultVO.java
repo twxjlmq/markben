@@ -21,6 +21,9 @@ public class OrgLoginResultVO implements BaseVO {
     @ApiModelProperty(value = "TOKEN")
     private String token;
 
+    @ApiModelProperty(value = "所在部门列表")
+    private List<SimpleDeptInfoVO> deptList;
+
     public OrgLoginResultVO() {
 
     }
@@ -28,9 +31,6 @@ public class OrgLoginResultVO implements BaseVO {
     public OrgLoginResultVO(String userId) {
         this.userId = userId;
     }
-
-    @ApiModelProperty(value = "所在部门列表")
-    private List<SimpleDeptInfoVO> deptList;
 
     public String getUserId() {
         return userId;
