@@ -2,20 +2,19 @@ package com.markben.rest.common.controller;
 
 import com.markben.beans.bean.UserInfo;
 import com.markben.beans.enums.MarkbenStatusEnums;
+import com.markben.beans.helper.ResponseHelper;
 import com.markben.beans.response.BaseResponse;
-import com.markben.beans.response.ResultResponse;
-import com.markben.beans.validator.BeanValidatorFactory;
 import com.markben.beans.validator.BeanValidator;
+import com.markben.beans.validator.BeanValidatorFactory;
 import com.markben.common.enable.Checkable;
 import com.markben.core.bean.PKStringEntity;
 import com.markben.core.bean.SupportCreatorEntity;
 import com.markben.core.service.MgrService;
-import com.markben.beans.helper.ResponseHelper;
 import com.markben.rest.common.response.RestBaseResponse;
 import com.markben.rest.common.response.RestResultResponse;
-import com.markben.rest.common.vo.AbstractRestRequest;
 import com.markben.rest.common.vo.BaseVO;
 import com.markben.rest.common.vo.IdRequest;
+import com.markben.rest.common.vo.RestRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.function.Supplier;
@@ -90,6 +89,15 @@ public abstract class AbstractRestController extends AbstractBaseController {
     }
 
     /**
+     * 设置接口的相应状态
+     * @param resultResp 响应对象
+     * @param statusEnum 状态枚举对象
+     */
+    protected void setResponseStatus(BaseResponse resultResp, MarkbenStatusEnums statusEnum) {
+        ResponseHelper.setResponseStatus(resultResp, statusEnum);
+    }
+
+    /**
      * 创建数据
      * @param request 请求对象
      * @param createRequest 创建请求对象
@@ -97,10 +105,10 @@ public abstract class AbstractRestController extends AbstractBaseController {
      * @param supplier 提供实体对象函数试方法
      * @return 返回结果
      */
-    protected ResultResponse<String> create(HttpServletRequest request, AbstractRestRequest createRequest,
+    protected RestResultResponse<String> create(HttpServletRequest request, RestRequest createRequest,
                                             MgrService mgrService, Supplier<PKStringEntity> supplier) {
         checkRequestVO(createRequest);
-        ResultResponse<String> resultResp = new RestResultResponse<>();
+        RestResultResponse<String> resultResp = new RestResultResponse<>();
         UserInfo userInfo = getUserInfoByRequest(request);
         PKStringEntity entity = supplier.get();
         if(null != entity) {
@@ -123,10 +131,10 @@ public abstract class AbstractRestController extends AbstractBaseController {
      * @param supplier 提供实体对象函数试方法
      * @return 返回结果
      */
-    protected ResultResponse<String> update(AbstractRestRequest updateRequest,
+    protected RestResultResponse<String> update(RestRequest updateRequest,
                                             MgrService mgrService, Supplier<PKStringEntity> supplier) {
         checkRequestVO(updateRequest);
-        ResultResponse<String> resultResp = new RestResultResponse<>();
+        RestResultResponse<String> resultResp = new RestResultResponse<>();
         PKStringEntity entity = supplier.get();
         if(null != entity) {
             if(mgrService.update(entity)) {
@@ -143,9 +151,9 @@ public abstract class AbstractRestController extends AbstractBaseController {
      * @param mgrService 服务类
      * @return 返回结果
      */
-    protected BaseResponse delete(IdRequest idRequest, MgrService mgrService) {
+    protected RestBaseResponse delete(IdRequest idRequest, MgrService mgrService) {
         checkRequestVO(idRequest);
-        BaseResponse response = new RestBaseResponse();
+        RestBaseResponse response = new RestBaseResponse();
         if(mgrService.delete(idRequest.getId())) {
             setSuccessResult(response);
         }

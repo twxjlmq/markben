@@ -2,8 +2,7 @@ package com.markben.basic.rest.vo;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.markben.common.enable.Checkable;
-import com.markben.rest.common.vo.BaseVO;
+import com.markben.rest.common.vo.RestRequest;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotEmpty;
@@ -14,7 +13,7 @@ import javax.validation.constraints.NotEmpty;
  * @since 0.0.1
  */
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class LoginRequest implements BaseVO, Checkable {
+public class LoginRequest implements RestRequest {
 
     @ApiModelProperty(value = "用户名", required = true)
     @NotEmpty
