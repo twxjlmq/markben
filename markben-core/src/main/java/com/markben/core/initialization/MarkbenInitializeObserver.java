@@ -47,9 +47,9 @@ public class MarkbenInitializeObserver implements Observer {
      * 初始化上下文接口实现类
      */
     private void initContextAware() {
-        LoggerUtils.debug(logger, "正在初始化IMarkbenContextAware接口实现类...");
+        LoggerUtils.debug(logger, "正在初始化MarkbenContextAware接口实现类...");
         List<MarkbenContextAware> contextAwareList = MarkbenContextFactory.finds(MarkbenContextAware.class);
-        LoggerUtils.debug(logger, "实现IMarkbenContextAware接口的有[{}]个实例.", (null == contextAwareList ? 0 :contextAwareList.size()));
+        LoggerUtils.debug(logger, "实现MarkbenContextAware接口的有[{}]个实例.", (null == contextAwareList ? 0 :contextAwareList.size()));
         if(CollectionUtils.isNotEmpty(contextAwareList)) {
             MarkbenContext context = MarkbenContextFactory.getContext();
             for (MarkbenContextAware contextAware : contextAwareList) {

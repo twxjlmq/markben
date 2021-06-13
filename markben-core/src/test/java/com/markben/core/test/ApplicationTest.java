@@ -1,4 +1,4 @@
-package com.markben.core;
+package com.markben.core.test;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

@@ -1,10 +1,10 @@
-package com.markben.core.test;
+package com.markben.core.test.asserts;
 
 import com.markben.common.logger.Logger;
 import com.markben.common.utils.LoggerUtils;
 import com.markben.core.callback.UpdateCallbackAware;
-import com.markben.core.entity.TTestUser;
-import com.markben.core.dao.UserMapper;
+import com.markben.core.test.entity.TTestUser;
+import com.markben.core.test.dao.UserMapper;
 import org.springframework.stereotype.Component;
 
 /**

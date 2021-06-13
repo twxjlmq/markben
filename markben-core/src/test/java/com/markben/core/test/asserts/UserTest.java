@@ -1,8 +1,8 @@
-package com.markben.core.test;
+package com.markben.core.test.asserts;
 
-import com.markben.core.ApplicationTest;
-import com.markben.core.entity.TTestUser;
-import com.markben.core.service.UserService;
+import com.markben.core.test.ApplicationTest;
+import com.markben.core.test.entity.TTestUser;
+import com.markben.core.test.service.UserService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

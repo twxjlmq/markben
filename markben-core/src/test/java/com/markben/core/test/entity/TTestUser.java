@@ -1,4 +1,4 @@
-package com.markben.core.entity;
+package com.markben.core.test.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.markben.core.bean.AbstractBaseEntity;

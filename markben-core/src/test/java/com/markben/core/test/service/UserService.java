@@ -1,6 +1,7 @@
-package com.markben.core.service;
+package com.markben.core.test.service;
 
-import com.markben.core.entity.TTestUser;
+import com.markben.core.service.MgrServiceImpl;
+import com.markben.core.test.entity.TTestUser;
 import org.springframework.stereotype.Service;
 
 /**

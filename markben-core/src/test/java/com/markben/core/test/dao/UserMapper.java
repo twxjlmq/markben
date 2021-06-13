@@ -1,6 +1,7 @@
-package com.markben.core.dao;
+package com.markben.core.test.dao;
 
-import com.markben.core.entity.TTestUser;
+import com.markben.core.dao.BaseDao;
+import com.markben.core.test.entity.TTestUser;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
