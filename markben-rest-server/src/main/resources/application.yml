@@ -18,6 +18,8 @@ server:
       max: 150
       #最小线程数
       min-spare: 3
+  servlet:
+    register-default-servlet: true
 
 spring:
   #配置数据库
@@ -44,7 +46,7 @@ spring:
 
   #驼峰的json转换配置
   jackson:
-    property-naming-strategy: CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES
+    property-naming-strategy: SNAKE_CASE
 
 mybatis-plus:
   configuration:

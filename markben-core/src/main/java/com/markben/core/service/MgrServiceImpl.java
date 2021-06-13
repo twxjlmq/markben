@@ -72,7 +72,8 @@ public class MgrServiceImpl<T extends EntityBean> extends ServiceImpl<BaseDao<T>
         if(null == ids) {
             return Collections.emptyList();
         }
-        QueryChainWrapper<T> queryWrapper = query().in("id", ids);
+        Object[] objects = Arrays.stream(ids).toArray();
+        QueryChainWrapper<T> queryWrapper = query().in("id", objects);
         if(SupportStateEntity.class.isAssignableFrom(entityClass)) {
             queryWrapper.and(q -> q.eq("state", YesNoType.YES.getIndex()));
         }
