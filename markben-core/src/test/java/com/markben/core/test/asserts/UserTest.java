@@ -26,7 +26,7 @@ public class UserTest {
     @Autowired
     private UserService userServ;
 
-    //@Test
+    @Test
     public void saveTest() {
         TTestUser user = new TTestUser();
         user.setId("11122");

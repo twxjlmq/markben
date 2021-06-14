@@ -1,5 +1,6 @@
 package com.markben.basic.common.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
 import com.markben.basic.common.entity.TSysUser;
 import com.markben.basic.common.service.UserService;
@@ -56,7 +57,8 @@ public class UserServiceImpl extends MgrServiceImpl<TSysUser> implements UserSer
 
     @Override
     public Optional<TSysUser> getUserOfLogin(String username) {
-        QueryChainWrapper queryWrapper = super.query().eq("state", YesNoType.YES.getIndex())
+        QueryWrapper<TSysUser> queryWrapper = new QueryWrapper();
+        queryWrapper.select().eq("state", YesNoType.YES.getIndex())
                 .and(w -> w.eq("username", username).or().eq("mobile", username));
         TSysUser user = getOne(queryWrapper, false);
         return Optional.ofNullable(user);

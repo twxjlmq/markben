@@ -26,20 +26,20 @@ import java.util.stream.Collectors;
  * @author 乌草坡
  * @since 0.0.1
  */
-public class MgrServiceImpl<K extends BaseDao<T>, T extends EntityBean> extends ServiceImpl<K , T> implements MgrService<T> {
+public class MgrServiceImpl<T extends EntityBean> extends ServiceImpl<BaseDao<T>, T> implements MgrService<T> {
 
     private Logger logger;
 
     @Autowired
-    private K baseDao;
+    private BaseDao<T> baseMapper;
 
     public MgrServiceImpl() {
         logger = LoggerUtils.getLogger(getClass());
     }
 
     @Override
-    public K getBaseMapper() {
-        return baseDao;
+    public BaseDao<T> getBaseMapper() {
+        return baseMapper;
     }
 
     @Override
