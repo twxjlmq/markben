@@ -18,6 +18,12 @@ public class TTestUser extends AbstractBaseEntity {
 
     private Integer age;
 
+    private String username;
+
+    private String mobile;
+
+    private Integer state;
+
     public String getFullName() {
         return fullName;
     }
@@ -40,5 +46,29 @@ public class TTestUser extends AbstractBaseEntity {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
     }
 }

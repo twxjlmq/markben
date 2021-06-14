@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 1.0
  */
 @SpringBootApplication
-@MapperScan(value = {"com.markben.core.mapper"})
+@MapperScan(value = {"com.markben.core"})
 public class ApplicationTest {
 
     public static void main(String[] args) {
