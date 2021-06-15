@@ -1,5 +1,6 @@
 package com.markben.basic.common.service.impl;
 
+import com.markben.basic.common.dao.DictDao;
 import com.markben.basic.common.entity.TSysDict;
 import com.markben.basic.common.service.DictService;
 import com.markben.common.enums.YesNoType;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
  * @since 0.0.1
  */
 @Service
-public class DictServiceImpl extends MgrServiceImpl<TSysDict> implements DictService {
+public class DictServiceImpl extends MgrServiceImpl<DictDao, TSysDict> implements DictService {
 
     @Override
     public List<TSysDict> findAll() {

@@ -2,6 +2,7 @@ package com.markben.basic.common.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
+import com.markben.basic.common.dao.UserDao;
 import com.markben.basic.common.entity.TSysUser;
 import com.markben.basic.common.service.UserService;
 import com.markben.common.enums.YesNoType;
@@ -21,7 +22,7 @@ import java.util.Optional;
  * @since 0.0.1
  */
 @Service
-public class UserServiceImpl extends MgrServiceImpl<TSysUser> implements UserService {
+public class UserServiceImpl extends MgrServiceImpl<UserDao, TSysUser> implements UserService {
 
     @Override
     @Transactional

@@ -1,6 +1,12 @@
 package com.markben.core.service;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.enums.SqlMethod;
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
+import com.baomidou.mybatisplus.core.toolkit.Assert;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
 import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
@@ -14,6 +20,7 @@ import com.markben.core.dao.BaseDao;
 import com.markben.core.service.event.BizBehaviourEventListenerContext;
 import com.markben.core.service.event.BizBehaviourType;
 import com.markben.core.utils.EntityUtils;
+import org.apache.ibatis.binding.MapperMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +33,7 @@ import java.util.stream.Collectors;
  * @author 乌草坡
  * @since 0.0.1
  */
-public class MgrServiceImpl<M extends BaseDao<T>,T extends EntityBean> extends ServiceImpl<M, T> implements MgrService<T> {
+public class MgrServiceImpl<M extends BaseDao<T>, T extends EntityBean> extends ServiceImpl<M, T> implements MgrService<T> {
 
     private Logger logger;
 

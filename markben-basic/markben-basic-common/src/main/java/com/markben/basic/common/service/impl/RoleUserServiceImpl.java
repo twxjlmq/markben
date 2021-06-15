@@ -1,6 +1,7 @@
 package com.markben.basic.common.service.impl;
 
 
+import com.markben.basic.common.dao.RoleUserDao;
 import com.markben.basic.common.entity.TSysRole;
 import com.markben.basic.common.entity.TSysRoleUser;
 import com.markben.basic.common.entity.TSysUser;
@@ -22,7 +23,7 @@ import java.util.List;
  * @since 0.0.1
  */
 @Service
-public class RoleUserServiceImpl extends MgrServiceImpl<TSysRoleUser> implements RoleUserService {
+public class RoleUserServiceImpl extends MgrServiceImpl<RoleUserDao, TSysRoleUser> implements RoleUserService {
 
     private RoleService roleService;
 

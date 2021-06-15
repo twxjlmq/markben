@@ -1,5 +1,6 @@
 package com.markben.basic.common.service.impl;
 
+import com.markben.basic.common.dao.MenuDao;
 import com.markben.basic.common.entity.TSysMenu;
 import com.markben.basic.common.service.MenuService;
 import com.markben.core.service.MgrServiceImpl;
@@ -10,5 +11,5 @@ import org.springframework.stereotype.Service;
  * @since 0.0.1
  */
 @Service
-public class MenuServiceImpl extends MgrServiceImpl<TSysMenu> implements MenuService {
+public class MenuServiceImpl extends MgrServiceImpl<MenuDao, TSysMenu> implements MenuService {
 }

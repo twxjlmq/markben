@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -34,6 +36,18 @@ public class UserTest {
         user.setFullName("李四");
         user.setCreateTime(new Date());
         userServ.save(user);
+    }
+
+    @Test
+    public void saveBatchTest() {
+        TTestUser user = new TTestUser();
+        user.setId("111222");
+        user.setAge(30);
+        user.setFullName("李四");
+        user.setCreateTime(new Date());
+        List<TTestUser> list = new ArrayList<>();
+        list.add(user);
+        userServ.saveOrUpdateBatch(list, 10);
     }
 
     //@Test

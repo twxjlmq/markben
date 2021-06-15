@@ -1,5 +1,6 @@
 package com.markben.basic.common.service.impl;
 
+import com.markben.basic.common.dao.FunTypeDao;
 import com.markben.basic.common.entity.TSysFunType;
 import com.markben.basic.common.service.FunTypeService;
 import com.markben.core.service.MgrServiceImpl;
@@ -10,6 +11,6 @@ import org.springframework.stereotype.Service;
  * @since 0.0.1
  */
 @Service
-public class FunTypeServiceImpl extends MgrServiceImpl<TSysFunType> implements FunTypeService {
+public class FunTypeServiceImpl extends MgrServiceImpl<FunTypeDao, TSysFunType> implements FunTypeService {
 
 }
