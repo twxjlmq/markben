@@ -3,6 +3,7 @@ package com.markben.core.test.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.markben.common.enums.YesNoType;
 import com.markben.core.service.MgrServiceImpl;
+import com.markben.core.test.dao.UserMapper;
 import com.markben.core.test.entity.TTestUser;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import java.util.Optional;
  * @since 1.0
  */
 @Service
-public class UserService extends MgrServiceImpl<TTestUser> {
+public class UserService extends MgrServiceImpl<UserMapper, TTestUser> {
 
     public Optional<TTestUser> getUserOfLogin(String username) {
 
