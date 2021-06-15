@@ -10,6 +10,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SnakeCamelRequest {
 
-    public Class<?> value() default Void.class;
+    Class<?> value() default Void.class;
     
 }

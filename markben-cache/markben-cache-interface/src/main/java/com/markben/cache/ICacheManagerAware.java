@@ -14,6 +14,6 @@ public interface ICacheManagerAware {
 	 * 设置cache管理器
 	 * @param cacheManager
 	 */
-	public void setCacheManager(ICacheManager cacheManager);
+    void setCacheManager(ICacheManager cacheManager);
 	
 }

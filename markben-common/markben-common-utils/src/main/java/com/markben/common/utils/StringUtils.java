@@ -231,11 +231,7 @@ public class StringUtils {
 		boolean is = false;
 		Pattern pattern = Pattern.compile("\\d+|\\d+\\.\\d+");
 		Matcher matcher = pattern.matcher(value);
-		if(matcher.matches()) {
-			is = true;
-		} else {
-			is = false;
-		}
+		is = matcher.matches();
 		return is;
 	}
 	
@@ -252,11 +248,7 @@ public class StringUtils {
 			pattern = Pattern.compile("^[1-9]\\d+");
 		}
 		Matcher matcher = pattern.matcher(value);
-		if(matcher.matches()) {
-			is = true;
-		} else {
-			is = false;
-		}
+		is = matcher.matches();
 		return is;
 	} 
 	
@@ -269,11 +261,7 @@ public class StringUtils {
 		boolean is = false;
 		Pattern pattern = Pattern.compile("\\d+\\.\\d+");
 		Matcher matcher = pattern.matcher(value);
-		if(matcher.matches()) {
-			is = true;
-		} else {
-			is = false;
-		}
+		is = matcher.matches();
 		return is;
 	} 
 	
@@ -366,10 +354,10 @@ public class StringUtils {
 					if(i>0 && i<(values.length-1)) {
 					    strBuilder.append("_"+(char)((int)values[i]+32));
 					} else {
-					    strBuilder.append(String.valueOf((char)((int)values[i]+32)));
+					    strBuilder.append((char) ((int) values[i] + 32));
 					}
 				} else {
-				    strBuilder.append(String.valueOf((char)values[i]));
+				    strBuilder.append((char) values[i]);
 				}
 			}
 			values = null;
@@ -602,7 +590,7 @@ public class StringUtils {
 	public static boolean isContains(String value, String contain) {
 		boolean is = false;
 		if(!isEmpty(value) && null != contain) {
-			is = value.indexOf(contain)>-1?true:false;
+			is = value.indexOf(contain) > -1;
 		}
 		return is;
 	}

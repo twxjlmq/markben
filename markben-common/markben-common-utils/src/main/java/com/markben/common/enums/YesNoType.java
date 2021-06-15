@@ -23,7 +23,7 @@ public enum YesNoType {
     private String strValue;
     private String text;
     
-    private YesNoType(int index, boolean value, String strValue, String text) {
+    YesNoType(int index, boolean value, String strValue, String text) {
         this.index = index;
         this.value = value;
         this.strValue = strValue;

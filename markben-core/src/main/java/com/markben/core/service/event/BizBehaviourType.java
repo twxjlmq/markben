@@ -33,7 +33,7 @@ public enum BizBehaviourType {
     
     private String text;
     
-    private BizBehaviourType(int index, String value, String text) {
+    BizBehaviourType(int index, String value, String text) {
         this.index = index;
         this.value = value;
         this.text = text;

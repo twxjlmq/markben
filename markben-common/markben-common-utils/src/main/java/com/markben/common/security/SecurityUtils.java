@@ -5,6 +5,7 @@ import com.markben.common.utils.StringUtils;
 import org.apache.commons.codec.binary.Base64;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * 加密解密算法工具类
@@ -22,7 +23,7 @@ public class SecurityUtils {
 		if(StringUtils.isNotEmpty(value)) {
 			byte[] bytes;
 			try {
-				bytes = value.getBytes("UTF-8");
+				bytes = value.getBytes(StandardCharsets.UTF_8);
 				bytes = Coder.encryptMD5(bytes);
 				StringBuffer md5StrBuff = new StringBuffer();
 				for (int i = 0; i < bytes.length; i++) {
@@ -32,9 +33,6 @@ public class SecurityUtils {
 						md5StrBuff.append(Integer.toHexString(0xFF & bytes[i]));
 				}
 				value = md5StrBuff.toString();
-			} catch (UnsupportedEncodingException e) {
-				value = null;
-				e.printStackTrace();
 			} catch (Exception e) {
 				value = null;
 				e.printStackTrace();
@@ -52,12 +50,9 @@ public class SecurityUtils {
 		if(StringUtils.isNotEmpty(value)) {
 			byte[] bytes;
 			try {
-				bytes = value.getBytes("UTF-8");
+				bytes = value.getBytes(StandardCharsets.UTF_8);
 				bytes = Coder.encryptSHA(bytes);
 				value = byteArrayToHex(bytes);
-			} catch (UnsupportedEncodingException e) {
-				value = null;
-				e.printStackTrace();
 			} catch (Exception e) {
 				value = null;
 				e.printStackTrace();
@@ -91,7 +86,7 @@ public class SecurityUtils {
 	public static String desEncode(String value, String key) {
 		if(StringUtils.isNotEmpty(value) && StringUtils.isNotEmpty(key)) {
 			try {
-				byte[] bytes = value.getBytes("UTF-8");
+				byte[] bytes = value.getBytes(StandardCharsets.UTF_8);
 				bytes = DESCoder.encrypt(bytes,key);
 				value = Base64.encodeBase64URLSafeString(bytes);
 			} catch (UnsupportedEncodingException e) {
@@ -114,7 +109,7 @@ public class SecurityUtils {
 		try {
 			byte[] bytes = Base64.decodeBase64(value);
 			bytes = DESCoder.decrypt(bytes,key);
-			value = new String(bytes,"UTF8");
+			value = new String(bytes, StandardCharsets.UTF_8);
 		} catch (UnsupportedEncodingException e) {
 			value = null;
 			e.printStackTrace();

@@ -15,9 +15,9 @@ public class PrintLogoTestMain {
         System.out.println("| |  | |  | | /  _  \\/  | /_ _| |/ /  | |/  _  \\ /  _  \\ /  __  \\");
         System.out.println("| |  | |  | ||  (_)  |  | |   | |\\ \\  | |  (_)  | = = =  | |  | |");
         System.out.println("|_|  |_|  |_| \\ ___ /\\_ |_|   |_| \\_\\ |_|_ ___ / \\ ___ / |_|  |_|");
-        System.out.println("");
+        System.out.println();
         System.out.println(">>> Markben >>> \t\t\t(v0.0.1)");
-        System.out.println("");
+        System.out.println();
 
 
 
@@ -27,9 +27,9 @@ public class PrintLogoTestMain {
         System.out.println("  / /    \\ \\    / /    \\ \\  /  _  \\/  | /_ _| |/ /  | |/  _  \\ /  _  \\ /  __  \\");
         System.out.println(" / /      \\ \\  / /      \\ \\|  (_)  |  | |   | |\\ \\  | |  (_)  | = = =  | |  | |");
         System.out.println("/_/        \\_\\/_/        \\_\\\\ ___ /\\_ |_|   |_| \\_\\ |_|_ ___ / \\ ___ / |_|  |_|");
-        System.out.println("");
+        System.out.println();
         System.out.println(">>> Markben >>> \t\t\t(v0.0.1)");
-        System.out.println("");
+        System.out.println();
     }
 
 }

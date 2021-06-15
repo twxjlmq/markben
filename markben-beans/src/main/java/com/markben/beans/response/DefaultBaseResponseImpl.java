@@ -12,7 +12,7 @@ public class DefaultBaseResponseImpl implements BaseResponse {
 
     private int status = MarkbenStatusEnums.SUCCESS.getStatus();
 
-    private String msg = MarkbenStatusEnums.SUCCESS.getMsg();;
+    private String msg = MarkbenStatusEnums.SUCCESS.getMsg();
 
     @Override
     public int getStatus() {
