@@ -33,6 +33,7 @@ CREATE TABLE `t_sys_user` (
   `create_time` DATETIME NOT NULL COMMENT '创建时间',
   `password` VARCHAR(64) NOT NULL COMMENT '密码',
   `username` VARCHAR(127) NOT NULL COMMENT '用户名',
+  `nickname` VARCHAR(45) NOT NULL COMMENT '匿名',
   `mobile` VARCHAR(20) NULL COMMENT '手机号',
   `avatar` VARCHAR(127) NULL COMMENT '头像地址',
   `remarks` VARCHAR(500) NULL COMMENT '备注',
