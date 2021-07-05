@@ -1,6 +1,7 @@
 package com.markben.rest.common.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.markben.common.constant.MarkbenConstant;
@@ -11,7 +12,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @author 乌草坡
  * @since 0.0.1
  */
-@JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
+@JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class PageRequestVO implements BaseVO {
 
     private static final int MAX_SIZE = 1000;

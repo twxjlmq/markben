@@ -5,7 +5,7 @@ package com.markben.rest.common.vo;
  * @author 乌草坡
  * @since 0.0.1
  */
-public interface UpdateRequest extends BaseVO {
+public interface UpdateRequest extends RestRequest {
 
     /**
      * 获取ID

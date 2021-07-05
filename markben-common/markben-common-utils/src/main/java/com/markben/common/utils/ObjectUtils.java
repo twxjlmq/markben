@@ -25,7 +25,7 @@ public class ObjectUtils {
      * @param <E> 类型
      * @return 返回对应类型的对象
      */
-    public static <E> Optional<E> convertObject(Class<?> convertedClazz, Object instance) {
+    public static <E> Optional<E> convertObject(Class<E> convertedClazz, Object instance) {
         if(null == convertedClazz || null == instance) {
             return Optional.empty();
         }

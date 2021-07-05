@@ -10,16 +10,12 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public abstract class AbstractTreeVO implements SupportTreeEntity<String>, BaseVO {
 
-    @ApiModelProperty(value = "ID")
     private String id;
 
-    @ApiModelProperty(value = "父ID")
     private String parentId;
 
-    @ApiModelProperty(value = "名称")
     private String name;
 
-    @ApiModelProperty(value = "排序序号")
     private Integer sortOrder;
 
     public AbstractTreeVO() {
@@ -34,6 +30,7 @@ public abstract class AbstractTreeVO implements SupportTreeEntity<String>, BaseV
     }
 
     @Override
+    @ApiModelProperty(value = "ID")
     public String getId() {
         return id;
     }
@@ -44,6 +41,7 @@ public abstract class AbstractTreeVO implements SupportTreeEntity<String>, BaseV
     }
 
     @Override
+    @ApiModelProperty(value = "父ID")
     public String getParentId() {
         return parentId;
     }
@@ -54,6 +52,7 @@ public abstract class AbstractTreeVO implements SupportTreeEntity<String>, BaseV
     }
 
     @Override
+    @ApiModelProperty(value = "名称")
     public String getName() {
         return name;
     }
@@ -64,6 +63,7 @@ public abstract class AbstractTreeVO implements SupportTreeEntity<String>, BaseV
     }
 
     @Override
+    @ApiModelProperty(value = "排序序号")
     public Integer getSortOrder() {
         return sortOrder;
     }

@@ -9,6 +9,7 @@ import com.markben.beans.validator.BeanValidatorFactory;
 import com.markben.common.enable.Checkable;
 import com.markben.core.bean.PKStringEntity;
 import com.markben.core.bean.SupportCreatorEntity;
+import com.markben.core.bean.SupportLastUpdaterEntity;
 import com.markben.core.service.MgrService;
 import com.markben.rest.common.response.RestBaseResponse;
 import com.markben.rest.common.response.RestResultResponse;
@@ -126,17 +127,23 @@ public abstract class AbstractRestController extends AbstractBaseController {
 
     /**
      * 更新数据
+     * @param request Http请求对象
      * @param updateRequest 更新请求对象
      * @param mgrService 服务类
      * @param supplier 提供实体对象函数试方法
      * @return 返回结果
      */
-    protected RestResultResponse<String> update(RestRequest updateRequest,
+    protected RestResultResponse<String> update(HttpServletRequest request, RestRequest updateRequest,
                                             MgrService mgrService, Supplier<PKStringEntity> supplier) {
         checkRequestVO(updateRequest);
         RestResultResponse<String> resultResp = new RestResultResponse<>();
         PKStringEntity entity = supplier.get();
         if(null != entity) {
+            UserInfo userInfo = getUserInfoByRequest(request);
+            if(entity instanceof SupportLastUpdaterEntity) {
+                SupportLastUpdaterEntity updateEntity = (SupportLastUpdaterEntity) entity;
+                updateEntity.setLastUpdater(userInfo.getUserId());
+            }
             if(mgrService.update(entity)) {
                 setSuccessResult(resultResp);
                 resultResp.setResult(entity.getId());

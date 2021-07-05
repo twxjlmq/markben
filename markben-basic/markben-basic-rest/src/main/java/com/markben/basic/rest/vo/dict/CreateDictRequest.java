@@ -5,10 +5,12 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.markben.beans.validator.hibernate.IntValueContain;
 import com.markben.common.constant.MarkbenConstant;
 import com.markben.common.enable.Checkable;
+import com.markben.common.enums.YesNoType;
 import com.markben.rest.common.vo.BaseVO;
 import com.markben.rest.common.vo.RestRequest;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
 /**
@@ -17,24 +19,24 @@ import javax.validation.constraints.NotEmpty;
  * @since 0.0.1
  */
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class CreateDictRequest implements RestRequest, BaseVO, Checkable {
+public class CreateDictRequest implements RestRequest, Checkable {
 
     @ApiModelProperty(value = "名称", required = true)
-    @NotEmpty
+    @NotBlank(message = "名称不能为空")
     private String name;
 
     @ApiModelProperty(value = "父ID；为空时使用默认值：0")
     private String parentId = MarkbenConstant.TREE_ROOT_ID;
 
     @ApiModelProperty(value = "状态，1--有效；0--无效；默认为：1")
-    @IntValueContain(value = {0, 1})
-    private Integer state;
+    @IntValueContain(message = "状态值，范围为：0和1", value = {0, 1})
+    private Integer state = YesNoType.YES.getIndex();
 
     @ApiModelProperty(value = "排序序号，默认为0")
     private Integer sortOrder = 0;
 
     @ApiModelProperty(value = "业务值", required = true)
-    @NotEmpty
+    @NotBlank(message = "业务值不能为空")
     private String value;
 
     public String getName() {
