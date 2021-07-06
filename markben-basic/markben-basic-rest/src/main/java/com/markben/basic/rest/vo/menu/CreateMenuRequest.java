@@ -2,6 +2,8 @@ package com.markben.basic.rest.vo.menu;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.markben.beans.validator.hibernate.IntValueContain;
+import com.markben.common.enums.YesNoType;
 import com.markben.rest.common.vo.TreeCreateRequest;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -22,6 +24,8 @@ public class CreateMenuRequest extends TreeCreateRequest {
     private String pcIcon;
 
     private String mobileIcon;
+
+    private Integer state = YesNoType.YES.getIndex();
 
     @ApiModelProperty(value = "关联的资源ID")
     public String getResourceId() {
@@ -58,5 +62,15 @@ public class CreateMenuRequest extends TreeCreateRequest {
 
     public void setMobileIcon(String mobileIcon) {
         this.mobileIcon = mobileIcon;
+    }
+
+    @ApiModelProperty(value = "状态；1--有效；0--无效", required = true)
+    @IntValueContain(message = "状态值范围只能是1或0", value = {1, 0})
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
     }
 }

@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @since 0.0.1
  */
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class PageRequestVO implements BaseVO {
+public class PageRequest implements BaseVO {
 
     private static final int MAX_SIZE = 1000;
 

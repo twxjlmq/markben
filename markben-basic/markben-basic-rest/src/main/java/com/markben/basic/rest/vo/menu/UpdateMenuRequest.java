@@ -18,11 +18,11 @@ public class UpdateMenuRequest extends CreateMenuRequest implements UpdateReques
     @ApiModelProperty(value = "ID", required = true)
     @NotBlank(message = "ID不能为空")
     public String getId() {
-        return null;
+        return id;
     }
 
     @Override
     public void setId(String id) {
-
+        this.id = id;
     }
 }

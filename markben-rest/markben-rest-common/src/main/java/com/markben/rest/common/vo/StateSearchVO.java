@@ -1,5 +1,6 @@
 package com.markben.rest.common.vo;
 
+import com.markben.beans.bean.StateSearch;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
@@ -7,16 +8,16 @@ import io.swagger.annotations.ApiModelProperty;
  * @author 乌草坡
  * @since 0.0.1
  */
-public class StateSearchVO extends NameSearchVO {
+public class StateSearchVO extends NameSearchVO implements StateSearch {
 
-    @ApiModelProperty("按状态搜索")
-    private String state;
+    @ApiModelProperty(value = "按状态搜索", example="0")
+    private Integer state;
 
-    public String getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 }

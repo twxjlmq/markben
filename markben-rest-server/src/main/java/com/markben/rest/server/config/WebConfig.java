@@ -26,10 +26,10 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        DefaultRestInterceptor restInterceptor = new DefaultRestInterceptor();
+        /*DefaultRestInterceptor restInterceptor = new DefaultRestInterceptor();
         registry.addInterceptor(restInterceptor)
                 .excludePathPatterns("/rest/personal/login")
-                .addPathPatterns("/rest/**");
+                .addPathPatterns("/rest/**");*/
     }
 
     @Override

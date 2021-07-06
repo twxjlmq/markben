@@ -1,6 +1,6 @@
 package com.markben.rest.common.vo;
 
-import com.markben.beans.bean.SearchFilter;
+import com.markben.beans.bean.NameSearch;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
@@ -8,11 +8,12 @@ import io.swagger.annotations.ApiModelProperty;
  * @author 乌草坡
  * @since 0.0.1
  */
-public class NameSearchVO implements BaseVO, SearchFilter {
+public class NameSearchVO implements BaseVO, NameSearch {
 
     @ApiModelProperty("按名称搜索")
     private String name;
 
+    @Override
     public String getName() {
         return name;
     }

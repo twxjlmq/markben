@@ -59,7 +59,7 @@ public class RestDictController extends AbstractRestController {
     @PostMapping(value = "/update", produces = PRODUCES_FORMAT)
     @ApiOperation(value = "更新数据字典", notes = "更新数据字典")
     public ResultResponse<String> update(HttpServletRequest request, @RequestBody UpdateDictRequest updateRequest) {
-        return super.update(updateRequest, dictService, () -> DictHelper.convert(updateRequest));
+        return super.update(request, updateRequest, dictService, () -> DictHelper.convert(updateRequest));
     }
 
     /**

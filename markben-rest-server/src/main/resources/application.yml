@@ -51,6 +51,7 @@ spring:
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*Mapper.xml
 
 #swagger配置
 swagger:

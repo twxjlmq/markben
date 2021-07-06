@@ -1,20 +1,24 @@
 package com.markben.basic.rest.controller;
 
+import com.markben.basic.common.bean.MenuItem;
 import com.markben.basic.common.entity.TSysMenu;
 import com.markben.basic.common.service.MenuService;
 import com.markben.basic.rest.vo.menu.CreateMenuRequest;
+import com.markben.basic.rest.vo.menu.MenuVO;
 import com.markben.basic.rest.vo.menu.UpdateMenuRequest;
+import com.markben.common.utils.CollectionUtils;
 import com.markben.common.utils.ObjectUtils;
 import com.markben.rest.common.controller.AbstractRestController;
+import com.markben.rest.common.response.RestCollectionResponse;
 import com.markben.rest.common.response.RestResultResponse;
+import com.markben.rest.common.vo.StateSearchVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 菜单控制器
@@ -30,6 +34,27 @@ public class RestMenuController extends AbstractRestController {
 
     public RestMenuController(MenuService menuService) {
         this.menuService = menuService;
+    }
+
+    /**
+     * 获取管理列表
+     * @param search 搜索对象
+     * @return 返回列表结果
+     */
+    @GetMapping(value = "/list", produces = PRODUCES_FORMAT)
+    @ApiOperation(value = "获取菜单列表", notes = "获取菜单列表接口")
+    public RestCollectionResponse<MenuVO> getList(StateSearchVO search) {
+        RestCollectionResponse<MenuVO> restResp = new RestCollectionResponse<>();
+        List<MenuItem> menus = menuService.getMgrList(search);
+        if(CollectionUtils.isNotEmpty(menus)) {
+            List<MenuVO> menuList = menus.stream().map(m -> {
+                MenuVO menuVO = ObjectUtils.convertObject(MenuVO.class, m).get();
+                return menuVO;
+            }).collect(Collectors.toList());
+            restResp.setData(menuList);
+            super.setSuccessResult(restResp);
+        }
+        return restResp;
     }
 
     /**
