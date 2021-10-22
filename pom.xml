@@ -45,7 +45,7 @@
 
         <aspectjrt.version>1.9.5</aspectjrt.version>
         <cglib.version>3.3.0</cglib.version>
-        <mybatis-plus-boot-starter.version>3.4.3</mybatis-plus-boot-starter.version>
+        <mybatis-plus-boot-starter.version>3.4.3.4</mybatis-plus-boot-starter.version>
         <lombok.version>1.18.12</lombok.version>
 
         <markben.version>${project.version}</markben.version>
@@ -66,7 +66,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.1</version>
+        <version>2.5.6</version>
     </parent>
 
     <build>
