@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.markben.beans.validator.hibernate.IntValueContain;
 import com.markben.common.constant.MarkbenConstant;
 import com.markben.common.enums.YesNoType;
-import com.markben.rest.common.vo.RestRequest;
+import com.markben.restful.common.vo.RestRequest;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotEmpty;

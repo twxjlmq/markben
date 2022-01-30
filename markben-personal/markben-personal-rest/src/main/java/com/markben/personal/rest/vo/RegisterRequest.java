@@ -1,6 +1,6 @@
 package com.markben.personal.rest.vo;
 
-import com.markben.rest.common.vo.RestRequest;
+import com.markben.restful.common.vo.RestRequest;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotEmpty;
@@ -16,6 +16,10 @@ public class RegisterRequest extends UserVO implements RestRequest {
     @NotEmpty(message = "密码不能为空")
     private String password;
 
+    @ApiModelProperty(value = "验证码", required = true)
+    @NotEmpty(message = "验证码不能为空")
+    private String code;
+
     public String getPassword() {
         return password;
     }
@@ -24,4 +28,11 @@ public class RegisterRequest extends UserVO implements RestRequest {
         this.password = password;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 }

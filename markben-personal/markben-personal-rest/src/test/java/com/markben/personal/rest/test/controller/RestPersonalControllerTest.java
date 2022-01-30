@@ -6,7 +6,7 @@ import com.markben.beans.enums.MarkbenStatusEnums;
 import com.markben.common.utils.JSONUtils;
 import com.markben.personal.rest.test.main.SpringBootMain;
 import com.markben.personal.rest.vo.LoginResultVO;
-import com.markben.rest.common.response.RestResultResponse;
+import com.markben.restful.common.response.RestResultResponse;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.FixMethodOrder;

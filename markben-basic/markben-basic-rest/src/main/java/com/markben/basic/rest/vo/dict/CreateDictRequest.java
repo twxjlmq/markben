@@ -6,12 +6,10 @@ import com.markben.beans.validator.hibernate.IntValueContain;
 import com.markben.common.constant.MarkbenConstant;
 import com.markben.common.enable.Checkable;
 import com.markben.common.enums.YesNoType;
-import com.markben.rest.common.vo.BaseVO;
-import com.markben.rest.common.vo.RestRequest;
+import com.markben.restful.common.vo.RestRequest;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 
 /**
  * 创建数据字典请求对象

@@ -2,7 +2,7 @@ package com.markben.basic.rest.helper;
 
 import com.markben.basic.common.entity.TSysDict;
 import com.markben.common.utils.StringUtils;
-import com.markben.rest.common.vo.UpdateRequest;
+import com.markben.restful.common.vo.UpdateRequest;
 import com.markben.basic.rest.vo.dict.CreateDictRequest;
 
 /**

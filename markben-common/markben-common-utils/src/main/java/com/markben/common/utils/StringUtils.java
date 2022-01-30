@@ -228,11 +228,9 @@ public class StringUtils {
 	 * @return 数字返回：true；否则返回：false
 	 */
 	public static boolean isNum(String value) {
-		boolean is = false;
 		Pattern pattern = Pattern.compile("\\d+|\\d+\\.\\d+");
 		Matcher matcher = pattern.matcher(value);
-		is = matcher.matches();
-		return is;
+		return matcher.matches();
 	}
 	
 	
@@ -242,14 +240,12 @@ public class StringUtils {
 	 * @return 是返回：true；否则返回：false
 	 */
 	public static boolean isInteger(String value) {
-		boolean is = false;
 		Pattern pattern = Pattern.compile("\\d+");
 		if(null != value && value.length()>1) {
 			pattern = Pattern.compile("^[1-9]\\d+");
 		}
 		Matcher matcher = pattern.matcher(value);
-		is = matcher.matches();
-		return is;
+		return matcher.matches();
 	} 
 	
 	/**
@@ -258,11 +254,9 @@ public class StringUtils {
 	 * @return 是返回：true；否则返回：false
 	 */
 	public static boolean isDecimal(String value) {
-		boolean is = false;
 		Pattern pattern = Pattern.compile("\\d+\\.\\d+");
 		Matcher matcher = pattern.matcher(value);
-		is = matcher.matches();
-		return is;
+		return matcher.matches();
 	} 
 	
 	
@@ -273,11 +267,11 @@ public class StringUtils {
 	 */
 	public static String randomNum(int num) {
 		Random random = new Random();
-		String numStr = "";
+		StringBuilder numStr = new StringBuilder();
 		for (int i = 0; i < num; i++) {
-			numStr += random.nextInt(10);
+			numStr.append(random.nextInt(10));
 		}
-		return numStr;
+		return numStr.toString();
 	}
 	
 	
@@ -360,7 +354,6 @@ public class StringUtils {
 				    strBuilder.append((char) values[i]);
 				}
 			}
-			values = null;
 		}
 		return strBuilder != null ? strBuilder.toString() : null;
 	}
@@ -420,12 +413,12 @@ public class StringUtils {
 	
 	/**
 	 * 验证手机号码
-	 * @param phoneNo 手机号
+	 * @param mobileNo 手机号
 	 * @return 验证成功返回：true；否则返回：false
 	 */
-	public static boolean isPhoneNO(String phoneNo){
-		Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
-		Matcher m = p.matcher(phoneNo);
+	public static boolean checkMobileNo(String mobileNo){
+		Pattern p = Pattern.compile("^1(3\\d|4[5-9]|5[0-35-9]|6[567]|7[0-8]|8\\d|9[0-35-9])\\d{8}$");
+		Matcher m = p.matcher(mobileNo);
 		return m.matches();
 	}
 	
@@ -435,7 +428,7 @@ public class StringUtils {
 	 * @param tel 需要验证的电话号码
 	 * @return 验证成功返回：true；否则返回：false
 	 */
-	public static boolean isFixedTelephone(String tel) {
+	public static boolean checkFixedTelephone(String tel) {
 		Pattern p = Pattern.compile("^[0][0-9]{2,3}-[2-9][0-9]{6,7}(-[0-9]{1,4})?");
 		Matcher m = p.matcher(tel);
 		return m.matches();
@@ -447,7 +440,7 @@ public class StringUtils {
 	 * @param anonymous 匿名
 	 * @return 验证成功返回：true；否则返回：false
 	 */
-	public static boolean isAnonymous(String anonymous){
+	public static boolean checkAnonymous(String anonymous){
 		Pattern p = Pattern.compile("^[\\u4e00-\\u9fa5|A-Za-z]([\\w|\\u4e00-\\u9fa5]){1,7}$");
 		Matcher m = p.matcher(anonymous);
 		return m.matches();
@@ -458,11 +451,10 @@ public class StringUtils {
 	 * @param value 需要处理的值
 	 * @return 验证成功返回：true；否则返回：false
 	 */
-	public static boolean isChinese(String value){
+	public static boolean checkChinese(String value){
 		Pattern p = Pattern.compile("^[\\u4E00-\\u9FFF]+$");
 		Matcher m = p.matcher(value);
-		boolean is = m.matches();
-		return is;
+		return m.matches();
 	}
 	
 	/**
@@ -471,11 +463,10 @@ public class StringUtils {
 	 * @param regex 正则表达式
 	 * @return 验证成功返回：true；否则返回：false
 	 */
-	public static boolean isCheckRegex(String value,String regex){
+	public static boolean checkCheckRegex(String value,String regex){
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(value);
-		boolean is = m.matches();
-		return is;
+		return m.matches();
 	}
 	
 	/**
@@ -483,7 +474,7 @@ public class StringUtils {
 	 * @param email 需要处理的值
 	 * @return 验证成功返回：true；否则返回：false
 	 */
-	public static boolean isEmail(String email) {
+	public static boolean checkEmail(String email) {
 		Pattern p = Pattern.compile("^([a-zA-Z0-9]+[_|\\_|\\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\\_|\\.]?)*[a-zA-Z0-9]+\\.[a-zA-Z]{2,3}$");
 		Matcher m = p.matcher(email);
 		return m.matches();
@@ -495,23 +486,23 @@ public class StringUtils {
 	 * @return 返回转化后的结果
 	 */
 	public static String secondToHHMMSS(long second){
-		long h=0,m=0,s=0,tmp=0;
-		if(second>=3600){
-		   h= second/3600;
-		   tmp = second%36000;
-		   if(tmp>=60) {
-			   m = tmp/60;
-			   s = tmp%60;
+		long h = 0, m = 0, s = 0, tmp = 0;
+		if(second >= 3600){
+		   h= second / 3600;
+		   tmp = second % 36000;
+		   if(tmp >= 60) {
+			   m = tmp / 60;
+			   s = tmp % 60;
 		   }else {
 		     s = tmp;
 		   }
-		}else if(second>=60){
-		   m = second/60;
-		   s = second%60;
-		}else {
+		} else if(second >= 60) {
+		   m = second / 60;
+		   s =  second % 60;
+		} else {
 		   s = second;
 		}
-		return (h>9?h:"0"+h)+":"+(m>9?m:"0"+m)+":"+(s>9?s:"0"+s);
+		return (h > 9 ? h : "0" + h) + ":" + (m > 9 ? m : "0" + m) + ":" + (s > 9 ? s : "0" + s);
 	 }
 	
 	
@@ -522,15 +513,13 @@ public class StringUtils {
 	 */
 	public static String filterSQLParams(String params) {
 		if(!isEmpty(params)) {
-		    StringBuilder strBuilder = new StringBuilder();
-		    strBuilder.append("'|\"|update|delete|select|drop|insert|=|;|0x|\\(|\\)|\\s|\\*|\\?|\\%|\\$");
-		    strBuilder.append("|and|exec|execute|chr|mid|master|truncate|char|declare|sitename|net user|xp_cmdshell|or");
-		    strBuilder.append("|\\+|,|like'|table|from|grant|use|group_concat|column_name|information_schema.columns");
-		    strBuilder.append("|table_schema|union|where|order|by|count");
-		    strBuilder.append("|--|,|like|//|/|#");
+			String strBuilder = "'|\"|update|delete|select|drop|insert|=|;|0x|\\(|\\)|\\s|\\*|\\?|\\%|\\$" +
+					"|and|exec|execute|chr|mid|master|truncate|char|declare|sitename|net user|xp_cmdshell|or" +
+					"|\\+|,|like'|table|from|grant|use|group_concat|column_name|information_schema.columns" +
+					"|table_schema|union|where|order|by|count" +
+					"|--|,|like|//|/|#";
 		    String params1 = params.toLowerCase();
-
-		    params1 = params1.replaceAll(strBuilder.toString(), "");
+		    params1 = params1.replaceAll(strBuilder, "");
 		    if("".equals(params1)&&!"''".equals(params)){
 		    	params = params1;
 		    }
@@ -590,7 +579,7 @@ public class StringUtils {
 	public static boolean isContains(String value, String contain) {
 		boolean is = false;
 		if(!isEmpty(value) && null != contain) {
-			is = value.indexOf(contain) > -1;
+			is = value.contains(contain);
 		}
 		return is;
 	}
@@ -737,7 +726,7 @@ public class StringUtils {
 	        return url;
 	    }
 	    StringBuilder urlBuilder = new StringBuilder(url);
-	    if(url.indexOf("?") == -1) {
+	    if(!url.contains("?")) {
 	        urlBuilder.append("?");
 	    } else {
 	        urlBuilder.append("&");
@@ -800,7 +789,7 @@ public class StringUtils {
 			separate = MarkbenConstant.MULTI_VALUE_SPLIT;
 		}
 		StringBuilder strBuilder = new StringBuilder();
-		for (int i=0; i < objs.length; i++) {
+		for (int i = 0; i < objs.length; i++) {
 			if(i < objs.length-1 ) {
 				strBuilder.append(objs[i] + separate);
 			} else {

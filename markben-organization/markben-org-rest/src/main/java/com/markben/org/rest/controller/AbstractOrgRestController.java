@@ -2,7 +2,7 @@ package com.markben.org.rest.controller;
 
 import com.markben.beans.bean.UserInfo;
 import com.markben.org.rest.bean.OrgUserInfo;
-import com.markben.rest.common.controller.AbstractRestController;
+import com.markben.restful.common.controller.AbstractRestController;
 
 import javax.servlet.http.HttpServletRequest;
 

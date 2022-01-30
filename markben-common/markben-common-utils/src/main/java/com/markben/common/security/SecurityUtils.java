@@ -126,10 +126,20 @@ public class SecurityUtils {
 	 * @return 返回加密处理后的密码
 	 */
 	public static String encryptPassword(String password) {
+		return encryptPassword(password, MarkbenConstant.MD5_SALT);
+	}
+
+	/**
+	 * 对密码加密
+	 * @param password 密码
+	 * @param salt  盐值
+	 * @return 返回加密处理后的密码
+	 */
+	public static String encryptPassword(String password, String salt) {
 		if(StringUtils.isEmpty(password)) {
 			return null;
 		}
-		String saltPassword =  MarkbenConstant.MD5_SALT + password;
+		String saltPassword =  salt + password;
 		return SecurityUtils.md5(saltPassword);
 	}
 }

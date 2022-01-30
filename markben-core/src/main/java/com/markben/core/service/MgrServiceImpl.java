@@ -49,13 +49,23 @@ public class MgrServiceImpl<M extends BaseDao<T>, T extends EntityBean> extends 
         return baseMapper;
     }
 
+    @Override
+    protected Class<M> currentMapperClass() {
+        return (Class<M>) ReflectionKit.getSuperClassGenericType(this.getClass(), MgrServiceImpl.class, 0);
+    }
+
+    @Override
+    protected Class<T> currentModelClass() {
+        return (Class<T>) ReflectionKit.getSuperClassGenericType(this.getClass(), MgrServiceImpl.class, 1);
+    }
+    /*
     protected Class<T> currentMapperClass() {
         return (Class<T>) this.getResolvableType().as(MgrServiceImpl.class).getGeneric(0).getType();
     }
 
     protected Class<T> currentModelClass() {
         return (Class<T>) this.getResolvableType().as(MgrServiceImpl.class).getGeneric(1).getType();
-    }
+    }*/
 
     @Override
     public Optional<T> find(String id) {
@@ -262,7 +272,7 @@ public class MgrServiceImpl<M extends BaseDao<T>, T extends EntityBean> extends 
 
     @Override
     @Transactional
-    public boolean removeByIds(Collection<? extends Serializable> idList) {
+    public boolean removeByIds(Collection<?> idList) {
         boolean is = super.removeByIds(idList);
         triggerBehaviourEvent(BizBehaviourType.DELETE, idList);
         return is;

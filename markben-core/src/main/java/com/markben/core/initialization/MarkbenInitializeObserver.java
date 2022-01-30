@@ -2,8 +2,10 @@ package com.markben.core.initialization;
 
 import com.markben.cache.ICacheManager;
 import com.markben.cache.ICacheManagerAware;
+import com.markben.cache.utils.CacheManagerUtils;
 import com.markben.common.logger.Logger;
 import com.markben.common.utils.CollectionUtils;
+import com.markben.common.utils.LoaderClassUtils;
 import com.markben.common.utils.LoggerUtils;
 import com.markben.core.config.MarkbenConfiguration;
 import com.markben.core.context.MarkbenContext;
@@ -73,9 +75,18 @@ public class MarkbenInitializeObserver implements Observer {
         if(CollectionUtils.isNotEmpty(cacheManagerAwareList)) {
             ICacheManager cacheManager = MarkbenContextFactory.getConfiguration().getCacheManager();
             if(null == cacheManager) {
+                LoggerUtils.debug(logger, "未配置缓存实现类，尝试使用本地ehcache缓存");
+                //尝试着加载本地内存缓存策略
+                String classPath = "com.markben.cache.ehcache.EhCacheManager";
+                cacheManager = LoaderClassUtils.tryLoadingAndInstance(classPath, null);
+                if(null == cacheManager) {
+                    LoggerUtils.warn(logger, "未引入ehcache缓存实现模块，无法使用ehcache缓存");
+                    LoggerUtils.warn(logger, "未找到缓存接口(ICacheManager)的实现类，将无法使用缓存功能");
+                }
                 LoggerUtils.warn(logger, "没有找到缓存接口实现类，无法使用缓存...");
                 return;
             }
+            CacheManagerUtils.setCacheManager(cacheManager);
             for(ICacheManagerAware cacheManagerAware : cacheManagerAwareList) {
                 cacheManagerAware.setCacheManager(cacheManager);
             }

@@ -59,7 +59,7 @@ public class EhCacheManager implements ICacheManager {
     }
 
     @Override
-    public <K, V> ICache<K, V> getCacheIfAbsent(String name) throws CacheException {
+    public <K, V> ICache<K, V> getCacheIfNotAbsent(String name) throws CacheException {
         if(StringUtils.isEmpty(name)) {
             throw new NullArgumentException();
         }

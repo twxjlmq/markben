@@ -11,7 +11,7 @@ import com.markben.beans.response.ResultResponse;
 import com.markben.common.logger.Logger;
 import com.markben.common.utils.LoggerUtils;
 import com.markben.common.utils.StringUtils;
-import com.markben.rest.common.helper.SecurityFilterHelper;
+import com.markben.restful.common.helper.SecurityFilterHelper;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

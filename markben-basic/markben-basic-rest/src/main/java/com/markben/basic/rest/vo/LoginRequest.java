@@ -2,7 +2,7 @@ package com.markben.basic.rest.vo;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.markben.rest.common.vo.RestRequest;
+import com.markben.restful.common.vo.RestRequest;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotEmpty;

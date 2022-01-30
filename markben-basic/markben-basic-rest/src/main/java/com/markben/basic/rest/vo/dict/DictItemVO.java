@@ -1,9 +1,8 @@
 package com.markben.basic.rest.vo.dict;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.markben.rest.common.vo.AbstractTreeVO;
+import com.markben.restful.common.vo.AbstractTreeVO;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;

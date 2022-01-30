@@ -41,4 +41,17 @@ public interface UserService extends MgrService<TSysUser> {
      */
     Optional<TSysUser> getUserOfLogin(String username);
 
+    /**
+     * 判断用户名是否存在
+     * @param username 用户名
+     * @return 如果存在返回true；否则返回false
+     */
+    boolean isExistUsername(String username);
+
+    /**
+     * 判断手机号是否存在
+     * @param mobile 手机号
+     * @return 如果存在返回true；否则返回false
+     */
+    boolean isExistMobile(String mobile);
 }

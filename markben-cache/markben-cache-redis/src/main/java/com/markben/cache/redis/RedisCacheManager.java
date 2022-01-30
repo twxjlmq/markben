@@ -49,7 +49,7 @@ public class RedisCacheManager implements ICacheManager {
     }
 
     @Override
-    public RedisCache getCacheIfAbsent(String name) throws CacheException {
+    public RedisCache getCacheIfNotAbsent(String name) throws CacheException {
         name = handleName(name);
         LoggerUtils.debug(logger, "正在从redis获取缓存数据,key为:[{}]...", name);
         Map cacheMap = redisTemplate.opsForHash().entries(name);

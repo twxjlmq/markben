@@ -1,7 +1,7 @@
 package com.markben.personal.rest.test.config;
 
-import com.markben.rest.common.SnakeToCamelArgumentResolver;
-import com.markben.rest.common.interceptor.DefaultRestInterceptor;
+import com.markben.restful.common.SnakeToCamelArgumentResolver;
+import com.markben.restful.common.interceptor.DefaultRestInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;

@@ -20,7 +20,7 @@
 
         <dependency>
             <groupId>com.markben</groupId>
-            <artifactId>markben-rest-common</artifactId>
+            <artifactId>markben-restful-common</artifactId>
         </dependency>
 
         <dependency>

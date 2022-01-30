@@ -35,8 +35,10 @@ public enum MarkbenStatusEnums {
     LOGIN_CAPTCHA_ERROR(20007, "验证码错误"),
 
     CHANGE_PASSWORD_ERROR(20010, "密码修改错误"),
+
     CHANGE_PASSWORD_NEW_VALUE_ERROR(20011, "两次输入的密码不一致"),
 
+    USER_MOBILE_NO_ERROR(20020, "手机号错误"),
 
     USER_NOT_EXIST(20100, "用户不存在"),
 

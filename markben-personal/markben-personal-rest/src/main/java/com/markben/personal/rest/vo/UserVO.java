@@ -1,6 +1,6 @@
 package com.markben.personal.rest.vo;
 
-import com.markben.rest.common.vo.BaseVO;
+import com.markben.restful.common.vo.BaseVO;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotEmpty;

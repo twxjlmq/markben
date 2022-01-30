@@ -18,8 +18,8 @@ import com.markben.org.rest.bean.OrgUserInfo;
 import com.markben.org.rest.bean.OrgUserInfoImpl;
 import com.markben.org.rest.vo.OrgLoginResultVO;
 import com.markben.org.rest.wrapper.UserWrapper;
-import com.markben.rest.common.helper.SecurityFilterHelper;
-import com.markben.rest.common.response.RestResultResponse;
+import com.markben.restful.common.helper.SecurityFilterHelper;
+import com.markben.restful.common.response.RestResultResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

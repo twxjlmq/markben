@@ -31,7 +31,7 @@ public interface ICacheManager {
 	 * @return ICache<K, V>
 	 * @throws CacheException
 	 */
-	<K, V> ICache<K, V>  getCacheIfAbsent(String name) throws CacheException;
+	<K, V> ICache<K, V>  getCacheIfNotAbsent(String name) throws CacheException;
 	
 	/**
 	 * 销毁缓存

@@ -11,5 +11,11 @@
 
     <artifactId>markben-cache-interface</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.markben</groupId>
+            <artifactId>markben-common-utils</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
